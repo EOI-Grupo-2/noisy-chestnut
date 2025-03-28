@@ -8,11 +8,11 @@
         <version>3.4.3</version>
         <relativePath/> <!-- lookup parent from repository -->
     </parent>
-    <groupId>com.atm.java6</groupId>
-    <artifactId>buenaspracticas</artifactId>
+    <groupId>com.eoi.grupo2</groupId>
+    <artifactId>noisychestnut</artifactId>
     <version>0.0.1-SNAPSHOT</version>
-    <name>buenaspracticas</name>
-    <description>buenaspracticas</description>
+    <name>noisy-chestnut</name>
+    <description>noisy-chestnut</description>
     <url/>
     <licenses>
         <license/>
