@@ -1,0 +1,204 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Perfil</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <link rel="stylesheet" href="./styles/profile.css">
+</head>
+<body>
+    <div class="row" style=" width: 100vw">
+        <nav class="menu-bg col-lg-2">
+            <h2 class="text-white p-3">Noisy-chestnut</h2>
+            <ul class="nav flex-column">
+                <li class="nav-item"><a href="../index.html" class="nav-link text-white">Inicio</a></li>
+                <li class="nav-item"><a href="../artist/artist.html" class="nav-link text-white">Artistas</a></li>
+                <li class="nav-item"><a href="../concert/index.html" class="nav-link text-white">Conciertos</a></li>
+                <li class="nav-item"><a href="#" class="nav-link text-white">Nueva publicación</a></li>
+                <li class="nav-item"><a href="../search/concerts.html" class="nav-link text-white">Buscar</a></li>
+            </ul>
+            <div class="mt-5">
+                <a href="./login.html" class="nav-link text-white ps-3 pt-2">Iniciar sesión</a></li>
+                <a href="./register.html" class="nav-link text-white ps-3 pt-3">Registrarse</a></li>
+            </div>
+        </nav>
+    
+        <div class="col-lg-10">
+            <!--encabezado perfil-->
+            <div class="main-header d-flex flex-column align-items-start w-100">
+                <div class="row">
+                    <div class="col-sm-3 d-flex align-items-center">
+                        <img src="https://imgs.search.brave.com/E_UWBRRxi_Mth0t2pKHhoYW5627CGE77wLMeEt6qDb0/rs:fit:860:0:0:0/g:ce/aHR0cHM6Ly93YWxs/cGFwZXJzLmNvbS9p/bWFnZXMvaGQvYmFz/aWMtZGVmYXVsdC1w/ZnAtcHhpNzdxdjVv/MHp1ejhqMy5qcGc" class="rounded-circle" alt="FotoPerfil" style="width: 150px;">
+                    </div>
+                    <div class="col-sm-9 mt-5 pl-3">
+                        <h1 class="ml-4">Usuario</h1>
+                        <ul class="nav nav-pills mt-4 ml-3">
+                            <li class="nav-item"><a href="#" class="nav-link text-white ">Publicaciones</a></li>
+                            <li class="nav-item">
+                                <a href="#" class="nav-link text-white" data-toggle="modal" data-target="#modalSeguidores">Seguidores</a>
+                            </li>
+                            <li class="nav-item">
+                                <a href="#" class="nav-link text-white" data-toggle="modal" data-target="#modalSeguidos">Seguidos</a>
+                            </li>
+                            <li class="nav-item">
+                                <a href="#" class="nav-link text-white" data-toggle="modal" data-target="#modalInsignias">Insignias</a>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        
+            <!-- Modal Seguidores -->
+            <div class="modal fade" id="modalSeguidores" tabindex="-1" aria-labelledby="modalSeguidoresLabel" aria-hidden="true">
+                <div class="modal-dialog">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title" id="modalSeguidoresLabel">Seguidores</h5>
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                            </button>
+                        </div>
+                        <div class="modal-body">
+                            <ul class="list-group">
+                                <li class="list-group-item d-flex align-items-center bg-white text-dark">
+                                    <span class="ml-3">Antonio98</span>
+                                </li>
+                                <li class="list-group-item d-flex align-items-center bg-white text-dark">
+                                    <span class="ml-3">Manuel2004</span>
+                                </li>
+                                <li class="list-group-item d-flex align-items-center bg-white text-dark">
+                                    <span class="ml-3">Curro203u54</span>
+                                </li>
+                            </ul>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Modal Seguidos -->
+            <div class="modal fade" id="modalSeguidos" tabindex="-1" aria-labelledby="modalSeguidosLabel" aria-hidden="true">
+                <div class="modal-dialog">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title" id="modalSeguidosLabel">Seguidos</h5>
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                            </button>
+                        </div>
+                        <div class="modal-body">
+                            <ul class="list-group">
+                                <li class="list-group-item d-flex align-items-center bg-white text-dark">
+                                    <span class="ml-3">Antonio98</span>
+                                </li>
+                                <li class="list-group-item d-flex align-items-center bg-white text-dark">
+                                    <span class="ml-3">Manuel2004</span>
+                                </li>
+                                <li class="list-group-item d-flex align-items-center bg-white text-dark">
+                                    <span class="ml-3">Curro203u54</span>
+                                </li>
+                            </ul>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Modal Insignias -->
+            <div class="modal fade" id="modalInsignias" tabindex="-1" aria-labelledby="modalInsigniasLabel" aria-hidden="true">
+                <div class="modal-dialog">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title" id="modalInsigniasLabel">Insignias</h5>
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                            </button>
+                        </div>
+                        <div class="modal-body">
+                            Insignias del usuario.
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="container mt-4">
+                <div class="row">
+                    <div class="col-md-6">
+                        <!--publicacion 1-->
+                        <div class="card mb-3" style="width:30rem">
+                            <div class="card-header d-flex align-items-center">
+                                <img src="https://imgs.search.brave.com/E_UWBRRxi_Mth0t2pKHhoYW5627CGE77wLMeEt6qDb0/rs:fit:860:0:0:0/g:ce/aHR0cHM6Ly93YWxs/cGFwZXJzLmNvbS9p/bWFnZXMvaGQvYmFz/aWMtZGVmYXVsdC1w/ZnAtcHhpNzdxdjVv/MHp1ejhqMy5qcGc" class="rounded-circle" alt="FotoPublicacion" style="width: 40px;">
+                                <h4 class="ml-3 mb-0">Usuario</h4>
+                            </div>
+                            <div class="card-body">
+                                <p class="card-text">Contenido de la publicación</p>
+                                <p class="text-muted">Hoy 15:30</p>
+                                <div class="d-flex justify-content-between">
+                                    <a class="text-white text-decoration-none" href="./publicacion.html">Ver mas</a> 
+                                    <div>
+                                        <button class="btn btn-link"><i class="fas fa-share"></i></button>
+                                        <button class="btn btn-link"><i class="fas fa-heart"></i></button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <!--publicacion 2-->
+                        <div class="card mb-3" style="width:30rem">
+                            <div class="card-header d-flex align-items-center">
+                                <img src="https://imgs.search.brave.com/E_UWBRRxi_Mth0t2pKHhoYW5627CGE77wLMeEt6qDb0/rs:fit:860:0:0:0/g:ce/aHR0cHM6Ly93YWxs/cGFwZXJzLmNvbS9p/bWFnZXMvaGQvYmFz/aWMtZGVmYXVsdC1w/ZnAtcHhpNzdxdjVv/MHp1ejhqMy5qcGc" class="rounded-circle" alt="FotoPublicacion" style="width: 40px;">
+                                <h4 class="ml-3 mb-0">Usuario</h4>
+                            </div>
+                            <div class="card-body">
+                                <p class="card-text">Contenido de la publicación</p>
+                                <p class="text-muted">Hoy 15:30</p>
+                                <div class="d-flex justify-content-between">
+                                    <a class="text-white text-decoration-none" href="./publicacion.html">Ver mas</a> 
+                                    <div>
+                                        <button class="btn btn-link"><i class="fas fa-share"></i></button>
+                                        <button class="btn btn-link"><i class="fas fa-heart"></i></button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                        <!--próximoas conciertos-->
+                    <div class="col-md-4">
+                        <div class="card" style= "width: 20rem">
+                            <div class="card-header d-flex justify-content-between align-items-center">
+                                <h5 class="mb-0">Próximos conciertos</h5>
+                            </div>
+                            <ul class="list-group list-group-flush">
+                                <li class="list-group-item d-flex align-items-center">
+                                    <span class="ml-3">Concierto de David Guetta</span>
+                                </li>
+                                <li class="list-group-item d-flex align-items-center">
+                                    <span class="ml-3">Cabo de Plata</span>
+                                </li>
+                                <li class="list-group-item d-flex align-items-center">
+                                    <span class="ml-3">Tomorrowland</span>
+                                </li>
+                                <li class="list-group-item d-flex align-items-center">
+                                    <span class="ml-3">Concierto de Melendi</span>
+                                </li>
+                                <li class="list-group-item d-flex align-items-center">
+                                    <span class="ml-3">Concierto de Carol G</span>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</body>
+</html>

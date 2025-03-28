@@ -1,0 +1,95 @@
+.sidebar-custom {
+    right: 0 !important; /* Forzar la posición a la derecha */
+    width: 300px; /* Ajusta el ancho de las cajas */
+    height: auto; /* Ajusta la altura según el contenido */
+    max-height: 100vh; /* Evita que la caja se desborde */
+    overflow-y: auto; /* Permite scroll si hay mucho contenido */
+    z-index: 1000; /* Asegura que esté por encima de otros elementos */
+}
+.list-group-item {
+    background-color: #ED7D8E !important;
+    color: white !important;
+    border: none;
+}
+
+.list-group a:hover{
+    background-color: #E21937;
+}
+.list-group-item:hover {
+    background-color: #E21937;
+    text-decoration: none;
+}
+.navlink:hover {
+    text-decoration: none;
+}
+.list-group{
+    background-color: #E21937;
+}
+.tarjeta-tendencias{
+    background-color: #E21937;
+}
+.tarjeta-artistas{
+    background-color: #E21937;
+}
+
+
+
+.container-fluid {
+    position: relative; /* Evita que elementos `fixed` se comporten de forma inesperada */
+}
+body {
+    background-image: url('https://images.unsplash.com/photo-1701099153549-a94513b57f60?fm=jpg&q=60&w=3000&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D'); /* Reemplaza con tu imagen */
+    background-size: auto; /* Ajusta la imagen al tamaño de la pantalla */
+    background-position: center; /* Centra la imagen */
+    background-repeat: no-repeat; /* Evita que la imagen se repita */
+}
+
+.container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100%;
+}
+.menu-bg {
+    background-image: linear-gradient(#FF425F, #A30E24);
+    color: white;
+    height: 100vh;
+    padding: 20px;
+    position: fixed;
+    left: 0;
+    top: 0;
+    width: 250px;
+    z-index: 1;
+}
+.card {
+    margin-bottom: 20px; /* Espacio entre las tarjetas */
+    background-color: #ED7D8E;
+    border-radius: 5px;
+}
+
+.post-header {
+    display: flex;
+    align-items: center;
+    padding: 10px;
+    background-color: #f1f1f1;
+    border-top-left-radius: 5px;
+    border-top-right-radius: 5px;
+    height: 30px;
+}
+.post-header img {
+    width: 30px;
+    height: 30px;
+    border-radius: 50%;
+    margin-right: 10px;
+    border-radius: 50%;
+}
+.post-header{
+    background-color: #E21937;
+    height: 40px;
+
+}
+.post-header .username {
+    flex-grow: 1;
+    text-align: center;
+    font-weight: bold;
+}
