@@ -1,0 +1,100 @@
+body {
+    background-image: url('https://images.unsplash.com/photo-1701099153549-a94513b57f60?fm=jpg&q=60&w=3000&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D'); /* Reemplaza con tu imagen */
+    background-size: auto;
+    background-position: center;
+    background-repeat: no-repeat;
+}
+
+.menu-bg {
+    background-image: linear-gradient(#FF425F, #A30E24);
+    color: white;
+    height: 100vh;
+    padding: 20px;
+    left: 0;
+    top: 0;
+    width: 250px;
+    z-index: 1;
+}
+.main-header{
+    width: 100%;
+    align-items: center;
+    padding: 30px;
+    color: white;
+    background-color: rgb(33, 37, 41, 0.7);
+}
+
+
+.card-publicacion {
+    width: 100%;
+    margin: 0 auto;
+}
+
+.FotoPerfil {
+    width: 150px;
+    border-radius: 50%;
+}
+
+.FotoPublicacion {
+    width: 40px;
+    border-radius: 50%;
+}
+
+.header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px;
+}
+
+.card {
+    background-color: rgb(66, 68, 70);
+    width: 18rem;
+    display: flex;
+    flex-direction: column;
+    color:white;
+}
+
+.card h1, .card-header h3 {
+    margin-left: 10px;
+}
+
+.card-header {
+    display: flex;
+    align-items: center;
+    background-color: rgb(33, 37, 41);
+}
+
+.card-body {
+    margin-top: 10px;
+}
+
+.text-muted {
+    position: absolute;
+    right: 10px;
+    font-style: italic;
+}
+
+.list-group-item{
+    background-color: rgb(66, 68, 70);
+}
+
+
+
+@media (max-width: 768px) {
+    .menu-bg {
+        width: 100%;
+        height: auto;
+        position: relative;
+    }
+
+    .main-content {
+        margin-left: 0;
+    }
+
+    .content-wrapper {
+        width: 100%;
+        margin-left: 0;
+        flex-direction: column;
+        align-items: center;
+    }
+}

@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-rbsA2VBKQhggwzxH7pPCaAqO46MgnOM80zW1RWuH61DGLwZJEdK2Kadq2F9CUG65" crossorigin="anonymous">
+    <link rel="stylesheet" href="./styles/login.css">
+</head>
+<body>
+
+    <div class="container-fluid">
+        <div class="row">
+            <!-- Header Lateral -->
+            <nav class="col-md-3 col-lg-2 d-md-block sidebar menu-bg">
+                <h2 class="text-white p-3">Noisy-chestnut</h2>
+                <ul class="nav flex-column">
+                    <li class="nav-item"><a href="../index.html" class="nav-link text-white">Inicio</a></li>
+                    <li class="nav-item"><a href="../artist/artist.html" class="nav-link text-white">Artistas</a></li>
+                    <li class="nav-item"><a href="../concert/index.html" class="nav-link text-white">Conciertos</a></li>
+                    <li class="nav-item"><a href="#" class="nav-link text-white">Nueva publicación</a></li>
+                    <li class="nav-item"><a href="../search/concerts.html" class="nav-link text-white">Buscar</a></li>
+                </ul>
+                <div class="mt-5">
+                    <a href="./login.html" class="nav-link text-white ps-3 pt-2">Iniciar sesión</a></li>
+                    <a href="./register.html" class="nav-link text-white ps-3 pt-3">Registrarse</a></li>
+                </div>
+            </nav>
+
+            <!-- Contenido principal -->
+            <main class="col-md-9 col-lg-10 d-flex justify-content-center align-items-center">
+                <div class="container d-flex justify-content-center align-items-center vh-100">
+                    <div class="card login-card">
+                        <!-- Barra superior -->
+                        <div class="card-header text-white text-center">
+                            <h4>Iniciar Sesión</h4>
+                        </div>
+                        <!-- Formulario -->
+                        <div class="card-body">
+                            <form>
+                                <div class="mb-3">
+                                    <label for="email" class="form-label">Correo Electrónico</label>
+                                    <input type="email" class="form-control" id="email" placeholder="Ingresa tu correo">
+                                </div>
+                                <div class="mb-3">
+                                    <label for="password" class="form-label">Contraseña</label>
+                                    <input type="password" class="form-control" id="password" placeholder="Ingresa tu contraseña">
+                                </div>
+                                <button type="submit" class="btn btn-danger w-100">Entrar</button>
+                            </form>
+                            <!-- Botón para registrarse -->
+                            <div class="text-center mt-3">
+                                <a href="./register.html" class="btn btn-link">¿No tienes una cuenta? Regístrate</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </main>
+            
+        </div>
+    </div>
+    
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>
