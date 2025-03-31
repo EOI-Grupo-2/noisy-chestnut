@@ -1,0 +1,38 @@
+body {
+    background-image: url('https://images.unsplash.com/photo-1701099153549-a94513b57f60?fm=jpg&q=60&w=3000&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D'); /* Reemplaza con tu imagen */
+    background-size: auto; /* Ajusta la imagen al tamaño de la pantalla */
+    background-position: center; /* Centra la imagen */
+    background-repeat: no-repeat; /* Evita que la imagen se repita */
+}
+
+/* Estructura central de la página*/
+
+.container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+/* Menú lateral */
+
+.menu {
+    background-image: linear-gradient(#FF425F, #A30E24);
+    height: 100vh;
+    padding: 20px;
+}
+
+.menu__title{
+    color: white;
+}
+
+.menu__items{
+    list-style: none;
+    padding: 0;
+    margin: 0;
+
+}
+
+.menu__link{
+    color: white;
+    text-decoration: none;
+}

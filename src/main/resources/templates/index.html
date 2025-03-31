@@ -8,25 +8,25 @@
     <!-- Enlace al CDN de Bootstrap -->
     <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
    <link rel="stylesheet" href="./styles/index.css">
+   <link rel="stylesheet" href="./styles/global.css">
 </head>
 <body>
-    <div class="container-fluid">
-        <div class="row">
+    <div class="container">
             <!-- Header Lateral -->
-            <nav class="col-lg-2 d-md-block sidebar menu-bg">
-                <h2 class="text-white p-3">Noisy-chestnut</h2>
-                <ul class="nav flex-column">
-                    <li class="nav-item"><a href="index.html" class="nav-link text-white">Inicio</a></li>
-                    <li class="nav-item"><a href="./artist/artist.html" class="nav-link text-white">Artistas</a></li>
-                    <li class="nav-item"><a href="./concert/index.html" class="nav-link text-white">Conciertos</a></li>
-                    <li class="nav-item"><a href="#" class="nav-link text-white">Nueva publicación</a></li>
-                    <li class="nav-item"><a href="./search/concerts.html" class="nav-link text-white">Buscar</a></li>
-                </ul>
-                <div class="mt-5">
-                    <a href="./user/login.html" class="nav-link text-white">Iniciar sesión</a></li>
-                    <a href="./user/register.html" class="nav-link text-white">Registrarse</a></li>
-                </div> 
-            </nav>
+        <nav class="menu sidebar">
+            <h2 class="menu__title">Noisy-chestnut</h2>
+            <ul class="menu__items">
+                <li class="menu__item"><a href="index.html" class="menu__link">Inicio</a></li>
+                <li class="menu__item"><a href="./artist/artist.html" class="menu__link">Artistas</a></li>
+                <li class="menu__item"><a href="./concert/index.html" class="menu__link">Conciertos</a></li>
+                <li class="menu__item"><a href="#" class="menu__link">Nueva publicación</a></li>
+                <li class="menu__item"><a href="./search/concerts.html" class="menu__link">Buscar</a></li>
+            </ul>
+            <div class="mt-5">
+                <a href="./user/login.html" class="nav-link text-white">Iniciar sesión</a></li>
+                <a href="./user/register.html" class="nav-link text-white">Registrarse</a></li>
+            </div> 
+        </nav>
     
 
     <div class="container col-lg-10 d-flex justify-content-center align-items-center">
@@ -71,7 +71,6 @@
                     <a class="text-dark text-decoration-none" href="./user/publicacion.html">Ver mas</a>
                 </div>
             </div>
-        </div>
     </div>
 
     <!-- Enlace a los scripts de Bootstrap -->
