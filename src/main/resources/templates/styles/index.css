@@ -1,0 +1,39 @@
+.card {
+    margin-bottom: 20px; /* Espacio entre las tarjetas */
+    background-color: #ED7D8E;
+    border-radius: 5px;
+}
+
+.post-header {
+    display: flex;
+    align-items: center;
+    padding: 10px;
+    background-color: #f1f1f1;
+    border-top-left-radius: 5px;
+    border-top-right-radius: 5px;
+    height: 30px;
+}
+.post-header img {
+    width: 30px;
+    height: 30px;
+    border-radius: 50%;
+    margin-right: 10px;
+    border-radius: 50%;
+}
+.post-header{
+    background-color: #E21937;
+    height: 40px;
+
+}
+.post-header .username {
+    flex-grow: 1;
+    text-align: center;
+    font-weight: bold;
+}
+.content {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-top: 4rem;
+    gap: 2rem;
+}

@@ -1,0 +1,30 @@
+section {
+    background-image: url('https://images.unsplash.com/photo-1701099153549-a94513b57f60?fm=jpg&q=60&w=3000&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D');
+    background-size: auto;
+    background-position: center;
+    background-repeat: no-repeat;
+}
+
+.menu-bg{
+    background-image: linear-gradient(#FF425F, #A30E24);
+}
+
+.search-container {
+    position: relative;
+}
+
+.search-input {
+    height: 30px;
+    border-radius: 5px;
+    padding-left: 35px;
+    border: none;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+.search-icon {
+    position: absolute;
+    top: 50%;
+    left: 15px;
+    transform: translateY(-50%);
+    color: #888;
+}
