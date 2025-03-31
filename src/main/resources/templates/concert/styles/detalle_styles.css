@@ -1,0 +1,292 @@
+/* Estilos para la página de detalles del concierto */
+
+.detail-container {
+    color: #333;
+    padding-bottom: 30px;
+}
+
+.breadcrumb a {
+    color: #FF425F;
+}
+
+.breadcrumb-item.active {
+    color: #333;
+}
+
+.concert-detail {
+    background: white;
+    border-radius: 10px;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+    overflow: hidden;
+}
+
+.concert-header {
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.concert-image {
+    flex: 1;
+    min-width: 300px;
+    max-height: 400px;
+    overflow: hidden;
+}
+
+.concert-image img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.concert-info {
+    flex: 1;
+    min-width: 300px;
+    padding: 20px;
+    background: linear-gradient(135deg, #FF425F, #A30E24);
+    color: white;
+}
+
+.concert-info h1 {
+    margin-bottom: 20px;
+    font-family: 'Roboto Condensed', sans-serif;
+    font-weight: bold;
+}
+
+.info-item {
+    display: flex;
+    align-items: center;
+    margin-bottom: 10px;
+}
+
+.info-item .material-symbols-outlined {
+    margin-right: 10px;
+}
+
+.btn-tickets {
+    display: inline-block;
+    padding: 10px 20px;
+    background-color: white;
+    color: #FF425F;
+    text-decoration: none;
+    border-radius: 5px;
+    font-weight: bold;
+    transition: all 0.3s ease;
+    border: 2px solid white;
+}
+
+.btn-tickets:hover {
+    background-color: transparent;
+    color: white;
+}
+
+.concert-content {
+    padding: 20px;
+}
+
+.nav-tabs {
+    border-bottom: 2px solid #FF425F;
+}
+
+.nav-tabs .nav-link {
+    color: #333;
+    border: none;
+    border-bottom: 2px solid transparent;
+    margin-bottom: -2px;
+}
+
+.nav-tabs .nav-link:hover {
+    border-color: transparent;
+    color: #FF425F;
+}
+
+.nav-tabs .nav-link.active {
+    color: #FF425F;
+    background-color: transparent;
+    border-bottom: 2px solid #FF425F;
+}
+
+.tab-content {
+    padding-top: 20px;
+}
+
+/* Estilos para la sección de lugar */
+.venue-image {
+    width: 100%;
+    max-height: 300px;
+    overflow: hidden;
+    border-radius: 8px;
+}
+
+.venue-image img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.transport-info {
+    margin-top: 15px;
+}
+
+.transport-item {
+    display: flex;
+    align-items: center;
+    margin-bottom: 10px;
+}
+
+.transport-item .material-symbols-outlined {
+    margin-right: 10px;
+    color: #FF425F;
+}
+
+.map-placeholder {
+    background-color: #f8f9fa;
+    height: 200px;
+    border-radius: 8px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    border: 1px dashed #ddd;
+}
+
+.map-icon {
+    font-size: 48px;
+    color: #A30E24;
+}
+
+/* Estilos para la sección de comentarios */
+.comments-section {
+    margin-top: 20px;
+}
+
+.comment {
+    background-color: #f9f9f9;
+    border-radius: 8px;
+    padding: 15px;
+    margin-bottom: 15px;
+}
+
+.comment-header {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 10px;
+}
+
+.comment-user {
+    display: flex;
+    align-items: center;
+}
+
+.user-name {
+    font-weight: bold;
+    margin-left: 5px;
+}
+
+.comment-date {
+    color: #777;
+    font-size: 0.9em;
+}
+
+.comment-form textarea {
+    resize: none;
+    border: 1px solid #ddd;
+}
+
+.btn-submit {
+    background-color: #FF425F;
+    color: white;
+    border: none;
+    padding: 8px 15px;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.btn-submit:hover {
+    background-color: #A30E24;
+}
+
+/* Estilos para conciertos relacionados */
+.related-concerts h3 {
+    margin-bottom: 20px;
+    color: #333;
+}
+
+.related-cards {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+}
+
+.related-card {
+    flex: 1;
+    min-width: 250px;
+    border-radius: 8px;
+    overflow: hidden;
+    box-shadow: 0 3px 10px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s ease;
+    background-color: white;
+}
+
+.related-card:hover {
+    transform: translateY(-5px);
+}
+
+.related-card img {
+    width: 100%;
+    height: 150px;
+    object-fit: cover;
+}
+
+.related-card-info {
+    padding: 15px;
+}
+
+.related-card-info h4 {
+    margin: 0 0 5px 0;
+    color: #333;
+}
+
+.related-card-info p {
+    color: #777;
+    margin-bottom: 10px;
+}
+
+.related-link {
+    color: #FF425F;
+    text-decoration: none;
+    display: inline-flex;
+    align-items: center;
+}
+
+.related-link:hover {
+    text-decoration: underline;
+}
+
+/* Estilos para dispositivos móviles */
+@media (max-width: 768px) {
+    .concert-header {
+        flex-direction: column;
+    }
+    
+    .concert-image {
+        max-height: 250px;
+    }
+    
+    .related-cards {
+        flex-direction: column;
+    }
+    
+    .related-card {
+        width: 100%;
+    }
+    
+    .transport-item {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+    
+    .transport-item .material-symbols-outlined {
+        margin-bottom: 5px;
+    }
+}

@@ -182,6 +182,17 @@ main {
     width: 100%;
 }
 
+.visible-button {
+    opacity: 1 !important;
+    color: white !important;
+    visibility: visible !important;
+    pointer-events: auto !important;
+}
+
+.card:hover .visible-button {
+    color: white !important;
+}
+
 @media (max-width: 768px) {
     .sidebar {
         width: 100%;
