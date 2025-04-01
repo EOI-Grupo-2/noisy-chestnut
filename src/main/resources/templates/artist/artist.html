@@ -5,13 +5,11 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Publicaciones</title>
     <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
-    <link rel="stylesheet" href="./styles/artist.css">
+    <link rel="stylesheet" th:href="@{/css/artist/artist.css}">
 
 </head>
 <body>
-    <div class="container-fluid">
         <div class="row">
-            <!-- Sidebar izquierdo -->
             <nav class="col-md-3 col-lg-2 d-md-block sidebar menu-bg">
                 <h2 class="text-white p-3">Noisy-chestnut</h2>
                 <ul class="nav flex-column">
@@ -26,7 +24,7 @@
                     <a href="../user/register.html" class="nav-link text-white">Registrarse</a></li>
                 </div>
             </nav>
-    
+
             <div class="container d-flex justify-content-center align-items-center">
                 <div class="justify-content-center align-items-center">
                     <!-- Publicación 1 -->
