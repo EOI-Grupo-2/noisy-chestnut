@@ -1,30 +1,13 @@
 
 <!DOCTYPE html>
-<html lang="es">
+<html lang="en" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" layout:decorate="~{layouts/main_layout.html}"
+      xmlns:th="http://www.thymeleaf.org">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Publicaciones</title>
-   <link rel="stylesheet" href="./styles/index.css">
-   <link rel="stylesheet" href="./styles/global.css">
+   <link rel="stylesheet" th:href="@{/css/index.css}"/>
+    <link rel="stylesheet" th:href="@{/css/styles.css}"/>
 </head>
 <body>
-    <div class="container">
-            <!-- Header Lateral -->
-        <nav class="menu sidebar">
-            <h2 class="menu__title">Noisy-chestnut</h2>
-            <ul class="menu__items">
-                <li class="menu__item"><a href="index.html" class="menu__link">Inicio</a></li>
-                <li class="menu__item"><a href="./artist/artist.html" class="menu__link">Artistas</a></li>
-                <li class="menu__item"><a href="./concert/index.html" class="menu__link">Conciertos</a></li>
-                <li class="menu__item"><a href="#" class="menu__link">Nueva publicación</a></li>
-                <li class="menu__item"><a href="./search/concerts.html" class="menu__link">Buscar</a></li>
-                <li class="menu__item"><a href="./user/login.html" class="menu__link">Iniciar sesión</a></li>
-                <li class="menu__item"><a href="./user/register.html" class="menu__link">Registrarse</a></li>
-            </ul> 
-        </nav>
-    
-        <div class="content">
+        <div class="content" layout:fragment="content">
             <!-- Publicación 1 -->
             <div class="pub-card" >
                 <div class="pub-card__header">
@@ -70,7 +53,6 @@
                 </div>
             </div>
         </div>
-    </div>
 
 
     <!-- Enlace a los scripts de Bootstrap -->
