@@ -129,4 +129,14 @@ public class DefaultController {
     public String getSearchArtistPage(){
         return "/search/artists";
     }
+
+    @GetMapping({"", "/search/users"})
+    public String getSearchUsersPage(){
+        return "/search/users";
+    }
+
+    @GetMapping({"", "/search/concerts"})
+    public String getSearchConcertsPage(){
+        return "/search/concerts";
+    }
 }
