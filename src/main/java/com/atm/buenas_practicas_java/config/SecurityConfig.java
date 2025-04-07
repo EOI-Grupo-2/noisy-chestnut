@@ -92,6 +92,9 @@ public class SecurityConfig {
                 .httpBasic(Customizer.withDefaults())
                 .formLogin(Customizer.withDefaults())
                 .authorizeHttpRequests(authorize -> authorize
+                        .requestMatchers("/").permitAll()
+                        .requestMatchers("/artists").permitAll()
+                        .requestMatchers("/concerts").permitAll()
                         .requestMatchers("/entities").permitAll()
                         .requestMatchers("/entities/*").permitAll()
                         .requestMatchers("/css/*").permitAll()

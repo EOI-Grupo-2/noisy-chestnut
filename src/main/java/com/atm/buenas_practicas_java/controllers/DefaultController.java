@@ -110,4 +110,18 @@ public class DefaultController {
         return "redirect:/entities";
     }
 
+    @GetMapping({"", "/"})
+    public String getHomePage(){
+        return "index";
+    }
+
+    @GetMapping({"", "/concerts"})
+    public String getConcertPage(){
+        return "/concert/index";
+    }
+
+    @GetMapping({"", "/artists"})
+    public String getArtistPage(){
+        return "/artist/artist";
+    }
 }
