@@ -12,10 +12,14 @@ body {
   background-repeat: no-repeat; /* Evita que la imagen se repita */
 }
 
-.container {
+.page-layout {
   display: grid;
   grid-template-rows: auto;
   grid-template-columns: 1fr 8fr;
+}
+
+.content{
+  padding: 0 2rem;
 }
 
 .menu{
