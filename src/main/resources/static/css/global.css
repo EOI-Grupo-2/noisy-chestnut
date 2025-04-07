@@ -80,7 +80,10 @@ body {
     border-radius: 50%;
 }
 .pub-card__body{
-
+    padding: 1rem;
+    display: flex;
+    flex-direction: column;
+    gap: 0;
 }
 .pub-card__username{
     font-weight: bold;
