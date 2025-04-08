@@ -126,5 +126,5 @@ public class DefaultController {
     }
 
     @GetMapping({"", "/publication"})
-    public String getPublicationPage(){return "/publication/publication";}
+    public String getPublicationPage(){return "/user/publication";}
 }
