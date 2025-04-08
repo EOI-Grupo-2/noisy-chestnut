@@ -124,4 +124,9 @@ public class DefaultController {
     public String getArtistPage(){
         return "/artist/artist";
     }
+
+    @GetMapping({"", "/chat"})
+    public String getChatPage(){
+        return "/social/chat";
+    }
 }
