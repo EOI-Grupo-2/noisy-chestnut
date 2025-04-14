@@ -124,4 +124,14 @@ public class DefaultController {
     public String getArtistPage(){
         return "/artist/artist";
     }
+
+    @GetMapping({"", "/Profile"})
+    public String getUserProfile(){
+        return "/user/profile";
+    }
+
+    @GetMapping({"", "/ArtistProfile"})
+    public String getArtistProfile(){
+        return "/artist/artistProfile";
+    }
 }
