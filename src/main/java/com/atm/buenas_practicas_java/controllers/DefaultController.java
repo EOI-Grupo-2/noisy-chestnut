@@ -124,4 +124,14 @@ public class DefaultController {
     public String getArtistPage(){
         return "/artist/artist";
     }
+
+    @GetMapping({"", "/logueo"})
+    public String getLogin(){
+        return "/user/login";
+    }
+
+    @GetMapping({"", "/register"})
+    public String getRegister(){
+        return "/user/register";
+    }
 }

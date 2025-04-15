@@ -1,0 +1,97 @@
+.register-page {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+  padding: 40px 20px;
+
+}
+
+.register-card {
+  width: 100%;
+  max-width: 420px;
+  border-radius: 12px;
+  overflow: hidden;
+  background-color: #1c1e21;
+  color: #ffffff;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.4);
+  font-size: 16px;
+  position: relative;
+  z-index: 1;
+
+  &__header {
+    background: linear-gradient(to right, #ED7D8E, #E21937);
+    font-weight: bold;
+    padding: 20px;
+    text-align: center;
+    font-size: 1.3rem;
+  }
+
+  &__body {
+    padding: 30px 25px;
+    display: flex;
+    flex-direction: column;
+    gap: 24px; // Aumentamos el espacio entre los campos
+  }
+
+  &__field {
+    display: flex;
+    flex-direction: column;
+    gap: 12px; // Más separación entre el label y el input
+
+    label {
+      font-size: 0.95rem;
+      color: #ccc;
+    }
+
+    input {
+      padding: 12px; // Un pelín más de padding para comodidad
+      border: none;
+      border-radius: 6px;
+      background-color: #2c2c2e;
+      color: #fff;
+      font-size: 1rem;
+
+      &::placeholder {
+        color: #999;
+      }
+
+      &:focus {
+        outline: none;
+        background-color: #3a3a3c;
+      }
+    }
+  }
+
+  &__button {
+    margin-top: 8px; // Espacio extra entre el último input y el botón
+    background-color: #E21937;
+    color: #ffffff;
+    padding: 14px;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+    font-weight: bold;
+    font-size: 1rem;
+    transition: background-color 0.3s ease;
+
+    &:hover {
+      background-color: darken(#E21937, 10%);
+    }
+  }
+
+  &__login {
+    text-align: center;
+    margin-top: 16px;
+
+    a {
+      color: #ED7D8E;
+      text-decoration: none;
+      font-size: 0.95rem;
+
+      &:hover {
+        text-decoration: underline;
+      }
+    }
+  }
+}

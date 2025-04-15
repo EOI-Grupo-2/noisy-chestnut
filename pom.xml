@@ -168,12 +168,6 @@
                 <groupId>org.springframework.boot</groupId>
                 <artifactId>spring-boot-maven-plugin</artifactId>
                 <version>3.4.3</version>
-                <configuration>
-                    <image>
-                        <!--suppress UnresolvedMavenProperty -->
-                        <name>noisychestnut:${env.VERSION}</name>
-                    </image>
-                </configuration>
             </plugin>
             <plugin>
                 <groupId>org.jacoco</groupId>
