@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" layout:decorate="~{layouts/main_layout.html}"
+      xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Publicaciones de Conciertos</title>
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" th:href="@{/css/concerts.css}"/>
+</head>
+<body>
+<div class="content" layout:fragment="content">
+    <div class="central-div">
+        <!-- Botones para las funciones "Crear publicación" y "Buscar conciertos"-->
+        <div class="buttons-container">
+            <button class="buttons-container__button" data-toggle="modal" data-target="#modalCrearConcierto">
+                <i class="fas fa-music"></i>
+                Crear publicación
+            </button>
+            <button class="buttons-container__button" data-toggle="modal" data-target="#modalBuscarConcierto">
+                <i class="fas fa-search"></i>
+                Buscar conciertos
+            </button>
+        </div>
+
+        <!-- Listado de conciertos -->
+        <div class="concerts-list">
+            <h3 class="concerts-list__title">Próximos conciertos</h3>
+
+            <!-- Ejemplo de tarjeta de concierto -->
+            <div class="concert-card" th:each="i : ${#numbers.sequence(1, 5)}">
+                <div class="concert-card__header">
+                    <h4 class="concert-card__title">Concierto de Rock en Madrid</h4>
+                    <span class="concert-card__date">15 de Julio, 2023</span>
+                </div>
+                <div class="concert-card__body">
+                    <p class="concert-card__description">Gran concierto de rock con las mejores bandas del momento. No te lo pierdas!</p>
+                    <div class="concert-card__details">
+                        <span class="concert-card__location"><i class="fas fa-map-marker-alt"></i> WiZink Center, Madrid</span>
+                        <span class="concert-card__time"><i class="far fa-clock"></i> 20:00h</span>
+                    </div>
+                </div>
+                <div class="concert-card__footer">
+                    <button class="concert-card__button">Ver detalles</button>
+                    <button class="concert-card__button concert-card__button--interested">Me interesa</button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Modal para crear publicación de concierto -->
+        <div class="modal fade" id="modalCrearConcierto" tabindex="-1" role="dialog" aria-labelledby="modalCrearConciertoLabel" aria-hidden="true">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="modalCrearConciertoLabel">Crear publicación de concierto</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Cerrar">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div class="modal-body">
+                        <form>
+                            <div class="form-group">
+                                <label for="conciertoTitulo">Título del concierto</label>
+                                <input type="text" class="form-control" id="conciertoTitulo" placeholder="Título del concierto">
+                            </div>
+                            <div class="form-group">
+                                <label for="conciertoDescripcion">Descripción</label>
+                                <textarea class="form-control" id="conciertoDescripcion" rows="3" placeholder="Descripción del concierto"></textarea>
+                            </div>
+                            <div class="form-group">
+                                <label for="conciertoFecha">Fecha</label>
+                                <input type="date" class="form-control" id="conciertoFecha">
+                            </div>
+                            <div class="form-group">
+                                <label for="conciertoHora">Hora</label>
+                                <input type="time" class="form-control" id="conciertoHora">
+                            </div>
+                            <div class="form-group">
+                                <label for="conciertoLugar">Lugar</label>
+                                <input type="text" class="form-control" id="conciertoLugar" placeholder="Lugar del concierto">
+                            </div>
+                            <div class="form-group">
+                                <label for="conciertoImagen">Imagen del evento (opcional)</label>
+                                <input type="file" class="form-control-file" id="conciertoImagen">
+                            </div>
+                            <button type="submit" class="btn crear-btn">Publicar concierto</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Modal para buscar conciertos -->
+        <div class="modal fade" id="modalBuscarConcierto" tabindex="-1" role="dialog" aria-labelledby="modalBuscarConciertoLabel" aria-hidden="true">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="modalBuscarConciertoLabel">Buscar conciertos</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Cerrar">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div class="modal-body">
+                        <form>
+                            <div class="form-group">
+                                <label for="buscarPalabra">Palabra clave</label>
+                                <input type="text" class="form-control" id="buscarPalabra" placeholder="Artista, género, título...">
+                            </div>
+                            <div class="form-group">
+                                <label for="buscarUbicacion">Ubicación</label>
+                                <input type="text" class="form-control" id="buscarUbicacion" placeholder="Ciudad, lugar...">
+                            </div>
+                            <div class="form-group">
+                                <label for="buscarFechaDesde">Desde</label>
+                                <input type="date" class="form-control" id="buscarFechaDesde">
+                            </div>
+                            <div class="form-group">
+                                <label for="buscarFechaHasta">Hasta</label>
+                                <input type="date" class="form-control" id="buscarFechaHasta">
+                            </div>
+                            <button type="submit" class="btn btn-primary">Buscar</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Scripts necesarios para el funcionamiento de los modales -->
+<script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</body>
+</html>

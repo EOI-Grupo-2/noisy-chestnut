@@ -129,4 +129,8 @@ public class DefaultController {
     public String getSocialPage(){
         return "/social/social";
     }
+    @GetMapping("/concert")
+    public String showConcertsPage() {
+        return "concert/concerts";
+    }
 }
