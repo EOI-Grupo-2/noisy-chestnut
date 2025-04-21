@@ -6,16 +6,12 @@ $light-text: #fff;
 $border-radius: 5px;
 
 // Contenedor central
-.conctent {
+.content {
   width: 100%;
-  max-width: 960px;
-  padding: 3rem;
+  padding: 3rem 2rem 3rem 0;
   display: flex;
   flex-direction: column;
-  justify-content: center;
   align-items: center;
-  margin-left: auto;
-  margin-right: auto;
 }
 
 // Contenedor de botones

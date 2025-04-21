@@ -17,11 +17,11 @@ body {
   grid-template-rows: auto;
   grid-template-columns: 1fr 8fr;
   grid-template-areas: 'menu content';
+  gap: 2rem;
 }
 
 .content{
   grid-area: content;
-  padding: 0 2rem;
   overflow-y: scroll;
   max-height: 100vh;
 }
