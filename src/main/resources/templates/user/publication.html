@@ -2,14 +2,11 @@
 <html lang="en" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" layout:decorate="~{layouts/main_layout.html}"
       xmlns:th="http://www.thymeleaf.org">
 <head>
-    <link rel="stylesheet" th:href="@{/css/style.css}" />
     <link rel="stylesheet" th:href="@{/css/publication.css}" />
 </head>
-<body class="page">
 <div class="content" layout:fragment="content">
 
     <!-- Contenedor de la publicación y los comentarios -->
-    <div class="main-content">
         <!-- Publicación -->
         <div class="post">
             <h5 class="post__author">Eladio Carrión <span class="post__handle">@eladiocarrion</span></h5>
@@ -44,7 +41,5 @@
                 <button class="button button--comment">Comentar</button>
             </div>
         </div>
-    </div>
 </div>
-</body>
 </html>

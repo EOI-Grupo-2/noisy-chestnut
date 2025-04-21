@@ -1,56 +1,28 @@
-/* Variables */
-$bg-dark: #1c1e21;
-$bg-publicacion: #1c1e21;
-$bg-comentarios: #242526;
-$bg-comentario: #3a3b3c;
-$color-principal: #FF425F;
-$blanco: #ffffff;
-$gris: #cccccc;
 
-/* General */
-body.page {
-  min-height: 100vh;
-  margin: 0;
-  padding: 0;
-  background-color: $bg-dark;
-  color: $blanco;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-}
 
 
 .content {
-  width: 100%;
-}
-
-/* Contenedor principal */
-.main-content {
   display: flex;
   flex-direction: row;
   justify-content: center;
-  align-items: flex-start;
+  align-items: center;
   gap: 20px;
-  padding: 40px 20px 60px; // espacio superior + inferior
-  max-width: 1200px;
-  margin: 0 auto;
+  padding: 3rem 0;
 }
 
-/* Publicación */
 .post {
-  width: 600px;
-  background-color: $bg-publicacion;
+  background-color: #0C0C00; // Negro
   padding: 15px;
   border-radius: 10px;
-  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
-
+  box-shadow: 0 4px 10px rgba(12, 12, 0, 0.8); // Basado en color negro con opacidad
+  max-height: 90%;
   &__author {
     font-size: 18px;
     margin-bottom: 5px;
   }
 
   &__handle {
-    color: $gris;
+    color: #FAEBD7; // Gris
     font-weight: normal;
   }
 
@@ -71,10 +43,9 @@ body.page {
   }
 }
 
-/* Botones */
 .button {
-  background-color: $color-principal;
-  color: $blanco;
+  background-color: #9B111E; // Rojo
+  color: #FFFAF0; // Blanco
   border: none;
   padding: 8px 16px;
   border-radius: 6px;
@@ -83,7 +54,8 @@ body.page {
   transition: background 0.3s ease;
 
   &:hover {
-    background-color: darken($color-principal, 10%);
+    background-color: #9B111E; // Mismo rojo (no hay otro tono permitido)
+    opacity: 0.85; // Simula efecto sin cambiar color
   }
 
   &--comment {
@@ -92,25 +64,25 @@ body.page {
   }
 }
 
-/* Comentarios */
 .comments {
-  width: 400px;
-  background-color: $bg-comentarios;
+  max-height: 90%;
+  background-color: #0C0C00; // Negro
   padding: 15px;
+
   border-radius: 10px;
-  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
-  max-height: 80vh;
-  overflow-y: auto;
+  box-shadow: 0 4px 10px rgba(12, 12, 0, 0.4); // Basado en negro
 
   &__title {
     margin-bottom: 10px;
+    color: #0C0C00; // Negro para contraste
   }
 
   &__comment {
-    background-color: $bg-comentario;
+    background-color: #0C0C00; // Negro
     padding: 10px;
     border-radius: 5px;
     margin-bottom: 10px;
+    color: #FFFAF0; // Texto negro
   }
 
   &__new {
@@ -119,8 +91,8 @@ body.page {
 
   &__textarea {
     width: 100%;
-    background-color: $bg-comentario;
-    color: $blanco;
+    background-color: #0C0C00; // Negro
+    color: #FFFAF0;
     border-radius: 5px;
     border: none;
     padding: 10px;
