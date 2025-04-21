@@ -1,4 +1,4 @@
-.login-page {
+.content {
   display: flex;
   justify-content: center;
   align-items: center;
@@ -8,7 +8,7 @@
 
 .login-card {
   width: 100%;
-  max-width: 420px; // Más ancho
+  max-width: 25%;
   border-radius: 12px;
   overflow: hidden;
   background-color: #1c1e21;
@@ -35,7 +35,7 @@
     display: flex;
     flex-direction: column;
     gap: 10px;
-    margin-bottom: 20px; // Añadimos separación entre campos
+    margin-bottom: 20px;
 
     label {
       font-size: 0.95rem;
@@ -67,7 +67,8 @@
 
 
   &__button {
-    margin-top: 10px; // Espacio respecto al último input
+    width: 100%;
+    margin-top: 10px;
     background-color: #E21937;
     color: #ffffff;
     padding: 12px;

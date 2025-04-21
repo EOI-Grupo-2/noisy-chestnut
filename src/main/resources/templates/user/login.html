@@ -2,12 +2,9 @@
 <html lang="en" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" layout:decorate="~{layouts/main_layout.html}"
       xmlns:th="http://www.thymeleaf.org">
 <head>
-    <link rel="stylesheet" th:href="@{/css/style.css}" />
     <link rel="stylesheet" th:href="@{/css/login.css}" />
 </head>
-<body class="page">
 <div class="content" layout:fragment="content">
-    <main class="login-page">
         <div class="login-card">
             <!-- Barra superior -->
             <div class="login-card__header">
@@ -31,7 +28,6 @@
                 </div>
             </div>
         </div>
-    </main>
-</div>
+    </div>
 </body>
 </html>

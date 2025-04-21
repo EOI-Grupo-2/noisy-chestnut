@@ -1,4 +1,4 @@
-.register-page {
+.content {
   display: flex;
   justify-content: center;
   align-items: center;
@@ -7,9 +7,11 @@
 
 }
 
+
+
 .register-card {
   width: 100%;
-  max-width: 420px;
+  max-width: 25%;
   border-radius: 12px;
   overflow: hidden;
   background-color: #1c1e21;
@@ -31,13 +33,14 @@
     padding: 30px 25px;
     display: flex;
     flex-direction: column;
-    gap: 24px; // Aumentamos el espacio entre los campos
+    gap: 24px;
   }
 
   &__field {
+    margin-top: 20px;
     display: flex;
     flex-direction: column;
-    gap: 12px; // Más separación entre el label y el input
+    gap: 20px;
 
     label {
       font-size: 0.95rem;
@@ -45,26 +48,29 @@
     }
 
     input {
-      padding: 12px; // Un pelín más de padding para comodidad
+      padding: 10px 12px;
       border: none;
       border-radius: 6px;
-      background-color: #2c2c2e;
+      background-color: #2c2f33;
       color: #fff;
       font-size: 1rem;
+      transition: border 0.3s ease, box-shadow 0.3s ease;
 
       &::placeholder {
-        color: #999;
+        color: #aaa;
       }
 
       &:focus {
         outline: none;
-        background-color: #3a3a3c;
+        border: 1px solid #ED7D8E;
+        box-shadow: 0 0 0 3px rgba(237, 125, 142, 0.2);
       }
     }
   }
 
   &__button {
-    margin-top: 8px; // Espacio extra entre el último input y el botón
+    width: 100%;
+    margin-top: 25px;
     background-color: #E21937;
     color: #ffffff;
     padding: 14px;
@@ -82,7 +88,7 @@
 
   &__login {
     text-align: center;
-    margin-top: 16px;
+    margin-top: 20px;
 
     a {
       color: #ED7D8E;
