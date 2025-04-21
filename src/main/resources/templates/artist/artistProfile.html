@@ -5,100 +5,90 @@
     <meta charset="UTF-8">
     <link rel="stylesheet" href="pruebaweb.css">
     <link rel="stylesheet" th:href="@{/css/style.css}" />
-    <link rel="stylesheet" th:href="@{/css/Profile.css}" />
+    <link rel="stylesheet" th:href="@{/css/profile.css}" />
     <title>Perfil</title>
 </head>
 <body>
 <!-- Menú lateral -->
 <div class="content" layout:fragment="content">
     <!-- Encabezado perfil -->
-    <div class="main-header">
-        <div>
-            <img id="fotoperfil" src="https://imgs.search.brave.com/E_UWBRRxi_Mth0t2pKHhoYW5627CGE77wLMeEt6qDb0/rs:fit:860:0:0:0/g:ce/aHR0cHM6Ly93YWxs/cGFwZXJzLmNvbS9p/bWFnZXMvaGQvYmFz/aWMtZGVmYXVsdC1w/ZnAtcHhpNzdxdjVv/MHp1ejhqMy5qcGc" alt="FotoPerfil">
-        </div>
-        <div>
-            <div class="user-header">
-                <h1>Usuario</h1>
-                <p>Descripción del usuario</p>
+    <div class="profile-header">
+        <img class="profile-header__userimage" src="https://imgs.search.brave.com/E_UWBRRxi_Mth0t2pKHhoYW5627CGE77wLMeEt6qDb0/rs:fit:860:0:0:0/g:ce/aHR0cHM6Ly93YWxs/cGFwZXJzLmNvbS9p/bWFnZXMvaGQvYmFz/aWMtZGVmYXVsdC1w/ZnAtcHhpNzdxdjVv/MHp1ejhqMy5qcGc" alt="FotoPerfil">
+        <div class="profile-header__content">
+            <div class="profile-header__info">
+                <h1 class="profile-header__username">Usuario</h1>
+                <p class="profile-header__description">Descripción del usuario</p>
             </div>
-            <ul class="user-info">
-                <li><button type="button">Publicaciones</button></li>
-                <li><button type="button">Seguidores</button></li>
-                <li><button type="button">Seguidos</button></li>
-                <li><button type="button">Insignias</button></li>
+            <ul class="profile-header__info-items">
+                <li class="profile-header__info-item"><button class="profile-header__info-button" type="button">Publicaciones</button></li>
+                <li class="profile-header__info-item"><button class="profile-header__info-button" type="button">Seguidores</button></li>
+                <li class="profile-header__info-item"><button class="profile-header__info-button" type="button">Seguidos</button></li>
+                <li class="profile-header__info-item"><button class="profile-header__info-button" type="button">Insignias</button></li>
             </ul>
         </div>
     </div>
     <!-- Contenido -->
-    <div class="container">
+    <div class="profile-content">
         <!-- COLUMNA PRINCIPAL PUBLICACIONES -->
-        <div class="column-1">
-            <div class="cards-background">
-                <div>
+        <div class="profile-content__pubs">
                     <!-- Publicación 1 -->
-                    <div class="card-pub">
-                        <div class="card-header">
-                            <img src="https://imgs.search.brave.com/E_UWBRRxi_Mth0t2pKHhoYW5627CGE77wLMeEt6qDb0/rs:fit:860:0:0:0/g:ce/aHR0cHM6Ly93YWxs/cGFwZXJzLmNvbS9p/bWFnZXMvaGQvYmFz/aWMtZGVmYXVsdC1w/ZnAtcHhpNzdxdjVv/MHp1ejhqMy5qcGc" alt="FotoPublicacion"  class="card-img">
-                            <h4>Usuario</h4>
-                        </div>
-                        <div class="card-body">
-                            <p>Contenido de la publicación</p>
-                            <div class="fecha">
-                                <p>Hoy 15:30</p>
-                            </div>
-                            <div class="iconos">
-                                <span class="icono">❤️ Me gusta</span>
-                                <span class="icono">🔗 Compartir</span>
-                            </div>
-                        </div>
-                    </div>
+            <div class="pub-card" >
+                <div class="pub-card__header">
+                    <img src="https://as1.ftcdn.net/v2/jpg/03/46/83/96/1000_F_346839683_6nAPzbhpSkIpb8pmAwufkC7c5eD7wYws.jpg" class="pub-card__user-image"alt="">
+                    <div class="pub-card__username">Usuario 1</div>
                 </div>
-                <div>
-                    <!-- Publicación 2 -->
-                    <div class="card-pub">
-                        <div class="card-header">
-                            <img src="https://imgs.search.brave.com/E_UWBRRxi_Mth0t2pKHhoYW5627CGE77wLMeEt6qDb0/rs:fit:860:0:0:0/g:ce/aHR0cHM6Ly93YWxs/cGFwZXJzLmNvbS9p/bWFnZXMvaGQvYmFz/aWMtZGVmYXVsdC1w/ZnAtcHhpNzdxdjVv/MHp1ejhqMy5qcGc" alt="FotoPublicacion" class="card-img">
-                            <h4>Usuario</h4>
-                        </div>
-                        <div class="card-body">
-                            <p>Contenido de la publicación</p>
-                            <div class="fecha">
-                                <p>Hoy 15:30</p>
-                            </div>
-                            <div class="iconos">
-                                <span class="icono">❤️ Me gusta</span>
-                                <span class="icono">🔗 Compartir</span>
-                            </div>
-                        </div>
-                    </div>
+                <div class="pub-card__body">
+                    <h5 class="pub-card__title">Contenido de la publicación</h5>
+                </div>
+                <div class="pub-card__footer">
+                    <p class="pub-card__date">Fecha y hora de la publicación</p>
+                    <a class="pub-card__link" href="./user/publicacion.html">Ver mas</a>
+                </div>
+            </div>
+            <!-- Publicación 2 -->
+            <div class="pub-card" >
+                <div class="pub-card__header">
+                    <img src="https://as1.ftcdn.net/v2/jpg/03/46/83/96/1000_F_346839683_6nAPzbhpSkIpb8pmAwufkC7c5eD7wYws.jpg" class="pub-card__user-image"alt="">
+                    <div class="pub-card__username">Usuario 2</div>
+                </div>
+                <div class="pub-card__body">
+                    <h5 class="pub-card__title">Contenido de la publicación</h5>
+                </div>
+                <div class="pub-card__footer">
+                    <p class="pub-card__date">Fecha y hora de la publicación</p>
+                    <a class="pub-card__link" href="./user/publicacion.html">Ver mas</a>
                 </div>
             </div>
         </div>
         <!-- COLUMNA DERECHA CARDS -->
-        <div class="column-2">
-            <div class="cards-background">
-                <!-- Próximos conciertos -->
-                <div class="card-mas">
-                    <div class="card-header">
-                        <h5>Próximos conciertos</h5>
-                    </div>
-                    <div class="card">
-                        <div class="list-item">Madrid 08.04.2025</div>
-                        <div class="list-item">Sevilla 15.04.2025</div>
-                        <div class="list-item">Barcelona 20.04.2025</div>
-                    </div>
+        <div class="profile-content__more">
+            <!-- Próximos conciertos -->
+            <div class="concert-card">
+                <div class="concert-card__header">
+                    <h3 class="concert-card__title">Próximos conciertos</h3>
                 </div>
-                <!-- Albumes -->
-                <div class="card-mas">
-                    <div class="card-header">
-                        <h5>Música</h5>
-                    </div>
-                    <div class="card">
-                        <a href="#"><img class="albumFoto" src="https://imgs.search.brave.com/160UXkJijBd3i8zpxUy45l0b3lNfqJHfYIyQp6vWVKw/rs:fit:860:0:0:0/g:ce/aHR0cHM6Ly9pbWcu/ZnJlZXBpay5jb20v/cHNkLXByZW1pdW0v/c3VwZXJwb3NpY2lv/bi1lbnZvbHR1cmEt/cGxhc3RpY2EtcG9y/dGFkYS1hbGJ1bS1h/cnRlLXBsYW50aWxs/YS1wc2QtMDhfOTg0/MTAwLTc0OS5qcGc_/c2VtdD1haXNfaHli/cmlk"></a>
-                        <a href="#"><img class="albumFoto" src="https://imgs.search.brave.com/RNQ6-vNJgUIlswGNKZQNThuYgbulwyKqj2y-Mmfd36c/rs:fit:860:0:0:0/g:ce/aHR0cHM6Ly9jZG4u/Y3JlYXRlLnZpc3Rh/LmNvbS9kb3dubG9h/ZHMvNmE4YzBhYjgt/MTlhNy00ZTAzLThk/ZTUtYmQ5NTA0ZTcy/NzIyXzQ1MC5qcGVn"></a>
-                        <a href="#"><img class="albumFoto" src="https://imgs.search.brave.com/tEzmYu-8ws2AsU1z8sEThNRNWNh-ngYrIjUh5I-BV80/rs:fit:860:0:0:0/g:ce/aHR0cHM6Ly9jZG4u/Y3JlYXRlLnZpc3Rh/LmNvbS9kb3dubG9h/ZHMvNGVkMjhiMGEt/NTYzNy00NzQwLWE3/ZDEtNjRjMTRmMmJh/Y2U5XzQ1MC5qcGVn"></a>
-                        <a href="#"><img class="albumFoto" src="https://imgs.search.brave.com/VqUGitc5l4rzV-7o7N-dMWFfWZAk_EPMff21QJXIGEY/rs:fit:860:0:0:0/g:ce/aHR0cHM6Ly9jZG4u/Y3JlYXRlLnZpc3Rh/LmNvbS9kb3dubG9h/ZHMvZjIyOTRjNGYt/ODViNC00NTZmLTg2/MmYtZTc5YzdiMDUy/YjNiXzQ1MC5qcGVn"></a>
-                    </div>
+                <div class="concert-card__body">
+                    <div class="concert-card__item">Madrid 08.04.2025</div>
+                    <div class="concert-card__item">Sevilla 15.04.2025</div>
+                    <div class="concert-card__item">Barcelona 20.04.2025</div>
+                </div>
+                <div class="concert-card__footer">
+                    <a class="concert-card__link" href="./user/publicacion.html">Ver mas</a>
+                </div>
+            </div>
+            <!-- Albumes -->
+            <div class="music-card">
+                <div class="music-card__header">
+                    <h3 class="music-card__title">Música</h3>
+                </div>
+                <div class="music-card__body">
+                    <a href="#"><img class="music-card__album" src="https://imgs.search.brave.com/160UXkJijBd3i8zpxUy45l0b3lNfqJHfYIyQp6vWVKw/rs:fit:860:0:0:0/g:ce/aHR0cHM6Ly9pbWcu/ZnJlZXBpay5jb20v/cHNkLXByZW1pdW0v/c3VwZXJwb3NpY2lv/bi1lbnZvbHR1cmEt/cGxhc3RpY2EtcG9y/dGFkYS1hbGJ1bS1h/cnRlLXBsYW50aWxs/YS1wc2QtMDhfOTg0/MTAwLTc0OS5qcGc_/c2VtdD1haXNfaHli/cmlk"></a>
+                    <a href="#"><img class="music-card__album" src="https://imgs.search.brave.com/RNQ6-vNJgUIlswGNKZQNThuYgbulwyKqj2y-Mmfd36c/rs:fit:860:0:0:0/g:ce/aHR0cHM6Ly9jZG4u/Y3JlYXRlLnZpc3Rh/LmNvbS9kb3dubG9h/ZHMvNmE4YzBhYjgt/MTlhNy00ZTAzLThk/ZTUtYmQ5NTA0ZTcy/NzIyXzQ1MC5qcGVn"></a>
+                    <a href="#"><img class="music-card__album" src="https://imgs.search.brave.com/tEzmYu-8ws2AsU1z8sEThNRNWNh-ngYrIjUh5I-BV80/rs:fit:860:0:0:0/g:ce/aHR0cHM6Ly9jZG4u/Y3JlYXRlLnZpc3Rh/LmNvbS9kb3dubG9h/ZHMvNGVkMjhiMGEt/NTYzNy00NzQwLWE3/ZDEtNjRjMTRmMmJh/Y2U5XzQ1MC5qcGVn"></a>
+                    <a href="#"><img class="music-card__album" src="https://imgs.search.brave.com/VqUGitc5l4rzV-7o7N-dMWFfWZAk_EPMff21QJXIGEY/rs:fit:860:0:0:0/g:ce/aHR0cHM6Ly9jZG4u/Y3JlYXRlLnZpc3Rh/LmNvbS9kb3dubG9h/ZHMvZjIyOTRjNGYt/ODViNC00NTZmLTg2/MmYtZTc5YzdiMDUy/YjNiXzQ1MC5qcGVn"></a>
+                </div>
+                <div class="music-card__footer">
+                    <a class="music-card__link" href="./user/publicacion.html">Ver mas</a>
                 </div>
             </div>
         </div>

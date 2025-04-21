@@ -1,0 +1,172 @@
+
+.content{
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+  width: 100%;
+}
+
+/* ENCABEZADO */
+
+.profile-header {
+  display: flex;
+  flex-direction: row;
+  gap: 2rem;
+  background-color: rgba(0, 0, 0, 0.5);
+  color: #FFFAF0;
+  padding: 1rem;
+
+  &__userimage {
+    width: 150px;
+    height: 150px;
+    border-radius: 50%;
+  }
+
+  &__username {
+    font-size: xx-large;
+    font-weight: 550;
+    margin-bottom: 10px;
+    margin-top: 5px;
+  }
+
+  &__userdescription {
+    font-size: small;
+    font-weight: 200;
+  }
+
+  &__content{
+    display:flex;
+    flex-direction:column;
+    justify-content: space-between;
+  }
+
+  &__info-items{
+    list-style: none;
+    display:flex;
+    flex-direction: row;
+    gap: 2rem;
+  }
+
+  &__info-button{
+    border: none;
+    background: transparent;
+    color: inherit;
+    font-weight: 500;
+    font-size: small;
+  }
+}
+
+/* PUBLICACIONES */
+
+.profile-content{
+  display: grid;
+  grid-template-rows: auto;
+  grid-template-columns: 5fr 2fr;
+  grid-template-areas: 'pubs more';
+  gap: 2rem;
+
+  &__pubs{
+    grid-area: pubs;
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+    align-items: center;
+  }
+
+  &__more{
+    grid-area: more;
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+    width:75%;
+  }
+}
+
+.concert-card {
+  background-color: #545B61;
+  display: grid;
+  grid-template-rows: auto 1fr;
+  grid-template-columns: 1fr;
+  color: white;
+  border-radius: 5px;
+
+  &__header{
+    padding: 1rem;
+    background-color: #212529;
+    border-top-left-radius: 5px;
+    border-bottom-right-radius: 5px;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    gap: 1rem;
+  }
+
+  &__body {
+    padding: 1rem;
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+  }
+
+  &__footer {
+    padding: 0.5rem 1rem;
+    border-bottom-right-radius: 5px;
+    border-bottom-left-radius: 5px;
+    display: flex;
+    flex-direction: row;
+    justify-content: right;
+    font-weight: 500;
+    font-size: small;
+  }
+
+  &__link {
+    text-decoration: none;
+    color: white;
+  }
+}
+
+.music-card{
+  color: white;
+  background-color: #545B61;
+  border-radius: 5px;
+
+  &__header{
+    padding: 1rem;
+    background-color: #212529;
+    border-top-left-radius: 5px;
+    border-bottom-right-radius: 5px;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    gap: 1rem;
+  }
+
+  &__body {
+    padding: 1rem;
+    display: flex;
+    flex-direction: row;
+    gap: 1rem;
+  }
+
+  &__footer {
+    padding: 0.5rem 1rem;
+    border-bottom-right-radius: 5px;
+    border-bottom-left-radius: 5px;
+    display: flex;
+    flex-direction: row;
+    justify-content: right;
+    font-weight: 500;
+    font-size: small;
+  }
+
+  &__link {
+    text-decoration: none;
+    color: white;
+  }
+  &__album{
+    width: 50px;
+    height: 50px;
+  }
+}
+
+/* MAS */
