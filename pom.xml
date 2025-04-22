@@ -171,7 +171,7 @@
                 <configuration>
                     <image>
                         <!--suppress UnresolvedMavenProperty -->
-                        <name>buenaspracticas:${env.VERSION}</name>
+                        <name>noisychestnut:${env.VERSION}</name>
                     </image>
                 </configuration>
             </plugin>
@@ -249,7 +249,6 @@
                 </executions>
             </plugin>
         </plugins>
-
     </build>
 
 </project>
