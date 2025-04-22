@@ -125,8 +125,25 @@ public class DefaultController {
         return "/artist/artist";
     }
 
+
     @GetMapping({"", "/social"})
     public String getSocialPage(){
         return "/social/social";
+    }
+  
+    @GetMapping({"", "/search/artists"})
+    public String getSearchArtistPage(){
+        return "/search/artists";
+    }
+
+    @GetMapping({"", "/search/users"})
+    public String getSearchUsersPage(){
+        return "/search/users";
+    }
+
+    @GetMapping({"", "/search/concerts"})
+    public String getSearchConcertsPage(){
+        return "/search/concerts";
+
     }
 }
