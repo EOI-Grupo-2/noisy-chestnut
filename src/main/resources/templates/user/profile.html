@@ -6,6 +6,7 @@
     <link rel="stylesheet" href="pruebaweb.css">
     <link rel="stylesheet" th:href="@{/css/style.css}" />
     <link rel="stylesheet" th:href="@{/css/profile.css}" />
+    <script th:src="@{/js/tabs.js}"></script>
     <title>Perfil</title>
 </head>
 <body>
@@ -20,46 +21,112 @@
                     <p class="profile-header__description">Descripción del usuario</p>
                 </div>
                 <ul class="profile-header__info-items">
-                    <li class="profile-header__info-item"><button class="profile-header__info-button" type="button">Publicaciones</button></li>
-                    <li class="profile-header__info-item"><button class="profile-header__info-button" type="button">Seguidores</button></li>
-                    <li class="profile-header__info-item"><button class="profile-header__info-button" type="button">Seguidos</button></li>
-                    <li class="profile-header__info-item"><button class="profile-header__info-button" type="button">Insignias</button></li>
+                    <li class="profile-header__info-item"><button class="profile-header__info-button" type="button" onclick="selectTab('pubTab', 'profile-content__principal')">Publicaciones</button></li>
+                    <li class="profile-header__info-item"><button class="profile-header__info-button" type="button" onclick="selectTab('followersTab', 'profile-content__principal')">Seguidores</button></li>
+                    <li class="profile-header__info-item"><button class="profile-header__info-button" type="button" onclick="selectTab('followingTab', 'profile-content__principal')">Seguidos</button></li>
+                    <li class="profile-header__info-item"><button class="profile-header__info-button" type="button" onclick="selectTab('insigniaTab', 'profile-content__principal')">Insignias</button></li>
                 </ul>
             </div>
         </div>
         <!-- Contenido -->
         <div class="profile-content">
             <!-- COLUMNA PRINCIPAL PUBLICACIONES -->
-            <div class="profile-content__pubs">
-                <!-- Publicación 1 -->
-                <div class="pub-card" >
-                    <div class="pub-card__header">
-                        <img src="https://as1.ftcdn.net/v2/jpg/03/46/83/96/1000_F_346839683_6nAPzbhpSkIpb8pmAwufkC7c5eD7wYws.jpg" class="pub-card__user-image"alt="">
-                        <div class="pub-card__username">Usuario 1</div>
-                    </div>
-                    <div class="pub-card__body">
-                        <h5 class="pub-card__title">Contenido de la publicación</h5>
-                    </div>
-                    <div class="pub-card__footer">
-                        <p class="pub-card__date">Fecha y hora de la publicación</p>
-                        <a class="pub-card__link" href="./user/publicacion.html">Ver mas</a>
-                    </div>
+             <div class="profile-content__principal profile-content__principal--pubs" id="pubTab">
+                    <!-- Publicación 1 -->
+            <div class="pub-card">
+                <div class="pub-card__header">
+                    <img src="https://as1.ftcdn.net/v2/jpg/03/46/83/96/1000_F_346839683_6nAPzbhpSkIpb8pmAwufkC7c5eD7wYws.jpg" class="pub-card__user-image"alt="">
+                    <div class="pub-card__username">Usuario 1</div>
                 </div>
-                <!-- Publicación 2 -->
-                <div class="pub-card" >
-                    <div class="pub-card__header">
-                        <img src="https://as1.ftcdn.net/v2/jpg/03/46/83/96/1000_F_346839683_6nAPzbhpSkIpb8pmAwufkC7c5eD7wYws.jpg" class="pub-card__user-image"alt="">
-                        <div class="pub-card__username">Usuario 1</div>
-                    </div>
-                    <div class="pub-card__body">
-                        <h5 class="pub-card__title">Contenido de la publicación</h5>
-                    </div>
-                    <div class="pub-card__footer">
-                        <p class="pub-card__date">Fecha y hora de la publicación</p>
-                        <a class="pub-card__link" href="./user/publicacion.html">Ver mas</a>
-                    </div>
+                <div class="pub-card__body">
+                    <h5 class="pub-card__title">Contenido de la publicación</h5>
+                </div>
+                <div class="pub-card__footer">
+                    <p class="pub-card__date">Fecha y hora de la publicación</p>
+                    <a class="pub-card__link" href="./user/publicacion.html">Ver mas</a>
                 </div>
             </div>
+            <!-- Publicación 2 -->
+            <div class="pub-card" >
+                <div class="pub-card__header">
+                    <img src="https://as1.ftcdn.net/v2/jpg/03/46/83/96/1000_F_346839683_6nAPzbhpSkIpb8pmAwufkC7c5eD7wYws.jpg" class="pub-card__user-image"alt="">
+                    <div class="pub-card__username">Usuario 2</div>
+                </div>
+                <div class="pub-card__body">
+                    <h5 class="pub-card__title">Contenido de la publicación</h5>
+                </div>
+                <div class="pub-card__footer">
+                    <p class="pub-card__date">Fecha y hora de la publicación</p>
+                    <a class="pub-card__link" href="./user/publicacion.html">Ver mas</a>
+                </div>
+            </div>
+        </div>
+
+        <div class="profile-content__principal profile-content__principal--followers" id="followersTab">
+            <div class="user-card">
+                <div class="user-card__info">
+                    <img class="user-card__image" src="https://i.scdn.co/image/ab6761610000e5eb81f47f44084e0a09b5f0fa13" alt="Profile Image"/>
+                    <h1 class="user-card__username">
+                        @Usuario1
+                    </h1>
+                    <p class="user-card__description">
+                        Descripcion usuario1
+                    </p>
+                </div>
+                <button class="user-card__button">
+                    Seguir
+                </button>
+            </div>
+            <div class="user-card">
+                <div class="user-card__info">
+                    <img class="user-card__image" src="https://i.scdn.co/image/ab6761610000e5eb81f47f44084e0a09b5f0fa13" alt="Profile Image"/>
+                    <h1 class="user-card__username">
+                        @Usuario1
+                    </h1>
+                    <p class="user-card__description">
+                        Descripcion usuario1
+                    </p>
+                </div>
+                <button class="user-card__button">
+                    Seguir
+                </button>
+            </div>
+        </div>
+
+        <div class="profile-content__principal profile-content__principal--following" id="followingTab">
+            <div class="user-card">
+                <div class="user-card__info">
+                    <img class="user-card__image" src="https://i.scdn.co/image/ab6761610000e5eb81f47f44084e0a09b5f0fa13" alt="Profile Image"/>
+                    <h1 class="user-card__username">
+                        @Usuario1
+                    </h1>
+                    <p class="user-card__description">
+                        Descripcion usuario1
+                    </p>
+                </div>
+                <button class="user-card__button">
+                    Siguiendo
+                </button>
+            </div>
+            <div class="user-card">
+                <div class="user-card__info">
+                    <img class="user-card__image" src="https://i.scdn.co/image/ab6761610000e5eb81f47f44084e0a09b5f0fa13" alt="Profile Image"/>
+                    <h1 class="user-card__username">
+                        @Usuario1
+                    </h1>
+                    <p class="user-card__description">
+                        Descripcion usuario1
+                    </p>
+                </div>
+                <button class="user-card__button">
+                    Siguiendo
+                </button>
+            </div>
+        </div>
+
+        <div class="profile-content__principal profile-content__principal--insignia" id="insigniaTab">
+
+        </div>
             <!-- COLUMNA DERECHA CARDS -->
             <div class="profile-content__more">
                 <!-- Próximos conciertos -->
