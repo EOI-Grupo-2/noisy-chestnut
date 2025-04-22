@@ -125,6 +125,11 @@ public class DefaultController {
         return "/artist/artist";
     }
 
+    @GetMapping({"", "/chat"})
+    public String getChatPage(){
+        return "/social/chat";
+    }
+  
     @GetMapping({"", "/search/artists"})
     public String getSearchArtistPage(){
         return "/search/artists";
