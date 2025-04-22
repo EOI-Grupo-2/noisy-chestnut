@@ -1,9 +1,11 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
+<html lang="en" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
     <title>Title</title>
     <link rel="stylesheet" th:href="@{/css/global.css}"/>
+    <script th:src="@{/js/chatModal.js}"></script>
+    <script src="https://kit.fontawesome.com/cfb847b9dd.js" crossorigin="anonymous"></script>
 </head>
 <body>
 <div class="page-layout">
@@ -21,6 +23,174 @@
     </div>
     <div layout:fragment="content">
 
+    </div>
+
+    <button class="chat-modal__button" onclick="openChatModal('')">
+        <i class="fa-regular fa-message fa-2xl" style="color: #ffffff;"></i>
+    </button>
+
+    <div class="chat-modal" id="chatModal">
+       <div class="chat-modal__content">
+           <div class="chat-modal__header">
+               <h1 class="chat-modal__header-title">
+                   Chat
+               </h1>
+               <i class="fa-solid fa-xmark fa-lg" style="color: #ffffff;" onclick="openChatModal()"></i>
+           </div>
+           <div class="chat-modal__items">
+               <div class="chat-modal__item">
+                   <img class="chat-modal__image" src="https://as1.ftcdn.net/v2/jpg/03/46/83/96/1000_F_346839683_6nAPzbhpSkIpb8pmAwufkC7c5eD7wYws.jpg" alt="Chat Image"/>
+                   <a class="chat-modal__link" href="/chat">
+                       <h2 class="chat-modal__title">
+                           Usuario 1
+                       </h2>
+                   </a>
+               </div>
+               <div class="chat-modal__item">
+                   <img class="chat-modal__image" src="https://as1.ftcdn.net/v2/jpg/03/46/83/96/1000_F_346839683_6nAPzbhpSkIpb8pmAwufkC7c5eD7wYws.jpg" alt="Chat Image"/>
+                   <a class="chat-modal__link" href="/chat">
+                       <h2 class="chat-modal__title">
+                           Usuario 1
+                       </h2>
+                   </a>
+               </div>
+               <div class="chat-modal__item">
+                   <img class="chat-modal__image" src="https://as1.ftcdn.net/v2/jpg/03/46/83/96/1000_F_346839683_6nAPzbhpSkIpb8pmAwufkC7c5eD7wYws.jpg" alt="Chat Image"/>
+                   <a class="chat-modal__link" href="/chat">
+                       <h2 class="chat-modal__title">
+                           Usuario 1
+                       </h2>
+                   </a>
+               </div>
+               <div class="chat-modal__item">
+                   <img class="chat-modal__image" src="https://as1.ftcdn.net/v2/jpg/03/46/83/96/1000_F_346839683_6nAPzbhpSkIpb8pmAwufkC7c5eD7wYws.jpg" alt="Chat Image"/>
+                   <a class="chat-modal__link" href="/chat">
+                       <h2 class="chat-modal__title">
+                           Usuario 1
+                       </h2>
+                   </a>
+               </div>
+               <div class="chat-modal__item">
+                   <img class="chat-modal__image" src="https://as1.ftcdn.net/v2/jpg/03/46/83/96/1000_F_346839683_6nAPzbhpSkIpb8pmAwufkC7c5eD7wYws.jpg" alt="Chat Image"/>
+                   <a class="chat-modal__link" href="/chat">
+                       <h2 class="chat-modal__title">
+                           Usuario 1
+                       </h2>
+                   </a>
+               </div>
+               <div class="chat-modal__item">
+                   <img class="chat-modal__image" src="https://as1.ftcdn.net/v2/jpg/03/46/83/96/1000_F_346839683_6nAPzbhpSkIpb8pmAwufkC7c5eD7wYws.jpg" alt="Chat Image"/>
+                   <a class="chat-modal__link" href="/chat">
+                       <h2 class="chat-modal__title">
+                           Usuario 1
+                       </h2>
+                   </a>
+               </div>
+               <div class="chat-modal__item">
+                   <img class="chat-modal__image" src="https://as1.ftcdn.net/v2/jpg/03/46/83/96/1000_F_346839683_6nAPzbhpSkIpb8pmAwufkC7c5eD7wYws.jpg" alt="Chat Image"/>
+                   <a class="chat-modal__link" href="/chat">
+                       <h2 class="chat-modal__title">
+                           Usuario 1
+                       </h2>
+                   </a>
+               </div>
+               <div class="chat-modal__item">
+                   <img class="chat-modal__image" src="https://as1.ftcdn.net/v2/jpg/03/46/83/96/1000_F_346839683_6nAPzbhpSkIpb8pmAwufkC7c5eD7wYws.jpg" alt="Chat Image"/>
+                   <a class="chat-modal__link" href="/chat">
+                       <h2 class="chat-modal__title">
+                           Usuario 1
+                       </h2>
+                   </a>
+               </div>
+               <div class="chat-modal__item">
+                   <img class="chat-modal__image" src="https://as1.ftcdn.net/v2/jpg/03/46/83/96/1000_F_346839683_6nAPzbhpSkIpb8pmAwufkC7c5eD7wYws.jpg" alt="Chat Image"/>
+                   <a class="chat-modal__link" href="/chat">
+                       <h2 class="chat-modal__title">
+                           Usuario 1
+                       </h2>
+                   </a>
+               </div>
+               <div class="chat-modal__item">
+                   <img class="chat-modal__image" src="https://as1.ftcdn.net/v2/jpg/03/46/83/96/1000_F_346839683_6nAPzbhpSkIpb8pmAwufkC7c5eD7wYws.jpg" alt="Chat Image"/>
+                   <a class="chat-modal__link" href="/chat">
+                       <h2 class="chat-modal__title">
+                           Usuario 1
+                       </h2>
+                   </a>
+               </div>
+               <div class="chat-modal__item">
+                   <img class="chat-modal__image" src="https://as1.ftcdn.net/v2/jpg/03/46/83/96/1000_F_346839683_6nAPzbhpSkIpb8pmAwufkC7c5eD7wYws.jpg" alt="Chat Image"/>
+                   <a class="chat-modal__link" href="/chat">
+                       <h2 class="chat-modal__title">
+                           Usuario 1
+                       </h2>
+                   </a>
+               </div>
+               <div class="chat-modal__item">
+                   <img class="chat-modal__image" src="https://as1.ftcdn.net/v2/jpg/03/46/83/96/1000_F_346839683_6nAPzbhpSkIpb8pmAwufkC7c5eD7wYws.jpg" alt="Chat Image"/>
+                   <a class="chat-modal__link" href="/chat">
+                       <h2 class="chat-modal__title">
+                           Usuario 1
+                       </h2>
+                   </a>
+               </div>
+               <div class="chat-modal__item">
+                   <img class="chat-modal__image" src="https://as1.ftcdn.net/v2/jpg/03/46/83/96/1000_F_346839683_6nAPzbhpSkIpb8pmAwufkC7c5eD7wYws.jpg" alt="Chat Image"/>
+                   <a class="chat-modal__link" href="/chat">
+                       <h2 class="chat-modal__title">
+                           Usuario 1
+                       </h2>
+                   </a>
+               </div>
+               <div class="chat-modal__item">
+                   <img class="chat-modal__image" src="https://as1.ftcdn.net/v2/jpg/03/46/83/96/1000_F_346839683_6nAPzbhpSkIpb8pmAwufkC7c5eD7wYws.jpg" alt="Chat Image"/>
+                   <a class="chat-modal__link" href="/chat">
+                       <h2 class="chat-modal__title">
+                           Usuario 1
+                       </h2>
+                   </a>
+               </div>
+               <div class="chat-modal__item">
+                   <img class="chat-modal__image" src="https://as1.ftcdn.net/v2/jpg/03/46/83/96/1000_F_346839683_6nAPzbhpSkIpb8pmAwufkC7c5eD7wYws.jpg" alt="Chat Image"/>
+                   <a class="chat-modal__link" href="/chat">
+                       <h2 class="chat-modal__title">
+                           Usuario 1
+                       </h2>
+                   </a>
+               </div>
+               <div class="chat-modal__item">
+                   <img class="chat-modal__image" src="https://as1.ftcdn.net/v2/jpg/03/46/83/96/1000_F_346839683_6nAPzbhpSkIpb8pmAwufkC7c5eD7wYws.jpg" alt="Chat Image"/>
+                   <a class="chat-modal__link" href="/chat">
+                       <h2 class="chat-modal__title">
+                           Usuario 1
+                       </h2>
+                   </a>
+               </div>
+               <div class="chat-modal__item">
+                   <img class="chat-modal__image" src="https://as1.ftcdn.net/v2/jpg/03/46/83/96/1000_F_346839683_6nAPzbhpSkIpb8pmAwufkC7c5eD7wYws.jpg" alt="Chat Image"/>
+                   <a class="chat-modal__link" href="/chat">
+                       <h2 class="chat-modal__title">
+                           Usuario 1
+                       </h2>
+                   </a>
+               </div>
+               <div class="chat-modal__item">
+                   <img class="chat-modal__image" src="https://as1.ftcdn.net/v2/jpg/03/46/83/96/1000_F_346839683_6nAPzbhpSkIpb8pmAwufkC7c5eD7wYws.jpg" alt="Chat Image"/>
+                   <a class="chat-modal__link" href="/chat">
+                       <h2 class="chat-modal__title">
+                           Usuario 1
+                       </h2>
+                   </a>
+               </div>
+           </div>
+       </div>
+        <div class="chat-modal__footer">
+            <a class="chat-modal__link" href="/chat">
+                <h3 class="chat-modal__footer-text">
+                    Ver todos los chats
+                </h3>
+            </a>
+        </div>
     </div>
 </div>
 </body>
