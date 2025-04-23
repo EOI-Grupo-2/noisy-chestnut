@@ -133,4 +133,8 @@ public class DefaultController {
     public String showConcertsPage() {
         return "concert/concerts";
     }
+    @GetMapping("/concert/detail")
+    public String showConcertDetailPage() {
+        return "concert/concert-detail";
+    }
 }

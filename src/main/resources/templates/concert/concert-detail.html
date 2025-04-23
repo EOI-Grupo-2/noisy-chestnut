@@ -1,167 +1,128 @@
 <!DOCTYPE html>
-<html lang="es" xmlns:th="http://www.thymeleaf.org">
+<html lang="es" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" layout:decorate="~{layouts/main_layout.html}"
+      xmlns:th="http://www.thymeleaf.org">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Detalle de Concierto | Noisy-chestnut</title>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-rbsA2VBKQhggwzxH7pPCaAqO46MgnOM80zW1RWuH61DGLwZJEdK2Kadq2F9CUG65" crossorigin="anonymous">
-    <link rel="stylesheet" th:href="@{/css/global.css}">
-    <link rel="stylesheet" th:href="@{/css/concert-detail.css}">
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Roboto+Condensed&family=Roboto:wght@300;400;700&display=swap" rel="stylesheet">
+    <title>Detalles de Conciertos</title>
+    <link rel="stylesheet" th:href="@{/css/concert-detail.css}" />
+    <link href="https://fonts.googleapis.com/css2?family=Roboto+Condensed&family=Roboto:wght@300&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@48,400,0,0" />
-    <script src="https://kit.fontawesome.com/cfb847b9dd.js" crossorigin="anonymous"></script>
 </head>
 <body>
-<main class="row" style="width: 100vw; height: 100vh;">
-    <!-- Menú lateral -->
-    <aside class="d-flex flex-column col-lg-2 h-100 menu-bg justify-content-between">
-        <div class="row justify-content-center">
-            <h2 class="text-white p-5 pb-0">Noisy-chestnut</h2>
-        </div>
-        <nav class="d-flex flex-column ps-3 pb-5">
-            <ul class="nav flex-column">
-                <li class="nav-item"><a th:href="@{/}" class="nav-link text-white">Inicio</a></li>
-                <li class="nav-item"><a th:href="@{/artist}" class="nav-link text-white">Artistas</a></li>
-                <li class="nav-item"><a th:href="@{/concerts}" class="nav-link text-white active">Conciertos</a></li>
-                <li class="nav-item"><a th:href="@{/post/new}" class="nav-link text-white">Nueva publicación</a></li>
-                <li class="nav-item"><a th:href="@{/search}" class="nav-link text-white">Buscar</a></li>
-            </ul>
-            <div class="nav mt-5">
-                <a th:href="@{/login}" class="nav-link text-white">Iniciar sesión</a>
-                <a th:href="@{/register}" class="nav-link text-white">Registrarse</a>
-            </div>
-        </nav>
-    </aside>
+<div layout:fragment="content" class="content">
+            <a href="/concert" class="btn-back">
+                <span class="material-symbols-outlined">arrow_back</span> Volver a conciertos
+            </a>
 
-    <!-- Contenido principal -->
-    <section class="col-lg-10 h-100 bg-secondary overflow-auto">
-        <div class="container py-4">
-            <!-- Botón de volver -->
-            <div class="mb-4">
-                <a th:href="@{/concerts}" class="btn-back">
-                    <i class="fas fa-arrow-left me-2"></i>Volver a conciertos
-                </a>
-            </div>
-
-            <!-- Detalle del concierto -->
             <div class="concert-detail">
                 <div class="concert-header">
-                    <img src="https://images.unsplash.com/photo-1501386761578-eac5c94b800a?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1170&q=80" alt="Imagen del concierto" class="concert-image" th:src="${concierto.imagenUrl}" th:alt="${concierto.titulo}">
-                    <div class="concert-overlay">
-                        <h1 class="concert-title" th:text="${concierto.titulo}">Concierto de Bad Bunny</h1>
-                    </div>
+                    <img src="https://images.unsplash.com/photo-1540039155733-5bb30b53aa14?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80" alt="Imagen del concierto" class="concert-header__image">
+                    <h1 class="concert-header__title">Concierto de Rock en Madrid</h1>
                 </div>
 
-                <div class="concert-info">
-                    <div class="info-section">
-                        <div class="info-item">
-                            <i class="fas fa-map-marker-alt"></i>
-                            <span th:text="${concierto.ubicacion}">Madrid, Wizink Center</span>
+                <div class="concert-content">
+                    <div class="concert-info">
+                        <div class="concert-info__item">
+                            <span class="material-symbols-outlined">calendar_month</span>
+                            <span>15/07/2023 20:00</span>
                         </div>
-                        <div class="info-item">
-                            <i class="fas fa-calendar-alt"></i>
-                            <span th:text="${#temporals.format(concierto.fecha, 'd MMMM yyyy')}">15 abril de 2023</span>
+                        <div class="concert-info__item">
+                            <span class="material-symbols-outlined">location_on</span>
+                            <a href="/place" class="venue-link">WiZink Center, Madrid</a>
                         </div>
-                        <div class="info-item">
-                            <i class="fas fa-clock"></i>
-                            <span th:text="${#temporals.format(concierto.fecha, 'HH:mm')}">20:30</span>
-                        </div>
-                        <div class="info-item" th:if="${concierto.precio != null}">
-                            <i class="fas fa-ticket-alt"></i>
-                            <span th:text="${concierto.precio + ' €'}">45.00 €</span>
+                        <div class="concert-info__item">
+                            <span class="material-symbols-outlined">music_note</span>
+                            <span>Rock</span>
                         </div>
                     </div>
 
                     <div class="concert-description">
-                        <h2>Descripción</h2>
-                        <p th:text="${concierto.descripcion}">
-                            Bad Bunny llega a Madrid con su gira "World's Hottest Tour". El artista puertorriqueño presentará sus últimos éxitos en un concierto que promete ser inolvidable. No te pierdas la oportunidad de ver en directo a uno de los artistas más importantes del momento.
-                        </p>
+                        <h2 class="concert-description__title">Descripción</h2>
+                        <p class="concert-description__text">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam auctor, nisl eget ultricies tincidunt, nisl nisl aliquam nisl, eget ultricies nisl nisl eget nisl. Nullam auctor, nisl eget ultricies tincidunt, nisl nisl aliquam nisl, eget ultricies nisl nisl eget nisl. Nullam auctor, nisl eget ultricies tincidunt, nisl nisl aliquam nisl, eget ultricies nisl nisl eget nisl.</p>
+                        <p class="concert-description__text">Praesent euismod, nisl eget ultricies tincidunt, nisl nisl aliquam nisl, eget ultricies nisl nisl eget nisl. Nullam auctor, nisl eget ultricies tincidunt, nisl nisl aliquam nisl, eget ultricies nisl nisl eget nisl.</p>
                     </div>
 
-                    <div class="concert-artist" th:if="${concierto.artista != null}">
-                        <h2>Artista</h2>
-                        <div class="artist-card">
-                            <img th:src="${concierto.artista.imagenUrl}" src="https://images.unsplash.com/photo-1598387993281-cecf8b71a8f8?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=764&q=80" alt="Foto del artista" class="artist-image">
-                            <div class="artist-info">
-                                <h3 th:text="${concierto.artista.nombre}">Bad Bunny</h3>
-                                <p th:text="${concierto.artista.genero}">Reggaeton, Trap</p>
-                                <a th:href="@{/artist/{id}(id=${concierto.artista.id})}" class="btn-artist">Ver perfil del artista</a>
+                    <div class="concert-artist">
+                        <h2 class="concert-artist__title">Artista</h2>
+                        <div class="concert-artist__card">
+                            <img src="https://images.unsplash.com/photo-1511367461989-f85a21fda167?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80" alt="Imagen del artista" class="concert-artist__image">
+                            <div class="concert-artist__info">
+                                <div class="concert-artist__info-header">
+                                    <h3 class="concert-artist__name">Nombre del Artista</h3>
+                                    <input type="range" min="0.5" max="5" step="0.5" value="2.5" class="concert-artist__rating" style="--val:2.5" oninput="this.style='--val:'+this.value" disabled>
+                                </div>
+                                <p class="concert-artist__biography">Biografía corta del artista. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam auctor, nisl eget ultricies tincidunt, nisl nisl aliquam nisl.</p>
+                                <a href="#" class="concert-artist__button">Ver perfil completo</a>
                             </div>
                         </div>
                     </div>
 
                     <div class="concert-actions">
-                        <a href="#" class="btn-ticket">
-                            <i class="fas fa-ticket-alt me-2"></i>Comprar entradas
+                        <a href="#" class="concert-actions__btn concert-actions__btn--buy">
+                            <span class="material-symbols-outlined">local_activity</span> Comprar entradas
                         </a>
-                        <button class="btn-share">
-                            <i class="fas fa-share-alt me-2"></i>Compartir
+                        <button class="concert-actions__btn concert-actions__btn--attend" id="attendButton">
+                            <span class="material-symbols-outlined">event_available</span> Asistiré
+                            <span class="concert-actions__count" id="attendCount">42</span>
+                        </button>
+                        <button class="concert-actions__btn concert-actions__btn--share">
+                            <span class="material-symbols-outlined">share</span> Compartir
                         </button>
                     </div>
                 </div>
 
-                <!-- Comentarios -->
                 <div class="concert-comments">
-                    <h2>Comentarios</h2>
+                    <h2 class="concert-comments__title">Comentarios</h2>
+                    <form class="concert-comments__form">
+                        <textarea class="concert-comments__textbox" rows="3" placeholder="Escribe un comentario..."></textarea>
+                        <button type="button" class="concert-comments__button">Comentar</button>
+                    </form>
 
-                    <!-- Formulario de comentario -->
-                    <div class="comment-form">
-                        <textarea placeholder="Escribe un comentario..." class="form-control"></textarea>
-                        <button class="btn-comment">Publicar</button>
-                    </div>
-
-                    <!-- Lista de comentarios -->
-                    <div class="comments-list">
-                        <div class="comment-item" th:each="comentario : ${comentarios}">
-                            <div class="comment-avatar">
-                                <img src="https://via.placeholder.com/50" alt="Avatar" th:src="${comentario.usuario.avatarUrl}">
-                            </div>
-                            <div class="comment-content">
-                                <div class="comment-header">
-                                    <h4 th:text="${comentario.usuario.nombre}">Usuario123</h4>
-                                    <span th:text="${#temporals.format(comentario.fecha, 'd MMM yyyy, HH:mm')}">10 Mar 2023, 15:30</span>
+                    <div class="concert-comments__items">
+                        <div class="concert-comments__item">
+                            <img src="https://images.unsplash.com/photo-1535713875002-d1d0cf377fde?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80" alt="Avatar de usuario" class="concert-comments__avatar">
+                            <div class="concert-comments__content">
+                                <div class="concert-comments__header">
+                                    <h4 class="concert-comments__username">Usuario1</h4>
+                                    <span class="concert-comments__date">10/06/2023 12:30</span>
                                 </div>
-                                <p th:text="${comentario.texto}">¡Increíble concierto! No puedo esperar para asistir.</p>
+                                <p class="concert-comments__text">¡Gran concierto! No puedo esperar para asistir.</p>
                             </div>
                         </div>
-
-                        <!-- Comentario de ejemplo (se mostrará solo si no hay comentarios) -->
-                        <div class="comment-item" th:if="${#lists.isEmpty(comentarios)}">
-                            <div class="comment-avatar">
-                                <img src="https://via.placeholder.com/50" alt="Avatar">
-                            </div>
-                            <div class="comment-content">
-                                <div class="comment-header">
-                                    <h4>María García</h4>
-                                    <span>10 Mar 2023, 15:30</span>
+                        <div class="concert-comments__item">
+                            <img src="https://images.unsplash.com/photo-1535713875002-d1d0cf377fde?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80" alt="Avatar de usuario" class="concert-comments__avatar">
+                            <div class="concert-comments__content">
+                                <div class="concert-comments__header">
+                                    <h4 class="concert-comments__username">Usuario2</h4>
+                                    <span class="concert-comments__date">09/06/2023 18:45</span>
                                 </div>
-                                <p>¡Increíble concierto! No puedo esperar para asistir. Bad Bunny siempre ofrece shows espectaculares.</p>
-                            </div>
-                        </div>
-
-                        <div class="comment-item" th:if="${#lists.isEmpty(comentarios)}">
-                            <div class="comment-avatar">
-                                <img src="https://via.placeholder.com/50" alt="Avatar">
-                            </div>
-                            <div class="comment-content">
-                                <div class="comment-header">
-                                    <h4>Carlos Rodríguez</h4>
-                                    <span>9 Mar 2023, 18:45</span>
-                                </div>
-                                <p>Ya tengo mis entradas. ¿Alguien sabe a qué hora abren las puertas?</p>
+                                <p class="concert-comments__text">Ya tengo mis entradas. ¿Alguien más va a ir?</p>
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
-        </div>
-    </section>
-</main>
 
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-kenU1KFdBIe4zVF0s0G1M5b4hcpxyD9F7jL+jjXkk+Q2h455rYXK/7HAuoJl+0I4" crossorigin="anonymous"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const attendButton = document.getElementById('attendButton');
+            const attendCount = document.getElementById('attendCount');
+            let isAttending = false;
+            let count = parseInt(attendCount.textContent);
+
+            attendButton.addEventListener('click', function() {
+                if (!isAttending) {
+                    count++;
+                    isAttending = true;
+                    attendButton.classList.add('active');
+                } else {
+                    count--;
+                    isAttending = false;
+                    attendButton.classList.remove('active');
+                }
+                attendCount.textContent = count;
+            });
+        });
+    </script>
+</div>
 </body>
 </html>
