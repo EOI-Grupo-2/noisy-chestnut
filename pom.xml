@@ -8,11 +8,18 @@
         <version>3.4.3</version>
         <relativePath/> <!-- lookup parent from repository -->
     </parent>
-    <groupId>com.eoi.grupo2</groupId>
-    <artifactId>noisychestnut</artifactId>
+    <properties>
+        <java.version>24</java.version>
+        <lombok.version>1.18.38</lombok.version>
+        <sonar.coverage.exclusions>**/Application.*,**/loaders/*</sonar.coverage.exclusions>
+        <project.name>noisychestnut</project.name>
+        <project.groupId>com.eoi.grupo2</project.groupId>
+    </properties>
+    <groupId>${project.groupId}</groupId>
+    <artifactId>${project.name}</artifactId>
     <version>0.0.1-SNAPSHOT</version>
-    <name>noisy-chestnut</name>
-    <description>noisy-chestnut</description>
+    <name>${project.name}</name>
+    <description>${project.name}</description>
     <url/>
     <licenses>
         <license/>
@@ -26,10 +33,6 @@
         <tag/>
         <url/>
     </scm>
-    <properties>
-        <java.version>17</java.version>
-        <sonar.coverage.exclusions>**/Application.*,**/loaders/*</sonar.coverage.exclusions>
-    </properties>
     <dependencies>
         <dependency>
             <groupId>org.springframework.boot</groupId>
@@ -84,7 +87,8 @@
         <dependency>
             <groupId>org.projectlombok</groupId>
             <artifactId>lombok</artifactId>
-            <optional>true</optional>
+            <version>${lombok.version}</version>
+            <scope>provided</scope>
         </dependency>
         <dependency>
             <groupId>org.springframework.boot</groupId>
@@ -139,6 +143,12 @@
             <artifactId>spring-boot-maven-plugin</artifactId>
             <version>3.4.3</version>
         </dependency>
+        <!-- https://mvnrepository.com/artifact/org.jacoco/jacoco-maven-plugin -->
+        <dependency>
+            <groupId>org.jacoco</groupId>
+            <artifactId>jacoco-maven-plugin</artifactId>
+            <version>0.8.13</version>
+        </dependency>
         <dependency>
             <groupId>nz.net.ultraq.thymeleaf</groupId>
             <artifactId>thymeleaf-layout-dialect</artifactId>
@@ -150,18 +160,16 @@
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-compiler-plugin</artifactId>
-                <version>3.13.0</version>
+                <version>3.14.0</version>
                 <configuration>
                     <annotationProcessorPaths>
                         <path>
-                            <groupId>org.springframework.boot</groupId>
-                            <artifactId>spring-boot-configuration-processor</artifactId>
-                        </path>
-                        <path>
                             <groupId>org.projectlombok</groupId>
                             <artifactId>lombok</artifactId>
+                            <version>${lombok.version}</version>
                         </path>
                     </annotationProcessorPaths>
+                    <release>24</release>
                 </configuration>
             </plugin>
             <plugin>
@@ -171,17 +179,16 @@
                 <configuration>
                     <image>
                         <!--suppress UnresolvedMavenProperty -->
-                        <name>noisychestnut:${env.VERSION}</name>
+                        <name>${project.name}:${env.VERSION}</name>
                     </image>
                 </configuration>
             </plugin>
             <plugin>
                 <groupId>org.jacoco</groupId>
                 <artifactId>jacoco-maven-plugin</artifactId>
-                <version>0.8.12</version>
+                <version>0.8.13</version>
                 <executions>
                     <execution>
-                        <id>default-prepare-agent</id>
                         <goals>
                             <goal>prepare-agent</goal>
                         </goals>
