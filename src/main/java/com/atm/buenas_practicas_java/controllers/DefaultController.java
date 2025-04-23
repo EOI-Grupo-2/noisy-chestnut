@@ -110,4 +110,48 @@ public class DefaultController {
         return "redirect:/entities";
     }
 
+    @GetMapping({"", "/"})
+    public String getHomePage(){
+        return "index";
+    }
+
+    @GetMapping({"", "/concerts"})
+    public String getConcertPage(){
+        return "/concert/index";
+    }
+
+    @GetMapping({"", "/artists"})
+    public String getArtistPage(){
+        return "/artist/artist";
+    }
+
+    @GetMapping({"", "/Profile"})
+    public String getUserProfile(){
+        return "/user/profile";
+    }
+
+    @GetMapping({"", "/ArtistProfile"})
+    public String getArtistProfile(){
+        return "/artist/artistProfile";
+    }
+  
+    @GetMapping({"", "/chat"})
+    public String getChatPage(){
+        return "/social/chat";
+    }
+  
+    @GetMapping({"", "/search/artists"})
+    public String getSearchArtistPage(){
+        return "/search/artists";
+    }
+
+    @GetMapping({"", "/search/users"})
+    public String getSearchUsersPage(){
+        return "/search/users";
+    }
+
+    @GetMapping({"", "/search/concerts"})
+    public String getSearchConcertsPage(){
+        return "/search/concerts";
+    }
 }
