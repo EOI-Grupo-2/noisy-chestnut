@@ -125,6 +125,36 @@ public class DefaultController {
         return "/artist/artist";
     }
 
+    @GetMapping({"", "/Profile"})
+    public String getUserProfile(){
+        return "/user/profile";
+    }
+
+    @GetMapping({"", "/ArtistProfile"})
+    public String getArtistProfile(){
+        return "/artist/artistProfile";
+    }
+
+    @GetMapping({"", "/chat"})
+    public String getChatPage(){
+        return "/social/chat";
+    }
+
+    @GetMapping({"", "/search/artists"})
+    public String getSearchArtistPage(){
+        return "/search/artists";
+    }
+
+    @GetMapping({"", "/search/users"})
+    public String getSearchUsersPage(){
+        return "/search/users";
+    }
+
+    @GetMapping({"", "/search/concerts"})
+    public String getSearchConcertsPage(){
+        return "/search/concerts";
+    }
+
     @GetMapping({"", "/publication"})
     public String getPublicationPage(){return "/user/publication";}
 }
