@@ -125,14 +125,31 @@ public class DefaultController {
         return "/artist/artist";
     }
 
+    @GetMapping({"", "/Profile"})
+    public String getUserProfile(){
+        return "/user/profile";
+    }
+
+    @GetMapping({"", "/ArtistProfile"})
+    public String getArtistProfile(){
+        return "/artist/artistProfile";
+    }
+
+    @GetMapping({"", "/chat"})
+    public String getChatPage(){
+        return "/social/chat";
+    }
+
     @GetMapping({"", "/social"})
     public String getSocialPage(){
         return "/social/social";
     }
+
     @GetMapping("/concert")
     public String showConcertsPage() {
         return "concert/concerts";
     }
+
     @GetMapping("/concert/detail")
     public String showConcertDetailPage() {
         return "concert/concert-detail";
