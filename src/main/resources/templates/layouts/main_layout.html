@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <title>Title</title>
     <link rel="stylesheet" th:href="@{/css/global.css}"/>
-    <script th:src="@{/js/chatModal.js}"></script>
+    <script th:src="@{/js/modal.js}"></script>
     <script src="https://kit.fontawesome.com/cfb847b9dd.js" crossorigin="anonymous"></script>
 </head>
 <body>
@@ -25,7 +25,7 @@
 
     </div>
 
-    <button class="chat-modal__button" onclick="openChatModal('')">
+    <button class="chat-modal__button" onclick="openModal('chatModal')">
         <i class="fa-regular fa-message fa-2xl" style="color: #ffffff;"></i>
     </button>
 
@@ -35,7 +35,7 @@
                <h1 class="chat-modal__header-title">
                    Chat
                </h1>
-               <i class="fa-solid fa-xmark fa-lg" style="color: #ffffff;" onclick="openChatModal()"></i>
+               <i class="fa-solid fa-xmark fa-lg" style="color: #ffffff;" onclick="openModal('chatModal')"></i>
            </div>
            <div class="chat-modal__items">
                <div class="chat-modal__item">
