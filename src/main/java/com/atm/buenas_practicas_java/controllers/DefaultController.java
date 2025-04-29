@@ -139,7 +139,7 @@ public class DefaultController {
     public String getChatPage(){
         return "/social/chat";
     }
-
+  
     @GetMapping({"", "/social"})
     public String getSocialPage(){
         return "/social/social";
@@ -160,6 +160,9 @@ public class DefaultController {
         return "/search/concerts";
     }
 
+    @GetMapping({"", "/publication"})
+    public String getPublicationPage(){return "/user/publication";}
+  
     @GetMapping("/concert")
     public String showConcertsPage() {
         return "concert/concerts";
