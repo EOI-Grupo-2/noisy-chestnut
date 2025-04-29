@@ -140,14 +140,14 @@ public class DefaultController {
         return "/user/register";
     }
   
-    @GetMapping({"", "/Profile"})
+    @GetMapping({"", "/user/profile"})
     public String getUserProfile(){
         return "/user/profile";
     }
 
-    @GetMapping({"", "/ArtistProfile"})
+    @GetMapping({"", "/artist/profile"})
     public String getArtistProfile(){
-        return "/artist/artistProfile";
+        return "/artist/profile";
     }
   
     @GetMapping({"", "/chat/id"})

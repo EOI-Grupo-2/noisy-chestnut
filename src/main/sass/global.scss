@@ -55,6 +55,7 @@ body {
   }
 
   &__link{
+    width: 100%;
     color: white;
     text-decoration: none;
 
@@ -65,7 +66,6 @@ body {
   }
 
 }
-
 
 .pub-card{
   width: 30rem;
@@ -150,6 +150,15 @@ body {
     font-weight: 600;
     font-size: larger;
     margin: 0;
+  }
+
+  &__link{
+    text-decoration: none;
+    color: inherit;
+
+    &:hover{
+      color: inherit;
+    }
   }
 
   &__description{
@@ -253,6 +262,10 @@ body {
 
   &__link{
     text-decoration: none;
+
+    &:hover{
+      text-decoration: none;
+    }
   }
 
   &__title{
