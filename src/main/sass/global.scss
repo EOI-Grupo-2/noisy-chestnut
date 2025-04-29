@@ -16,20 +16,24 @@ body {
   display: grid;
   grid-template-rows: auto;
   grid-template-columns: 1fr 8fr;
+  grid-template-areas: 'menu content';
+  gap: 2rem;
 }
 
 .content{
-  padding: 0 2rem;
+  grid-area: content;
+  overflow-y: scroll;
+  max-height: 100vh;
 }
 
 .menu{
+  grid-area: menu;
   background-image: linear-gradient(#FF425F, #A30E24);
   height: 100vh;
   padding: 2rem;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
-  width: 100%;
   
   &__title{
     color: white;
@@ -167,7 +171,7 @@ body {
     }
   }
 }
-    
+
 .chat-modal{
   display: flex;
   flex-direction: column;

@@ -1,45 +1,28 @@
 <!DOCTYPE html>
-<html lang="es">
+<html lang="en" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" layout:decorate="~{layouts/main_layout.html}"
+      xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Interacción Social</title>
     <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
-    <link rel="stylesheet" href="./social.css">
+    <link rel="stylesheet" th:href="@{/css/social.css}"/>
    
 </head>
 <body>
-    <div class="container-fluid">
-        <div class="row">
-            <!-- Sidebar izquierdo -->
-            <nav class="col-md-3 col-lg-2 d-md-block sidebar menu-bg">
-                <h2 class="text-white p-3">Noisy-chestnut</h2>
-                <ul class="nav flex-column">
-                    <li class="nav-item"><a href="../index.html" class="nav-link text-white">Inicio</a></li>
-                    <li class="nav-item"><a href="./artist.html" class="nav-link text-white">Artistas</a></li>
-                    <li class="nav-item"><a href="../concert/index.html" class="nav-link text-white">Conciertos</a></li>
-                    <li class="nav-item"><a href="#" class="nav-link text-white">Nueva publicación</a></li>
-                    <li class="nav-item"><a href="../search/concerts.html" class="nav-link text-white">Buscar</a></li>
-                </ul>
-                <div class="mt-5">
-                    <a href="../user/login.html" class="nav-link text-white">Iniciar sesión</a></li>
-                    <a href="../user/register.html" class="nav-link text-white">Registrarse</a></li>
-                </div>
-            
-            </nav>
-
+<div class="content" layout:fragment="content">
             <!-- Botones para las funciones "Crear grupo" y "Crear chat"-->
-             <div class="container col-lg-10 p-5 justify-content-center align-items-center">
+             <div class="central-div">
 
                 <!--Botón para crear grupo-->
 
-                <div class="d-flex justify-content-center mb-4 align-items-center" data-toggle="modal" data-target="#modalGrupo">
-                    <button class="btn btn-custom mr-3" data-toggle="modal" data-target="#modalGrupo">
+                <div class="buttons-container" data-toggle="modal" data-target="#modalGrupo">
+                    <button class="buttons-container__button" data-toggle="modal" data-target="#modalGrupo">
                     <i class="fas fa-comments"></i>
                     Crear grupo
                 </button>
                 <!--Botón para crear chat-->
-                    <button class="btn btn-custom mr-3">
+                    <button class="buttons-container__button">
                     <i class="fas fa-comments"></i>
                     Crear chat
                 </button>
@@ -72,27 +55,27 @@
                                     <input type="text" class="form-control" id="userSearch" placeholder="Escribe para buscar...">
                                 </div>
         
-                                <div class="user-list">
+                                <div class="user-container">
                                     <!-- Lista de usuarios -->
-                                    <div class="user-item mb-2">
+                                    <div class="user-container-item">
                                         <span>Usuario 1</span>
-                                        <button type="button" class="btn user-btn btn-sm ml-5">Añadir</button>
+                                        <button type="button" class="user-btn">Añadir</button>
                                     </div>
-                                    <div class="user-item mb-2">
+                                    <div class="user-container-item">
                                         <span>Usuario 2</span>
-                                        <button type="button" class="btn user-btn btn-sm ml-5">Añadir</button>
+                                        <button type="button" class="user-btn">Añadir</button>
                                     </div>
-                                    <div class="user-item mb-2">
+                                    <div class="user-container-item">
                                         <span>Usuario 3</span>
-                                        <button type="button" class="btn user-btn btn-sm ml-5">Añadir</button>
+                                        <button type="button" class="user-btn">Añadir</button>
                                     </div>
-                                    <div class="user-item mb-2">
+                                    <div class="user-container-item">
                                         <span>Usuario 4</span>
-                                        <button type="button" class="btn user-btn btn-sm ml-5">Añadir</button>
+                                        <button type="button" class="user-btn">Añadir</button>
                                     </div>
-                                    <div class="user-item mb-2">
+                                    <div class="user-container-item">
                                         <span>Usuario 5</span>
-                                        <button type="button" class="btn user-btn btn-sm ml-5">Añadir</button>
+                                        <button type="button" class="user-container-item-btn">Añadir</button>
                                     </div>
                                 </div>
         
