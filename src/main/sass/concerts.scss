@@ -1,3 +1,13 @@
+
+// Estilos para la página de conciertos
+.content {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1.5rem;
+  flex-direction: row;
+  padding: 2rem 0;
+}
+
 .concert-card{
   width: 12rem;
   height: 18rem;
@@ -78,12 +88,4 @@
 
 .material-symbols-outlined {
   vertical-align: middle;
-}
-
-.search-content{
-  display: flex;
-  flex-direction: row;
-  flex-wrap: wrap;
-  gap: 0.5rem;
-  padding: 0.5rem;
 }

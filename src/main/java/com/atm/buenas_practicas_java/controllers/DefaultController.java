@@ -124,10 +124,20 @@ public class DefaultController {
     public String getArtistPage(){
         return "/artist/artist";
     }
+  
+    @GetMapping({"", "/logueo"})
+    public String getLogin(){
+        return "/user/login";
+    }
 
     @GetMapping({"", "/chat"})
     public String getSocialPage(){
         return "/social/social";
+    }
+  
+    @GetMapping({"", "/register"})
+    public String getRegister(){
+        return "/user/register";
     }
   
     @GetMapping({"", "/Profile"})
@@ -145,6 +155,11 @@ public class DefaultController {
         return "/social/chat";
     }
   
+    @GetMapping({"", "/social"})
+    public String getSocialPage(){
+        return "/social/social";
+    }
+
     @GetMapping({"", "/search/artists"})
     public String getSearchArtistPage(){
         return "/search/artists";
@@ -159,5 +174,18 @@ public class DefaultController {
     public String getSearchConcertsPage(){
         return "/search/concerts";
 
+    }
+
+    @GetMapping({"", "/publication"})
+    public String getPublicationPage(){return "/user/publication";}
+  
+    @GetMapping("/concert")
+    public String showConcertsPage() {
+        return "concert/concerts";
+    }
+
+    @GetMapping("/concert/detail")
+    public String showConcertDetailPage() {
+        return "concert/concert-detail";
     }
 }
