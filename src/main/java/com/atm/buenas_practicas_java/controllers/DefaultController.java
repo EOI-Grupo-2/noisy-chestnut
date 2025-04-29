@@ -125,7 +125,7 @@ public class DefaultController {
         return "/artist/artist";
     }
 
-    @GetMapping({"", "/social"})
+    @GetMapping({"", "/chat"})
     public String getSocialPage(){
         return "/social/social";
     }
@@ -140,7 +140,7 @@ public class DefaultController {
         return "/artist/artistProfile";
     }
   
-    @GetMapping({"", "/chat"})
+    @GetMapping({"", "/chat/id"})
     public String getChatPage(){
         return "/social/chat";
     }
