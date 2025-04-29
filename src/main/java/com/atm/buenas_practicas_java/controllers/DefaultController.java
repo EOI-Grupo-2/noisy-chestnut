@@ -117,7 +117,7 @@ public class DefaultController {
 
     @GetMapping({"", "/concerts"})
     public String getConcertPage(){
-        return "/concert/index";
+        return "/concert/concerts";
     }
 
     @GetMapping({"", "/artists"})
@@ -140,24 +140,19 @@ public class DefaultController {
         return "/user/register";
     }
   
-    @GetMapping({"", "/Profile"})
+    @GetMapping({"", "/user/profile"})
     public String getUserProfile(){
         return "/user/profile";
     }
 
-    @GetMapping({"", "/ArtistProfile"})
+    @GetMapping({"", "/artist/profile"})
     public String getArtistProfile(){
-        return "/artist/artistProfile";
+        return "/artist/profile";
     }
   
     @GetMapping({"", "/chat/id"})
     public String getChatPage(){
         return "/social/chat";
-    }
-  
-    @GetMapping({"", "/social"})
-    public String getSocialPage(){
-        return "/social/social";
     }
 
     @GetMapping({"", "/search/artists"})
