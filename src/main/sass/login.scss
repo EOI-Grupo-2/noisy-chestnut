@@ -1,3 +1,5 @@
+@import "variables";
+
 .content {
   display: flex;
   justify-content: center;
@@ -11,13 +13,13 @@
   max-width: 25%;
   border-radius: 12px;
   overflow: hidden;
-  background-color: #1c1e21;
-  color: #ffffff;
+  background-color: $secondary-color;
+  color: $font-color;
   box-shadow: 0 4px 20px rgba(0, 0, 0, 0.4);
   font-size: 16px;
 
   &__header {
-    background: linear-gradient(to right, #ED7D8E, #E21937);
+    background-color: $primary-color;
     font-weight: bold;
     padding: 20px;
     text-align: center;
@@ -39,7 +41,7 @@
 
     label {
       font-size: 0.95rem;
-      color: #ccc;
+      color: $font-color;
     }
   }
 
@@ -47,19 +49,19 @@
     padding: 10px 12px;
     border: none;
     border-radius: 6px;
-    background-color: #2c2f33;
-    color: #fff;
+    background-color: $tertiary-color;
+    color: $font-color;
     font-size: 1rem;
     transition: border 0.3s ease, box-shadow 0.3s ease;
 
     &::placeholder {
-      color: #aaa;
+      color: $font-color;
     }
 
     &:focus {
       outline: none;
-      border: 1px solid #ED7D8E;
-      box-shadow: 0 0 0 3px rgba(237, 125, 142, 0.2);
+      border: 1px solid $tertiary-color;
+      box-shadow: 0 0 0 3px $hover-color;
     }
   }
 
@@ -69,8 +71,8 @@
   &__button {
     width: 100%;
     margin-top: 10px;
-    background-color: #E21937;
-    color: #ffffff;
+    background-color: $primary-color;
+    color: $font-color;
     padding: 12px;
     border: none;
     border-radius: 6px;
@@ -80,7 +82,7 @@
     transition: background-color 0.3s ease;
 
     &:hover {
-      background-color: darken(#E21937, 10%);
+      background-color: $hover-color;
     }
   }
 
@@ -90,7 +92,7 @@
     margin-top: 10px;
 
     a {
-      color: #ED7D8E;
+      color: $font-color;
       text-decoration: none;
       font-size: 0.95rem;
 
