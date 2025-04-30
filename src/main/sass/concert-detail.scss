@@ -1,40 +1,33 @@
-// Estilos generales
+@import "variables";
+
 .content {
-  background-image: url('https://images.unsplash.com/photo-1701099153549-a94513b57f60?fm=jpg&q=60&w=3000&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D');
-  background-size: cover;
-  background-position: center;
   padding-right: 2rem;
 }
 
-.menu-bg {
-  background-image: linear-gradient(#FF425F, #A30E24);
-}
-
-// Botón de volver
 .btn-back {
   display: inline-flex;
   align-items: center;
   gap: 5px;
-  color: white;
+  color: $font-color;
   text-decoration: none;
   padding: 0.5rem 1rem;
   border-radius: 5px;
-  background-color: rgba(0, 0, 0, 0.3);
+  background-color: transparentize($secondary-color, 0.7);
   transition: background-color 0.3s;
 
   &:hover {
-    background-color: rgba(0, 0, 0, 0.5);
-    color: white;
+    background-color: transparentize($secondary-color, 0.5);
+    color: $font-color;
   }
 }
 
 // Detalle del concierto
 .concert-detail {
-  background-color: rgba(33, 37, 41, 0.8);
-  border-radius: 10px;
+  background-color: transparentize($secondary-color, 0.2);
+  border-radius: 5px;
   overflow: hidden;
   box-shadow: 0 5px 20px rgba(0, 0, 0, 0.4);
-  color: white;
+  color: $font-color;
   margin-bottom: 2rem;
 }
 
@@ -59,7 +52,7 @@
     font-size: 2.5rem;
     font-weight: bold;
     margin: 0;
-    color: white;
+    color: $font-color;
     text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
   }
 }
@@ -82,7 +75,7 @@
     gap: 0.5rem;
 
     i {
-      color: #FF425F;
+      color: $font-color;
       font-size: 1.2rem;
       width: 25px;
       text-align: center;
@@ -92,34 +85,12 @@
 
 // Enlace a la ubicación
 .venue-link {
-  color: #FF425F;
+  color: $font-color;
   text-decoration: none;
   transition: color 0.3s;
 
   &:hover {
-    color: white;
-    text-decoration: underline;
-  }
-}
-
-// Botón de reseñas
-.reviews-button {
-  display: flex;
-  align-items: center;
-  gap: 0.5rem;
-
-  .material-symbols-outlined {
-    color: #FF425F;
-  }
-}
-
-.reviews-link {
-  color: #FF425F;
-  text-decoration: none;
-  transition: color 0.3s;
-
-  &:hover {
-    color: white;
+    color: $font-color;
     text-decoration: underline;
   }
 }
@@ -130,12 +101,12 @@
   &__title {
     font-size: 1.5rem;
     margin-bottom: 1rem;
-    color: #FF425F;
+    color: $font-color;
   }
 
   &__text {
     line-height: 1.6;
-    color: #e0e0e0;
+    color: $font-color;
   }
 }
 
@@ -145,19 +116,18 @@
   &__title {
     font-size: 1.5rem;
     margin-bottom: 1rem;
-    color: #FF425F;
+    color: $font-color;
   }
 
   &__card{
     display: flex;
-    background-color: rgba(0, 0, 0, 0.2);
+    background-color: transparentize($secondary-color, 0.8);
     border-radius: 8px;
     overflow: hidden;
   }
 
   &__image {
     width: 120px;
-    height: 120px;
     object-fit: cover;
   }
 
@@ -185,7 +155,7 @@
     conic-gradient(from 54deg at 68% 56%, #0000 108deg, #000 0) 0 / var(--size),
     conic-gradient(from 198deg at 32% 56%, #0000 108deg, #000 0) 0 / var(--size),
     conic-gradient(from 126deg at 50% 69%, #0000 108deg, #000 0) 0 / var(--size);
-    --bg: linear-gradient(90deg, #FF425F calc(var(--size) * var(--val)), rgba(0, 0, 0, 0.6) 0);
+    --bg: linear-gradient(90deg, $primary-color calc(var(--size) * var(--val)), transparentize($secondary-color, 0.4) 0);
     background-color: transparent;
     height: var(--size);
     width: calc(var(--size) * 5);
@@ -222,14 +192,14 @@
   }
 
   &__biography{
-    color: #e0e0e0;
+    color: $font-color;
     margin-bottom: 1rem;
   }
 
   &__button{
     display: inline-block;
-    background-color: rgba(255, 66, 95, 0.2);
-    color: #FF425F;
+    background-color: $primary-color;
+    color: $font-color;
     text-decoration: none;
     padding: 0.5rem 1rem;
     border-radius: 5px;
@@ -237,8 +207,8 @@
     transition: background-color 0.3s;
 
     &:hover {
-      background-color: rgba(255, 66, 95, 0.4);
-      color: white;
+      background-color: $hover-color;
+      color: $font-color;
     }
   }
 }
@@ -246,8 +216,8 @@
 .concert-actions {
   display: flex;
   gap: 1rem;
-  margin-bottom: 2rem;
   flex-wrap: wrap;
+
   &__btn {
     display: inline-flex;
     align-items: center;
@@ -259,42 +229,36 @@
 
     &--share {
       background-color: transparent;
-      color: white;
-      border: 1px solid rgba(255, 255, 255, 0.3);
+      color: $font-color;
+      border: 1px solid transparentize($tertiary-color, 0.5);
 
       &:hover {
-        background-color: rgba(255, 255, 255, 0.1);
+        background-color: transparentize($tertiary-color, 0.9);
       }
     }
 
     &--attend {
       background-color: transparent;
-      color: white;
-      border: 1px solid rgba(255, 255, 255, 0.3);
+      color: $font-color;
+      border: 1px solid transparentize($tertiary-color, 0.5);
       position: relative;
       transition: all 0.3s;
       gap: 8px;
 
       &:hover {
-        background-color: rgba(255, 255, 255, 0.1);
-      }
-
-      .active {
-        background-color: rgba(255, 66, 95, 0.2);
-        border-color: #FF425F;
-        color: #FF425F;
+        background-color: transparentize($tertiary-color, 0.9);
       }
     }
 
     &--buy {
-      background: linear-gradient(to right, #FF425F, #A30E24);
-      color: white;
+      background-color:$primary-color;
+      color: $font-color;
       text-decoration: none;
       border: none;
 
       &:hover {
-        color: white;
-        background: linear-gradient(to right, #FF5A73, #C41E34);
+        color: $font-color;
+        background-color: $hover-color;
       }
     }
   }
@@ -302,7 +266,7 @@
     display: inline-flex;
     align-items: center;
     justify-content: center;
-    background-color: rgba(255, 255, 255, 0.2);
+    background-color: transparentize($tertiary-color, 0.3);
     border-radius: 12px;
     padding: 2px 8px;
     font-size: 0.8rem;
@@ -314,12 +278,12 @@
 // Comentarios
 .concert-comments {
   padding: 2rem;
-  background-color: rgba(0, 0, 0, 0.2);
+  background-color: transparentize($secondary-color, 0.6);
 
   &__title {
     font-size: 1.5rem;
     margin-bottom: 1.5rem;
-    color: #FF425F;
+    color: $font-color;
   }
 
   &__form{
@@ -330,25 +294,25 @@
 
   &__textbox{
     flex-grow: 1;
-    background-color: rgba(255, 255, 255, 0.1);
-    border: 1px solid rgba(255, 255, 255, 0.2);
-    color: white;
+    background-color: transparentize($tertiary-color, 0.7);
+    border: 1px solid transparentize($aux-color, 0.5);
+    color: $font-color;
     padding: 0.8rem;
 
     &::placeholder {
-      color: rgba(255, 255, 255, 0.5);
+      color: $font-color;
     }
 
     &:focus {
-      background-color: rgba(255, 255, 255, 0.15);
-      border-color: rgba(255, 255, 255, 0.3);
+      background-color: transparentize($tertiary-color, 0.5);
+      border-color: transparentize($aux-color, 0.3);
       box-shadow: none;
     }
   }
 
   &__button{
-    background: linear-gradient(to right, #FF425F, #A30E24);
-    color: white;
+    background-color: $primary-color;
+    color: $font-color;
     border: none;
     border-radius: 5px;
     padding: 0.5rem 1.5rem;
@@ -356,7 +320,7 @@
     cursor: pointer;
 
     &:hover {
-      background: linear-gradient(to right, #FF5A73, #C41E34);
+      background: $hover-color;
     }
   }
 
@@ -380,7 +344,7 @@
 
   &__content{
     flex-grow: 1;
-    background-color: rgba(255, 255, 255, 0.05);
+    background-color: transparentize($secondary-color, 0.4);
     border-radius: 8px;
     padding: 1rem;
   }
@@ -399,7 +363,7 @@
 
   &__date{
     font-size: 0.8rem;
-    color: rgba(255, 255, 255, 0.6);
+    color: $font-color;
   }
 }
 

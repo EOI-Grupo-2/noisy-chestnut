@@ -1,21 +1,24 @@
+@import "variables";
+
 .content{
   display: flex;
   align-items: center;
   justify-content: center;
   height: 100vh;
+  padding: 2rem 2rem 2rem 0;
 }
 
 .chat{
-  width: 75%;
-  height: 90%;
-  background-color: rgb(255, 255, 255, 0.8);
+  width: 100%;
+  height: 100%;
+  background-color: transparentize($secondary-color, 0.4);
   display: grid;
   grid-template-rows: 0.75fr 10fr 0.5fr;
   grid-template-columns: auto;
 
   &__header{
     width: 100%;
-    background-color: grey;
+    background-color: $primary-color;
     display: flex;
     flex-direction: row;
     gap: 0.5rem;
@@ -35,13 +38,13 @@
   }
 
   &__title{
-    color: white;
+    color: $font-color;
     font-size: medium;
     font-weight: 600;
   }
 
   &__description{
-    color: white;
+    color: $font-color;
     font-size: small;
     font-weight: 400;
   }
@@ -53,40 +56,35 @@
     gap: 1rem;
   }
 
-  &__message-sender{
+  &__message{
     display: flex;
     flex-direction: row;
     justify-content: space-between;
     max-width: 100%;
-    align-self: flex-end;
     gap: 1rem;
-    background-color: grey;
-    border-radius: 30px 5px 30px 15px;
+    background-color: $tertiary-color;
     padding: 0.25rem 0.5rem;
     min-width: 25%;
-  }
 
-  &__message-receiver{
-    display: flex;
-    flex-direction: row;
-    justify-content: space-between;
-    max-width: 100%;
-    align-self: flex-start;
-    gap: 1rem;
-    background-color: grey;
-    border-radius: 5px 30px 15px;
-    padding: 0.25rem 0.5rem;
-    min-width: 25%;
+    &--sender{
+      align-self: flex-end;
+      border-radius: 30px 5px 30px 15px;
+    }
+
+    &--receiver{
+      align-self: flex-start;
+      border-radius: 5px 30px 15px;
+    }
   }
 
   &__text{
-    color: white;
+    color: $font-color;
     font-size: medium;
     font-weight: 400;
   }
 
   &__date{
-    color: white;
+    color: $font-color;
     font-size: smaller;
     font-weight: 400;
     align-self: flex-end;
@@ -94,7 +92,7 @@
 
   &__input{
     width: 100%;
-    background-color: grey;
+    background-color: $tertiary-color;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -103,19 +101,23 @@
 
   &__input-box{
     width: 80%;
-    background-color: white;
-    color: #1c1e21;
+    background-color: #a6a6a6;
+    color: $font-color;
     border-radius: 5px;
-    border: solid lightgrey;
+    border: solid transparent;
     padding: 0.25rem 0.5rem;
 
+    &::placeholder{
+      color: $font-color;
+    }
+
     &:focus{
-      border: solid #545B61;
+      border: solid $aux-color;
       outline: none;
     }
 
     &:focus-visible{
-      border: solid #545B61;
+      border: solid $aux-color;
     }
   }
 
