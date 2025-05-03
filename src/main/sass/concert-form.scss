@@ -73,27 +73,19 @@
     }
   }
 
-  // Usando variables para los colores
-  &__input {
+  &__input, &__textarea {
     padding: 10px;
     border: none;
     border-radius: 6px;
-    background-color: $tertiary-color;
+    background-color: darken($tertiary-color, 5%);
     color: $font-color;
     font-size: 1rem;
     width: 100%;
   }
 
   &__textarea {
-    padding: 10px;
-    border: none;
-    border-radius: 6px;
-    background-color: $tertiary-color;
-    color: $font-color;
-    font-size: 1rem;
     resize: vertical;
     min-height: 100px;
-    width: 100%;
   }
 
   &__file {
