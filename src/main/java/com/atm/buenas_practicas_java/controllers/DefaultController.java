@@ -183,4 +183,10 @@ public class DefaultController {
     public String showConcertDetailPage() {
         return "concert/concert-detail";
     }
+
+    @GetMapping("/concert/form")
+    public String showConcertFormPage() {
+        return "concert/concert-form";
+    }
+
 }
