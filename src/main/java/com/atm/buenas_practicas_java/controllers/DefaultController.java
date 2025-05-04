@@ -171,6 +171,11 @@ public class DefaultController {
 
     }
 
+    @GetMapping({"", "/places"})
+    public String getPlacesProfile(){
+        return "/places/places";
+    }
+
     @GetMapping({"", "/publication"})
     public String getPublicationPage(){return "/user/publication";}
   
