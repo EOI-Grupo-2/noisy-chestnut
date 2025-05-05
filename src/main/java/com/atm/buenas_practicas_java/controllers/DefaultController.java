@@ -155,20 +155,9 @@ public class DefaultController {
         return "/social/chat";
     }
 
-    @GetMapping({"", "/search/artists"})
-    public String getSearchArtistPage(){
-        return "/search/artists";
-    }
-
-    @GetMapping({"", "/search/users"})
-    public String getSearchUsersPage(){
-        return "/search/users";
-    }
-
-    @GetMapping({"", "/search/concerts"})
-    public String getSearchConcertsPage(){
-        return "/search/concerts";
-
+    @GetMapping({"", "/search"})
+    public String getSearch(){
+        return "/search/search";
     }
 
     @GetMapping({"", "/publication"})

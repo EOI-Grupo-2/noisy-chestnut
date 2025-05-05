@@ -1,3 +1,57 @@
+@import "variables";
+
+.content{
+  padding-right: 2rem;
+  display: grid;
+  grid-template-rows: auto 1fr;
+  grid-template-columns: auto;
+  grid-template-areas: 'tabs'
+                        'content';
+}
+
+.tabs-menu{
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+  width: 80%;
+  justify-self: center;
+  padding-top: 0.5rem;
+  border-bottom: solid 2px $secondary-color;
+
+  &__item{
+    padding: 0.5rem 1rem;
+    width: 100%;
+    background-color: transparent;
+    border: none;
+    border-radius: 0;
+    transition: all 0.25s ease-in;
+    color: $font-color;
+
+    &--concerts{
+      border-left: solid 2px $secondary-color;
+      border-right: solid 2px $secondary-color;
+    }
+
+    &:hover{
+      background-color: $primary-color;
+      transform: scale(1.2, 1.2);
+      border: 0;
+      border-radius: 5px;
+    }
+  }
+
+  .active{
+    background-color: rgba($primary-color, 0.8);
+
+    &:hover{
+      background-color: $primary-color;
+      transform: scale(1.2, 1.2);
+      border: 0;
+      border-radius: 5px;
+    }
+  }
+}
+
 .concert-card{
   width: 12rem;
   height: 18rem;
@@ -86,4 +140,11 @@
   flex-wrap: wrap;
   gap: 0.5rem;
   padding: 0.5rem;
+  grid-area: content;
+  transition: visibility 0s, opacity 0.4s ease-in;
+
+  &--artists, &--concerts{
+    visibility: hidden;
+    opacity: 0;
+  }
 }
