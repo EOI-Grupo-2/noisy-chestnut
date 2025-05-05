@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" layout:decorate="~{layouts/main_layout.html}"
+      xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="pruebaweb.css">
+    <link rel="stylesheet" th:href="@{/css/editprofile.css}" />
+    <title>Edición Perfil</title>
+</head>
+<body>
+
+<div class="content" layout:fragment="content">
+    <form action="/submit-profile" method="POST" class="user-form">
+        <div class="user-form__field">
+            <label for="name" class="user-form__label">Name:</label>
+            <input type="text" id="name" name="name" class="user-form__input" required>
+        </div>
+
+        <div class="user-form__field">
+            <label for="firstName" class="user-form__label">First Name:</label>
+            <input type="text" id="firstName" name="firstName" class="user-form__input" required>
+        </div>
+
+        <div class="user-form__field">
+            <label for="username" class="user-form__label">Username:</label>
+            <input type="text" id="username" name="username" class="user-form__input" required>
+        </div>
+
+        <div class="user-form__field">
+            <label for="description" class="user-form__label">Description:</label>
+            <textarea id="description" name="description" rows="3" class="user-form__textarea"></textarea>
+        </div>
+
+        <div class="user-form__field">
+            <label for="genre" class="user-form__label">Genre:</label>
+            <select id="genre" name="genre" class="user-form__select" required>
+                <option value="">--Select--</option>
+                <option value="male">Male</option>
+                <option value="female">Female</option>
+            </select>
+        </div>
+
+        <div class="user-form__field">
+            <label for="musicgenre" class="user-form__label">Music Genre:</label>
+            <select id="musicgenre" name="musicgenre" class="user-form__select" required>
+                <option value="">--Select--</option>
+                <option value="Rock">Rock</option>
+                <option value="Pop">Pop</option>
+                <option value="Trap">Trap</option>
+                <option value="Rap">Rap</option>
+                <option value="Techno">Techno</option>
+                <option value="House">House</option>
+            </select>
+        </div>
+
+        <div class="user-form__actions">
+            <button type="submit" class="user-form__button">Save</button>
+        </div>
+    </form>
+</div>
+</body>
+</html>

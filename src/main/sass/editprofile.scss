@@ -1,0 +1,58 @@
+@import "variables";
+
+.user-form {
+  width: 100%;
+  background-color: $secondary-color;
+  color: $font-color;
+  padding: 2rem;
+  border-radius: 3rem;
+  max-width:30% ;
+  margin-left: 35%;
+  margin-top: 10%;
+
+  &__field {
+    margin-bottom: 1rem;
+    display: flex;
+    flex-direction: column;
+  }
+
+  &__label {
+    margin-bottom: 0.5rem;
+    font-weight: bold;
+  }
+
+  &__input,
+  &__select,
+  &__textarea {
+    padding: 0.5rem;
+    border: 1px solid $tertiary-color;
+    border-radius: 4px;
+    background-color: $aux-color;
+    color: $secondary-color;
+    font-size: 1rem;
+
+    &:focus {
+      outline: none;
+      border-color: $primary-color;
+    }
+  }
+
+  &__button {
+    background-color: $primary-color;
+    color: $font-color;
+    border: none;
+    padding: 0.75rem 1.5rem;
+    font-size: 1rem;
+    border-radius: 4px;
+    cursor: pointer;
+
+    &:hover {
+      background-color: $hover-color;
+    }
+  }
+
+  &__actions {
+    text-align: center;
+    margin-top: 2rem;
+  }
+}

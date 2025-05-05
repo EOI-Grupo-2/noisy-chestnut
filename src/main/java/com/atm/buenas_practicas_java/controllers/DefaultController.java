@@ -145,6 +145,12 @@ public class DefaultController {
         return "/user/profile";
     }
 
+    @GetMapping({"", "/user/editprofile"})
+    public String getUserEditProfile(){
+        return "/user/editprofile";
+    }
+
+
     @GetMapping({"", "/artist/profile"})
     public String getArtistProfile(){
         return "/artist/profile";
@@ -183,4 +189,6 @@ public class DefaultController {
     public String showConcertDetailPage() {
         return "concert/concert-detail";
     }
+
+
 }

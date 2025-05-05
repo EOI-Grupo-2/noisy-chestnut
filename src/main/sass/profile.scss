@@ -11,6 +11,21 @@
 
 /* ENCABEZADO */
 
+.edit-profile-button {
+  background-color: $primary-color;
+  color: $font-color;
+  border: none;
+
+  padding: 0.5rem 1rem;
+  border-radius: 1rem;
+  cursor: pointer;
+
+  &:hover {
+    background-color: $primary-color;
+  }
+}
+
+
 .profile-header {
   display: flex;
   flex-direction: row;
@@ -19,6 +34,8 @@
   color: $font-color;
   padding: 1rem;
   border-radius: 5px;
+
+
 
   &__userimage {
     width: 150px;
