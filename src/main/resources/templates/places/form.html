@@ -5,6 +5,30 @@
     <link rel="stylesheet" th:href="@{/css/places-form.css}"/>
 </head>
 <body>
-
+<div class="content" layout:fragment="content">
+    <form class="places-form">
+        <div  class="places-form__item">
+            <label for="name" class="places-form__label">Nombre</label>
+            <input id="name" name="name" placeholder="Inserte el nombre del lugar aquí" type="text" class="places-form__input">
+        </div>
+        <div  class="places-form__item">
+            <label for="description" class="places-form__label">Descripción</label>
+            <label for="description"></label><textarea id="description" name="address" placeholder="Inserte la descripción del lugar aquí" type="" class="places-form__textarea"></textarea>
+        </div>
+        <div  class="places-form__item">
+            <label for="address" class="places-form__label">Dirección</label>
+            <input id="address" name="address" placeholder="Inserte la dirección del lugar aquí" type="text" class="places-form__input">
+        </div>
+        <div  class="places-form__item">
+            <label for="capacity" class="places-form__label">Capacidad</label>
+            <div class="places-form__number-input-container">
+                <button onclick="inputNumberMinus('capacity')" type="button" class="places-form__number-button places-form__number-button--minus"></button>
+                <input id="capacity" name="capacity" placeholder="Inserte la capacidad del lugar aquí" type="number" class="places-form__number" min="0" value="0">
+                <button onclick="inputNumberPlus('capacity')" type="button" class="places-form__number-button places-form__number-button--plus"></button>
+            </div>
+        </div>
+        <input type="submit" class="places-form__button">
+    </form>
+</div>
 </body>
 </html>
