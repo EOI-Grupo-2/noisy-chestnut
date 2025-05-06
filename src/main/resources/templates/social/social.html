@@ -9,6 +9,7 @@
     <link rel="stylesheet" th:href="@{/css/social.css}"/>
     <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"></script>
+
 </head>
 <body>
       <div class="content" layout:fragment="content">
@@ -22,6 +23,7 @@
                   <i class="fas fa-comments"></i>
                   Usuarios
               </button>
+
           </div>
           <div class="chats-tab chats-tab--users" id="usersTab">
               <div class="chats-tab__item">
@@ -170,6 +172,45 @@
               </div>
           </div>
           <div class="chats-tab chats-tab--groups" id="groupsTab">
+              <!-- Botón para crear grupo -->
+                  <button class="buttons-container__button" id="createGroupButton"  onclick="openModal('groupModal')">
+                      <i class="fas fa-plus"></i> Crear grupo
+                  </button>
+
+              <!-- Modal -->
+              <div class="modal" id="groupModal">
+                  <div class="modal__content">
+                      <div class="modal__header">
+                          <h2 class="modal__title">Crear nuevo grupo</h2>
+                          <i class="fa-solid fa-xmark fa-lg" style="color: #ffffff;" onclick="openModal('groupModal')"></i>
+                      </div>
+                      <div class="modal__body">
+                          <div class="modal__name">
+                              <label for="groupName" class="modal__label">Nombre del grupo:</label>
+                              <input type="text" id="groupName" class="modal__input" placeholder="Escribe el nombre del grupo" />
+                          </div>
+                          <div class="modal__search">
+                              <label for="userSearch" class="modal__label">Añadir personas:</label>
+                              <input type="text" id="userSearch" class="modal__input" placeholder="Buscar personas..."  onkeyup="myFunction()"/>
+                              <ul id="list">
+                                  <li><a href="#">Adele</a></li>
+                                  <li><a href="#">Agnes</a></li>
+
+                                  <li><a href="#">Billy</a></li>
+                                  <li><a href="#">Bob</a></li>
+
+                                  <li><a href="#">Calvin</a></li>
+                                  <li><a href="#">Christina</a></li>
+                                  <li><a href="#">Cindy</a></li>
+                              </ul>
+                          </div>
+                          <div class="confirmGroupButton">
+                              <button class="buttons-container__button" id="confirmCreateGroup">Crear grupo</button>
+                          </div>
+                      </div>
+                  </div>
+              </div>
+
               <div class="chats-tab__item">
                   <img class="chats-tab__image" src="https://as1.ftcdn.net/v2/jpg/03/46/83/96/1000_F_346839683_6nAPzbhpSkIpb8pmAwufkC7c5eD7wYws.jpg" alt="Chat Image"/>
                   <a class="chats-tab__link" href="/chat/id">
@@ -315,6 +356,9 @@
                   </a>
               </div>
           </div>
-      </div>  
+      </div>
+      <script>
+
+      </script>
 </body>
 </html>

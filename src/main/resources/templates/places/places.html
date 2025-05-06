@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" layout:decorate="~{layouts/main_layout.html}"
+      xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="pruebaweb.css">
+    <link rel="stylesheet" th:href="@{/css/style.css}" />
+    <link rel="stylesheet" th:href="@{/css/profile.css}" />
+    <script th:src="@{/js/tabs.js}"></script>
+    <title>Places</title>
+</head>
+<body>
+<!-- Menú lateral -->
+<div class="content" layout:fragment="content">
+    <!-- Encabezado place-->
+
+    <!-- Contenido -->
+    <div class="profile-content">
+        <!-- COLUMNA PRINCIPAL PUBLICACIONES -->
+        <div class="profile-content__principal profile-content__principal--pubs" id="pubTab">
+            <!-- Publicación 1 -->
+            <div class="pub-card">
+                <div class="pub-card__header">
+                    <img src="https://as1.ftcdn.net/v2/jpg/03/46/83/96/1000_F_346839683_6nAPzbhpSkIpb8pmAwufkC7c5eD7wYws.jpg" class="pub-card__user-image"alt="">
+                    <div class="pub-card__username">Sala 1</div>
+                </div>
+                <div class="pub-card__body">
+                    <h5 class="pub-card__title">Contenido de la publicación</h5>
+                </div>
+                <div class="pub-card__footer">
+                    <p class="pub-card__date">Fecha y hora de la publicación</p>
+                    <a class="pub-card__link" href="./user/publicacion.html">Ver mas</a>
+                </div>
+            </div>
+            <!-- Publicación 2 -->
+            <div class="pub-card" >
+                <div class="pub-card__header">
+                    <img src="https://as1.ftcdn.net/v2/jpg/03/46/83/96/1000_F_346839683_6nAPzbhpSkIpb8pmAwufkC7c5eD7wYws.jpg" class="pub-card__user-image"alt="">
+                    <div class="pub-card__username">Sala 1</div>
+                </div>
+                <div class="pub-card__body">
+                    <h5 class="pub-card__title">Contenido de la publicación</h5>
+                </div>
+                <div class="pub-card__footer">
+                    <p class="pub-card__date">Fecha y hora de la publicación</p>
+                    <a class="pub-card__link" href="./user/publicacion.html">Ver mas</a>
+                </div>
+            </div>
+        </div>
+
+        <div class="profile-content__principal profile-content__principal--followers" id="followersTab">
+            <div class="user-card">
+                <div class="user-card__info">
+                    <img class="user-card__image" src="https://i.scdn.co/image/ab6761610000e5eb81f47f44084e0a09b5f0fa13" alt="Profile Image"/>
+                    <h1 class="user-card__username">
+                        @Usuario1
+                    </h1>
+                    <p class="user-card__description">
+                        Descripcion usuario1
+                    </p>
+                </div>
+                <button class="user-card__button">
+                    Seguir
+                </button>
+            </div>
+            <div class="user-card">
+                <div class="user-card__info">
+                    <img class="user-card__image" src="https://i.scdn.co/image/ab6761610000e5eb81f47f44084e0a09b5f0fa13" alt="Profile Image"/>
+                    <h1 class="user-card__username">
+                        @Usuario1
+                    </h1>
+                    <p class="user-card__description">
+                        Descripcion usuario1
+                    </p>
+                </div>
+                <button class="user-card__button">
+                    Seguir
+                </button>
+            </div>
+        </div>
+
+        <div class="profile-content__principal profile-content__principal--following" id="followingTab">
+            <div class="user-card">
+                <div class="user-card__info">
+                    <img class="user-card__image" src="https://i.scdn.co/image/ab6761610000e5eb81f47f44084e0a09b5f0fa13" alt="Profile Image"/>
+                    <h1 class="user-card__username">
+                        @Usuario1
+                    </h1>
+                    <p class="user-card__description">
+                        Descripcion usuario1
+                    </p>
+                </div>
+                <button class="user-card__button">
+                    Siguiendo
+                </button>
+            </div>
+            <div class="user-card">
+                <div class="user-card__info">
+                    <img class="user-card__image" src="https://i.scdn.co/image/ab6761610000e5eb81f47f44084e0a09b5f0fa13" alt="Profile Image"/>
+                    <h1 class="user-card__username">
+                        @Usuario1
+                    </h1>
+                    <p class="user-card__description">
+                        Descripcion usuario1
+                    </p>
+                </div>
+                <button class="user-card__button">
+                    Siguiendo
+                </button>
+            </div>
+        </div>
+
+        <div class="profile-content__principal profile-content__principal--insignia" id="insigniaTab">
+
+        </div>
+        <!-- COLUMNA DERECHA CARDS -->
+        <div class="profile-content__more">
+            <!-- Próximos conciertos -->
+            <div class="concert-card">
+                <div class="concert-card__header">
+                    <h3 class="concert-card__title">Próximos conciertos</h3>
+                </div>
+                <div class="concert-card__body">
+                    <div class="concert-card__item">Lia Kali - 08.04.2025</div>
+                    <div class="concert-card__item">Califato - 3/4 15.04.2025</div>
+                    <div class="concert-card__item">Pantera Blue - 20.04.2025</div>
+                </div>
+                <div class="concert-card__footer">
+                    <a class="concert-card__link" href="./user/publicacion.html">Ver mas</a>
+                </div>
+            </div>
+            <!-- Lugares de interés cercano -->
+            <div class="points-card">
+                <div class="points-card__header">
+                    <h3 class="points-card__title">Sitios de interés</h3>
+                </div>
+                <div class="points-card__body">
+                    Encuentra puntos de interés cercanos a nosotros.
+
+                    Mapa
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+</body>
+</html>
