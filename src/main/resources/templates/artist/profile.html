@@ -136,17 +136,17 @@
         <!-- COLUMNA DERECHA CARDS -->
         <div class="profile-content__more">
             <!-- Próximos conciertos -->
-            <div class="concert-card">
-                <div class="concert-card__header">
-                    <h3 class="concert-card__title">Próximos conciertos</h3>
+            <div class="concerts-card">
+                <div class="concerts-card__header">
+                    <h3 class="concerts-card__title">Próximos conciertos</h3>
                 </div>
-                <div class="concert-card__body">
-                    <div class="concert-card__item">Madrid 08.04.2025</div>
-                    <div class="concert-card__item">Sevilla 15.04.2025</div>
-                    <div class="concert-card__item">Barcelona 20.04.2025</div>
+                <div class="concerts-card__body">
+                    <div class="concerts-card__item">Madrid 08.04.2025</div>
+                    <div class="concerts-card__item">Sevilla 15.04.2025</div>
+                    <div class="concerts-card__item">Barcelona 20.04.2025</div>
                 </div>
-                <div class="concert-card__footer">
-                    <a class="concert-card__link" href="#">Ver mas</a>
+                <div class="concerts-card__footer">
+                    <a class="concerts-card__link" href="#" onclick="openModal('concertsModal')">Ver mas</a>
                 </div>
             </div>
             <!-- Albumes -->
@@ -161,7 +161,170 @@
                     <a href="#"><img class="music-card__album" src="https://imgs.search.brave.com/VqUGitc5l4rzV-7o7N-dMWFfWZAk_EPMff21QJXIGEY/rs:fit:860:0:0:0/g:ce/aHR0cHM6Ly9jZG4u/Y3JlYXRlLnZpc3Rh/LmNvbS9kb3dubG9h/ZHMvZjIyOTRjNGYt/ODViNC00NTZmLTg2/MmYtZTc5YzdiMDUy/YjNiXzQ1MC5qcGVn"></a>
                 </div>
                 <div class="music-card__footer">
-                    <a class="music-card__link" href="#">Ver mas</a>
+                    <a class="concerts-card__link" href="#" onclick="openModal('musicModal')">Ver mas</a>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Modales -->
+    <div class="modal" id="concertsModal">
+        <div class="modal__content">
+            <div class="modal__header">
+                <h2 class="modal__title">Próximos conciertos</h2>
+                <span class="modal__close" onclick="openModal('concertsModal')">&times;</span>
+            </div>
+            <div class="modal__body">
+                <div class="concert-card">
+                    <img class="concert-card__image" src="https://images.unsplash.com/photo-1656618020911-1c7a937175fd?crop=entropy&cs=tinysrgb&fm=jpg&ixid=MnwzMjM4NDZ8MHwxfHJhbmRvbXx8fHx8fHx8fDE2NTc1MzQyNTE&ixlib=rb-1.2.1&q=80" alt="concertImage">
+                    <div class="concert-card__content">
+                        <h2 class="concert-card__title">
+                            Concierto de Lia Kali
+                        </h2>
+                        <p class="concert-card__description">
+                            08.04.2025
+                        </p>
+                        <a href="/concert/detail" class="concert-card__link">
+                            Detalles
+                        </a>
+                    </div>
+                </div>
+                <div class="concert-card">
+                    <img class="concert-card__image" src="https://images.unsplash.com/photo-1656618020911-1c7a937175fd?crop=entropy&cs=tinysrgb&fm=jpg&ixid=MnwzMjM4NDZ8MHwxfHJhbmRvbXx8fHx8fHx8fDE2NTc1MzQyNTE&ixlib=rb-1.2.1&q=80" alt="concertImage">
+                    <div class="concert-card__content">
+                        <h2 class="concert-card__title">
+                            Concierto de Lia Kali
+                        </h2>
+                        <p class="concert-card__description">
+                            08.04.2025
+                        </p>
+                        <a href="/concert/detail" class="concert-card__link">
+                            Detalles
+                        </a>
+                    </div>
+                </div>
+                <div class="concert-card">
+                    <img class="concert-card__image" src="https://images.unsplash.com/photo-1656618020911-1c7a937175fd?crop=entropy&cs=tinysrgb&fm=jpg&ixid=MnwzMjM4NDZ8MHwxfHJhbmRvbXx8fHx8fHx8fDE2NTc1MzQyNTE&ixlib=rb-1.2.1&q=80" alt="concertImage">
+                    <div class="concert-card__content">
+                        <h2 class="concert-card__title">
+                            Concierto de Lia Kali
+                        </h2>
+                        <p class="concert-card__description">
+                            08.04.2025
+                        </p>
+                        <a href="/concert/detail" class="concert-card__link">
+                            Detalles
+                        </a>
+                    </div>
+                </div>
+                <div class="concert-card">
+                    <img class="concert-card__image" src="https://images.unsplash.com/photo-1656618020911-1c7a937175fd?crop=entropy&cs=tinysrgb&fm=jpg&ixid=MnwzMjM4NDZ8MHwxfHJhbmRvbXx8fHx8fHx8fDE2NTc1MzQyNTE&ixlib=rb-1.2.1&q=80" alt="concertImage">
+                    <div class="concert-card__content">
+                        <h2 class="concert-card__title">
+                            Concierto de Lia Kali
+                        </h2>
+                        <p class="concert-card__description">
+                            08.04.2025
+                        </p>
+                        <a href="/concert/detail" class="concert-card__link">
+                            Detalles
+                        </a>
+                    </div>
+                </div>
+                <div class="concert-card">
+                    <img class="concert-card__image" src="https://images.unsplash.com/photo-1656618020911-1c7a937175fd?crop=entropy&cs=tinysrgb&fm=jpg&ixid=MnwzMjM4NDZ8MHwxfHJhbmRvbXx8fHx8fHx8fDE2NTc1MzQyNTE&ixlib=rb-1.2.1&q=80" alt="concertImage">
+                    <div class="concert-card__content">
+                        <h2 class="concert-card__title">
+                            Concierto de Lia Kali
+                        </h2>
+                        <p class="concert-card__description">
+                            08.04.2025
+                        </p>
+                        <a href="/concert/detail" class="concert-card__link">
+                            Detalles
+                        </a>
+                    </div>
+                </div>
+                <div class="concert-card">
+                    <img class="concert-card__image" src="https://images.unsplash.com/photo-1656618020911-1c7a937175fd?crop=entropy&cs=tinysrgb&fm=jpg&ixid=MnwzMjM4NDZ8MHwxfHJhbmRvbXx8fHx8fHx8fDE2NTc1MzQyNTE&ixlib=rb-1.2.1&q=80" alt="concertImage">
+                    <div class="concert-card__content">
+                        <h2 class="concert-card__title">
+                            Concierto de Lia Kali
+                        </h2>
+                        <p class="concert-card__description">
+                            08.04.2025
+                        </p>
+                        <a href="/concert/detail" class="concert-card__link">
+                            Detalles
+                        </a>
+                    </div>
+                </div>
+                <div class="concert-card">
+                    <img class="concert-card__image" src="https://images.unsplash.com/photo-1656618020911-1c7a937175fd?crop=entropy&cs=tinysrgb&fm=jpg&ixid=MnwzMjM4NDZ8MHwxfHJhbmRvbXx8fHx8fHx8fDE2NTc1MzQyNTE&ixlib=rb-1.2.1&q=80" alt="concertImage">
+                    <div class="concert-card__content">
+                        <h2 class="concert-card__title">
+                            Concierto de Lia Kali
+                        </h2>
+                        <p class="concert-card__description">
+                            08.04.2025
+                        </p>
+                        <a href="/concert/detail" class="concert-card__link">
+                            Detalles
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="modal" id="musicModal">
+        <div class="modal__content">
+            <div class="modal__header">
+                <h2 class="modal__title">Discografía</h2>
+                <span class="modal__close" onclick="openModal('musicModal')">&times;</span>
+            </div>
+            <div class="modal__body">
+                <div class="album-card">
+                    <a href="#"><img class="album-card__image" src="https://imgs.search.brave.com/160UXkJijBd3i8zpxUy45l0b3lNfqJHfYIyQp6vWVKw/rs:fit:860:0:0:0/g:ce/aHR0cHM6Ly9pbWcu/ZnJlZXBpay5jb20v/cHNkLXByZW1pdW0v/c3VwZXJwb3NpY2lv/bi1lbnZvbHR1cmEt/cGxhc3RpY2EtcG9y/dGFkYS1hbGJ1bS1h/cnRlLXBsYW50aWxs/YS1wc2QtMDhfOTg0/MTAwLTc0OS5qcGc_/c2VtdD1haXNfaHli/cmlk"></a>
+                    <div class="album-card__content">
+                        <h2 class="album-card__title">
+                            Album 1
+                        </h2>
+                        <p class="album-card__description">
+                            Descripción del album 1
+                        </p>
+                    </div>
+                </div>
+                <div class="album-card">
+                    <a href="#"><img class="album-card__image" src="https://imgs.search.brave.com/RNQ6-vNJgUIlswGNKZQNThuYgbulwyKqj2y-Mmfd36c/rs:fit:860:0:0:0/g:ce/aHR0cHM6Ly9jZG4u/Y3JlYXRlLnZpc3Rh/LmNvbS9kb3dubG9h/ZHMvNmE4YzBhYjgt/MTlhNy00ZTAzLThk/ZTUtYmQ5NTA0ZTcy/NzIyXzQ1MC5qcGVn"></a>
+                    <div class="album-card__content">
+                        <h2 class="album-card__title">
+                            Album 2
+                        </h2>
+                        <p class="album-card__description">
+                            Descripción del album 2
+                        </p>
+                    </div>
+                </div>
+                <div class="album-card">
+                    <a href="#"><img class="album-card__image" src="https://imgs.search.brave.com/tEzmYu-8ws2AsU1z8sEThNRNWNh-ngYrIjUh5I-BV80/rs:fit:860:0:0:0/g:ce/aHR0cHM6Ly9jZG4u/Y3JlYXRlLnZpc3Rh/LmNvbS9kb3dubG9h/ZHMvNGVkMjhiMGEt/NTYzNy00NzQwLWE3/ZDEtNjRjMTRmMmJh/Y2U5XzQ1MC5qcGVn"></a>
+                    <div class="album-card__content">
+                        <h2 class="album-card__title">
+                            Album 3
+                        </h2>
+                        <p class="album-card__description">
+                            Descripción del album 3
+                        </p>
+                    </div>
+                </div>
+                <div class="album-card">
+                    <a href="#"><img class="album-card__image" src="https://imgs.search.brave.com/VqUGitc5l4rzV-7o7N-dMWFfWZAk_EPMff21QJXIGEY/rs:fit:860:0:0:0/g:ce/aHR0cHM6Ly9jZG4u/Y3JlYXRlLnZpc3Rh/LmNvbS9kb3dubG9h/ZHMvZjIyOTRjNGYt/ODViNC00NTZmLTg2/MmYtZTc5YzdiMDUy/YjNiXzQ1MC5qcGVn"></a>
+                    <div class="album-card__content">
+                        <h2 class="album-card__title">
+                            Album 4
+                        </h2>
+                        <p class="album-card__description">
+                            Descripción del album 4
+                        </p>
+                    </div>
                 </div>
             </div>
         </div>
