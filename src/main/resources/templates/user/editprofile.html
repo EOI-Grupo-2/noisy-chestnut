@@ -12,27 +12,27 @@
 <div class="content" layout:fragment="content">
     <form action="/submit-profile" method="POST" class="user-form">
         <div class="user-form__field">
-            <label for="name" class="user-form__label">Name:</label>
-            <input type="text" id="name" name="name" class="user-form__input" required>
+            <label for="name" class="user-form__label">Nombre:</label>
+            <input type="text" id="name" name="name" class="user-form__input" placeholder="Ingresa tu nombre" required>
         </div>
 
         <div class="user-form__field">
-            <label for="firstName" class="user-form__label">First Name:</label>
-            <input type="text" id="firstName" name="firstName" class="user-form__input" required>
+            <label for="firstName" class="user-form__label">Apellido:</label>
+            <input type="text" id="firstName" name="firstName" class="user-form__input" placeholder="Ingresa tu Apellido" required>
         </div>
 
         <div class="user-form__field">
-            <label for="username" class="user-form__label">Username:</label>
-            <input type="text" id="username" name="username" class="user-form__input" required>
+            <label for="username" class="user-form__label">Nombre de usuario:</label>
+            <input type="text" id="username" name="username" class="user-form__input" placeholder="Ingresa tu nombre de usuario" required>
         </div>
 
         <div class="user-form__field">
-            <label for="description" class="user-form__label">Description:</label>
-            <textarea id="description" name="description" rows="3" class="user-form__textarea"></textarea>
+            <label for="description" class="user-form__label">Descripción:</label>
+            <textarea id="description" name="description" rows="3" class="user-form__textarea" placeholder="Ingresa una descripción"></textarea>
         </div>
 
         <div class="user-form__field">
-            <label for="genre" class="user-form__label">Genre:</label>
+            <label for="genre" class="user-form__label">Géneros de música:</label>
             <select id="genre" name="genre" class="user-form__select" required>
                 <option value="">--Select--</option>
                 <option value="male">Male</option>
