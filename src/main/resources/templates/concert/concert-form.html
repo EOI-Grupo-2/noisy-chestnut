@@ -6,6 +6,9 @@
     <link rel="stylesheet" th:href="@{/css/concert-form.css}" />
     <link href="https://fonts.googleapis.com/css2?family=Roboto+Condensed&family=Roboto:wght@300;400;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@48,400,0,0" />
+    <link rel="stylesheet" href="https://cdn.rawgit.com/harvesthq/chosen/gh-pages/chosen.min.css" />
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <script src="https://cdn.rawgit.com/harvesthq/chosen/gh-pages/chosen.jquery.min.js"></script>
 </head>
 <body>
 
@@ -15,14 +18,12 @@
     </a>
 
     <div class="concert-form-card">
-        <!-- Encabezado -->
         <div class="concert-form-card__header">
             <h4>Crear/Editar Concierto</h4>
         </div>
 
-        <!-- Formulario -->
         <div class="concert-form-card__body">
-            <form action="/concert/save" method="post" enctype="multipart/form-data">
+            <form action="/concert/save" method="post" enctype="multipart/form-data" id="concertForm">
                 <div class="concert-form-card__section">
                     <h5 class="concert-form-card__section-title">Información Básica</h5>
 
@@ -61,18 +62,13 @@
                     <h5 class="concert-form-card__section-title">Ubicación</h5>
 
                     <div class="concert-form-card__field">
-                        <label for="venue">Lugar</label>
-                        <input type="text" id="venue" name="venue" class="concert-form-card__input" placeholder="Nombre del recinto" required>
-                    </div>
-
-                    <div class="concert-form-card__field">
-                        <label for="address">Dirección</label>
-                        <input type="text" id="address" name="address" class="concert-form-card__input" placeholder="Dirección completa" required>
-                    </div>
-
-                    <div class="concert-form-card__field">
-                        <label for="city">Ciudad</label>
-                        <input type="text" id="city" name="city" class="concert-form-card__input" placeholder="Ciudad" required>
+                        <label for="placeId">Lugar</label>
+                        <select id="placeId" name="placeId" class="concert-form-card__input" required>
+                            <option value="">Selecciona un lugar</option>
+                            <option value="1">Wizink Center - Madrid</option>
+                            <option value="2">Palau Sant Jordi - Barcelona</option>
+                            <option value="3">La Riviera - Madrid</option>
+                        </select>
                     </div>
                 </div>
 
@@ -85,23 +81,25 @@
                     </div>
 
                     <div class="concert-form-card__field">
-                        <label for="artist">Artista</label>
-                        <select id="artist" name="artistId" class="concert-form-card__input" required>
-                            <option value="">Selecciona un artista</option>
-                            <option value="1">Artista 1</option>
-                            <option value="2">Artista 2</option>
-                            <option value="3">Artista 3</option>
+                        <label for="artistIds">Artistas</label>
+                        <select data-placeholder="Selecciona artistas..." multiple class="chosen-select" name="artistIds" id="artistIds">
+                            <option value=""></option>
+                            <option value="1">Rosalía</option>
+                            <option value="2">C. Tangana</option>
+                            <option value="3">Quevedo</option>
+                            <option value="4">Bad Bunny</option>
+                            <option value="5">J Balvin</option>
+                            <option value="6">Karol G</option>
                         </select>
                     </div>
+                </div>
+
+                <div class="concert-form-card__section">
+                    <h5 class="concert-form-card__section-title">Puntos de Venta</h5>
 
                     <div class="concert-form-card__field">
-                        <label for="price">Precio de Entrada (€)</label>
-                        <input type="number" id="price" name="price" class="concert-form-card__input" placeholder="0.00" min="0" step="0.01" required>
-                    </div>
-
-                    <div class="concert-form-card__field">
-                        <label for="capacity">Capacidad</label>
-                        <input type="number" id="capacity" name="capacity" class="concert-form-card__input" placeholder="Número de asistentes" min="1" required>
+                        <label for="ticketUrl">URL de venta de entradas</label>
+                        <input type="url" id="ticketUrl" name="ticketUrl" class="concert-form-card__input" placeholder="https://ejemplo.com/entradas">
                     </div>
                 </div>
 
@@ -122,6 +120,25 @@
         </div>
     </div>
 </div>
+
+<script>
+    $(document).ready(function(){
+        $(".chosen-select").chosen({
+            no_results_text: "No se encontraron resultados para: ",
+            width: "100%",
+            allow_single_deselect: true
+        });
+
+        $("#concertForm").on("submit", function(e) {
+            if ($("#artistIds").val() === null || $("#artistIds").val().length === 0) {
+                alert("Por favor, selecciona al menos un artista.");
+                e.preventDefault();
+                return false;
+            }
+            return true;
+        });
+    });
+</script>
 
 </body>
 </html>
