@@ -1,14 +1,14 @@
-function myFunction() {
-    var input = document.getElementById("userSearch");
-    var filter = input.value.toUpperCase();
-    var ul = document.getElementById("list");
-    var li = ul.getElementsByTagName("li");
-    for (var i = 0; i < li.length; i++) {
-        var txtValue = li[i].textContent || li[i].innerText;
-        if (txtValue.toUpperCase().indexOf(filter) > -1) {
-            li[i].style.display = "";
+function searchInput(listId, inputId) {
+    const input = document.getElementById(inputId);
+    const search = input.value.toLowerCase();
+    const ul = document.getElementById(listId);
+    const li = ul.getElementsByTagName("li");
+    for (let i = 0; i < li.length; i++) {
+        let item = li[i];
+        if (item.id.toLowerCase().includes(search)) {
+            item.style.display = "";
         } else {
-            li[i].style.display = "none";
+            item.style.display = "none";
         }
     }
 }

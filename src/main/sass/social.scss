@@ -74,12 +74,15 @@
     gap: 1.5rem;
     flex-direction: column;
     padding: 2rem;
-    max-height: 70%;
     overflow-y: hidden;
     border-bottom-right-radius: 5px;
     border-bottom-left-radius: 5px;
+    height: 100%;
   }
+
   &__search{
+    height: 25rem;
+    overflow-y: scroll;
     li{
       list-style-type: none;
     }
