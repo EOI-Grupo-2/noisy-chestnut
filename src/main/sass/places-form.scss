@@ -32,22 +32,22 @@
 
   &__input{
     padding: 0.5rem 1rem;
-    border: none;
     height: 2.5rem;
     border-radius: 1.25rem;
+    box-sizing: border-box;
+    border: 3px solid transparent;
     background-color: rgba($tertiary-color, 0.8);
     color: $font-color;
 
     &:focus, &:focus-visible{
+      border: 3px solid $hover-color;
       outline: none;
     }
   }
 
   &__textarea{
-    padding: 0.8rem 1rem;
-    border: none;
+    padding: 0.6rem 1rem;
     min-height: 2.5rem;
-
     height: 2.5rem;
     border-radius: 1.25rem;
     background-color: rgba($tertiary-color, 0.8);
@@ -55,8 +55,11 @@
     max-width: 100%;
     min-width: 100%;
     font-size: small;
+    box-sizing: border-box;
+    border: 3px solid transparent;
 
     &:focus, &:focus-visible{
+      border: 3px solid $hover-color;
       outline: none;
     }
   }
