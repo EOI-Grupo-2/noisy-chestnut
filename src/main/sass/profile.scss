@@ -15,13 +15,21 @@
   background-color: $primary-color;
   color: $font-color;
   border: none;
-
+  margin-top: 1rem;
   padding: 0.5rem 1rem;
   border-radius: 1rem;
   cursor: pointer;
 
   &:hover {
     background-color: $primary-color;
+  }
+
+  a {
+    color: inherit;
+    text-decoration: none;
+    display: inline-block;
+    width: 100%;
+    height: 100%;
   }
 }
 
