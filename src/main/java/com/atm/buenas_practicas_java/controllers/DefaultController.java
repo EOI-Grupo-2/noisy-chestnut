@@ -135,6 +135,12 @@ public class DefaultController {
         return "/publication/new-publication";
     }
 
+    @GetMapping({"", "/edit-publication"})
+    public String getEditPublicationPage(){
+        return "/publication/edit-publication";
+    }
+
+
     @GetMapping({"", "/chat"})
     public String getSocialPage(){
         return "/social/social";
