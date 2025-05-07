@@ -1,0 +1,55 @@
+@import "variables";
+
+
+.post-form {
+  max-width: 35%;
+  padding: 2rem;
+  background-color: $secondary-color;
+  border-radius: 10px;
+  margin-left: 32.5%;
+  margin-top: 10%;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+  color: $font-color;
+
+
+
+  &__group {
+    margin-bottom: 1.5rem;
+
+    &--center {
+      text-align: center;
+    }
+  }
+
+  &__label {
+    display: block;
+    margin-bottom: 0.5rem;
+    font-weight: bold;
+  }
+
+  &__input,
+  &__textarea {
+    width: 100%;
+    padding: 0.8rem;
+    border: 1px solid $tertiary-color;
+    border-radius: 5px;
+    background-color: $aux-color;
+    color: $secondary-color;
+    font-size: 1rem;
+  }
+
+  &__button {
+    background-color: $primary-color;
+    color: $font-color;
+    padding: 0.75rem 2rem;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+
+    &:hover {
+      background-color: $hover-color;
+    }
+  }
+}
+

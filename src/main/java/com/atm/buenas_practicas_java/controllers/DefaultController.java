@@ -130,6 +130,11 @@ public class DefaultController {
         return "/user/login";
     }
 
+    @GetMapping({"", "/new-publication"})
+    public String getNewPublicationPage(){
+        return "/publication/new-publication";
+    }
+
     @GetMapping({"", "/chat"})
     public String getSocialPage(){
         return "/social/social";
@@ -147,7 +152,7 @@ public class DefaultController {
 
     @GetMapping({"", "/artist/profile"})
     public String getArtistProfile(){
-        return "/artist/profile";
+        return "/arti st/profile";
     }
   
     @GetMapping({"", "/chat/id"})
@@ -172,7 +177,7 @@ public class DefaultController {
     }
 
     @GetMapping({"", "/publication"})
-    public String getPublicationPage(){return "/user/publication";}
+    public String getPublicationPage(){return "/publication/publication";}
   
     @GetMapping("/concert")
     public String showConcertsPage() {
