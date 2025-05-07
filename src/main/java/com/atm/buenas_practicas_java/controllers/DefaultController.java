@@ -171,9 +171,9 @@ public class DefaultController {
 
     }
 
-    @GetMapping({"", "/places"})
+    @GetMapping({"", "/places/id"})
     public String getPlacesProfile(){
-        return "/places/places";
+        return "/places/profile";
     }
 
     @GetMapping({"", "/publication"})
