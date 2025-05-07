@@ -168,7 +168,6 @@ public class DefaultController {
     @GetMapping({"", "/search/concerts"})
     public String getSearchConcertsPage(){
         return "/search/concerts";
-
     }
 
     @GetMapping({"", "/places/id"})

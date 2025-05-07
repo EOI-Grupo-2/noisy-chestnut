@@ -150,6 +150,10 @@
   }
 }
 
+.material-symbols-outlined {
+  vertical-align: middle;
+}
+
 .music-card{
   color: $font-color;
   background-color: $secondary-color;
@@ -306,6 +310,7 @@
     max-width: 80%;
     transition: opacity .3s ease-out;
     inset: auto auto 40px 15px;
+    margin-bottom: 1rem;
   }
 
   &__link {
