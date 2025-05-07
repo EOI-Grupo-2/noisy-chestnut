@@ -171,6 +171,16 @@ public class DefaultController {
 
     }
 
+    @GetMapping({"", "/places/new"})
+    public String createPlacePage(){
+        return "/places/form";
+    }
+
+    @GetMapping({"", "/places/edit"})
+    public String editPlacePage(){
+        return "/places/form";
+    }
+
     @GetMapping({"", "/publication"})
     public String getPublicationPage(){return "/user/publication";}
   
