@@ -22,8 +22,11 @@
         <button class="tabs-menu__item tabs-menu__item--concerts" id="concertsTabItem" onclick="selectTab('concertsTab','search-content', 'tabs-menu__item', 'concertsTabItem')">
             Conciertos
         </button>
-        <button class="tabs-menu__item" id="artistsTabItem" onclick="selectTab('artistsTab','search-content', 'tabs-menu__item', 'artistsTabItem')">
+        <button class="tabs-menu__item tabs-menu__item--artists" id="artistsTabItem" onclick="selectTab('artistsTab','search-content', 'tabs-menu__item', 'artistsTabItem')">
             Artistas
+        </button>
+        <button class="tabs-menu__item" id="placesTabItem" onclick="selectTab('placesTab','search-content', 'tabs-menu__item', 'placesTabItem')">
+            Lugares
         </button>
     </div>
     <div class="search-content search-content--concerts" id="concertsTab">
@@ -177,6 +180,50 @@
             <button class="user-card__button">
                 Seguir
             </button>
+        </div>
+    </div>
+    <div class="search-content search-content--places" id="placesTab">
+        <div class="place-card">
+            <img class="place-card__image" src="https://www.atleticodemadrid.com/system/file3s/78316/large/BV81gnkPa-__37A2770.jpg?1654122441" alt="placeImage">
+            <div class="place-card__content">
+                <h2 class="place-card__title">
+                    Sala 1
+                </h2>
+                <a href="/place/detail" class="place-card__link">
+                    Conocer más
+                    <span class="material-symbols-outlined">
+                    arrow_right_alt
+                </span>
+                </a>
+            </div>
+        </div>
+        <div class="place-card">
+            <img class="place-card__image" src="https://www.atleticodemadrid.com/system/file3s/78316/large/BV81gnkPa-__37A2770.jpg?1654122441" alt="placeImage">
+            <div class="place-card__content">
+                <h2 class="place-card__title">
+                    Sala 2
+                </h2>
+                <a href="/place/detail" class="place-card__link">
+                    Conocer más
+                    <span class="material-symbols-outlined">
+                    arrow_right_alt
+                </span>
+                </a>
+            </div>
+        </div>
+        <div class="place-card">
+            <div class="place-card__content">
+                <img class="place-card__image" src="https://www.atleticodemadrid.com/system/file3s/78316/large/BV81gnkPa-__37A2770.jpg?1654122441" alt="placeImage">
+                <h2 class="place-card__title">
+                    Sala 3
+                </h2>
+                <a href="/place/detail" class="place-card__link">
+                    Conocer más
+                    <span class="material-symbols-outlined">
+                    arrow_right_alt
+                </span>
+                </a>
+            </div>
         </div>
     </div>
 </div>
