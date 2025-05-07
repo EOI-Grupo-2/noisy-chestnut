@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="es" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" layout:decorate="~{layouts/main_layout.html}"
+      xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Conciertos</title>
+    <link rel="stylesheet" th:href="@{/css/places.css}" />
+    <link href="https://fonts.googleapis.com/css2?family=Roboto+Condensed&family=Roboto:wght@300&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@48,400,0,0" />
+</head>
+<body>
+<div layout:fragment="content" class="content">
+    <div class="place-card">
+        <img class="place-card__image" src="https://www.google.com/url?sa=i&url=http%3A%2F%2Fwww.andalucia360travel.com%2Fdescubrir%2Fcatedral-de-sevilla%2F&psig=AOvVaw3VwN5Y2_jEX2lttUAY4PWZ&ust=1746706417485000&source=images&cd=vfe&opi=89978449&ved=0CBQQjRxqFwoTCJizoNKqkY0DFQAAAAAdAAAAABAE" alt="placeImage">
+        <div class="place-card__content">
+            <h2 class="place-card__title">
+                Sevilla
+            </h2>
+            <a href="/place/detail" class="place-card__link">
+                Conocer más
+                <span class="material-symbols-outlined">
+                    arrow_right_alt
+                </span>
+            </a>
+        </div>
+    </div>
+    <div class="place-card">
+        <img class="place-card__image" src="https://www.google.com/imgres?q=madrid&imgurl=https%3A%2F%2Fmedia.traveler.es%2Fphotos%2F6712429132de56225d8bb7ff%2F2%3A3%2Fw_888%2Ch_1332%2Cc_limit%2FGettyImages-1752719931.jpg&imgrefurl=https%3A%2F%2Fwww.traveler.es%2Farticulos%2Fque-ver-en-madrid&docid=WShfZgXoyybJgM&tbnid=tX4Fdb4QndWSzM&vet=12ahUKEwitssqfq5GNAxWeVqQEHW0bBMIQM3oECDYQAA..i&w=888&h=1332&hcb=2&ved=2ahUKEwitssqfq5GNAxWeVqQEHW0bBMIQM3oECDYQAA" alt="placeImage">
+        <div class="place-card__content">
+            <h2 class="place-card__title">
+                Madrid
+            </h2>
+            <a href="/place/detail" class="place-card__link">
+                Conocer más
+                <span class="material-symbols-outlined">
+                    arrow_right_alt
+                </span>
+            </a>
+        </div>
+    </div>
+    <div class="place-card">
+        <img class="place-card__image" src="https://www.google.com/url?sa=i&url=https%3A%2F%2Fblog.renfe.com%2F10-lugares-imprescindibles-que-ver-en-barcelona%2F&psig=AOvVaw3Z-GngQllhPUXCXmE7AGyF&ust=1746706772987000&source=images&cd=vfe&opi=89978449&ved=0CBQQjRxqFwoTCNCl2PirkY0DFQAAAAAdAAAAABAE" alt="placeImage">
+        <div class="place-card__content">
+            <h2 class="place-card__title">
+                Barcelona
+            </h2>
+            <a href="/place/detail" class="place-card__link">
+                Conocer más
+                <span class="material-symbols-outlined">
+                    arrow_right_alt
+                </span>
+            </a>
+        </div>
+    </div>
+</div>
+</body>
+</html>
