@@ -99,7 +99,7 @@
       display: none;
     }
     li{
-      color:white;
+      color:$font-color;
       list-style-type: none;
       width: 100%;
       background-color: $secondary-color;
@@ -110,7 +110,7 @@
       padding: 0.25rem 0.5rem;
       border-bottom: 0.1rem solid $tertiary-color;
         a{
-          color: white;
+          color: $font-color;
 
       }
 
