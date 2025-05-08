@@ -3,8 +3,8 @@
       xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
-    <link rel="stylesheet" href="pruebaweb.css">
     <link rel="stylesheet" th:href="@{/css/profile.css}" />
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@48,400,0,0" />
     <title>Perfil</title>
 </head>
 <body>
@@ -158,8 +158,137 @@
                         <div class="concert-card__item">Concierto de Carol G</div>
                     </div>
                     <div class="concert-card__footer">
-                        //TO-DO: Hacer que este boton abra un modal con la lista de conciertos
-                        <a class="concert-card__link">Ver mas</a>
+                        <a class="concerts-card__link" href="#" onclick="openModal('concertsModal')">Ver mas</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- Modal -->
+        <div class="modal" id="concertsModal">
+            <div class="modal__content">
+                <div class="modal__header">
+                    <h2 class="modal__title">Próximos conciertos</h2>
+                    <span class="modal__close" onclick="openModal('concertsModal')">&times;</span>
+                </div>
+                <div class="modal__body">
+                    <div class="concert-card">
+                        <img class="concert-card__image" src="https://images.unsplash.com/photo-1656618020911-1c7a937175fd?crop=entropy&cs=tinysrgb&fm=jpg&ixid=MnwzMjM4NDZ8MHwxfHJhbmRvbXx8fHx8fHx8fDE2NTc1MzQyNTE&ixlib=rb-1.2.1&q=80" alt="concertImage">
+                        <div class="concert-card__content">
+                            <h2 class="concert-card__title">
+                                Concierto de Lia Kali
+                            </h2>
+                            <p class="concert-card__description">
+                                08.04.2025
+                            </p>
+                            <a href="/concert/detail" class="concert-card__link">
+                                Detalles
+                                <span class="material-symbols-outlined">
+                                arrow_right_alt
+                                </span>
+                            </a>
+                        </div>
+                    </div>
+                    <div class="concert-card">
+                        <img class="concert-card__image" src="https://images.unsplash.com/photo-1656618020911-1c7a937175fd?crop=entropy&cs=tinysrgb&fm=jpg&ixid=MnwzMjM4NDZ8MHwxfHJhbmRvbXx8fHx8fHx8fDE2NTc1MzQyNTE&ixlib=rb-1.2.1&q=80" alt="concertImage">
+                        <div class="concert-card__content">
+                            <h2 class="concert-card__title">
+                                Concierto de Lia Kali
+                            </h2>
+                            <p class="concert-card__description">
+                                08.04.2025
+                            </p>
+                            <a href="/concert/detail" class="concert-card__link">
+                                Detalles
+                                <span class="material-symbols-outlined">
+                                arrow_right_alt
+                                </span>
+                            </a>
+                        </div>
+                    </div>
+                    <div class="concert-card">
+                        <img class="concert-card__image" src="https://images.unsplash.com/photo-1656618020911-1c7a937175fd?crop=entropy&cs=tinysrgb&fm=jpg&ixid=MnwzMjM4NDZ8MHwxfHJhbmRvbXx8fHx8fHx8fDE2NTc1MzQyNTE&ixlib=rb-1.2.1&q=80" alt="concertImage">
+                        <div class="concert-card__content">
+                            <h2 class="concert-card__title">
+                                Concierto de Lia Kali
+                            </h2>
+                            <p class="concert-card__description">
+                                08.04.2025
+                            </p>
+                            <a href="/concert/detail" class="concert-card__link">
+                                Detalles
+                                <span class="material-symbols-outlined">
+                                arrow_right_alt
+                                </span>
+                            </a>
+                        </div>
+                    </div>
+                    <div class="concert-card">
+                        <img class="concert-card__image" src="https://images.unsplash.com/photo-1656618020911-1c7a937175fd?crop=entropy&cs=tinysrgb&fm=jpg&ixid=MnwzMjM4NDZ8MHwxfHJhbmRvbXx8fHx8fHx8fDE2NTc1MzQyNTE&ixlib=rb-1.2.1&q=80" alt="concertImage">
+                        <div class="concert-card__content">
+                            <h2 class="concert-card__title">
+                                Concierto de Lia Kali
+                            </h2>
+                            <p class="concert-card__description">
+                                08.04.2025
+                            </p>
+                            <a href="/concert/detail" class="concert-card__link">
+                                Detalles
+                                <span class="material-symbols-outlined">
+                                arrow_right_alt
+                                </span>
+                            </a>
+                        </div>
+                    </div>
+                    <div class="concert-card">
+                        <img class="concert-card__image" src="https://images.unsplash.com/photo-1656618020911-1c7a937175fd?crop=entropy&cs=tinysrgb&fm=jpg&ixid=MnwzMjM4NDZ8MHwxfHJhbmRvbXx8fHx8fHx8fDE2NTc1MzQyNTE&ixlib=rb-1.2.1&q=80" alt="concertImage">
+                        <div class="concert-card__content">
+                            <h2 class="concert-card__title">
+                                Concierto de Lia Kali
+                            </h2>
+                            <p class="concert-card__description">
+                                08.04.2025
+                            </p>
+                            <a href="/concert/detail" class="concert-card__link">
+                                Detalles
+                                <span class="material-symbols-outlined">
+                                arrow_right_alt
+                                </span>
+                            </a>
+                        </div>
+                    </div>
+                    <div class="concert-card">
+                        <img class="concert-card__image" src="https://images.unsplash.com/photo-1656618020911-1c7a937175fd?crop=entropy&cs=tinysrgb&fm=jpg&ixid=MnwzMjM4NDZ8MHwxfHJhbmRvbXx8fHx8fHx8fDE2NTc1MzQyNTE&ixlib=rb-1.2.1&q=80" alt="concertImage">
+                        <div class="concert-card__content">
+                            <h2 class="concert-card__title">
+                                Concierto de Lia Kali
+                            </h2>
+                            <p class="concert-card__description">
+                                08.04.2025
+                            </p>
+                            <a href="/concert/detail" class="concert-card__link">
+                                Detalles
+                                <span class="material-symbols-outlined">
+                                arrow_right_alt
+                                </span>
+                            </a>
+                        </div>
+                    </div>
+                    <div class="concert-card">
+                        <img class="concert-card__image" src="https://images.unsplash.com/photo-1656618020911-1c7a937175fd?crop=entropy&cs=tinysrgb&fm=jpg&ixid=MnwzMjM4NDZ8MHwxfHJhbmRvbXx8fHx8fHx8fDE2NTc1MzQyNTE&ixlib=rb-1.2.1&q=80" alt="concertImage">
+                        <div class="concert-card__content">
+                            <h2 class="concert-card__title">
+                                Concierto de Lia Kali
+                            </h2>
+                            <p class="concert-card__description">
+                                08.04.2025
+                            </p>
+                            <a href="/concert/detail" class="concert-card__link">
+                                Detalles
+                                <span class="material-symbols-outlined">
+                                arrow_right_alt
+                                </span>
+                            </a>
+                        </div>
                     </div>
                 </div>
             </div>

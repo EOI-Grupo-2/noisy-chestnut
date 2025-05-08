@@ -164,7 +164,17 @@ public class DefaultController {
     public String createPlacePage(){
         return "/places/form";
     }
+  
+    @GetMapping({"", "/search/concerts"})
+    public String getSearchConcertsPage(){
+        return "/search/concerts";
+    }
 
+    @GetMapping({"", "/places/id"})
+    public String getPlacesProfile(){
+        return "/places/profile";
+    }
+  
     @GetMapping({"", "/places/edit"})
     public String editPlacePage(){
         return "/places/form";
