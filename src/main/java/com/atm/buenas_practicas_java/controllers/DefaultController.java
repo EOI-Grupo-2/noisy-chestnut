@@ -155,16 +155,16 @@ public class DefaultController {
         return "/social/chat";
     }
 
-    @GetMapping({"", "/search/artists"})
-    public String getSearchArtistPage(){
-        return "/search/artists";
+    @GetMapping({"", "/search"})
+    public String getSearch(){
+        return "/search/search";
     }
 
-    @GetMapping({"", "/search/users"})
-    public String getSearchUsersPage(){
-        return "/search/users";
+    @GetMapping({"", "/places/new"})
+    public String createPlacePage(){
+        return "/places/form";
     }
-
+  
     @GetMapping({"", "/search/concerts"})
     public String getSearchConcertsPage(){
         return "/search/concerts";
@@ -173,6 +173,11 @@ public class DefaultController {
     @GetMapping({"", "/places/id"})
     public String getPlacesProfile(){
         return "/places/profile";
+    }
+  
+    @GetMapping({"", "/places/edit"})
+    public String editPlacePage(){
+        return "/places/form";
     }
 
     @GetMapping({"", "/publication"})
