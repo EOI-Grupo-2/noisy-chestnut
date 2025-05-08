@@ -26,6 +26,40 @@
 
           </div>
           <div class="chats-tab chats-tab--users" id="usersTab">
+              <!--              Botón para abrir chat-->
+              <button class="buttons-container__button" id="createChatButton" data-content="chats-tab" onclick="openModal('chatModal')">
+                  <i class="fas fa-plus"></i> Crear nuevo chat
+              </button>
+<!--              Modal del chat-->
+
+              <div class="modal" id="chatModal">
+                  <div class="modal__content">
+                      <div class="modal__header">
+                          <h2 class="modal__title">Crear nuevo chat</h2>
+                          <i class="fa-solid fa-xmark fa-lg" style="color: #ffffff;" onclick="openModal('chatModal')"></i>
+                      </div>
+                      <div class="modal__body">
+                              <div class="modal__search">
+                                  <label for="userSearch" class="modal__label">Añadir personas:</label>
+                                  <input type="text" id="userChatSearch" class="modal__input" placeholder="Buscar personas..."  onkeyup="searchInput('chatList', 'userChatSearch')"/>
+                                  <ul id="chatList">
+                                      <li id="juan"><a href="#">Juan</a></li>
+                                      <li id="julio"><a href="#">Julio</a></li>
+                                      <li id="julia"><a href="#">Julia</a></li>
+                                      <li id="manuel"><a href="#">Manuel</a></li>
+                                      <li id="maríaa"><a href="#">María</a></li>
+                                      <li id="mario"><a href="#">Mario</a></li>
+                                      <li id="marta"><a href="#">Marta</a></li>
+                                  </ul>
+                                </div>
+                          <div class="confirmChatButton">
+                              <button class="buttons-container__button" id="confirmCreateChat">Crear nuevo chat</button>
+                          </div>
+                      </div>
+                  </div>
+              </div>
+
+
               <div class="chats-tab__item">
                   <img class="chats-tab__image" src="https://as1.ftcdn.net/v2/jpg/03/46/83/96/1000_F_346839683_6nAPzbhpSkIpb8pmAwufkC7c5eD7wYws.jpg" alt="Chat Image"/>
                   <a class="chats-tab__link" href="/chat/id">
@@ -171,9 +205,10 @@
                   </a>
               </div>
           </div>
+
           <div class="chats-tab chats-tab--groups" id="groupsTab">
               <!-- Botón para crear grupo -->
-                  <button class="buttons-container__button" id="createGroupButton"  onclick="openModal('groupModal')">
+                  <button class="buttons-container__button" id="createGroupButton" data-content="groupsTab" onclick="openModal('groupModal')">
                       <i class="fas fa-plus"></i> Crear grupo
                   </button>
 
@@ -358,5 +393,6 @@
       <script>
 
       </script>
+</div>
 </body>
 </html>

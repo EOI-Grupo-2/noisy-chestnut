@@ -16,9 +16,9 @@
   justify-content: center;
   align-items: center;
   margin-bottom: 1.5rem;
+  gap: 1rem;
 
   &__button {
-    margin-right: 1rem;
     background-color: $primary-color;
     color: $font-color;
     border: none;
@@ -45,11 +45,14 @@
   z-index: 100;
   transition: visibility 0s, opacity 0.3s ease-in;
 
+
+
   &__content {
     display: flex;
     flex-direction: column;
     background-color: $tertiary-color;
     border-radius: 5px;
+    height: fit-content;
   }
 
   &__header {
@@ -65,13 +68,22 @@
     }
   }
   &__input{
-    border-radius: 5px;
+    padding: 8px 10px;
+    border: none;
+    border-radius: 6px;
+    background-color: #808080;
+    font-size: 1rem;
+    transition: border 0.3s ease, box-shadow 0.3s ease;
+    margin-bottom: 1.5rem;
+
+    &::placeholder {
+      color: #FFFAF0;
+    }
   }
   &__body{
     background-color: rgba($secondary-color, 0.8);
     display: flex;
     flex-wrap: wrap;
-    gap: 1.5rem;
     flex-direction: column;
     padding: 2rem;
     overflow-y: hidden;
@@ -83,8 +95,25 @@
   &__search{
     height: 25rem;
     overflow-y: scroll;
+    &::-webkit-scrollbar {
+      display: none;
+    }
     li{
+      color:white;
       list-style-type: none;
+      width: 100%;
+      background-color: $secondary-color;
+      display: flex;
+      flex-direction: row;
+      gap: 0.5rem;
+      align-items: center;
+      padding: 0.25rem 0.5rem;
+      border-bottom: 0.1rem solid $tertiary-color;
+        a{
+          color: white;
+
+      }
+
     }
   }
 }
