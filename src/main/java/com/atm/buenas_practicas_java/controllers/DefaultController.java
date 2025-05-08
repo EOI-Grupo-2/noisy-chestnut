@@ -192,4 +192,12 @@ public class DefaultController {
     public String showConcertDetailPage() {
         return "concert/concert-detail";
     }
+
+    @GetMapping("/places")
+    public String showPlacesPage() {
+        return "/places/places";
+    }
 }
+
+
+
