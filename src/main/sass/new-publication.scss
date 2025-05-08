@@ -28,14 +28,39 @@
   }
 
   &__input,
+  &__textarea,
+  &__select{
+    padding: 0.5rem 1rem;
+    border: 3px solid transparent;
+    height: 2.5rem;
+    border-radius: 1.25rem;
+    background-color: rgba($tertiary-color, 0.8);
+    color: $font-color;
+    max-width: 100%;
+    min-width: 100%;
+
+    &::placeholder {
+      color: $font-color;
+    }
+
+    &:focus {
+      outline: none;
+      border: 1px solid $tertiary-color;
+      box-shadow: 0 0 0 3px $hover-color;
+    }
+  }
   &__textarea {
-    width: 100%;
-    padding: 0.8rem;
-    border: 1px solid $tertiary-color;
-    border-radius: 5px;
-    background-color: $aux-color;
-    color: $secondary-color;
-    font-size: 1rem;
+    padding: 0.6rem 1rem;
+    min-height: 2.5rem;
+    height: 2.5rem;
+    border-radius: 1.25rem;
+    background-color: rgba($tertiary-color, 0.8);
+    color: $font-color;
+    max-width: 100%;
+    min-width: 100%;
+    font-size: small;
+    box-sizing: border-box;
+    border: 3px solid transparent;
   }
 
   &__button {

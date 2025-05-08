@@ -17,21 +17,21 @@
     <form action="/submit-post" method="POST" class="post-form">
         <div class="post-form__group">
             <label for="title" class="post-form__label">Título:</label>
-            <input type="text" id="title" name="title" class="post-form__input" required>
+            <input type="text" id="title" name="title" class="post-form__input"  placeholder="Ingresa un título" required>
         </div>
 
         <div class="post-form__group">
             <label for="description" class="post-form__label">Descripción:</label>
-            <textarea id="description" name="description" class="post-form__textarea" rows="4" required></textarea>
+            <textarea id="description" name="description" class="post-form__textarea" rows="4" placeholder="Ingresa una descripción" required></textarea>
         </div>
 
         <div class="post-form__group">
             <label for="photoUrl" class="post-form__label">Foto URL:</label>
-            <input type="url" id="photoUrl" name="photoUrl" class="post-form__input" required>
+            <input type="url" id="photoUrl" name="photoUrl" class="post-form__input" placeholder="Ingresa un enlace para la foto" required>
         </div>
 
         <div class="post-form__group post-form__group--center">
-            <button type="submit" class="post-form__button">Crear Publicación</button>
+            <button type="submit" class="post-form__button">Guardar</button>
         </div>
     </form>
 </div>

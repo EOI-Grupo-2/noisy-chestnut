@@ -135,10 +135,6 @@ public class DefaultController {
         return "/publication/new-publication";
     }
 
-    @GetMapping({"", "/edit-publication"})
-    public String getEditPublicationPage(){
-        return "/publication/edit-publication";
-    }
 
 
     @GetMapping({"", "/chat"})
@@ -158,7 +154,7 @@ public class DefaultController {
 
     @GetMapping({"", "/artist/profile"})
     public String getArtistProfile(){
-        return "/arti st/profile";
+        return "/artist/profile";
     }
   
     @GetMapping({"", "/chat/id"})
