@@ -1,7 +1,17 @@
+@import "variables";
+
 .content{
   display: flex;
   flex-direction: column;
   align-items: center;
   padding-top: 2rem;
   gap: 2rem;
+}
+
+@media (max-width: 600px) {
+  body {
+    background-size: cover;       /* Se asegura que la imagen siempre cubra el fondo */
+    background-position: center;  /* Centra la imagen */
+    background-attachment: scroll; /* En móviles se hace scroll junto con el contenido */
+  }
 }
