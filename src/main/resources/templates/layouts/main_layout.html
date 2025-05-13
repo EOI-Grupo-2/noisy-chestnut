@@ -9,11 +9,12 @@
     <script th:src="@{/js/tabs.js}"></script>
     <script th:src="@{/js/inputNumber.js}"></script>
     <script th:src="@{/js/menuListener.js}"></script>
+    <script th:src="@{/js/openMenu.js}"></script>
 </head>
 <body>
 <div class="page-layout">
     <div class="menu" id="menuModal">
-        <button class="menu__close-button" onclick="openModal('menuModal')">
+        <button class="menu__close-button" onclick="closeMenu('menuModal')">
             <i class=" fa-solid fa-xmark fa-lg" style="color: #ffffff;"></i>
         </button>
         <h2 class="menu__title">Noisy-chestnut</h2>
@@ -31,7 +32,7 @@
 
     </div>
 
-    <button class="menu__button" onclick="openModal('menuModal')">
+    <button class="menu__button" onclick="openMenu('menuModal')">
         <i class="fa fa-bars fa-2xl" style="color: #ffffff"></i>
     </button>
 

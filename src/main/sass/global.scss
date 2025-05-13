@@ -54,6 +54,7 @@ body {
   display: flex;
   flex-direction: column;
   justify-content: space-between;
+  transition: transform 0.75s ease;
 
   &__title{
     color: white;
@@ -370,11 +371,10 @@ body {
   }
 
   .menu{
-    visibility: hidden;
-    opacity: 0;
     position: absolute;
     top: 0;
     left: 0;
+    transform: translateX(-15rem);
 
     &__button{
       display: block;
