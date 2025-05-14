@@ -456,3 +456,67 @@
     }
   }
 }
+
+@media only screen and (max-width: $tablet-breakpoint) {
+
+  .content{
+    padding-right:0;
+  }
+  .profile-header{
+    margin-right: 1rem;
+    margin-left: 1rem;
+  }
+  .profile-content{
+    gap:0;
+    padding-right: 1rem;
+
+    &__more{
+      width: 100%;
+    }
+  }
+  .concerts-card{
+    &__header{
+      padding: 0.8rem;
+    }
+  }
+
+    .music-card {
+      &__header {
+        padding: 0.8rem;
+      }
+
+      &__body {
+        padding: 0.8rem;
+      }
+    }
+  }
+
+  @media only screen and (max-width: $mobile-breakpoint) {
+    .content{
+      padding-right:0;
+      padding-top: 0;
+    }
+
+    .profile-header {
+      flex-direction: column;
+      align-items: center;
+      text-align: center;
+
+      &__infoitems{
+        font-size: smaller;
+      }
+    }
+    .profile-content{
+
+      &__principal{
+
+        &--pubs{
+
+        }
+      }
+
+      &__more{
+        display:none
+      }
+    }
+  }
