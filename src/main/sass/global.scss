@@ -337,14 +337,3 @@ body {
     font-weight: 400;
   }
 }
-
-@media (min-width: 600px) {
-  body {
-    background-size: cover;
-    background-position: center;
-    background-attachment: scroll;
-  }
-  .content{
-    justify-content: center;
-  }
-}
