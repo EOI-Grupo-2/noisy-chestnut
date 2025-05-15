@@ -1,5 +1,7 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" layout:decorate="~{layouts/main_layout.html}"
+<html lang="en"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{layouts/main_layout.html}"
       xmlns:th="http://www.thymeleaf.org">
 <head>
     <link rel="stylesheet" th:href="@{/css/publication.css}" />
@@ -7,41 +9,49 @@
 <body>
 <div class="content" layout:fragment="content">
 
-    <!-- Publicación -->
-    <div class="post">
-        <h5 class="post__author">Eladio Carrión <span class="post__handle">@eladiocarrion</span></h5>
-        <p class="post__text">🔥¡Gracias a todos los que hicieron posible esta noche! Sold out en el Choli, esto es por ustedes. #3MEN2KBRN 🐐💯</p>
-        <img class="post__image" src="https://i.pinimg.com/736x/e8/eb/bb/e8ebbb4bf9e59858e9dd2440835c7484.jpg" alt="Eladio Carrión en concierto">
+    <div class="publication-layout">
+        <!-- Publicación -->
+        <div class="post">
+            <h5 class="post__author">Eladio Carrión <span class="post__handle">@eladiocarrion</span></h5>
+            <p class="post__text">
+                🔥¡Gracias a todos los que hicieron posible esta noche! Sold out en el Choli, esto es por ustedes. #3MEN2KBRN 🐐💯
+            </p>
+            <img class="post__image" src="https://i.pinimg.com/736x/e8/eb/bb/e8ebbb4bf9e59858e9dd2440835c7484.jpg" alt="Eladio Carrión en concierto">
 
-        <div class="post__actions">
-            <button class="button button--like"><i class="fas fa-thumbs-up"></i> Me gusta</button>
-            <button class="button button--share"><i class="fas fa-share-alt"></i> Compartir</button>
-            <button class="button button--edit"><i class="fas fa-pen"></i><a href="/new-publication">Editar</a></button>
+            <div class="post__actions">
+                <button class="button button--like"><i class="fas fa-thumbs-up"></i> Me gusta</button>
+                <button class="button button--share"><i class="fas fa-share-alt"></i> Compartir</button>
+                <button class="button button--edit">
+                    <a href="/new-publication"><i class="fas fa-pen"></i> Editar</a>
+                </button>
+            </div>
+        </div>
+
+        <!-- Comentarios -->
+        <div class="comments">
+            <h5 class="comments__title">Comentarios</h5>
+
+            <div class="comments__comment">
+                <p><strong>@TrapLover:</strong> 🔥🔥🔥 ¡Este show estuvo a otro nivel! #Eladio🐐</p>
+            </div>
+            <div class="comments__comment">
+                <p><strong>@Reggaetonera24:</strong> "Coco Chanel" en vivo fue épico 😭🔥</p>
+            </div>
+            <div class="comments__comment">
+                <p><strong>@RealHastaLaMuerte:</strong> Papi, tú eres el mejor en el trap ahora mismo. RESPECT. 💯</p>
+            </div>
+            <div class="comments__comment">
+                <p><strong>@LatinoGang:</strong> Me dejaste sin voz cantando "Mbappé" 🤯⚡</p>
+            </div>
+
+            <div class="comments__new">
+          <textarea class="comments__textarea" rows="3" placeholder="Escribir comentario..."
+                    onfocus="this.placeholder=''" onblur="this.placeholder='Escribir comentario...'"></textarea>
+                <button class="button button--comment">Comentar</button>
+            </div>
         </div>
     </div>
 
-    <!-- Comentarios -->
-    <div class="comments">
-        <h5 class="comments__title">Comentarios</h5>
-
-        <div class="comments__comment">
-            <p><strong>@TrapLover:</strong> 🔥🔥🔥 ¡Este show estuvo a otro nivel! #Eladio🐐</p>
-        </div>
-        <div class="comments__comment">
-            <p><strong>@Reggaetonera24:</strong> "Coco Chanel" en vivo fue épico 😭🔥</p>
-        </div>
-        <div class="comments__comment">
-            <p><strong>@RealHastaLaMuerte:</strong> Papi, tú eres el mejor en el trap ahora mismo. RESPECT. 💯</p>
-        </div>
-        <div class="comments__comment">
-            <p><strong>@LatinoGang:</strong> Me dejaste sin voz cantando "Mbappé" 🤯⚡</p>
-        </div>
-
-        <div class="comments__new">
-            <textarea class="comments__textarea" rows="3" placeholder="Escribir comentario..." onfocus="this.placeholder=''" onblur="this.placeholder='Escribir comentario...'"></textarea>
-            <button class="button button--comment">Comentar</button>
-        </div>
-    </div>
 </div>
 </body>
 </html>
