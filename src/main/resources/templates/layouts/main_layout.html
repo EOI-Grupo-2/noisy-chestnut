@@ -1,23 +1,29 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
 <head>
-    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Title</title>
     <link rel="stylesheet" th:href="@{/css/global.css}"/>
     <script th:src="@{/js/modal.js}"></script>
     <script src="https://kit.fontawesome.com/cfb847b9dd.js" crossorigin="anonymous"></script>
     <script th:src="@{/js/tabs.js}"></script>
     <script th:src="@{/js/search.js}"></script>
+    <script th:src="@{/js/inputNumber.js}"></script>
+    <script th:src="@{/js/menuListener.js}"></script>
+    <script th:src="@{/js/openMenu.js}"></script>
 </head>
 <body>
 <div class="page-layout">
-    <div class="menu">
+    <div class="menu" id="menuModal">
+        <button class="menu__close-button" onclick="closeMenu('menuModal')">
+            <i class=" fa-solid fa-xmark fa-lg" style="color: #ffffff;"></i>
+        </button>
         <h2 class="menu__title">Noisy-chestnut</h2>
         <ul class="menu__items">
             <li class="menu__item"><a href="/" class="menu__link">Inicio</a></li>
             <li class="menu__item"><a href="/artists" class="menu__link">Artistas</a></li>
             <li class="menu__item"><a href="/concert" class="menu__link">Conciertos</a></li>
-            <li class="menu__item"><a href="#" class="menu__link">Nueva publicación</a></li>
+            <li class="menu__item"><a href="/new-publication" class="menu__link">Nueva publicación</a></li>
             <li class="menu__item"><a href="/search/users" class="menu__link">Buscar</a></li>
             <li class="menu__item"><a href="/logueo" class="menu__link">Iniciar sesión</a></li>
             <li class="menu__item"><a href="/register" class="menu__link">Registrarse</a></li>
@@ -26,6 +32,10 @@
     <div layout:fragment="content">
 
     </div>
+
+    <button class="menu__button" onclick="openMenu('menuModal')">
+        <i class="fa fa-bars fa-2xl" style="color: #ffffff"></i>
+    </button>
 
     <button class="chat-modal__button" onclick="openModal('chatModal')">
         <i class="fa-regular fa-message fa-2xl" style="color: #ffffff;"></i>
