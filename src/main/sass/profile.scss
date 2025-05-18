@@ -491,32 +491,53 @@
     }
   }
 
-  @media only screen and (max-width: $mobile-breakpoint) {
-    .content{
-      padding-right:0;
-      padding-top: 0;
-    }
+@media only screen and (max-width: $mobile-breakpoint) {
+  .content {
+    padding-top: 0;
+    align-items: center;
+  }
 
-    .profile-header {
-      flex-direction: column;
-      align-items: center;
-      text-align: center;
+  .profile-header {
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    margin-right: 0;
 
-      &__infoitems{
-        font-size: smaller;
-      }
-    }
-    .profile-content{
-
-      &__principal{
-
-        &--pubs{
-
-        }
-      }
-
-      &__more{
-        display:none
-      }
+    &__info-items {
+      padding-top: 1rem;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 1rem;
+      justify-content: center;
     }
   }
+
+  .profile-content {
+    display: flex;
+    flex-direction: column;
+
+    &__more {
+      display: none
+    }
+
+    &--followers, &--following, &--insignia {
+      gap: 1rem;
+      visibility: hidden;
+      opacity: 0;
+    }
+  }
+
+  .modal {
+    .concert-card {
+      width: 5rem;
+      height: 8rem;
+    }
+
+    .album-card {
+      width: 5rem;
+      height: 5rem;
+    }
+  }
+}
+
+

@@ -385,3 +385,16 @@ body {
     }
   }
 }
+
+@media only screen and (max-width: $tablet-breakpoint) {
+  .pub-card {
+    width: 90%;
+    min-height: 10rem;
+    background-color: $secondary-color;
+    display: grid;
+    grid-template-rows: auto 1fr;
+    grid-template-columns: 1fr;
+    color: $font-color;
+    border-radius: 5px;
+  }
+}
