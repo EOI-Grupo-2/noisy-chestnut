@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="es" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" layout:decorate="~{layouts/main_layout.html}"
+      xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Conciertos</title>
+    <link rel="stylesheet" th:href="@{/css/places.css}" />
+    <link href="https://fonts.googleapis.com/css2?family=Roboto+Condensed&family=Roboto:wght@300&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@48,400,0,0" />
+</head>
+<body>
+<div layout:fragment="content" class="content">
+    <div class="place-card">
+        <img class="place-card__image" src="https://www.atleticodemadrid.com/system/file3s/78316/large/BV81gnkPa-__37A2770.jpg?1654122441" alt="placeImage">
+        <div class="place-card__content">
+            <h2 class="place-card__title">
+                Sala 1
+            </h2>
+            <a href="/place/detail" class="place-card__link">
+                Conocer más
+                <span class="material-symbols-outlined">
+                    arrow_right_alt
+                </span>
+            </a>
+        </div>
+    </div>
+    <div class="place-card">
+        <img class="place-card__image" src="https://www.atleticodemadrid.com/system/file3s/78316/large/BV81gnkPa-__37A2770.jpg?1654122441" alt="placeImage">
+        <div class="place-card__content">
+            <h2 class="place-card__title">
+                Sala 2
+            </h2>
+            <a href="/place/detail" class="place-card__link">
+                Conocer más
+                <span class="material-symbols-outlined">
+                    arrow_right_alt
+                </span>
+            </a>
+        </div>
+    </div>
+    <div class="place-card">
+        <div class="place-card__content">
+            <img class="place-card__image" src="https://www.atleticodemadrid.com/system/file3s/78316/large/BV81gnkPa-__37A2770.jpg?1654122441" alt="placeImage">
+            <h2 class="place-card__title">
+                Sala 3
+            </h2>
+            <a href="/place/detail" class="place-card__link">
+                Conocer más
+                <span class="material-symbols-outlined">
+                    arrow_right_alt
+                </span>
+            </a>
+        </div>
+    </div>
+</div>
+</body>
+</html>
