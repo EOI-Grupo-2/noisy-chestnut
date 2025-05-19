@@ -19,6 +19,7 @@ body {
   grid-template-columns: auto 8fr;
   grid-template-areas: 'menu content';
   gap: 2rem;
+  min-height: 100vh;
 }
 
 .content{
@@ -380,6 +381,11 @@ body {
 
     &__close-button{
       display: block;
+    }
+  }
+  @media only screen and (max-width: $tablet-breakpoint) {
+    .content {
+      margin-top: 3rem;
     }
   }
 }
