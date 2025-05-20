@@ -370,18 +370,35 @@ body {
     grid-template-areas: 'content';
   }
 
-  .menu{
+  .menu {
     position: absolute;
     top: 0;
     left: 0;
     transform: translateX(-15rem);
 
-    &__button{
+    &__button {
       display: block;
     }
 
-    &__close-button{
+    &__close-button {
       display: block;
     }
+  }
+  @media only screen and (max-width: $mobile-breakpoint) {@media only screen and (max-width: 768px) {
+    .chat,
+    .crear-grupo {
+      width: 90%;
+      height: 90vh;
+      margin: 2rem auto;
+      border-radius: 10px;
+      overflow-y: auto;
+    }
+
+    .chat__body,
+    .crear-grupo__body {
+      max-height: 70vh;
+      overflow-y: auto;
+    }
+  }
   }
 }

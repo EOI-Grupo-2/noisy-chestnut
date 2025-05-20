@@ -167,4 +167,28 @@
     font-size: x-large;
     font-weight: 600;
   }
+
+  @media only screen and (max-width: $tablet-breakpoint) {
+    .modal__content{
+     width: 90%;
+      height: 80%;
+    }
+    .confirmChatButton,
+    .confirmGroupButton{
+      margin-top: auto;
+      margin-bottom: 1rem;
+    }
+  }
+  @media only screen and (max-width: $mobile-breakpoint){
+    .modal__content{
+      height: 70%;
+    }
+    #chatModal{
+      height: 85%;
+    }
+    .modal__search{
+      height: 15rem;
+    }
+
+  }
 }
