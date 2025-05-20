@@ -3,6 +3,7 @@ function selectTab(tab, className, tabsClass, tabId){
     for (element of elements){
         element.style.visibility = element.id === tab ? 'visible' : 'hidden';
         element.style.opacity = element.id === tab ? '1' : '0';
+        element.style.display = element.id === tab ? 'flex' : 'none';
     }
     makeActive(tabsClass,tabId);
 }
