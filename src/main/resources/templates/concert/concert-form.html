@@ -2,10 +2,9 @@
 <html lang="es" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" layout:decorate="~{layouts/main_layout.html}"
       xmlns:th="http://www.thymeleaf.org">
 <head>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Crear/Editar Concierto</title>
     <link rel="stylesheet" th:href="@{/css/concert-form.css}" />
-    <link href="https://fonts.googleapis.com/css2?family=Roboto+Condensed&family=Roboto:wght@300;400;700&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@48,400,0,0" />
     <link rel="stylesheet" href="https://cdn.rawgit.com/harvesthq/chosen/gh-pages/chosen.min.css" />
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
     <script src="https://cdn.rawgit.com/harvesthq/chosen/gh-pages/chosen.jquery.min.js"></script>
@@ -14,7 +13,7 @@
 
 <div layout:fragment="content" class="content">
     <a href="/concert" class="btn-back">
-        <span class="material-symbols-outlined">arrow_back</span> Volver a conciertos
+        <i class="fa-solid fa-arrow-left"></i> Volver a conciertos
     </a>
 
     <div class="concert-form-card">
@@ -29,17 +28,20 @@
 
                     <div class="concert-form-card__field">
                         <label for="title">Título del Concierto</label>
-                        <input type="text" id="title" name="title" class="concert-form-card__input" placeholder="Ingresa el título del concierto" required>
+                        <input type="text" id="title" name="title" class="concert-form-card__input"
+                               placeholder="Ingresa el título del concierto" required>
                     </div>
 
-                    <div class="concert-form-card__field">
-                        <label for="date">Fecha</label>
-                        <input type="date" id="date" name="date" class="concert-form-card__input" required>
-                    </div>
+                    <div class="concert-form-card__grid-container">
+                        <div class="concert-form-card__field">
+                            <label for="date">Fecha</label>
+                            <input type="date" id="date" name="date" class="concert-form-card__input" required>
+                        </div>
 
-                    <div class="concert-form-card__field">
-                        <label for="time">Hora</label>
-                        <input type="time" id="time" name="time" class="concert-form-card__input" required>
+                        <div class="concert-form-card__field">
+                            <label for="time">Hora</label>
+                            <input type="time" id="time" name="time" class="concert-form-card__input" required>
+                        </div>
                     </div>
 
                     <div class="concert-form-card__field">
@@ -47,12 +49,6 @@
                         <select id="genre" name="genre" class="concert-form-card__input" required>
                             <option value="">Selecciona un género</option>
                             <option value="rock">Rock</option>
-                            <option value="pop">Pop</option>
-                            <option value="jazz">Jazz</option>
-                            <option value="electronic">Electrónica</option>
-                            <option value="classical">Clásica</option>
-                            <option value="hiphop">Hip Hop</option>
-                            <option value="reggaeton">Reggaeton</option>
                             <option value="other">Otro</option>
                         </select>
                     </div>
@@ -67,7 +63,6 @@
                             <option value="">Selecciona un lugar</option>
                             <option value="1">Wizink Center - Madrid</option>
                             <option value="2">Palau Sant Jordi - Barcelona</option>
-                            <option value="3">La Riviera - Madrid</option>
                         </select>
                     </div>
                 </div>
@@ -77,19 +72,19 @@
 
                     <div class="concert-form-card__field">
                         <label for="description">Descripción</label>
-                        <textarea id="description" name="description" class="concert-form-card__textarea" rows="5" placeholder="Describe el concierto..." required></textarea>
+                        <textarea id="description" name="description" class="concert-form-card__textarea"
+                                  rows="5" placeholder="Describe el concierto..." required></textarea>
                     </div>
 
                     <div class="concert-form-card__field">
                         <label for="artistIds">Artistas</label>
-                        <select data-placeholder="Selecciona artistas..." multiple class="chosen-select" name="artistIds" id="artistIds">
+                        <select data-placeholder="Selecciona artistas..." multiple class="chosen-select"
+                                name="artistIds" id="artistIds">
                             <option value=""></option>
                             <option value="1">Rosalía</option>
                             <option value="2">C. Tangana</option>
                             <option value="3">Quevedo</option>
                             <option value="4">Bad Bunny</option>
-                            <option value="5">J Balvin</option>
-                            <option value="6">Karol G</option>
                         </select>
                     </div>
                 </div>
@@ -99,7 +94,8 @@
 
                     <div class="concert-form-card__field">
                         <label for="ticketUrl">URL de venta de entradas</label>
-                        <input type="url" id="ticketUrl" name="ticketUrl" class="concert-form-card__input" placeholder="https://ejemplo.com/entradas">
+                        <input type="url" id="ticketUrl" name="ticketUrl" class="concert-form-card__input"
+                               placeholder="https://ejemplo.com/entradas">
                     </div>
                 </div>
 
@@ -109,6 +105,11 @@
                     <div class="concert-form-card__field">
                         <label for="image">Imagen del Concierto</label>
                         <input type="file" id="image" name="imageFile" class="concert-form-card__file" accept="image/*">
+                        <!-- Espacio para mostrar imagen actual en caso de edición -->
+                        <div class="current-image" style="display: none;">
+                            <p>Imagen actual:</p>
+                            <img src="" alt="Imagen actual" style="max-width: 200px; margin-top: 10px;">
+                        </div>
                     </div>
                 </div>
 
@@ -123,12 +124,14 @@
 
 <script>
     $(document).ready(function(){
+        // Inicializar Chosen para selección múltiple
         $(".chosen-select").chosen({
             no_results_text: "No se encontraron resultados para: ",
             width: "100%",
             allow_single_deselect: true
         });
 
+        // Validación del formulario
         $("#concertForm").on("submit", function(e) {
             if ($("#artistIds").val() === null || $("#artistIds").val().length === 0) {
                 alert("Por favor, selecciona al menos un artista.");
@@ -136,6 +139,11 @@
                 return false;
             }
             return true;
+        });
+
+        // Ajustar el ancho del Chosen en pantallas pequeñas
+        $(window).on('resize', function() {
+            $(".chosen-select").trigger("chosen:updated");
         });
     });
 </script>

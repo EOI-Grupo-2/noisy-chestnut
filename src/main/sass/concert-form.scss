@@ -1,13 +1,20 @@
 @import "variables";
 
-// Variables locales
+// Variables locales esenciales
 $input-bg-color: darken($tertiary-color, 5%);
 $input-border-radius: 6px;
-$section-spacing: 25px;
-$field-spacing: 20px;
 
 .content {
   padding: 40px 20px;
+  width: 100%;
+
+  @media (max-width: $tablet-breakpoint) {
+    padding-left: 90px;
+  }
+
+  @media (max-width: $mobile-breakpoint) {
+    padding: 20px 10px 20px 80px;
+  }
 }
 
 .btn-back {
@@ -24,7 +31,6 @@ $field-spacing: 20px;
 
   &:hover {
     background-color: $hover-color;
-    color: $font-color;
   }
 }
 
@@ -33,17 +39,16 @@ $field-spacing: 20px;
   max-width: 800px;
   margin: 0 auto;
   border-radius: 12px;
-  overflow: hidden;
   background-color: $secondary-color;
   color: $font-color;
   box-shadow: 0 4px 20px rgba(0, 0, 0, 0.4);
-  font-size: 16px;
+  overflow: hidden;
 
   &__header {
     background-color: $primary-color;
-    font-weight: bold;
     padding: 20px;
     text-align: center;
+    font-weight: bold;
     font-size: 1.3rem;
   }
 
@@ -51,8 +56,18 @@ $field-spacing: 20px;
     padding: 30px 25px;
   }
 
+  &__grid-container {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 15px;
+
+    @media (max-width: $mobile-breakpoint) {
+      grid-template-columns: 1fr;
+    }
+  }
+
   &__section {
-    margin-bottom: $section-spacing;
+    margin-bottom: 25px;
     border-bottom: 1px solid $tertiary-color;
     padding-bottom: 15px;
 
@@ -65,18 +80,15 @@ $field-spacing: 20px;
   &__section-title {
     font-size: 1.1rem;
     margin-bottom: 15px;
-    color: $font-color;
     font-weight: bold;
   }
 
   &__field {
-    margin-top: $field-spacing;
+    margin-top: 20px;
     display: flex;
     flex-direction: column;
 
     label {
-      font-size: 0.95rem;
-      color: $font-color;
       margin-bottom: 5px;
     }
 
@@ -88,26 +100,20 @@ $field-spacing: 20px;
       border-radius: $input-border-radius;
       background-color: $input-bg-color;
       color: $font-color;
-      font-size: 1rem;
       width: 100%;
-
-      &::placeholder {
-        color: rgba($font-color, 0.7);
-      }
 
       &:focus {
         outline: 1px solid $primary-color;
       }
     }
 
-    &__textarea {
+    textarea {
       resize: vertical;
       min-height: 100px;
     }
 
-    &__file {
+    input[type="file"] {
       padding: 10px 0;
-      color: $font-color;
 
       &::-webkit-file-upload-button {
         background-color: $tertiary-color;
@@ -116,7 +122,6 @@ $field-spacing: 20px;
         padding: 8px 16px;
         border-radius: 4px;
         cursor: pointer;
-        transition: background-color 0.2s ease;
 
         &:hover {
           background-color: darken($tertiary-color, 10%);
@@ -130,6 +135,10 @@ $field-spacing: 20px;
     justify-content: flex-end;
     gap: 15px;
     margin-top: 30px;
+
+    @media (max-width: $mobile-breakpoint) {
+      flex-direction: column;
+    }
   }
 
   &__button {
@@ -138,8 +147,11 @@ $field-spacing: 20px;
     border-radius: $input-border-radius;
     cursor: pointer;
     font-weight: bold;
-    font-size: 1rem;
     transition: background-color 0.3s ease;
+
+    @media (max-width: $mobile-breakpoint) {
+      width: 100%;
+    }
 
     &--cancel {
       background-color: $tertiary-color;
@@ -161,52 +173,66 @@ $field-spacing: 20px;
   }
 }
 
-/* Estilos personalizados para Chosen */
+// Estilos esenciales para Chosen
 .chosen-container {
   width: 100% !important;
 
-  .chosen-drop {
-    background-color: $input-bg-color;
-    border: 1px solid $tertiary-color;
-    border-top: none;
-    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+  .chosen-choices {
+    background-color: $input-bg-color !important;
+    border: none !important;
+    border-radius: $input-border-radius !important;
+
+    li.search-choice {
+      background-color: $primary-color !important;
+      background-image: none !important;
+      color: $font-color !important;
+      border: none !important;
+      box-shadow: none !important;
+    }
   }
 
-  .chosen-results {
-    color: $font-color;
+  .chosen-drop {
+    background-color: $input-bg-color !important;
+    border: 1px solid $tertiary-color !important;
 
-    li.highlighted {
-      background-color: $primary-color;
-      background-image: none;
-      color: $font-color;
+    .chosen-results li.highlighted {
+      background-color: $primary-color !important;
+      background-image: none !important;
     }
   }
 }
 
-.chosen-container-multi {
-  .chosen-choices {
-    background-color: $input-bg-color;
-    border: none;
-    border-radius: $input-border-radius;
-    padding: 5px 8px;
-    box-shadow: none;
+// Imagen actual
+.current-image {
+  margin-top: 10px;
+  background-color: rgba($tertiary-color, 0.3);
+  border-radius: $input-border-radius;
+  padding: 10px;
 
-    li.search-field input[type="text"] {
-      color: rgba($font-color, 0.7);
-      font-family: 'Roboto', sans-serif;
+  img {
+    border-radius: 4px;
+    max-width: 100%;
+  }
+}
+
+// Media query principal
+@media (max-width: $mobile-breakpoint) {
+  .concert-form-card {
+    border-radius: 8px;
+
+    &__header {
+      padding: 15px;
+      font-size: 1.1rem;
     }
 
-    li.search-choice {
-      background-color: $primary-color;
-      border: none;
-      border-radius: 4px;
-      color: $font-color;
-      padding: 5px 25px 5px 8px;
-      box-shadow: none;
+    &__body {
+      padding: 20px 15px;
+    }
 
-      .search-choice-close {
-        top: 6px;
-      }
+    &__field input,
+    &__field textarea,
+    &__field select {
+      padding: 8px;
     }
   }
 }
