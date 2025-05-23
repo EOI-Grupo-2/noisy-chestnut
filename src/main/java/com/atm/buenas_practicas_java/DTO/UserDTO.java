@@ -1,4 +1,4 @@
-package com.atm.buenas_practicas_java.dtos;
+package com.atm.buenas_practicas_java.DTO;
 
 import com.atm.buenas_practicas_java.entities.Role;
 import com.atm.buenas_practicas_java.entities.enums.Genre;
@@ -17,13 +17,11 @@ public class UserDTO {
     private Long id;
     private String username;
     private String name;
-    private String firstName;
-    private String lastName;
     private String fullLastName;
     private String email;
     private String description;
     private Double rate;
     private Genre genre;
     private MusicGenre musicGenre;
-    private Role role;
+    private Long roleId;
 }

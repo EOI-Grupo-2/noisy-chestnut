@@ -5,6 +5,7 @@ import com.atm.buenas_practicas_java.entities.EntidadPadre;
 import com.atm.buenas_practicas_java.entities.Role;
 import com.atm.buenas_practicas_java.entities.User;
 import com.atm.buenas_practicas_java.entities.enums.Genre;
+import com.atm.buenas_practicas_java.entities.enums.MusicGenre;
 import com.atm.buenas_practicas_java.repositories.EntidadHijaRepository;
 import com.atm.buenas_practicas_java.repositories.EntidadPadreRepository;
 import com.atm.buenas_practicas_java.repositories.RoleRepository;
@@ -142,6 +143,7 @@ public class LocalDataLoader {
         user1.setEmail("admin@mail.com");
         user1.setGenre(Genre.MALE);
         user1.setDescription("Descripcion del admin chulo");
+        user1.setMusicGenre(MusicGenre.RAP);
         user1.setRole(adminRole);
         User user2 = new User();
         user2.setUsername("user1");
@@ -151,6 +153,7 @@ public class LocalDataLoader {
         user2.setEmail("user@mail.com");
         user2.setGenre(Genre.MALE);
         user2.setRole(userRole);
+        user2.setMusicGenre(MusicGenre.CLASSIC);
         user2.setDescription("Descripcion del usuario chulo");
         userRepository.saveAll(List.of(user1, user2));
         adminRole.setUsers(List.of(user1));
