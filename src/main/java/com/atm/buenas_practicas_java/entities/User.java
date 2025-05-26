@@ -38,6 +38,7 @@ public class User {
     @Enumerated(EnumType.STRING)
     @Column(name = "music_genre")
     private MusicGenre musicGenre;
-    @ManyToOne(fetch = FetchType.EAGER)
+    @ManyToOne
+    @JoinColumn(name = "role_id")
     private Role role;
 }

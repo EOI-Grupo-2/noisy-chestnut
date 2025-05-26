@@ -5,12 +5,12 @@
     <meta charset="UTF-8">
     <link rel="stylesheet" href="pruebaweb.css">
     <link rel="stylesheet" th:href="@{/css/editprofile.css}" />
-    <title>Edición Perfil</title>
+    <title th:text="${isRegister ? 'Registro Usuario' : 'Edición Perfil'}"></title>
 </head>
 <body>
 
 <div class="content" layout:fragment="content">
-    <form th:action="@{/users/edit}" method="POST" class="user-form" th:object="${user}">
+    <form th:action="${isRegister ? '/users/register' : '/users/edit' }" method="POST" class="user-form" th:object="${user}">
         <div class="user-form__field">
             <label for="name" class="user-form__label">Nombre:</label>
             <input th:value="${user.getUsername()}" type="text" id="name" name="name" class="user-form__input" placeholder="Ingresa tu nombre" required>
@@ -22,8 +22,8 @@
         </div>
 
         <div class="user-form__field">
-            <label for="email" class="user-form__label">Apellido:</label>
-            <input th:value="${user.getEmail()}" type="text" id="email" name="email" class="user-form__input" placeholder="Ingresa tu Apellido" required>
+            <label for="email" class="user-form__label">Correo electronico:</label>
+            <input th:value="${user.getEmail()}" type="email" id="email" name="email" class="user-form__input" placeholder="Ingresa tu Apellido" required>
         </div>
 
         <div class="user-form__field">
@@ -52,8 +52,8 @@
             </select>
         </div>
 
-        <input th:value="${user.getRoleId()}" type="text" id="roleId" name="roleId" class="user-form__input" required hidden="hidden">
-        <input th:value="${user.getId()}" type="text" id="id" name="id" class="user-form__input" required hidden="hidden">
+        <input th:if="${!isRegister}" th:value="${user.getRoleId()}" type="text" id="roleId" name="roleId" class="user-form__input" required hidden="hidden">
+        <input th:if="${!isRegister}" th:value="${user.getId()}" type="text" id="id" name="id" class="user-form__input" required hidden="hidden">
 
         <div class="user-form__actions">
             <button type="submit" class="user-form__button">Save</button>
