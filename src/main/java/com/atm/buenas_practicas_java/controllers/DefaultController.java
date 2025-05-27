@@ -157,6 +157,10 @@ public class DefaultController {
         return "/user/editprofile";
     }
 
+    @GetMapping({"", "/user/adminpanel"})
+    public String getAdminPanel(){
+        return "/user/adminpanel";
+    }
 
     @GetMapping({"", "/artist/profile"})
     public String getArtistProfile(){

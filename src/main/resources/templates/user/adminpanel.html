@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" layout:decorate="~{layouts/main_layout.html}"
+      xmlns:th="http://www.thymeleaf.org">
+<head>
+    <link rel="stylesheet" th:href="@{/css/adminpanel.css}" />
+</head>
+<body>
+<div class="content" layout:fragment="content">
+
+    <h2 class="admin-title">Gestión de Usuarios</h2>
+
+    <table class="admin-table user-table">
+        <thead>
+        <tr>
+            <th>ID</th>
+            <th>Nombre</th>
+            <th>Usuario</th>
+            <th>Género</th>
+            <th>Rol</th>
+            <th>Acciones</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr>
+            <td>1</td>
+            <td>Juan Pérez</td>
+            <td>juanp</td>
+            <td>Rock</td>
+            <td>Admin</td>
+            <td class="table-actions">
+                <button class="btn-edit">Editar</button>
+                <button class="btn-delete">Eliminar</button>
+            </td>
+        </tr>
+        <tr>
+            <td>2</td>
+            <td>Ana Gómez</td>
+            <td>anag</td>
+            <td>Pop</td>
+            <td>Usuario</td>
+            <td class="table-actions">
+                <button class="btn-edit">Editar</button>
+                <button class="btn-delete">Eliminar</button>
+            </td>
+        </tr>
+        <tr>
+            <td>3</td>
+            <td>Carlos Ruiz</td>
+            <td>carlr</td>
+            <td>Reggaeton</td>
+            <td>Moderador</td>
+            <td class="table-actions">
+                <button class="btn-edit">Editar</button>
+                <button class="btn-delete">Eliminar</button>
+            </td>
+        </tr>
+        <tr>
+            <td>4</td>
+            <td>Laura Martínez</td>
+            <td>lauram</td>
+            <td>Jazz</td>
+            <td>Usuario</td>
+            <td class="table-actions">
+                <button class="btn-edit">Editar</button>
+                <button class="btn-delete">Eliminar</button>
+            </td>
+        </tr>
+        <tr>
+            <td>5</td>
+            <td>Pedro López</td>
+            <td>pedrol</td>
+            <td>Metal</td>
+            <td>Usuario</td>
+            <td class="table-actions">
+                <button class="btn-edit">Editar</button>
+                <button class="btn-delete">Eliminar</button>
+            </td>
+        </tr>
+        <tr>
+            <td>6</td>
+            <td>Sofía Díaz</td>
+            <td>sofiad</td>
+            <td>Indie</td>
+            <td>Admin</td>
+            <td class="table-actions">
+                <button class="btn-edit">Editar</button>
+                <button class="btn-delete">Eliminar</button>
+            </td>
+        </tr>
+        <tr>
+            <td>7</td>
+            <td>Diego Torres</td>
+            <td>diegot</td>
+            <td>Electrónica</td>
+            <td>Usuario</td>
+            <td class="table-actions">
+                <button class="btn-edit">Editar</button>
+                <button class="btn-delete">Eliminar</button>
+            </td>
+        </tr>
+        <tr>
+            <td>8</td>
+            <td>Lucía Hernández</td>
+            <td>luciah</td>
+            <td>Rap</td>
+            <td>Moderador</td>
+            <td class="table-actions">
+                <button class="btn-edit">Editar</button>
+                <button class="btn-delete">Eliminar</button>
+            </td>
+        </tr>
+        <tr>
+            <td>9</td>
+            <td>Álvaro Jiménez</td>
+            <td>alvaroj</td>
+            <td>Trap</td>
+            <td>Usuario</td>
+            <td class="table-actions">
+                <button class="btn-edit">Editar</button>
+                <button class="btn-delete">Eliminar</button>
+            </td>
+        </tr>
+        <tr>
+            <td>10</td>
+            <td>Elena Castro</td>
+            <td>elenac</td>
+            <td>Reggae</td>
+            <td>Usuario</td>
+            <td class="table-actions">
+                <button class="btn-edit">Editar</button>
+                <button class="btn-delete">Eliminar</button>
+            </td>
+        </tr>
+        </tbody>
+    </table>
+
+</div>
+</body>
+</html>
