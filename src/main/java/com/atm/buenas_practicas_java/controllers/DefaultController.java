@@ -210,6 +210,11 @@ public class DefaultController {
     public String showPlacesPage() {
         return "/places/places";
     }
+
+    @GetMapping("/places/admin")
+    public String showPlacesAdminPage() {
+        return "places/placesAdmin";
+    }
 }
 
 

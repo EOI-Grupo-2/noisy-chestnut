@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="es" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" layout:decorate="~{layouts/main_layout.html}"
+      xmlns:th="http://www.thymeleaf.org">
+<head>
+  <title>Places admin</title>
+  <link rel="stylesheet" th:href="@{/css/places.css}" />
+  <link rel="stylesheet" th:href="@{/css/placesAdmin.css}" />
+  <link href="https://fonts.googleapis.com/css2?family=Roboto+Condensed&family=Roboto:wght@300&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@48,400,0,0" />
+</head>
+<body>
+<div layout:fragment="content" class="content">
+
+  <div class="admin-header">
+    <h2>Gestión de salas</h2>
+    <button class="admin-header__create-button">+ Crear nueva sala</button>
+  </div>
+
+
+  <div class="place-card">
+    <img class="place-card__image" src="https://www.atleticodemadrid.com/system/file3s/78316/large/BV81gnkPa-__37A2770.jpg?1654122441" alt="placeImage">
+    <div class="place-card__content">
+      <h2 class="place-card__title">
+        Sala 1
+      </h2>
+      <div class="place-card__buttons">
+      <button class="place-card__edit-button">Editar</button>
+      <button class="place-card__delete-button">Eliminar</button>
+        </div>
+    </div>
+  </div>
+  <div class="place-card">
+    <img class="place-card__image" src="https://www.atleticodemadrid.com/system/file3s/78316/large/BV81gnkPa-__37A2770.jpg?1654122441" alt="placeImage">
+    <div class="place-card__content">
+      <h2 class="place-card__title">
+        Sala 1
+      </h2>
+      <div class="place-card__buttons">
+        <button class="place-card__edit-button">Editar</button>
+        <button class="place-card__delete-button">Eliminar</button>
+      </div>
+    </div>
+  </div>
+  <div class="place-card">
+    <img class="place-card__image" src="https://www.atleticodemadrid.com/system/file3s/78316/large/BV81gnkPa-__37A2770.jpg?1654122441" alt="placeImage">
+    <div class="place-card__content">
+      <h2 class="place-card__title">
+        Sala 1
+      </h2>
+      <div class="place-card__buttons">
+        <button class="place-card__edit-button">Editar</button>
+        <button class="place-card__delete-button">Eliminar</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+</body>
+</html>
