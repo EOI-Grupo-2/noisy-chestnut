@@ -23,5 +23,5 @@ public class UserDTO {
     private Double rate;
     private Genre genre;
     private MusicGenre musicGenre;
-    private Long roleId;
+    private Role role;
 }

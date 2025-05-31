@@ -49,7 +49,7 @@ public class UserController {
 
     @PostMapping({"/", "register"})
     public String registerUser(@ModelAttribute("user") UserDTO userDTO) throws Exception {
-        userDTO.setRoleId(roleService.findByName("USER").getId());
+        userDTO.setRole(roleService.findByName("USER"));
         UserDTO savedUser = userService.save(userDTO);
         return "redirect:/users/" + savedUser.getId() + "/profile";
     }
@@ -66,7 +66,7 @@ public class UserController {
     }
 
     @GetMapping({"/", "{id}/delete"})
-    public String deleteUserProfile(@PathVariable("id") Long id) throws Exception {
+    public String deleteUserProfile(@PathVariable("id") Long id) {
         userService.deleteById(id);
         return "redirect:/";
     }

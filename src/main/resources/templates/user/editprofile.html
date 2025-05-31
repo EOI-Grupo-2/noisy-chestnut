@@ -52,7 +52,7 @@
             </select>
         </div>
 
-        <input th:if="${!isRegister}" th:value="${user.getRoleId()}" type="text" id="roleId" name="roleId" class="user-form__input" required hidden="hidden">
+        <input th:if="${!isRegister}" th:value="${user.getRole()}" type="text" id="role" name="role" class="user-form__input" required hidden="hidden">
         <input th:if="${!isRegister}" th:value="${user.getId()}" type="text" id="id" name="id" class="user-form__input" required hidden="hidden">
 
         <div class="user-form__actions">

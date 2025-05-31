@@ -23,13 +23,13 @@ public class User {
     private String username;
     @Column(nullable = false)
     private String name;
-    @Column(nullable = false, name = "first_name")
+    @Column(nullable = false)
     private String firstName;
-    @Column(nullable = false, name = "last_name")
+    @Column(nullable = false)
     private String lastName;
     @Column(nullable = false)
     private String email;
-//    private String password;
+    private String password;
     private String description;
     private Double rate;
     @Column(nullable = false)
