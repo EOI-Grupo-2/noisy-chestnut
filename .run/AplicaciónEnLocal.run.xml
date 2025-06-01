@@ -1,7 +1,9 @@
 <component name="ProjectRunConfigurationManager">
   <configuration default="false" name="AplicaciónEnLocal" type="SpringBootApplicationConfigurationType" factoryName="Spring Boot">
     <option name="ACTIVE_PROFILES" value="local" />
-    <module name="noisy-chestnut" />
+    <option name="ALTERNATIVE_JRE_PATH" value="$USER_HOME$/.jdks/openjdk-24.0.1" />
+    <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="true" />
+    <module name="noisychestnut" />
     <option name="SPRING_BOOT_MAIN_CLASS" value="com.atm.buenas_practicas_java.Application" />
     <method v="2">
       <option name="Make" enabled="true" />

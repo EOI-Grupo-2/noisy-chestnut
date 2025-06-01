@@ -207,10 +207,9 @@ public class DefaultController {
     }
 
     @GetMapping("/places")
-    public String showPlacesPage() {
-        return "/places/places";
-    }
+    public String showPlacesPage() {return "/places/places"; }
+
+    @GetMapping("/concert/admin")
+    public String showConcertsAdminPage() {return "concert/concertsAdmin"; }
 }
-
-
 
