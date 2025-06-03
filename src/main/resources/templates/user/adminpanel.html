@@ -29,7 +29,7 @@
             <td>Admin</td>
             <td class="table-actions">
                 <button class="btn-edit">Editar</button>
-                <button class="btn-delete">Eliminar</button>
+                <button class="btn-delete" onclick="openModal('deletePlaceModal')">Eliminar</button>
             </td>
         </tr>
         <tr>
@@ -40,7 +40,7 @@
             <td>Usuario</td>
             <td class="table-actions">
                 <button class="btn-edit">Editar</button>
-                <button class="btn-delete">Eliminar</button>
+                <button class="btn-delete" onclick="openModal('deletePlaceModal')">Eliminar</button>
             </td>
         </tr>
         <tr>
@@ -51,7 +51,7 @@
             <td>Moderador</td>
             <td class="table-actions">
                 <button class="btn-edit">Editar</button>
-                <button class="btn-delete">Eliminar</button>
+                <button class="btn-delete" onclick="openModal('deletePlaceModal')">Eliminar</button>
             </td>
         </tr>
         <tr>
@@ -62,7 +62,7 @@
             <td>Usuario</td>
             <td class="table-actions">
                 <button class="btn-edit">Editar</button>
-                <button class="btn-delete">Eliminar</button>
+                <button class="btn-delete" onclick="openModal('deletePlaceModal')">Eliminar</button>
             </td>
         </tr>
         <tr>
@@ -73,7 +73,7 @@
             <td>Usuario</td>
             <td class="table-actions">
                 <button class="btn-edit">Editar</button>
-                <button class="btn-delete">Eliminar</button>
+                <button class="btn-delete" onclick="openModal('deletePlaceModal')">Eliminar</button>
             </td>
         </tr>
         <tr>
@@ -84,7 +84,7 @@
             <td>Admin</td>
             <td class="table-actions">
                 <button class="btn-edit">Editar</button>
-                <button class="btn-delete">Eliminar</button>
+                <button class="btn-delete" onclick="openModal('deletePlaceModal')">Eliminar</button>
             </td>
         </tr>
         <tr>
@@ -95,7 +95,7 @@
             <td>Usuario</td>
             <td class="table-actions">
                 <button class="btn-edit">Editar</button>
-                <button class="btn-delete">Eliminar</button>
+                <button class="btn-delete" onclick="openModal('deletePlaceModal')">Eliminar</button>
             </td>
         </tr>
         <tr>
@@ -106,7 +106,7 @@
             <td>Moderador</td>
             <td class="table-actions">
                 <button class="btn-edit">Editar</button>
-                <button class="btn-delete">Eliminar</button>
+                <button class="btn-delete" onclick="openModal('deletePlaceModal')">Eliminar</button>
             </td>
         </tr>
         <tr>
@@ -117,7 +117,7 @@
             <td>Usuario</td>
             <td class="table-actions">
                 <button class="btn-edit">Editar</button>
-                <button class="btn-delete">Eliminar</button>
+                <button class="btn-delete" onclick="openModal('deletePlaceModal')">Eliminar</button>
             </td>
         </tr>
         <tr>
@@ -128,12 +128,30 @@
             <td>Usuario</td>
             <td class="table-actions">
                 <button class="btn-edit">Editar</button>
-                <button class="btn-delete">Eliminar</button>
+                <button class="btn-delete" onclick="openModal('deletePlaceModal')">Eliminar</button>
+
             </td>
         </tr>
         </tbody>
     </table>
 
+    <!-- Modal para eliminar sala -->
+    <div class="modal" id="deletePlaceModal">
+        <div class="modal__content">
+            <header class="modal__header">
+                <h2>Eliminar sala</h2>
+            </header>
+            <div class="modal__body">
+                <p>¿Está seguro de que desea eliminar la sala?</p>
+            </div>
+            <div class="modal__footer">
+                <button class="btn-delete btn-cancel" onclick="closeModal('deletePlaceModal')">Cancelar</button>
+                <button class="btn-edit btn-confirm">Confirmar</button>
+            </div>
+        </div> <!-- cierre de modal__content -->
+    </div> <!-- cierre de modal -->
+
 </div>
+
 </body>
 </html>

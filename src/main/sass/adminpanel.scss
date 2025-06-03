@@ -73,6 +73,52 @@
     background-color: darken($tertiary-color, 15%);
     color: $font-color;
   }
+
+}
+
+.modal{
+  visibility: hidden;
+  opacity: 0;
+  position: fixed;
+  top: 0;       // Importante
+  left: 0;      // Importante
+  width: 100vw; // O 100%
+  height: 100vh;// O 100%
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+
+  &__content{
+    background-color: $secondary-color;
+    color: $font-color;
+    border-radius: 5px;
+    max-width: 300px;
+    max-height: 150px;
+  }
+
+  &__header{
+    background-color: $primary-color;
+    color: $font-color;
+    width: 100%;
+    padding: 1rem;
+    border-top-left-radius: 0.5rem;
+    border-top-right-radius: 0.5rem;
+  }
+  &__body{
+    padding: 1.5rem;
+    background-color: $secondary-color;
+    border-bottom-left-radius: 0.5rem;
+    border-bottom-right-radius: 0.5rem;
+  }
+  &__footer{
+    background-color: $secondary-color;
+    display: flex;
+    justify-content: space-between;
+    padding: 1rem;
+  }
+
+
 }
 
 @media only screen and (max-width: $tablet-breakpoint) {

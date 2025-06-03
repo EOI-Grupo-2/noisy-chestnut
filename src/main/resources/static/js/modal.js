@@ -5,3 +5,8 @@ function openModal(elementId) {
     element.style.opacity = isClose ? '1' : '0';
 }
 
+function closeModal(elementId) {
+    const element = document.getElementById(elementId);
+    element.style.visibility = 'hidden';
+    element.style.opacity = '0';
+}
