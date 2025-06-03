@@ -1,8 +1,6 @@
 package com.atm.buenas_practicas_java.controllers;
 
 import com.atm.buenas_practicas_java.DTO.UserDTO;
-import com.atm.buenas_practicas_java.entities.Role;
-import com.atm.buenas_practicas_java.entities.User;
 import com.atm.buenas_practicas_java.entities.enums.Genre;
 import com.atm.buenas_practicas_java.entities.enums.MusicGenre;
 import com.atm.buenas_practicas_java.services.RoleService;

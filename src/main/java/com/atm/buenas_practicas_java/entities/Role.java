@@ -22,6 +22,11 @@ public class Role {
     @Column(nullable = false)
     private String name;
   
-    @OneToMany( mappedBy = "role", fetch = FetchType.EAGER)
+   @ManyToMany(fetch = FetchType.EAGER)
+    @JoinTable(
+            name = "user_roles",
+            joinColumns = @JoinColumn(name = "role_id", referencedColumnName = "id"),
+            inverseJoinColumns = @JoinColumn(name = "user_id", referencedColumnName = "id")
+    )
     private List<User> users;
 }

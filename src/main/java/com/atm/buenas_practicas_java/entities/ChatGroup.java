@@ -20,13 +20,13 @@ public class ChatGroup {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @ManyToMany(fetch = FetchType.LAZY)
-    @JoinColumn (name = "user_sender_id", nullable = false)
-    private User userSender;
-
-    @ManyToMany(fetch = FetchType.LAZY)
-    @JoinColumn(name = "user_receiver_id", nullable = false)
-    private User userReciever;
+//    @ManyToOne(fetch = FetchType.LAZY)
+//    @JoinColumn (name = "user_sender_id", nullable = false)
+//    private User userSender;
+//
+//    @ManyToOne(fetch = FetchType.LAZY)
+//    @JoinColumn(name = "user_receiver_id", nullable = false)
+//    private Groups_Has_User groupReciever;
 
     @Column(nullable = false)
     private String content;
