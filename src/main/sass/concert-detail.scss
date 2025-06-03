@@ -1,0 +1,406 @@
+@import "variables";
+
+.content {
+  padding-right: 2rem;
+}
+
+.btn-back {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  color: $font-color;
+  text-decoration: none;
+  padding: 0.5rem 1rem;
+  border-radius: 5px;
+  background-color: transparentize($secondary-color, 0.7);
+  transition: background-color 0.3s;
+
+  &:hover {
+    background-color: transparentize($secondary-color, 0.5);
+    color: $font-color;
+  }
+}
+
+// Detalle del concierto
+.concert-detail {
+  background-color: transparentize($secondary-color, 0.2);
+  border-radius: 5px;
+  overflow: hidden;
+  box-shadow: 0 5px 20px rgba(0, 0, 0, 0.4);
+  color: $font-color;
+  margin-bottom: 2rem;
+}
+
+.concert-header {
+  position: relative;
+  height: 300px;
+  overflow: hidden;
+  &__image {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.5s;
+  }
+  &__title {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    padding: 2rem;
+    background: linear-gradient(transparent, rgba(0, 0, 0, 0.8));
+    font-family: 'Roboto Condensed', sans-serif;
+    font-size: 2.5rem;
+    font-weight: bold;
+    margin: 0;
+    color: $font-color;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+  }
+}
+
+.concert-content {
+  padding: 2rem;
+}
+
+.concert-info {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1.5rem;
+  margin-bottom: 1rem;
+  padding-bottom: 1.5rem;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+
+  &__item {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+
+    i {
+      color: $font-color;
+      font-size: 1.2rem;
+      width: 25px;
+      text-align: center;
+    }
+  }
+}
+
+// Enlace a la ubicación
+.venue-link {
+  color: $font-color;
+  text-decoration: none;
+  transition: color 0.3s;
+
+  &:hover {
+    color: $font-color;
+    text-decoration: underline;
+  }
+}
+
+.concert-description {
+  margin-bottom: 2rem;
+
+  &__title {
+    font-size: 1.5rem;
+    margin-bottom: 1rem;
+    color: $font-color;
+  }
+
+  &__text {
+    line-height: 1.6;
+    color: $font-color;
+  }
+}
+
+.concert-artist {
+  margin-bottom: 2rem;
+
+  &__title {
+    font-size: 1.5rem;
+    margin-bottom: 1rem;
+    color: $font-color;
+  }
+
+  &__card{
+    display: flex;
+    background-color: transparentize($secondary-color, 0.8);
+    border-radius: 8px;
+    overflow: hidden;
+  }
+
+  &__image {
+    width: 120px;
+    object-fit: cover;
+  }
+
+  &__info {
+    padding: 1rem;
+    width: 100%;
+  }
+
+  &__info-header{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-direction: row;
+  }
+
+  &__name{
+    margin: 0 0 0.5rem 0;
+    font-size: 1.2rem;
+  }
+
+  &__rating {
+    --size: 25px;
+    --mask: conic-gradient(from -18deg at 61% 34.5%, #0000 108deg, #000 0) 0 / var(--size),
+    conic-gradient(from 270deg at 39% 34.5%, #0000 108deg, #000 0) 0 / var(--size),
+    conic-gradient(from 54deg at 68% 56%, #0000 108deg, #000 0) 0 / var(--size),
+    conic-gradient(from 198deg at 32% 56%, #0000 108deg, #000 0) 0 / var(--size),
+    conic-gradient(from 126deg at 50% 69%, #0000 108deg, #000 0) 0 / var(--size);
+    --bg: linear-gradient(90deg, $primary-color calc(var(--size) * var(--val)), transparentize($secondary-color, 0.4) 0);
+    background-color: transparent;
+    height: var(--size);
+    width: calc(var(--size) * 5);
+    border: 0; /* Firefox adds a default border to ranges */
+    -webkit-appearance: none;
+    appearance: none;
+
+    /* Chrome and Safari */
+    &::-webkit-slider-runnable-track {
+      height: 100%;
+      mask: var(--mask);
+      mask-composite: intersect;
+      background: var(--bg);
+      -webkit-print-color-adjust: exact;
+      print-color-adjust: exact;
+    }
+
+    &::-webkit-slider-thumb {
+      opacity: 0;
+    }
+
+    /* Firefox */
+    &::-moz-range-track {
+      height: 100%;
+      mask: var(--mask);
+      mask-composite: intersect;
+      background: var(--bg);
+      print-color-adjust: exact;
+    }
+
+    &::-moz-range-thumb {
+      opacity: 0;
+    }
+  }
+
+  &__biography{
+    color: $font-color;
+    margin-bottom: 1rem;
+  }
+
+  &__button{
+    display: inline-block;
+    background-color: $primary-color;
+    color: $font-color;
+    text-decoration: none;
+    padding: 0.5rem 1rem;
+    border-radius: 5px;
+    font-size: 0.9rem;
+    transition: background-color 0.3s;
+
+    &:hover {
+      background-color: $hover-color;
+      color: $font-color;
+    }
+  }
+}
+
+.concert-actions {
+  display: flex;
+  gap: 1rem;
+  flex-wrap: wrap;
+
+  &__btn {
+    display: inline-flex;
+    align-items: center;
+    padding: 0.8rem 1.5rem;
+    border-radius: 5px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: transform 0.2s;
+
+    &--share {
+      background-color: transparent;
+      color: $font-color;
+      border: 1px solid transparentize($tertiary-color, 0.5);
+
+      &:hover {
+        background-color: transparentize($tertiary-color, 0.9);
+      }
+    }
+
+    &--attend {
+      background-color: transparent;
+      color: $font-color;
+      border: 1px solid transparentize($tertiary-color, 0.5);
+      position: relative;
+      transition: all 0.3s;
+      gap: 8px;
+
+      &:hover {
+        background-color: transparentize($tertiary-color, 0.9);
+      }
+    }
+
+    &--buy {
+      background-color:$primary-color;
+      color: $font-color;
+      text-decoration: none;
+      border: none;
+
+      &:hover {
+        color: $font-color;
+        background-color: $hover-color;
+      }
+    }
+  }
+  &__count {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    background-color: transparentize($tertiary-color, 0.3);
+    border-radius: 12px;
+    padding: 2px 8px;
+    font-size: 0.8rem;
+    min-width: 24px;
+    height: 24px;
+  }
+}
+
+// Comentarios
+.concert-comments {
+  padding: 2rem;
+  background-color: transparentize($secondary-color, 0.6);
+
+  &__title {
+    font-size: 1.5rem;
+    margin-bottom: 1.5rem;
+    color: $font-color;
+  }
+
+  &__form{
+    display: flex;
+    gap: 1rem;
+    margin-bottom: 2rem;
+  }
+
+  &__textbox{
+    flex-grow: 1;
+    background-color: transparentize($tertiary-color, 0.7);
+    border: 1px solid transparentize($aux-color, 0.5);
+    color: $font-color;
+    padding: 0.8rem;
+
+    &::placeholder {
+      color: $font-color;
+    }
+
+    &:focus {
+      background-color: transparentize($tertiary-color, 0.5);
+      border-color: transparentize($aux-color, 0.3);
+      box-shadow: none;
+    }
+  }
+
+  &__button{
+    background-color: $primary-color;
+    color: $font-color;
+    border: none;
+    border-radius: 5px;
+    padding: 0.5rem 1.5rem;
+    font-weight: bold;
+    cursor: pointer;
+
+    &:hover {
+      background: $hover-color;
+    }
+  }
+
+  &__items{
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+  }
+
+  &__item {
+    display: flex;
+    gap: 1rem;
+  }
+
+  &__avatar{
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    object-fit: cover;
+  }
+
+  &__content{
+    flex-grow: 1;
+    background-color: transparentize($secondary-color, 0.4);
+    border-radius: 8px;
+    padding: 1rem;
+  }
+
+  &__header{
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 0.5rem;
+  }
+
+  &__username{
+    margin: 0;
+    font-size: 1rem;
+    font-weight: bold;
+  }
+
+  &__date{
+    font-size: 0.8rem;
+    color: $font-color;
+  }
+}
+
+// Media queries para responsividad
+@media (max-width: 767px) {
+  .concert-header {
+    height: 200px;
+  }
+
+  .concert-title {
+    font-size: 1.8rem;
+  }
+
+  .info-section {
+    flex-direction: column;
+    gap: 1rem;
+  }
+
+  .artist-card {
+    flex-direction: column;
+  }
+
+  .artist-image {
+    width: 100%;
+    height: 180px;
+  }
+
+  .comment-form {
+    flex-direction: column;
+  }
+
+  .concert-actions {
+    flex-direction: column;
+
+    .btn-ticket, .btn-share, .btn-attend {
+      width: 100%;
+      justify-content: center;
+    }
+  }
+}

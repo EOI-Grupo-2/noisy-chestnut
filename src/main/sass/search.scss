@@ -1,4 +1,60 @@
+@import "variables";
 
+.content{
+  padding-right: 2rem;
+  display: grid;
+  grid-template-rows: auto 1fr;
+  grid-template-columns: auto;
+  grid-template-areas: 'tabs'
+                        'content';
+}
+
+.tabs-menu{
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+  width: 80%;
+  justify-self: center;
+  padding-top: 0.5rem;
+  border-bottom: solid 2px $secondary-color;
+
+  &__item{
+    padding: 0.5rem 1rem;
+    width: 100%;
+    background-color: transparent;
+    border: none;
+    border-radius: 0;
+    transition: all 0.25s ease-in;
+    color: $font-color;
+
+    &--concerts{
+      border-left: solid 2px $secondary-color;
+      border-right: solid 2px $secondary-color;
+    }
+
+    &--artists{
+      border-right: solid 2px $secondary-color;
+    }
+
+    &:hover{
+      background-color: $primary-color;
+      transform: scale(1.2, 1.2);
+      border: 0 transparent;
+      border-radius: 5px;
+    }
+  }
+
+  .active{
+    background-color: rgba($primary-color, 0.8);
+
+    &:hover{
+      background-color: $primary-color;
+      transform: scale(1.2, 1.2);
+      border: 0;
+      border-radius: 5px;
+    }
+  }
+}
 
 .concert-card{
   width: 12rem;
@@ -88,4 +144,89 @@
   flex-wrap: wrap;
   gap: 0.5rem;
   padding: 0.5rem;
+  grid-area: content;
+  transition: visibility 0s, opacity 0.4s ease-in;
+
+  &--artists, &--concerts, &--places{
+    visibility: hidden;
+    opacity: 0;
+  }
+}
+
+.place-card{
+  width: 12rem;
+  height: 18rem;
+  border-radius: 10px;
+  overflow: hidden;
+  cursor: pointer;
+  position: relative;
+  color: white;
+  box-shadow: 0 10px 30px 5px rgba(0, 0, 0, 0.2);
+
+  &__image{
+    position: absolute;
+    object-fit: cover;
+    width: 100%;
+    height: 100%;
+    top: 0;
+    left: 0;
+    opacity: 0.9;
+    transition: opacity .2s ease-out;
+  }
+
+  &__title{
+    position: absolute;
+    inset: auto auto 30px 15px;
+    margin: 0;
+    transition: inset .3s .3s ease-out;
+    font-family: 'Roboto Condensed', sans-serif;
+    font-weight: normal;
+    text-transform: uppercase;
+  }
+
+  &__description{
+    position: absolute;
+    opacity: 0;
+    max-width: 80%;
+    transition: opacity .3s ease-out;
+    inset: auto auto 40px 15px;
+  }
+
+  &__link {
+    position: absolute;
+    opacity: 0;
+    max-width: 80%;
+    transition: opacity .3s ease-out;
+    inset: auto auto 20px 15px;
+    color: inherit;
+    text-decoration: none;
+
+    &:hover{
+      color: white;
+    }
+  }
+
+  &:hover{
+    .place-card{
+      &__title{
+        inset: auto auto 100px 15px;
+        transition: inset .3s ease-out;
+      }
+
+      &__description{
+        opacity: 1;
+        transition: opacity .5s .1s ease-in;
+      }
+
+      &__link{
+        opacity: 1;
+        transition: opacity .5s .1s ease-in;
+      }
+
+      &__image{
+        transition: opacity .3s ease-in;
+        opacity: 0.5;
+      }
+    }
+  }
 }
