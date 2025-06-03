@@ -15,17 +15,23 @@
             <img class="profile-header__userimage" src="https://imgs.search.brave.com/E_UWBRRxi_Mth0t2pKHhoYW5627CGE77wLMeEt6qDb0/rs:fit:860:0:0:0/g:ce/aHR0cHM6Ly93YWxs/cGFwZXJzLmNvbS9p/bWFnZXMvaGQvYmFz/aWMtZGVmYXVsdC1w/ZnAtcHhpNzdxdjVv/MHp1ejhqMy5qcGc" alt="FotoPerfil">
             <div class="profile-header__content">
                 <div class="profile-header__info">
-                    <h1 class="profile-header__username">Usuario</h1>
-                    <p class="profile-header__description">Descripción del usuario</p>
+                    <h1 class="profile-header__username" th:text="${user.getUsername()}"></h1>
+                    <p class="profile-header__description" th:text="${user.getDescription()}"></p>
                     <button class="edit-profile-button">
-                        <a href="/user/editprofile">Editar Perfil</a>
+                        <a th:href="@{'/users/'+${user.getId()}+'/edit'}">Editar Perfil</a>
                     </button>
+                   <form th:action="@{'/users/'+${user.getId()}+'/delete'}"  method="get">
+                       <button class="edit-profile-button" type="submit">
+                            Eliminar Perfil
+                        </button>
+                    </form>
                 </div>
                 <ul class="profile-header__info-items">
                     <li class="profile-header__info-item"><button class="profile-header__info-button" type="button" onclick="selectTab('pubTab', 'profile-content__principal')">Publicaciones</button></li>
                     <li class="profile-header__info-item"><button class="profile-header__info-button" type="button" onclick="selectTab('followersTab', 'profile-content__principal')">Seguidores</button></li>
                     <li class="profile-header__info-item"><button class="profile-header__info-button" type="button" onclick="selectTab('followingTab', 'profile-content__principal')">Seguidos</button></li>
                     <li class="profile-header__info-item"><button class="profile-header__info-button" type="button" onclick="selectTab('insigniaTab', 'profile-content__principal')">Insignias</button></li>
+                    <li class="profile-header__info-item-hidden"><button class="profile-header__info-button" type="button" onclick="selectTab('concertsModal', 'modal')">Conciertos</button></li>
                 </ul>
             </div>
         </div>
@@ -39,21 +45,6 @@
                         <img src="https://as1.ftcdn.net/v2/jpg/03/46/83/96/1000_F_346839683_6nAPzbhpSkIpb8pmAwufkC7c5eD7wYws.jpg"
                              class="pub-card__user-image" alt="">
                         <div class="pub-card__username">Usuario 1</div>
-                    </div>
-                    <div class="pub-card__body">
-                        <h5 class="pub-card__title">Contenido de la publicación</h5>
-                    </div>
-                    <div class="pub-card__footer">
-                        <p class="pub-card__date">Fecha y hora de la publicación</p>
-                        <a class="pub-card__link" href="/publication">Ver mas</a>
-                    </div>
-                </div>
-                <!-- Publicación 2 -->
-                <div class="pub-card">
-                    <div class="pub-card__header">
-                        <img src="https://as1.ftcdn.net/v2/jpg/03/46/83/96/1000_F_346839683_6nAPzbhpSkIpb8pmAwufkC7c5eD7wYws.jpg"
-                             class="pub-card__user-image" alt="">
-                        <div class="pub-card__username">Usuario 2</div>
                     </div>
                     <div class="pub-card__body">
                         <h5 class="pub-card__title">Contenido de la publicación</h5>
@@ -149,18 +140,18 @@
             <!-- COLUMNA DERECHA CARDS -->
             <div class="profile-content__more">
                 <!-- Próximos conciertos -->
-                <div class="concert-card">
-                    <div class="concert-card__header">
-                        <h5 class="concert-card__title">Próximos conciertos</h5>
+                <div class="concerts-card">
+                    <div class="concerts-card__header">
+                        <h5 class="concerts-card__title">Próximos conciertos</h5>
                     </div>
-                    <div class="concert-card__body">
-                        <div class="concert-card__item">Concierto de David Guetta</div>
-                        <div class="concert-card__item">Cabo de Plata</div>
-                        <div class="concert-card__item">Tomorrowland</div>
-                        <div class="concert-card__item">Concierto de Melendi</div>
-                        <div class="concert-card__item">Concierto de Carol G</div>
+                    <div class="concerts-card__body">
+                        <div class="concerts-card__item">Concierto de David Guetta</div>
+                        <div class="concerts-card-card__item">Cabo de Plata</div>
+                        <div class="concerts-card-card__item">Tomorrowland</div>
+                        <div class="concerts-card-card__item">Concierto de Melendi</div>
+                        <div class="concerts-card__item">Concierto de Carol G</div>
                     </div>
-                    <div class="concert-card__footer">
+                    <div class="concerts-card-card__footer">
                         <a class="concerts-card__link" href="#" onclick="openModal('concertsModal')">Ver mas</a>
                     </div>
                 </div>
