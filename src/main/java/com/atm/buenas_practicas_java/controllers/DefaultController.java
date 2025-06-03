@@ -125,17 +125,11 @@ public class DefaultController {
         return "/artist/artist";
     }
   
-    @GetMapping({"", "/logueo"})
-    public String getLogin(){
-        return "/user/login";
-    }
 
     @GetMapping({"", "/new-publication"})
     public String getNewPublicationPage(){
         return "/publication/new-publication";
     }
-
-
 
     @GetMapping({"", "/chat"})
     public String getSocialPage(){
@@ -161,6 +155,7 @@ public class DefaultController {
     public String getAdminPanel(){
         return "/user/adminpanel";
     }
+
 
     @GetMapping({"", "/artist/profile"})
     public String getArtistProfile(){
