@@ -117,41 +117,78 @@ public class DefaultController {
 
     @GetMapping({"", "/concerts"})
     public String getConcertPage(){
-        return "/concert/index";
+        return "/concert/concerts";
     }
 
     @GetMapping({"", "/artists"})
     public String getArtistPage(){
         return "/artist/artist";
     }
+  
 
-    @GetMapping({"", "/Profile"})
-    public String getUserProfile(){
-        return "/user/profile";
+    @GetMapping({"", "/new-publication"})
+    public String getNewPublicationPage(){
+        return "/publication/new-publication";
     }
 
-    @GetMapping({"", "/ArtistProfile"})
-    public String getArtistProfile(){
-        return "/artist/artistProfile";
+    @GetMapping({"", "/chat"})
+    public String getSocialPage(){
+        return "/social/social";
     }
   
-    @GetMapping({"", "/chat"})
+    @GetMapping({"", "/artist/profile"})
+    public String getArtistProfile(){
+        return "/artist/profile";
+    }
+  
+    @GetMapping({"", "/chat/id"})
     public String getChatPage(){
         return "/social/chat";
     }
+
+    @GetMapping({"", "/search"})
+    public String getSearch(){
+        return "/search/search";
+    }
+
+    @GetMapping({"", "/places/new"})
+    public String createPlacePage(){
+        return "/places/form";
+    }
   
-    @GetMapping({"", "/search/artists"})
-    public String getSearchArtistPage(){
-        return "/search/artists";
-    }
-
-    @GetMapping({"", "/search/users"})
-    public String getSearchUsersPage(){
-        return "/search/users";
-    }
-
     @GetMapping({"", "/search/concerts"})
     public String getSearchConcertsPage(){
         return "/search/concerts";
     }
+
+    @GetMapping({"", "/places/id"})
+    public String getPlacesProfile(){
+        return "/places/profile";
+    }
+  
+    @GetMapping({"", "/places/edit"})
+    public String editPlacePage(){
+        return "/places/form";
+    }
+
+    @GetMapping({"", "/publication"})
+    public String getPublicationPage(){return "/publication/publication";}
+  
+    @GetMapping("/concert")
+    public String showConcertsPage() {
+        return "concert/concerts";
+    }
+
+    @GetMapping("/concert/detail")
+    public String showConcertDetailPage() {
+        return "concert/concert-detail";
+    }
+
+    @GetMapping("/places")
+    public String showPlacesPage() {
+        return "/places/places";
+    }
 }
+
+
+
