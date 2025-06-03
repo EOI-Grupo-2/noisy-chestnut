@@ -6,22 +6,30 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
-import java.util.List;
+import java.time.LocalDateTime;
 
 @Entity
 @Getter
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
-@Table(name = "roles")
-public class Role {
+public class Concert {
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column(nullable = false)
+    @Column (nullable = false)
     private String name;
-  
-    @OneToMany( mappedBy = "role", fetch = FetchType.EAGER)
-    private List<User> users;
+
+    @Column(nullable = false)
+    private String description;
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn (name = "place_id", nullable = false)
+    private Place place;
+
+    @Column(nullable = false)
+    private LocalDateTime date;
+
 }

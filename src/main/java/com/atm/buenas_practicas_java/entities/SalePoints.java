@@ -6,22 +6,25 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
-import java.util.List;
+import java.text.DecimalFormat;
 
 @Entity
 @Getter
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
-@Table(name = "roles")
-public class Role {
+public class SalePoints {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
     @Column(nullable = false)
-    private String name;
-  
-    @OneToMany( mappedBy = "role", fetch = FetchType.EAGER)
-    private List<User> users;
+    private String salePointUrl;
+
+    @Column(nullable = false)
+    private DecimalFormat ticketPrice;
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn (name = "concert_id", nullable = false)
+    private Concert concert;
 }

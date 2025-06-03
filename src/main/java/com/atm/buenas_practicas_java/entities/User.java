@@ -8,6 +8,8 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
+import java.util.List;
+
 @Entity
 @Getter
 @Setter
@@ -41,4 +43,6 @@ public class User {
     @ManyToOne
     @JoinColumn(name = "role_id")
     private Role role;
+    @OneToMany
+    private List<Follows> follows;
 }
