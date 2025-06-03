@@ -370,7 +370,8 @@ body {
     grid-template-areas: 'content';
   }
 
-  .menu {
+  .menu{
+
     position: absolute;
     top: 0;
     left: 0;
@@ -384,7 +385,8 @@ body {
       display: block;
     }
   }
-  @media only screen and (max-width: $mobile-breakpoint) {@media only screen and (max-width: 768px) {
+
+  @media only screen and (max-width: $mobile-breakpoint) {
     .chat,
     .crear-grupo {
       width: 90%;
@@ -402,3 +404,16 @@ body {
   }
   }
 }
+    .pub-card {
+      width: 90%;
+      min-height: 10rem;
+      background-color: $secondary-color;
+      display: grid;
+      grid-template-rows: auto 1fr;
+      grid-template-columns: 1fr;
+      color: $font-color;
+      border-radius: 5px;
+    }
+}
+
+
