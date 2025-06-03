@@ -13,115 +13,138 @@
 
   <div class="admin-header">
     <h2>Gestión de salas</h2>
-    <button class="admin-header__create-button" onclick="openModal('createPlaceModal')"> + Crear nueva sala </button>
+    <button class="admin-header__create-button" id="createPlaceButton" onclick="window.location.href='/places/new'"> + Crear nueva sala </button>
   </div>
-
-
-  <div class="place-card">
-    <img class="place-card__image" src="https://www.atleticodemadrid.com/system/file3s/78316/large/BV81gnkPa-__37A2770.jpg?1654122441" alt="placeImage">
-    <div class="place-card__content">
-      <h2 class="place-card__title">
-        Sala 1
-      </h2>
-      <div class="place-card__buttons">
-      <button class="place-card__edit-button">Editar</button>
-      <button class="place-card__delete-button">Eliminar</button>
-        </div>
-    </div>
-  </div>
-  <div class="place-card">
-    <img class="place-card__image" src="https://www.atleticodemadrid.com/system/file3s/78316/large/BV81gnkPa-__37A2770.jpg?1654122441" alt="placeImage">
-    <div class="place-card__content">
-      <h2 class="place-card__title">
-        Sala 1
-      </h2>
-      <div class="place-card__buttons">
-        <button class="place-card__edit-button">Editar</button>
-        <button class="place-card__delete-button">Eliminar</button>
+  <table class="admin-table user-table">
+    <thead>
+    <tr>
+      <th>ID</th>
+      <th>Nombre</th>
+      <th>Ubicación</th>
+      <th>Dirección</th>
+      <th>Acciones</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr>
+    <tbody>
+    <tr>
+      <td>1</td>
+      <td>Sala Aurora</td>
+      <td>Madrid</td>
+      <td>Calle Libertad 12</td>
+      <td class="table-actions">
+        <button class="btn-edit" onclick="window.location.href='/places/new'">Editar</button>
+        <button class="btn-delete" onclick="openModal('deletePlaceModal')">Eliminar</button>
+      </td>
+    </tr>
+    <tr>
+      <td>2</td>
+      <td>La Caverna</td>
+      <td>Barcelona</td>
+      <td>Avinguda del Sol 87</td>
+      <td class="table-actions">
+        <button class="btn-edit" onclick="window.location.href='/places/new'">Editar</button>
+        <button class="btn-delete" onclick="openModal('deletePlaceModal')">Eliminar</button>
+      </td>
+    </tr>
+    <tr>
+      <td>3</td>
+      <td>Rock Palace</td>
+      <td>Sevilla</td>
+      <td>Paseo de los Mártires 22</td>
+      <td class="table-actions">
+        <button class="btn-edit" onclick="window.location.href='/places/new'">Editar</button>
+        <button class="btn-delete" onclick="openModal('deletePlaceModal')">Eliminar</button>
+      </td>
+    </tr>
+    <tr>
+      <td>4</td>
+      <td>Jazz Garden</td>
+      <td>Valencia</td>
+      <td>Plaza del Carmen 5</td>
+      <td class="table-actions">
+        <button class="btn-edit" onclick="window.location.href='/places/new'">Editar</button>
+        <button class="btn-delete" onclick="openModal('deletePlaceModal')">Eliminar</button>
+      </td>
+    </tr>
+    <tr>
+      <td>5</td>
+      <td>Indie Hall</td>
+      <td>Bilbao</td>
+      <td>Calle Urkijo 14</td>
+      <td class="table-actions">
+        <button class="btn-edit" onclick="window.location.href='/places/new'">Editar</button>
+        <button class="btn-delete" onclick="openModal('deletePlaceModal')">Eliminar</button>
+      </td>
+    </tr>
+    <tr>
+      <td>6</td>
+      <td>La Trastienda</td>
+      <td>Zaragoza</td>
+      <td>Ronda San José 8</td>
+      <td class="table-actions">
+        <button class="btn-edit" onclick="window.location.href='/places/new'">Editar</button>
+        <button class="btn-delete" onclick="openModal('deletePlaceModal')">Eliminar</button>
+      </td>
+    </tr>
+    <tr>
+      <td>7</td>
+      <td>Electric Sound</td>
+      <td>Granada</td>
+      <td>Camino de Ronda 56</td>
+      <td class="table-actions">
+        <button class="btn-edit" onclick="window.location.href='/places/new'">Editar</button>
+        <button class="btn-delete" onclick="openModal('deletePlaceModal')">Eliminar</button>
+      </td>
+    </tr>
+    <tr>
+      <td>8</td>
+      <td>La Catedral del Rock</td>
+      <td>A Coruña</td>
+      <td>Rua Real 101</td>
+      <td class="table-actions">
+        <button class="btn-edit" onclick="window.location.href='/places/new'">Editar</button>
+        <button class="btn-delete" onclick="openModal('deletePlaceModal')">Eliminar</button>
+      </td>
+    </tr>
+    <tr>
+      <td>9</td>
+      <td>El Subterráneo</td>
+      <td>Murcia</td>
+      <td>Avenida Constitución 30</td>
+      <td class="table-actions">
+        <button class="btn-edit" onclick="window.location.href='/places/new'">Editar</button>
+        <button class="btn-delete" onclick="openModal('deletePlaceModal')">Eliminar</button>
+      </td>
+    </tr>
+    <tr>
+      <td>10</td>
+      <td>Sala Nebula</td>
+      <td>Málaga</td>
+      <td>Calle Larios 17</td>
+      <td class="table-actions">
+        <button class="btn-edit" onclick="window.location.href='/places/new'" >Editar</button>
+        <button class="btn-delete" onclick="openModal('deletePlaceModal')">Eliminar</button>
+      </td>
+    </tr>
+    </tbody>
+</table>
+  <!--Modal para eliminar sala-->
+  <div class="modal" id="deletePlaceModal">
+    <div class="modal__content">
+      <header class="modal__header">
+        <h2>Eliminar sala</h2>
+      </header>
+      <div class="modal__body">
+        <p>¿Está seguro de que desea eliminar la sala?</p>
+      </div>
+      <div class="modal__footer">
+          <button class="btn-cancel" onclick="openModal('deletePlaceModal')" >Cancelar</button>
+          <button class="btn-confirm">Confirmar</button>
       </div>
     </div>
   </div>
-  <div class="place-card">
-    <img class="place-card__image" src="https://www.atleticodemadrid.com/system/file3s/78316/large/BV81gnkPa-__37A2770.jpg?1654122441" alt="placeImage">
-    <div class="place-card__content">
-      <h2 class="place-card__title">
-        Sala 1
-      </h2>
-      <div class="place-card__buttons">
-        <button class="place-card__edit-button">Editar</button>
-        <button class="place-card__delete-button">Eliminar</button>
-      </div>
-    </div>
-  </div>
-</div>
-
-<!--Modal para crear sala-->
-<div class="modal" id="createPlaceModal">
-  <div class="modal__content">
-    <div class="modal__header">
-      <h2 class="modal__title">Crear nueva sala</h2>
-      <i class="fa-solid fa-xmark fa-lg" style="color: #ffffff;" onclick="openModal('createPlaceModal')"></i>
-    </div>
-    <div class="modal__body">
-      <div class="modal__name">
-        <label for="placeName" class="modal__label">Nombre de la sala:</label>
-        <input type="text" id="placeName" class="modal__input" placeholder="Escribe el nombre de la sala" />
-      </div>
-      <div class="modal__search">
-        <label for="userSearch" class="modal__label">Selecciona ubicación</label>
-        <input type="text" id="userSearch" class="modal__input" placeholder="Buscar ubicación..."  onkeyup="searchInput('usersList', 'userSearch')"/>
-      </div>
-      <div class="modal__description">
-        <label for="placeDescription" class="modal__label">Descripción: </label>
-        <input type="text" id="placeDescription" class="modal__input" placeholder="Introduce una descricpión" />
-      </div>
-
-      <div class="confirmPlaceButton">
-        <button class="buttons-container__button" id="confirmCreatePlace">Crear nueva sala</button>
-      </div>
-
-    </div>
-  </div>
-</div>
-<!--Modal para editar sala-->
-<div class="modal" id="editPlaceModal">
-  <div class="modal__content">
-    <div class="modal__header">
-      <h2 class="modal__title">Editar sala</h2>
-      <i class="fa-solid fa-xmark fa-lg" style="color: #ffffff;" onclick="openModal('editPlaceModal')"></i>
-    </div>
-    <div class="modal__body">
-      <div class="modal__name">
-        <label for="editPlaceName" class="modal__label">Nombre de la sala:</label>
-        <input type="text" id="editPlaceName" class="modal__input" placeholder="Edita el nombre de la sala" />
-      </div>
-      <div class="modal__search">
-        <label for="placeSearch" class="modal__label">Selecciona ubicación</label>
-        <input type="text" id="placeSearch" class="modal__input" placeholder="Buscar ubicación..."  onkeyup="searchInput('usersList', 'userSearch')"/>
-      </div>
-    </div>
-    <div class="confirmEditPlaceButton">
-      <button class="buttons-container__button" id="confirmEditPlace">Guardar cambios</button>
-    </div>
-  </div>
-
-</div>
-<!--Modal para eliminar sala-->
-<div class="modal" id="deletePlaceModal">
-  <div class="modal__content">
-    <div class="modal__header">
-      <h2 class="modal__title">Eliminar sala</h2>
-      <i>¿Está seguro de que desea eliminar la sala?</i>
-    </div>
-    <div class="modal__body">
-      <div class="confirmEditPlaceButton">
-        <button class="buttons-container__button" id="confirmDeletePlace">Confirmar</button>
-      </div>
-      <div class="confirmEditPlaceButton">
-        <button class="buttons-container__button" id="confirmDeletelace">Cancelar</button>
-      </div>
-    </div>
-</div>
 </div>
 </body>
 </html>
