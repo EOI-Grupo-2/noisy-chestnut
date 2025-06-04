@@ -10,7 +10,7 @@ import org.springframework.stereotype.Service;
 public class AlbumsService extends AbstractBusinessService<Albums,Long, AlbumsDTO,
         AlbumsRepository, AlbumsMapper> {
 
-    public AlbumsService(AlbumsRepository albumRepository, AlbumMapper albumMapper) {
-        super(albumRepository, albumsMapper);
+    public AlbumsService(AlbumsRepository albumsRepository, AlbumsMapper albumsMapper) {
+        super(albumsRepository, albumsMapper);
     }
 }
