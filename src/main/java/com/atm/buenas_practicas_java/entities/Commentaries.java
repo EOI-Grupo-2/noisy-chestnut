@@ -21,7 +21,7 @@ public class Commentaries {
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn (name = "pub_id", nullable = false)
-    private Publication pub;
+    private Publications pub;
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn (name = "user_id", nullable = false)

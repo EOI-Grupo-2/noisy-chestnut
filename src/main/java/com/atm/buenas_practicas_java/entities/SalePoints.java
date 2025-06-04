@@ -22,7 +22,7 @@ public class SalePoints {
     private String salePointUrl;
 
     @Column(nullable = false)
-    private DecimalFormat ticketPrice;
+    private Double ticketPrice;
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn (name = "concert_id", nullable = false)
