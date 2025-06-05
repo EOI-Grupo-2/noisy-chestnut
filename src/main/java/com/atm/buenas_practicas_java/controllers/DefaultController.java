@@ -136,6 +136,27 @@ public class DefaultController {
         return "/social/social";
     }
   
+    @GetMapping({"", "/register"})
+    public String getRegister(){
+        return "/user/register";
+    }
+  
+    @GetMapping({"", "/user/profile"})
+    public String getUserProfile(){
+        return "/user/profile";
+    }
+
+    @GetMapping({"", "/user/editprofile"})
+    public String getUserEditProfile(){
+        return "/user/editprofile";
+    }
+
+    @GetMapping({"", "/user/adminpanel"})
+    public String getAdminPanel(){
+        return "/user/adminpanel";
+    }
+
+
     @GetMapping({"", "/artist/profile"})
     public String getArtistProfile(){
         return "/artist/profile";
