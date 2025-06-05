@@ -23,7 +23,7 @@ public class Publications {
     @Column (nullable = false)
     private String description;
 
-    @Column (nullable = false)
+    @Column (nullable = true)
     private String photoUrl;
 
     @Column(nullable = false)
