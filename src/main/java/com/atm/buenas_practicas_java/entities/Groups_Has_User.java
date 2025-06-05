@@ -11,15 +11,17 @@ import lombok.Setter;
 @NoArgsConstructor
 @AllArgsConstructor
 public class Groups_Has_User {
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+    @EmbeddedId
+    private GroupHasUserId id;
 
-    @ManyToMany(fetch = FetchType.LAZY)
-    @JoinColumn (name = "user_id", nullable = false)
+    @ManyToOne(fetch = FetchType.LAZY)
+    @MapsId("userId")
+    @JoinColumn(name = "Users_id", nullable = false)
     private User user;
 
-    @ManyToMany(fetch = FetchType.LAZY)
-    @JoinColumn(name = "group_id", nullable = false)
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    @MapsId("groupId")
+    @JoinColumn(name = "Groups_id", nullable = false)
     private Group group;
 }
