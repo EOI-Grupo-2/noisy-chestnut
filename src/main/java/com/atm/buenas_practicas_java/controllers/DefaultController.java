@@ -176,7 +176,7 @@ public class DefaultController {
     public String createPlacePage(){
         return "/places/form";
     }
-  
+
     @GetMapping({"", "/search/concerts"})
     public String getSearchConcertsPage(){
         return "/search/concerts";
@@ -186,7 +186,7 @@ public class DefaultController {
     public String getPlacesProfile(){
         return "/places/profile";
     }
-  
+
     @GetMapping({"", "/places/edit"})
     public String editPlacePage(){
         return "/places/form";
@@ -204,6 +204,12 @@ public class DefaultController {
     public String showConcertDetailPage() {
         return "concert/concert-detail";
     }
+
+    @GetMapping("/concert/form")
+    public String showConcertFormPage() {
+        return "concert/concert-form";
+    }
+
 
     @GetMapping("/places")
     public String showPlacesPage() {

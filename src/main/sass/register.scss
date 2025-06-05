@@ -101,3 +101,45 @@
     }
   }
 }
+@media screen and (max-width: $tablet-breakpoint) {
+  .register-card {
+    max-width: 60%;
+  }
+}
+
+@media screen and (max-width: $mobile-breakpoint) {
+  .register-card {
+    max-width: 100%;
+    padding: 1.5rem 1rem;
+
+    &__body {
+      padding: 20px 15px;
+      gap: 20px;
+    }
+
+    &__field {
+      margin-top: 15px;
+
+      label {
+        font-size: 0.9rem;
+      }
+
+      input {
+        font-size: 0.95rem;
+      }
+    }
+
+    &__button {
+      padding: 12px;
+      font-size: 0.95rem;
+    }
+
+    &__login {
+      margin-top: 15px;
+
+      a {
+        font-size: 0.9rem;
+      }
+    }
+  }
+}
