@@ -52,4 +52,7 @@ public class User {
     private Set<Role> roles = new HashSet<>();
     @OneToMany(fetch = FetchType.EAGER)
     private List<Follows> follows;
+
+    @OneToMany(fetch = FetchType.EAGER)
+    private List<Group> groups;
 }

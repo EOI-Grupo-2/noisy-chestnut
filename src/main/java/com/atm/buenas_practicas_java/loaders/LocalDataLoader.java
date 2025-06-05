@@ -4,8 +4,6 @@ import com.atm.buenas_practicas_java.entities.Role;
 import com.atm.buenas_practicas_java.entities.User;
 import com.atm.buenas_practicas_java.entities.enums.Genre;
 import com.atm.buenas_practicas_java.entities.enums.MusicGenre;
-import com.atm.buenas_practicas_java.repositories.EntidadHijaRepository;
-import com.atm.buenas_practicas_java.repositories.EntidadPadreRepository;
 import com.atm.buenas_practicas_java.repositories.RoleRepository;
 import com.atm.buenas_practicas_java.repositories.UserRepository;
 import jakarta.annotation.PostConstruct;
