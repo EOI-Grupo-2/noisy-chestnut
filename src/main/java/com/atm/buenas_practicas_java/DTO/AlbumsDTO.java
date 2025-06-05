@@ -1,5 +1,6 @@
 package com.atm.buenas_practicas_java.DTO;
 
+import com.atm.buenas_practicas_java.entities.User;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -14,9 +15,9 @@ import java.time.LocalDateTime;
 public class AlbumsDTO {
     private Long id;
     private String title;
-    private String rating;
+    private Double rating;
     private String spotifyLink;
-    private Long userId;
+    private User userId;
     private Integer totalTracks;
     private LocalDateTime date;
 }
