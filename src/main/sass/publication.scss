@@ -1,21 +1,24 @@
+@import "variables";
 
-.content {
+
+.publication-layout {
   display: flex;
+  width: 100%;
   flex-direction: row;
-  justify-content: center;
+  gap: 2rem;
   align-items: center;
-  gap: 20px;
-  padding: 3rem 0;
+  justify-content: center;
+  padding: 1rem;
+
 }
 
 .post {
-  width: 60%;
-  max-width: 35%;
+  width: 90%;
+  max-width: 50rem;
   background-color: #0C0C00;
   padding: 15px;
   border-radius: 10px;
   box-shadow: 0 4px 10px rgba(12, 12, 0, 0.8);
-  max-height: 90%;
 
   &__author {
     font-size: 18px;
@@ -24,7 +27,7 @@
   }
 
   &__handle {
-    color: #FAEBD7; // Gris
+    color: #FAEBD7;
     font-weight: normal;
   }
 
@@ -40,15 +43,21 @@
 
   &__actions {
     display: flex;
+    flex-wrap: wrap;
     justify-content: center;
     gap: 10px;
     margin-top: 15px;
+
+    @media (max-width: 767px) {
+      flex-direction: column;
+      align-items: stretch;
+    }
   }
 }
 
 .button {
-  background-color: #9B111E; // Rojo
-  color: #FFFAF0; // Blanco
+  background-color: #9B111E;
+  color: #FFFAF0;
   border: none;
   padding: 8px 16px;
   border-radius: 6px;
@@ -57,14 +66,15 @@
   transition: background 0.3s ease;
 
   &:hover {
-    background-color: #9B111E; // Mismo rojo (no hay otro tono permitido)
-    opacity: 0.85; // Simula efecto sin cambiar color
+    background-color: #9B111E;
+    opacity: 0.85;
   }
 
   &--comment {
     width: 100%;
     margin-top: 10px;
   }
+
   a {
     color: inherit;
     text-decoration: none;
@@ -75,24 +85,24 @@
 }
 
 .comments {
-  max-height: 90%;
-  background-color: #0C0C00; // Negro
+  width: 90%;
+  max-width: 40rem;
+  background-color: #0C0C00;
   padding: 15px;
-
   border-radius: 10px;
-  box-shadow: 0 4px 10px rgba(12, 12, 0, 0.4); // Basado en negro
+  box-shadow: 0 4px 10px rgba(12, 12, 0, 0.4);
 
   &__title {
     margin-bottom: 10px;
-    color: #FFFAF0; // Negro para contraste
+    color: #FFFAF0;
   }
 
   &__comment {
-    background-color: #0C0C00; // Negro
+    background-color: #0C0C00;
     padding: 10px;
     border-radius: 5px;
     margin-bottom: 10px;
-    color: #FFFAF0; // Texto negro
+    color: #FFFAF0;
   }
 
   &__new {
@@ -101,7 +111,7 @@
 
   &__textarea {
     width: 100%;
-    background-color: #0C0C00; // Negro
+    background-color: #0C0C00;
     color: #FFFAF0;
     border-radius: 5px;
     border: none;
@@ -109,3 +119,22 @@
     resize: vertical;
   }
 }
+
+@media only screen and (max-width: $tablet-breakpoint){
+
+  .publication-layout{
+    flex-direction: column;
+
+  }
+
+}
+
+@media only screen and (max-width: $mobile-breakpoint) {
+  .publication-layout{
+    flex-direction: column;
+  }
+
+}
+
+
+
