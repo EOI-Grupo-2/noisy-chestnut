@@ -6,12 +6,11 @@
   padding: 0;
   font-family: Arial, Helvetica, sans-serif;
 }
-
 body {
   background-image: url('https://images.unsplash.com/photo-1701099153549-a94513b57f60?fm=jpg&q=60&w=3000&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D'); /* Reemplaza con tu imagen */
-  background-size: auto; /* Ajusta la imagen al tamaño de la pantalla */
-  background-position: center; /* Centra la imagen */
-  background-repeat: no-repeat; /* Evita que la imagen se repita */
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
 }
 
 .page-layout {
@@ -20,6 +19,7 @@ body {
   grid-template-columns: auto 8fr;
   grid-template-areas: 'menu content';
   gap: 2rem;
+  min-height: 100vh;
 }
 
 .content{
@@ -110,8 +110,7 @@ body {
 }
 
 .pub-card{
-  width: 30rem;
-  min-height: 10rem;
+  width: 80%;
   background-color: $secondary-color;
   display: grid;
   grid-template-rows: auto 1fr;
@@ -121,7 +120,7 @@ body {
 
   &__header{
     padding: 0.5rem 1rem;
-    background-color: $tertiary-color;
+    background-color: $primary-color;
     border-top-left-radius: 5px;
     border-top-right-radius: 5px;
     display: flex;
@@ -229,6 +228,7 @@ body {
 }
 
 .chat-modal{
+  z-index: 3;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
@@ -369,20 +369,41 @@ body {
     grid-template-rows: auto;
     grid-template-areas: 'content';
   }
+ .content {
+      margin-top: 3rem;
+    }
+  
   .menu{
+
     position: absolute;
     top: 0;
     left: 0;
     transform: translateX(-15rem);
 
-    &__button{
+    &__button {
       display: block;
     }
 
-    &__close-button{
+    &__close-button {
       display: block;
     }
   }
+  
+  .chat,
+    .crear-grupo {
+      width: 90%;
+      height: 90vh;
+      margin: 2rem auto;
+      border-radius: 10px;
+      overflow-y: auto;
+    }
+
+    .chat__body,
+    .crear-grupo__body {
+      max-height: 70vh;
+      overflow-y: auto;
+    }
+  
     .pub-card {
       width: 90%;
       min-height: 10rem;
@@ -395,3 +416,16 @@ body {
     }
 }
 
+@media only screen and (max-width: $mobile-breakpoint) {
+  .chat-modal{
+    width: 100%;
+    height: 100%;
+    top: 0;
+    left: 0;
+    border-radius: 0;
+
+    &__items{
+      max-height: 100%;
+    }
+  }
+}

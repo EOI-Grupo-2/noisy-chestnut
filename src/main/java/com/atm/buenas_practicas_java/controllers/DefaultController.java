@@ -62,6 +62,27 @@ public class DefaultController {
         return "/social/social";
     }
   
+    @GetMapping({"", "/register"})
+    public String getRegister(){
+        return "/user/register";
+    }
+  
+    @GetMapping({"", "/user/profile"})
+    public String getUserProfile(){
+        return "/user/profile";
+    }
+
+    @GetMapping({"", "/user/editprofile"})
+    public String getUserEditProfile(){
+        return "/user/editprofile";
+    }
+
+    @GetMapping({"", "/user/adminpanel"})
+    public String getAdminPanel(){
+        return "/user/adminpanel";
+    }
+
+
     @GetMapping({"", "/artist/profile"})
     public String getArtistProfile(){
         return "/artist/profile";
@@ -81,7 +102,7 @@ public class DefaultController {
     public String createPlacePage(){
         return "/places/form";
     }
-  
+
     @GetMapping({"", "/search/concerts"})
     public String getSearchConcertsPage(){
         return "/search/concerts";
@@ -91,7 +112,7 @@ public class DefaultController {
     public String getPlacesProfile(){
         return "/places/profile";
     }
-  
+
     @GetMapping({"", "/places/edit"})
     public String editPlacePage(){
         return "/places/form";
@@ -109,6 +130,12 @@ public class DefaultController {
     public String showConcertDetailPage() {
         return "concert/concert-detail";
     }
+
+    @GetMapping("/concert/form")
+    public String showConcertFormPage() {
+        return "concert/concert-form";
+    }
+
 
     @GetMapping("/places")
     public String showPlacesPage() {
