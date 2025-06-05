@@ -17,16 +17,16 @@ public class Publications {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column (nullable = false)
+    @Column (nullable = true)
     private String title;
 
-    @Column (nullable = false)
+    @Column (nullable = true)
     private String description;
 
     @Column (nullable = true)
     private String photoUrl;
 
-    @Column(nullable = false)
+    @Column(nullable = true)
     private Integer likes;
 
     @JoinColumn (name = "pubDate", nullable = false)
