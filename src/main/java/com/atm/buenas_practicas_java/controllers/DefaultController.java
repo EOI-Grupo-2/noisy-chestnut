@@ -125,39 +125,17 @@ public class DefaultController {
         return "/artist/artist";
     }
   
-    @GetMapping({"", "/logueo"})
-    public String getLogin(){
-        return "/user/login";
-    }
 
     @GetMapping({"", "/new-publication"})
     public String getNewPublicationPage(){
         return "/publication/new-publication";
     }
 
-
-
     @GetMapping({"", "/chat"})
     public String getSocialPage(){
         return "/social/social";
     }
   
-    @GetMapping({"", "/register"})
-    public String getRegister(){
-        return "/user/register";
-    }
-  
-    @GetMapping({"", "/user/profile"})
-    public String getUserProfile(){
-        return "/user/profile";
-    }
-
-    @GetMapping({"", "/user/editprofile"})
-    public String getUserEditProfile(){
-        return "/user/editprofile";
-    }
-
-
     @GetMapping({"", "/artist/profile"})
     public String getArtistProfile(){
         return "/artist/profile";
