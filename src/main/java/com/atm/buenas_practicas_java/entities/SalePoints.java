@@ -24,7 +24,7 @@ public class SalePoints {
     @Column(nullable = false)
     private DecimalFormat ticketPrice;
 
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn (name = "concert_id", nullable = false)
     private Concert concert;
 }
