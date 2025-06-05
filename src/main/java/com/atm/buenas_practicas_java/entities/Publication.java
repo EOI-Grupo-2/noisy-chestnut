@@ -33,7 +33,7 @@ public class Publication {
     @JoinColumn (name = "pubDate", nullable = false)
     private LocalDateTime Date;
 
-    @OneToOne(fetch = FetchType.LAZY)
+    @OneToOne(fetch = FetchType.EAGER)
     @JoinColumn (name = "user_id", nullable = false)
     private User user;
 }

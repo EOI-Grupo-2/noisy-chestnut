@@ -1,8 +1,6 @@
 package com.atm.buenas_practicas_java.integrationTests;
 
 import com.atm.buenas_practicas_java.PostgreSQLContainerTest;
-import com.atm.buenas_practicas_java.entities.EntidadHija;
-import com.atm.buenas_practicas_java.entities.EntidadPadre;
 import com.atm.buenas_practicas_java.repositories.EntidadHijaRepository;
 import com.atm.buenas_practicas_java.repositories.EntidadPadreRepository;
 import lombok.extern.log4j.Log4j2;

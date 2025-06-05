@@ -1,7 +1,5 @@
 package com.atm.buenas_practicas_java.loaders;
 
-import com.atm.buenas_practicas_java.entities.EntidadHija;
-import com.atm.buenas_practicas_java.entities.EntidadPadre;
 import com.atm.buenas_practicas_java.repositories.EntidadHijaRepository;
 import com.atm.buenas_practicas_java.repositories.EntidadPadreRepository;
 import jakarta.annotation.PostConstruct;

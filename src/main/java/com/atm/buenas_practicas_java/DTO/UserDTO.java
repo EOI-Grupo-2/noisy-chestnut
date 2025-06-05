@@ -1,5 +1,6 @@
 package com.atm.buenas_practicas_java.DTO;
 
+import com.atm.buenas_practicas_java.entities.Follows;
 import com.atm.buenas_practicas_java.entities.Role;
 import com.atm.buenas_practicas_java.entities.enums.Genre;
 import com.atm.buenas_practicas_java.entities.enums.MusicGenre;
@@ -7,6 +8,10 @@ import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Set;
 
 @Getter
 @Setter
@@ -16,6 +21,7 @@ public class UserDTO {
 
     private Long id;
     private String username;
+    private String password;
     private String name;
     private String fullLastName;
     private String email;
@@ -23,5 +29,6 @@ public class UserDTO {
     private Double rate;
     private Genre genre;
     private MusicGenre musicGenre;
-    private Role role;
+    private Set<Role> role;
+    private List<Follows> follows = new ArrayList<>();
 }

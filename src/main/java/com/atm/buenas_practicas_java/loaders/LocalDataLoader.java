@@ -1,7 +1,5 @@
 package com.atm.buenas_practicas_java.loaders;
 
-import com.atm.buenas_practicas_java.entities.EntidadHija;
-import com.atm.buenas_practicas_java.entities.EntidadPadre;
 import com.atm.buenas_practicas_java.entities.Role;
 import com.atm.buenas_practicas_java.entities.User;
 import com.atm.buenas_practicas_java.entities.enums.Genre;
@@ -14,10 +12,8 @@ import jakarta.annotation.PostConstruct;
 import lombok.extern.log4j.Log4j2;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Profile;
-import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 
-import java.util.Arrays;
 import java.util.List;
 import java.util.Set;
 
@@ -144,7 +140,7 @@ public class LocalDataLoader {
         user1.setGenre(Genre.MALE);
         user1.setDescription("Descripcion del admin chulo");
         user1.setMusicGenre(MusicGenre.RAP);
-        user1.setRoles(Set.of(adminRole));
+        user1.setRoles(Set.of(adminRole, userRole));
         User user2 = new User();
         user2.setUsername("user1");
         user2.setPassword(passwordEncoder.encode("user2"));
@@ -158,7 +154,7 @@ public class LocalDataLoader {
         user2.setDescription("Descripcion del usuario chulo");
         userRepository.saveAll(List.of(user1, user2));
         adminRole.setUsers(List.of(user1));
-        userRole.setUsers(List.of(user2));
+        userRole.setUsers(List.of(user1, user2));
         roleRepository.saveAll(List.of(adminRole, artistRole, concertAdminRole, placeAdminRole, userRole, anonymousRole));
         log.info("Datos de entidades cargados correctamente.");
     }
