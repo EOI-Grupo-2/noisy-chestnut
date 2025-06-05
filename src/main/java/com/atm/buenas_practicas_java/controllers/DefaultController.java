@@ -125,17 +125,11 @@ public class DefaultController {
         return "/artist/artist";
     }
   
-    @GetMapping({"", "/logueo"})
-    public String getLogin(){
-        return "/user/login";
-    }
 
     @GetMapping({"", "/new-publication"})
     public String getNewPublicationPage(){
         return "/publication/new-publication";
     }
-
-
 
     @GetMapping({"", "/chat"})
     public String getSocialPage(){
@@ -155,6 +149,11 @@ public class DefaultController {
     @GetMapping({"", "/user/editprofile"})
     public String getUserEditProfile(){
         return "/user/editprofile";
+    }
+
+    @GetMapping({"", "/user/adminpanel"})
+    public String getAdminPanel(){
+        return "/user/adminpanel";
     }
 
 
@@ -177,7 +176,7 @@ public class DefaultController {
     public String createPlacePage(){
         return "/places/form";
     }
-  
+
     @GetMapping({"", "/search/concerts"})
     public String getSearchConcertsPage(){
         return "/search/concerts";
@@ -187,7 +186,7 @@ public class DefaultController {
     public String getPlacesProfile(){
         return "/places/profile";
     }
-  
+
     @GetMapping({"", "/places/edit"})
     public String editPlacePage(){
         return "/places/form";
@@ -205,6 +204,12 @@ public class DefaultController {
     public String showConcertDetailPage() {
         return "concert/concert-detail";
     }
+
+    @GetMapping("/concert/form")
+    public String showConcertFormPage() {
+        return "concert/concert-form";
+    }
+
 
     @GetMapping("/places")
     public String showPlacesPage() {

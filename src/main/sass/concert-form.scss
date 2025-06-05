@@ -1,0 +1,238 @@
+@import "variables";
+
+// Variables locales esenciales
+$input-bg-color: darken($tertiary-color, 5%);
+$input-border-radius: 6px;
+
+.content {
+  padding: 40px 20px;
+  width: 100%;
+
+  @media (max-width: $tablet-breakpoint) {
+    padding-left: 90px;
+  }
+
+  @media (max-width: $mobile-breakpoint) {
+    padding: 20px 10px 20px 80px;
+  }
+}
+
+.btn-back {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  color: $font-color;
+  text-decoration: none;
+  padding: 0.5rem 1rem;
+  border-radius: 5px;
+  background-color: $secondary-color;
+  margin-bottom: 20px;
+  transition: background-color 0.3s ease;
+
+  &:hover {
+    background-color: $hover-color;
+  }
+}
+
+.concert-form-card {
+  width: 100%;
+  max-width: 800px;
+  margin: 0 auto;
+  border-radius: 12px;
+  background-color: $secondary-color;
+  color: $font-color;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.4);
+  overflow: hidden;
+
+  &__header {
+    background-color: $primary-color;
+    padding: 20px;
+    text-align: center;
+    font-weight: bold;
+    font-size: 1.3rem;
+  }
+
+  &__body {
+    padding: 30px 25px;
+  }
+
+  &__grid-container {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 15px;
+
+    @media (max-width: $mobile-breakpoint) {
+      grid-template-columns: 1fr;
+    }
+  }
+
+  &__section {
+    margin-bottom: 25px;
+    border-bottom: 1px solid $tertiary-color;
+    padding-bottom: 15px;
+
+    &:last-child {
+      border-bottom: none;
+      margin-bottom: 0;
+    }
+  }
+
+  &__section-title {
+    font-size: 1.1rem;
+    margin-bottom: 15px;
+    font-weight: bold;
+  }
+
+  &__field {
+    margin-top: 20px;
+    display: flex;
+    flex-direction: column;
+
+    label {
+      margin-bottom: 5px;
+    }
+
+    input,
+    textarea,
+    select {
+      padding: 10px;
+      border: none;
+      border-radius: $input-border-radius;
+      background-color: $input-bg-color;
+      color: $font-color;
+      width: 100%;
+
+      &:focus {
+        outline: 1px solid $primary-color;
+      }
+    }
+
+    textarea {
+      resize: vertical;
+      min-height: 100px;
+    }
+
+    input[type="file"] {
+      padding: 10px 0;
+
+      &::-webkit-file-upload-button {
+        background-color: $tertiary-color;
+        color: $font-color;
+        border: none;
+        padding: 8px 16px;
+        border-radius: 4px;
+        cursor: pointer;
+
+        &:hover {
+          background-color: darken($tertiary-color, 10%);
+        }
+      }
+    }
+  }
+
+  &__actions {
+    display: flex;
+    justify-content: flex-end;
+    gap: 15px;
+    margin-top: 30px;
+
+    @media (max-width: $mobile-breakpoint) {
+      flex-direction: column;
+    }
+  }
+
+  &__button {
+    padding: 12px 24px;
+    border: none;
+    border-radius: $input-border-radius;
+    cursor: pointer;
+    font-weight: bold;
+    transition: background-color 0.3s ease;
+
+    @media (max-width: $mobile-breakpoint) {
+      width: 100%;
+    }
+
+    &--cancel {
+      background-color: $tertiary-color;
+      color: $font-color;
+
+      &:hover {
+        background-color: darken($tertiary-color, 10%);
+      }
+    }
+
+    &--save {
+      background-color: $primary-color;
+      color: $font-color;
+
+      &:hover {
+        background-color: $hover-color;
+      }
+    }
+  }
+}
+
+// Estilos esenciales para Chosen
+.chosen-container {
+  width: 100% !important;
+
+  .chosen-choices {
+    background-color: $input-bg-color !important;
+    border: none !important;
+    border-radius: $input-border-radius !important;
+
+    li.search-choice {
+      background-color: $primary-color !important;
+      background-image: none !important;
+      color: $font-color !important;
+      border: none !important;
+      box-shadow: none !important;
+    }
+  }
+
+  .chosen-drop {
+    background-color: $input-bg-color !important;
+    border: 1px solid $tertiary-color !important;
+
+    .chosen-results li.highlighted {
+      background-color: $primary-color !important;
+      background-image: none !important;
+    }
+  }
+}
+
+// Imagen actual
+.current-image {
+  margin-top: 10px;
+  background-color: rgba($tertiary-color, 0.3);
+  border-radius: $input-border-radius;
+  padding: 10px;
+
+  img {
+    border-radius: 4px;
+    max-width: 100%;
+  }
+}
+
+// Media query principal
+@media (max-width: $mobile-breakpoint) {
+  .concert-form-card {
+    border-radius: 8px;
+
+    &__header {
+      padding: 15px;
+      font-size: 1.1rem;
+    }
+
+    &__body {
+      padding: 20px 15px;
+    }
+
+    &__field input,
+    &__field textarea,
+    &__field select {
+      padding: 8px;
+    }
+  }
+}
