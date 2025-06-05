@@ -5,6 +5,7 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Entity
@@ -26,8 +27,4 @@ public class Group {
     @OneToOne(fetch = FetchType.EAGER)
     @JoinColumn (name = "concert_id", nullable = false)
     private Concert concert;
-
-    @OneToMany(fetch = FetchType.EAGER)
-    private List<User> users;
-
 }

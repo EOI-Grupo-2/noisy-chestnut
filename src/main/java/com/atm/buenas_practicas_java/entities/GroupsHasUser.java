@@ -16,11 +16,11 @@ public class GroupsHasUser {
     private Long id;
 
     @ManyToOne(fetch = FetchType.EAGER)
-    @JoinColumn (name = "user_id", nullable = false)
+    @JoinColumn (name = "user_id", referencedColumnName = "id", nullable = false)
     private User user;
 
     @ManyToOne(fetch = FetchType.EAGER)
-    @JoinColumn(name = "group_id", nullable = false)
+    @JoinColumn(name = "group_id", referencedColumnName = "id", nullable = false)
     private Group group;
 
 

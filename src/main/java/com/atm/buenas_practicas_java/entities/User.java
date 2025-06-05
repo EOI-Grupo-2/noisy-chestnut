@@ -8,6 +8,7 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
+import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
@@ -52,7 +53,4 @@ public class User {
     private Set<Role> roles = new HashSet<>();
     @OneToMany(fetch = FetchType.EAGER)
     private List<Follows> follows;
-
-    @OneToMany(fetch = FetchType.EAGER)
-    private List<Group> groups;
 }
