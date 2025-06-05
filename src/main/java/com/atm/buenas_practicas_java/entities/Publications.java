@@ -17,13 +17,13 @@ public class Publications {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column (nullable = true)
+    @Column (nullable = false)
     private String title;
 
-    @Column (nullable = true)
+    @Column (nullable = false)
     private String description;
 
-    @Column (nullable = false)
+    @Column (nullable = true)
     private String photoUrl;
 
     @Column(nullable = false)
