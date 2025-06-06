@@ -10,10 +10,10 @@
     <h1 class="error__title">An error has occurred...</h1>
     <p>There seems to be a problem with the page you requested
         (<span th:text="${path}"></span>).</p>
-    <p th:text="${'The status code is ' + status
+    <p class="error__description" th:text="${'The status code is ' + status
        + ', which means that the page was ' + error + '.'}"></p>
-    <p th:text="${'Further details: ' + message + '.'}"></p>
-    <a class="btn" href="/">Back to home</a>
+    <p class="error__details" th:text="${'Further details: ' + message + '.'}"></p>
+    <a class="error__button" href="/">Back to home</a>
 </div>
 </body>
 </html>
