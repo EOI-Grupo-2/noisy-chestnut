@@ -15,12 +15,10 @@ public class PlaceService extends AbstractBusinessService<Place, Long, PlaceDTO,
         super(placeRepository, placeMapper);
     }
 
-    // Si necesitas añadir lógica específica de lugares, puedes hacerlo aquí.
     public Optional<Place> findByName(String name) {
         return this.getRepo().findByName(name);
     }
 
-    // Ejemplo: lógica adicional personalizada
     public Optional<PlaceDTO> findDTOByName(String name) {
         return this.getRepo().findByName(name)
                 .map(place -> this.getMapper().toDto(place));

@@ -4,12 +4,11 @@ import com.atm.buenas_practicas_java.DTO.PlaceDTO;
 import com.atm.buenas_practicas_java.entities.Place;
 import com.atm.buenas_practicas_java.entities.User;
 import com.atm.buenas_practicas_java.repositories.UserRepository;
+import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import java.text.DecimalFormat;
-import java.util.List;
-import java.util.stream.Collectors;
 
 @Component
 public class PlaceMapper extends AbstractServiceMapper<Place, PlaceDTO> {
@@ -21,42 +20,34 @@ public class PlaceMapper extends AbstractServiceMapper<Place, PlaceDTO> {
     public PlaceDTO toDto(Place entity) {
         if (entity == null) return null;
 
-        return new PlaceDTO(
-                entity.getId(),
-                entity.getName(),
-                entity.getDescription(),
-                entity.getAddress(),
-                entity.getCapacity(),
-                entity.getRating().toPattern(),
-                entity.getUser() != null ? entity.getUser().getId() : null
-        );
+        ModelMapper mapper = new ModelMapper();
+        PlaceDTO dto = mapper.map(entity, PlaceDTO.class);
+
+        if (entity.getUser() != null) {
+            dto.setUserId(entity.getUser().getId());
+        }
+        if (entity.getRating() != null) {
+            dto.setRating(entity.getRating().toPattern());
+        }
+
+        return dto;
     }
 
     @Override
     public Place toEntity(PlaceDTO dto) {
         if (dto == null) return null;
 
-        Place place = new Place();
-        place.setId(dto.getId());
-        place.setName(dto.getName());
-        place.setDescription(dto.getDescription());
-        place.setAddress(dto.getAddress());
-        place.setCapacity(dto.getCapacity());
-        place.setRating(new DecimalFormat(dto.getRating()));
+        ModelMapper mapper = new ModelMapper();
+        Place place = mapper.map(dto, Place.class);
+
+        if (dto.getRating() != null) {
+            place.setRating(new DecimalFormat(dto.getRating()));
+        }
         if (dto.getUserId() != null) {
             User user = userRepository.findById(dto.getUserId()).orElse(null);
             place.setUser(user);
         }
+
         return place;
-    }
-
-    @Override
-    public List<PlaceDTO> toDto(List<Place> entityList) {
-        return entityList.stream().map(this::toDto).collect(Collectors.toList());
-    }
-
-    @Override
-    public List<Place> toEntity(List<PlaceDTO> dtoList) {
-        return dtoList.stream().map(this::toEntity).collect(Collectors.toList());
     }
 }
