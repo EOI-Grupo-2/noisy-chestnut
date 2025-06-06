@@ -1,6 +1,7 @@
 package com.atm.buenas_practicas_java.DTO;
 
 
+import com.atm.buenas_practicas_java.entities.User;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -16,5 +17,5 @@ public class PlaceDTO {
     private String address;
     private Long capacity;
     private String rating;
-    private Long userId;
+    private User user;
 }

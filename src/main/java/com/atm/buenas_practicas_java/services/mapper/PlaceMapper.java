@@ -24,8 +24,9 @@ public class PlaceMapper extends AbstractServiceMapper<Place, PlaceDTO> {
         PlaceDTO dto = mapper.map(entity, PlaceDTO.class);
 
         if (entity.getUser() != null) {
-            dto.setUserId(entity.getUser().getId());
+            dto.setUser(entity.getUser());
         }
+
         if (entity.getRating() != null) {
             dto.setRating(entity.getRating().toPattern());
         }
@@ -41,13 +42,24 @@ public class PlaceMapper extends AbstractServiceMapper<Place, PlaceDTO> {
         Place place = mapper.map(dto, Place.class);
 
         if (dto.getRating() != null) {
-            place.setRating(new DecimalFormat(dto.getRating()));
+            try {
+                double ratingDouble = Double.parseDouble(dto.getRating());
+                String pattern = "0.0";
+                DecimalFormat decimalFormat = new DecimalFormat(pattern);
+                decimalFormat.setMaximumFractionDigits(1);
+                decimalFormat.setMinimumFractionDigits(1);
+                place.setRating(decimalFormat);
+            } catch (NumberFormatException e) {
+                place.setRating(null);
+            }
         }
-        if (dto.getUserId() != null) {
-            User user = userRepository.findById(dto.getUserId()).orElse(null);
+
+        if (dto.getUser() != null && dto.getUser().getId() != null) {
+            User user = userRepository.findById(dto.getUser().getId()).orElse(null);
             place.setUser(user);
         }
 
         return place;
     }
+
 }
