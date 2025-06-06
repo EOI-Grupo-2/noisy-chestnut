@@ -22,7 +22,6 @@
   th, td {
     padding: 1rem;
     text-align: left;
-    border-bottom: 1px solid $tertiary-color;
   }
 
   th {
@@ -33,6 +32,7 @@
 
   tr {
     background-color: $secondary-color;
+    border-bottom: 1px solid $tertiary-color;
   }
 
   tr:hover {
