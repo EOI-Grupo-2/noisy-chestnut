@@ -7,9 +7,8 @@
   padding-top: 2rem;
   gap: 2rem;
 }
-
-@media only screen and (max-width: 992px) {
-  .content {
+@media only screen and (max-width: $tablet-breakpoint) {
+  .content{
     margin-top: 3rem;
   }
 }

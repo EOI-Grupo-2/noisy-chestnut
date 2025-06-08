@@ -10,10 +10,12 @@
 }
 
 .tabs-menu{
+  grid-area: tabs;
   display: flex;
   flex-direction: row;
   justify-content: space-around;
   width: 80%;
+  min-height: 3rem;
   justify-self: center;
   padding-top: 0.5rem;
   border-bottom: solid 2px $secondary-color;
@@ -228,5 +230,28 @@
         opacity: 0.5;
       }
     }
+  }
+}
+
+@media only screen and (max-width: $mobile-breakpoint) {
+  .content{
+    grid-template-rows: 1fr 8fr;
+    padding: 0.5rem;
+  }
+
+  .tabs-menu{
+    max-width: 80%;
+    height: max-content;
+    overflow-x: auto;
+    scrollbar-width: none; /* Firefox */
+    -ms-overflow-style: none;
+
+    &::-webkit-scrollbar{
+      width: 0;
+    }
+  }
+
+  .search-content{
+      justify-content: center;
   }
 }
