@@ -8,6 +8,10 @@ import java.util.List;
 
 @Repository
 public interface UserRepository extends JpaRepository<User, Long> {
+ EOIG2-60-Servicios-Roles
     List<User> findByRole_Name(String name);
 
+
+    public User findByUsername(String username);
+desarrollo
 }

@@ -6,7 +6,6 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
-import java.awt.*;
 import java.text.DecimalFormat;
 import java.time.LocalDateTime;
 
@@ -25,12 +24,12 @@ public class Albums {
     private String title;
 
     @Column(name = "rate", nullable = false)
-    private DecimalFormat rating;
+    private Double rating;
 
     @Column(nullable = false)
     private String spotifyLink;
 
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn (name = "user_id", nullable = false)
     private User user;
 

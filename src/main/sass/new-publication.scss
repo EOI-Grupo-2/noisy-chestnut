@@ -1,74 +1,69 @@
 @import "variables";
 
+.content {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 40px 20px;
+  min-height: 100vh;
+}
 
 .post-form {
-  max-width: 35%;
-  padding: 2rem;
+  width: 100%;
+  max-width: 600px;
   background-color: $secondary-color;
-  border-radius: 10px;
-  margin-left: 32.5%;
-  margin-top: 10%;
-  box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+  padding: 30px;
+  border-radius: 12px;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
   color: $font-color;
-
-
+  display: flex;
+  flex-direction: column;
+  gap: 25px;
 
   &__group {
-    margin-bottom: 1.5rem;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
 
     &--center {
-      text-align: center;
+      align-items: center;
     }
   }
 
   &__label {
-    display: block;
-    margin-bottom: 0.5rem;
+    font-size: 1rem;
     font-weight: bold;
+    color: $font-color;
   }
 
   &__input,
-  &__textarea,
-  &__select{
-    padding: 0.5rem 1rem;
-    border: 3px solid transparent;
-    height: 2.5rem;
-    border-radius: 1.25rem;
-    background-color: rgba($tertiary-color, 0.8);
+  &__textarea {
+    padding: 12px;
+    border: none;
+    border-radius: 6px;
+    background-color: $tertiary-color;
     color: $font-color;
-    max-width: 100%;
-    min-width: 100%;
+    font-size: 1rem;
 
     &::placeholder {
-      color: $font-color;
+      color: $aux-color;
     }
 
     &:focus {
       outline: none;
-      border: 1px solid $tertiary-color;
+      border: 1px solid $primary-color;
       box-shadow: 0 0 0 3px $hover-color;
     }
-  }
-  &__textarea {
-    padding: 0.6rem 1rem;
-    min-height: 2.5rem;
-    height: 2.5rem;
-    border-radius: 1.25rem;
-    background-color: rgba($tertiary-color, 0.8);
-    color: $font-color;
-    max-width: 100%;
-    min-width: 100%;
-    font-size: small;
-    box-sizing: border-box;
-    border: 3px solid transparent;
   }
 
   &__button {
     background-color: $primary-color;
     color: $font-color;
-    padding: 0.75rem 2rem;
     border: none;
-    border-radius: 5px;
+    padding: 14px 20px;
+    border-radius: 6px;
+    font-size: 1rem;
+    font-weight: bold;
     cursor: pointer;
     transition: background-color 0.3s ease;
 
@@ -78,3 +73,33 @@
   }
 }
 
+// 📱 Tablet
+@media screen and (max-width: $tablet-breakpoint) {
+  .post-form {
+    max-width: 80%;
+    padding: 25px;
+  }
+}
+
+// 📱 Móvil
+@media screen and (max-width: $mobile-breakpoint) {
+  .post-form {
+    max-width: 100%;
+    padding: 20px;
+
+    &__label {
+      font-size: 0.95rem;
+    }
+
+    &__input,
+    &__textarea {
+      font-size: 0.95rem;
+      padding: 10px;
+    }
+
+    &__button {
+      font-size: 0.95rem;
+      padding: 12px;
+    }
+  }
+}
