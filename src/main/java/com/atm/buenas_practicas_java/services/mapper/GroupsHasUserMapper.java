@@ -1,15 +1,15 @@
 package com.atm.buenas_practicas_java.services.mapper;
 
 import com.atm.buenas_practicas_java.DTO.GroupsHasUserDTO;
-import com.atm.buenas_practicas_java.entities.Groups_Has_User;
+import com.atm.buenas_practicas_java.entities.GroupsHasUser;
 import org.modelmapper.ModelMapper;
 import org.springframework.stereotype.Component;
 
 @Component
-public class GroupsHasUserMapper extends AbstractServiceMapper<Groups_Has_User, GroupsHasUserDTO> {
+public class GroupsHasUserMapper extends AbstractServiceMapper<GroupsHasUser, GroupsHasUserDTO> {
 
     @Override
-    public GroupsHasUserDTO toDto(Groups_Has_User entity) {
+    public GroupsHasUserDTO toDto(GroupsHasUser entity) {
         if (entity == null) return null;
 
         ModelMapper mapper = new ModelMapper();
@@ -17,10 +17,10 @@ public class GroupsHasUserMapper extends AbstractServiceMapper<Groups_Has_User, 
     }
 
     @Override
-    public Groups_Has_User toEntity(GroupsHasUserDTO dto) {
+    public GroupsHasUser toEntity(GroupsHasUserDTO dto) {
         if (dto == null) return null;
 
         ModelMapper mapper = new ModelMapper();
-        return mapper.map(dto, Groups_Has_User.class);
+        return mapper.map(dto, GroupsHasUser.class);
     }
 }
