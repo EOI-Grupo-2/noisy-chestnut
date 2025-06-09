@@ -1,5 +1,6 @@
 package com.atm.buenas_practicas_java.DTO;
 
+import com.atm.buenas_practicas_java.entities.User;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -14,8 +15,8 @@ import java.time.LocalDateTime;
 public class FollowsDTO {
 
     private Long id;
-    private UserDTO userFollower;
-    private UserDTO userFollowed;
+    private User userFollower;
+    private User userFollowed;
     private LocalDateTime startDate;
     private LocalDateTime endDate;
 }
