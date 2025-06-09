@@ -1,0 +1,41 @@
+@import "variables";
+
+.content{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  color: $font-color;
+  background-color: rgba($secondary-color, 0.8);
+  margin-right: 2rem;
+  margin-top: 2rem;
+  margin-bottom: 2rem;
+}
+
+.error{
+  &__button{
+    color: inherit;
+    text-decoration: none;
+    padding: 0.5rem 1rem;
+    background-color: $primary-color;
+    border: none;
+    margin-top: 0.5rem;
+    border-radius: 10px;
+
+    &:hover{
+      background-color: $hover-color;
+    }
+  }
+}
+
+@media only screen and (max-width: $tablet-breakpoint) {
+  .content{
+    margin: 2rem;
+  }
+}
+
+@media only screen and (max-width: $mobile-breakpoint) {
+  .content{
+    padding: 0.5rem 1rem;
+  }
+}

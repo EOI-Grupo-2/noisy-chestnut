@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
+<html lang="en" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" xmlns:sec="https://www.thymeleaf.org/thymeleaf-extras-springsecurity6">
 <head>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Title</title>
@@ -7,6 +7,7 @@
     <script th:src="@{/js/modal.js}"></script>
     <script src="https://kit.fontawesome.com/cfb847b9dd.js" crossorigin="anonymous"></script>
     <script th:src="@{/js/tabs.js}"></script>
+    <script th:src="@{/js/search.js}"></script>
     <script th:src="@{/js/inputNumber.js}"></script>
     <script th:src="@{/js/menuListener.js}"></script>
     <script th:src="@{/js/openMenu.js}"></script>
@@ -24,8 +25,10 @@
             <li class="menu__item"><a href="/concert" class="menu__link">Conciertos</a></li>
             <li class="menu__item"><a href="/new-publication" class="menu__link">Nueva publicación</a></li>
             <li class="menu__item"><a href="/search/users" class="menu__link">Buscar</a></li>
-            <li class="menu__item"><a href="/logueo" class="menu__link">Iniciar sesión</a></li>
-            <li class="menu__item"><a href="/register" class="menu__link">Registrarse</a></li>
+            <li sec:authorize="!isAuthenticated()" class="menu__item"><a href="/login" class="menu__link">Iniciar sesión</a></li>
+            <li sec:authorize="!isAuthenticated()" class="menu__item"><a href="/register" class="menu__link">Registrarse</a></li>
+            <li sec:authorize="isAuthenticated()" class="menu__item"><a  th:href="${'/users/'+ #authentication.getPrincipal().getId() +'/profile'}" class="menu__link" th:text="${#authentication.getName()}"></a></li>
+            <li sec:authorize="isAuthenticated()" class="menu__item"><a href="/logout" class="menu__link">Cerrar sesión</a></li>
         </ul>
     </div>
     <div layout:fragment="content">

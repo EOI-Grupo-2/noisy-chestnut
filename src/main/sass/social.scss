@@ -29,7 +29,94 @@
     }
   }
 }
+.modal{
+  position: absolute;
+  width: 99vw;
+  height: 100vh;
+  background-color: rgba($secondary-color, 0.7);
+  color: $font-color;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  visibility: hidden;
+  opacity: 0;
+  top: 0;
+  left: 0;
+  z-index: 100;
+  transition: visibility 0s, opacity 0.3s ease-in;
 
+
+
+  &__content {
+    display: flex;
+    flex-direction: column;
+    background-color: $tertiary-color;
+    border-radius: 5px;
+    height: fit-content;
+  }
+
+  &__header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 1rem;
+    background-color: $tertiary-color;
+    border-top-left-radius: 5px;
+    border-top-right-radius: 5px;
+    i{
+      cursor: pointer;
+    }
+  }
+  &__input{
+    padding: 8px 10px;
+    border: none;
+    border-radius: 6px;
+    background-color: #808080;
+    font-size: 1rem;
+    transition: border 0.3s ease, box-shadow 0.3s ease;
+    margin-bottom: 1.5rem;
+
+    &::placeholder {
+      color: #FFFAF0;
+    }
+  }
+  &__body{
+    background-color: rgba($secondary-color, 0.8);
+    display: flex;
+    flex-wrap: wrap;
+    flex-direction: column;
+    padding: 2rem;
+    overflow-y: hidden;
+    border-bottom-right-radius: 5px;
+    border-bottom-left-radius: 5px;
+    height: 100%;
+  }
+
+  &__search{
+    height: 25rem;
+    overflow-y: scroll;
+    &::-webkit-scrollbar {
+      display: none;
+    }
+    li{
+      color:$font-color;
+      list-style-type: none;
+      width: 100%;
+      background-color: $secondary-color;
+      display: flex;
+      flex-direction: row;
+      gap: 0.5rem;
+      align-items: center;
+      padding: 0.25rem 0.5rem;
+      border-bottom: 0.1rem solid $tertiary-color;
+        a{
+          color: $font-color;
+
+      }
+
+    }
+  }
+}
 
 .chats-tab {
   grid-area: content;
@@ -79,6 +166,30 @@
     color: $font-color;
     font-size: x-large;
     font-weight: 600;
+  }
+
+  @media only screen and (max-width: $tablet-breakpoint) {
+    .modal__content{
+     width: 90%;
+      height: 80%;
+    }
+    .confirmChatButton,
+    .confirmGroupButton{
+      margin-top: auto;
+      margin-bottom: 1rem;
+    }
+  }
+  @media only screen and (max-width: $mobile-breakpoint){
+    .modal__content{
+      height: 70%;
+    }
+    #chatModal{
+      height: 85%;
+    }
+    .modal__search{
+      height: 15rem;
+    }
+
   }
 }
 @media only screen and (max-width: $mobile-breakpoint){

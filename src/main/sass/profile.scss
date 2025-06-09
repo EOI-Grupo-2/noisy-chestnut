@@ -76,6 +76,10 @@
     gap: 1rem;
   }
 
+  &__info-item-hidden{
+    display: none;
+  }
+
   &__info-button{
     border: none;
     background: transparent;
@@ -456,3 +460,109 @@
     }
   }
 }
+
+@media only screen and (max-width: $tablet-breakpoint) {
+
+  .content{
+    padding-right:0;
+  }
+  .profile-header{
+    margin-right: 1rem;
+    margin-left: 1rem;
+
+    &__info-item-hidden{
+        display: none;
+    }
+  }
+  .profile-content{
+    gap:0;
+    padding-right: 1rem;
+
+    &__more{
+      width: 100%;
+    }
+  }
+  .concerts-card{
+    &__header{
+      padding: 0.8rem;
+    }
+  }
+
+    .music-card {
+      &__header {
+        padding: 0.8rem;
+      }
+
+      &__body {
+        padding: 0.8rem;
+      }
+    }
+  }
+
+@media only screen and (max-width: $mobile-breakpoint) {
+  .content {
+    padding-top: 0;
+  }
+
+  .profile-header {
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+
+    &__info-items {
+      padding-top: 1rem;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.5rem;
+      justify-content: center;
+    }
+
+    &__info-item-hidden{
+      display: flex;
+    }
+  }
+
+  .profile-content {
+    display: flex;
+    flex-direction: column;
+
+    &__principal {
+      &--followers, &--following, &--insignia{
+        padding-left: 1rem;
+        gap: 0.5rem;
+      }
+    }
+
+    &__more {
+      display: none
+    }
+  }
+
+  .modal {
+    &__body{
+      padding: 0.5rem;
+    }
+
+    .concert-card {
+      width: 7rem;
+      height: 10rem;
+    }
+
+    .album-card {
+      width: 5rem;
+      height: 5rem;
+    }
+  }
+
+  .concert-card {
+    &__title {
+      font-size: 1rem;
+    }
+
+    &__description {
+      font-size: 1rem;
+    }
+  }
+}
+
+
