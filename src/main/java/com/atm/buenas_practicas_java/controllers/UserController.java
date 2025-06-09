@@ -64,7 +64,7 @@ public class UserController {
         userDTO.setPassword(passwordEncoder.encode(userDTO.getPassword()));
         UserDTO savedUser = userService.save(userDTO);
         userRole.getUsers().add(userMapper.toEntity(savedUser));
-        roleService.save(userRole);
+        roleService.saveEntity(userRole);
         return "redirect:/users/" + savedUser.getId() + "/profile";
     }
 

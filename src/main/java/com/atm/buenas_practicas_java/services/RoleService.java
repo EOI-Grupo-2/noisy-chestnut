@@ -9,6 +9,7 @@ import com.atm.buenas_practicas_java.services.mapper.RoleMapper;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Set;
 
 @Service
 public class RoleService extends AbstractBusinessService<Role, Long, RoleDTO, RoleRepository, RoleMapper> {
@@ -33,7 +34,9 @@ public class RoleService extends AbstractBusinessService<Role, Long, RoleDTO, Ro
                 .orElseThrow(() -> new RuntimeException("Usuario no encontrado"));
         Role role = getRepo().findById(roleId)
                 .orElseThrow(() -> new RuntimeException("Rol no encontrado"));
-        user.setRole(role);
+        Set<Role> userRoles = user.getRoles();
+        userRoles.add(role);
+        user.setRoles(userRoles);
         return userRepository.save(user);
     }
 
