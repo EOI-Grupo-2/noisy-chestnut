@@ -4,7 +4,9 @@ import com.atm.buenas_practicas_java.DTO.MessageDTO;
 import com.atm.buenas_practicas_java.entities.Message;
 import org.apache.maven.shared.model.fileset.Mapper;
 import org.modelmapper.ModelMapper;
+import org.springframework.stereotype.Service;
 
+@Service
 public class MessageMapper extends AbstractServiceMapper<Message, MessageDTO> {
     @Override
     public MessageDTO toDto(Message message) {

@@ -4,7 +4,9 @@ import com.atm.buenas_practicas_java.DTO.MessageDTO;
 import com.atm.buenas_practicas_java.entities.Message;
 import com.atm.buenas_practicas_java.repositories.MessageRepository;
 import com.atm.buenas_practicas_java.services.mapper.MessageMapper;
+import org.springframework.stereotype.Service;
 
+@Service
 public class MessageService extends AbstractBusinessService<Message, Long, MessageDTO, MessageRepository, MessageMapper>{
 
     public MessageService(MessageRepository messageRepository, MessageMapper mapper) {
