@@ -228,6 +228,7 @@ body {
 }
 
 .chat-modal{
+  z-index: 3;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
@@ -368,7 +369,10 @@ body {
     grid-template-rows: auto;
     grid-template-areas: 'content';
   }
-
+ .content {
+      margin-top: 3rem;
+    }
+  
   .menu{
 
     position: absolute;
@@ -384,17 +388,8 @@ body {
       display: block;
     }
   }
-
-  @media only screen and (max-width: $tablet-breakpoint) {
-    .content {
-      margin-top: 3rem;
-    }
-  }
-}
-
-
-  @media only screen and (max-width: $mobile-breakpoint) {
-    .chat,
+  
+  .chat,
     .crear-grupo {
       width: 90%;
       height: 90vh;
@@ -408,9 +403,7 @@ body {
       max-height: 70vh;
       overflow-y: auto;
     }
-  }
-  }
-}
+  
     .pub-card {
       width: 90%;
       min-height: 10rem;
@@ -423,5 +416,16 @@ body {
     }
 }
 
+@media only screen and (max-width: $mobile-breakpoint) {
+  .chat-modal{
+    width: 100%;
+    height: 100%;
+    top: 0;
+    left: 0;
+    border-radius: 0;
 
-
+    &__items{
+      max-height: 100%;
+    }
+  }
+}

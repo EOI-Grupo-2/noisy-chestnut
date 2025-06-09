@@ -1,9 +1,12 @@
 @import "variables";
 
+// Estilos generales para el contenido
 .content {
   padding-right: 2rem;
+  padding-left: 2rem;
 }
 
+// Botón de volver
 .btn-back {
   display: inline-flex;
   align-items: center;
@@ -14,6 +17,7 @@
   border-radius: 5px;
   background-color: transparentize($secondary-color, 0.7);
   transition: background-color 0.3s;
+  margin-bottom: 1rem;
 
   &:hover {
     background-color: transparentize($secondary-color, 0.5);
@@ -29,18 +33,22 @@
   box-shadow: 0 5px 20px rgba(0, 0, 0, 0.4);
   color: $font-color;
   margin-bottom: 2rem;
+  width: 100%;
 }
 
+// Cabecera del concierto
 .concert-header {
   position: relative;
   height: 300px;
   overflow: hidden;
+
   &__image {
     width: 100%;
     height: 100%;
     object-fit: cover;
     transition: transform 0.5s;
   }
+
   &__title {
     position: absolute;
     bottom: 0;
@@ -57,10 +65,12 @@
   }
 }
 
+// Contenido principal
 .concert-content {
   padding: 2rem;
 }
 
+// Información básica del concierto
 .concert-info {
   display: flex;
   flex-wrap: wrap;
@@ -95,6 +105,7 @@
   }
 }
 
+// Descripción del concierto
 .concert-description {
   margin-bottom: 2rem;
 
@@ -110,6 +121,7 @@
   }
 }
 
+// Sección del artista
 .concert-artist {
   margin-bottom: 2rem;
 
@@ -213,6 +225,7 @@
   }
 }
 
+// Botones de acción
 .concert-actions {
   display: flex;
   gap: 1rem;
@@ -248,6 +261,11 @@
       &:hover {
         background-color: transparentize($tertiary-color, 0.9);
       }
+
+      &.active {
+        background-color: transparentize($primary-color, 0.7);
+        border-color: $primary-color;
+      }
     }
 
     &--buy {
@@ -262,6 +280,7 @@
       }
     }
   }
+
   &__count {
     display: inline-flex;
     align-items: center;
@@ -275,7 +294,7 @@
   }
 }
 
-// Comentarios
+// Sección de comentarios
 .concert-comments {
   padding: 2rem;
   background-color: transparentize($secondary-color, 0.6);
@@ -298,6 +317,7 @@
     border: 1px solid transparentize($aux-color, 0.5);
     color: $font-color;
     padding: 0.8rem;
+    border-radius: 5px;
 
     &::placeholder {
       color: $font-color;
@@ -307,6 +327,7 @@
       background-color: transparentize($tertiary-color, 0.5);
       border-color: transparentize($aux-color, 0.3);
       box-shadow: none;
+      outline: none;
     }
   }
 
@@ -365,42 +386,159 @@
     font-size: 0.8rem;
     color: $font-color;
   }
+
+  &__text {
+    line-height: 1.4;
+  }
 }
 
 // Media queries para responsividad
-@media (max-width: 767px) {
+@media only screen and (max-width: $tablet-breakpoint) {
+  .content {
+    padding-left: 4.5rem; // Espacio para el botón del menú lateral
+    padding-right: 1rem;
+  }
+
+  .concert-header {
+    height: 250px;
+
+    &__title {
+      font-size: 2rem;
+      padding: 1.5rem;
+    }
+  }
+
+  .concert-content {
+    padding: 1.5rem;
+  }
+
+  .concert-actions {
+    justify-content: space-between;
+  }
+}
+
+@media only screen and (max-width: $mobile-breakpoint) {
+  .content {
+    padding-left: 4.5rem; // Espacio para el botón del menú lateral
+    padding-right: 1rem;
+  }
+
   .concert-header {
     height: 200px;
+
+    &__title {
+      font-size: 1.5rem;
+      padding: 1rem;
+    }
   }
 
-  .concert-title {
-    font-size: 1.8rem;
+  .concert-content {
+    padding: 1rem;
   }
 
-  .info-section {
+  .concert-info {
     flex-direction: column;
     gap: 1rem;
+    padding-bottom: 1rem;
   }
 
-  .artist-card {
-    flex-direction: column;
+  .concert-description {
+    &__title {
+      font-size: 1.3rem;
+    }
+
+    &__text {
+      font-size: 0.9rem;
+    }
   }
 
-  .artist-image {
-    width: 100%;
-    height: 180px;
-  }
+  .concert-artist {
+    &__title {
+      font-size: 1.3rem;
+    }
 
-  .comment-form {
-    flex-direction: column;
+    &__card {
+      flex-direction: column;
+    }
+
+    &__image {
+      width: 100%;
+      height: 180px;
+    }
+
+    &__info-header {
+      flex-direction: column;
+      align-items: flex-start;
+      gap: 0.5rem;
+    }
+
+    &__name {
+      margin-bottom: 0;
+    }
+
+    &__rating {
+      --size: 20px;
+    }
+
+    &__biography {
+      font-size: 0.9rem;
+    }
   }
 
   .concert-actions {
     flex-direction: column;
 
-    .btn-ticket, .btn-share, .btn-attend {
+    &__btn {
       width: 100%;
       justify-content: center;
+    }
+  }
+
+  .concert-comments {
+    padding: 1rem;
+
+    &__title {
+      font-size: 1.3rem;
+      margin-bottom: 1rem;
+    }
+
+    &__form {
+      flex-direction: column;
+      margin-bottom: 1.5rem;
+    }
+
+    &__button {
+      align-self: flex-end;
+    }
+
+    &__items {
+      gap: 1rem;
+    }
+
+    &__item {
+      gap: 0.5rem;
+    }
+
+    &__avatar {
+      width: 40px;
+      height: 40px;
+    }
+
+    &__content {
+      padding: 0.75rem;
+    }
+
+    &__header {
+      flex-direction: column;
+      gap: 0.25rem;
+    }
+
+    &__date {
+      font-size: 0.7rem;
+    }
+
+    &__text {
+      font-size: 0.9rem;
     }
   }
 }

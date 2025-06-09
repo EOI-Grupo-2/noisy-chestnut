@@ -31,6 +31,16 @@
             <input th:value="${user.getUsername()}" type="text" id="username" name="username" class="user-form__input" placeholder="Ingresa tu nombre de usuario" required>
         </div>
 
+        <div th:if="${isRegister}" class="user-form__field">
+            <label for="password" class="user-form__label">Contraseña: </label>
+            <input type="password" id="password" name="password" class="user-form__input" placeholder="Ingresa tu contraseña" required>
+        </div>
+
+        <div th:if="${isRegister}" class="user-form__field">
+            <label for="repeatPassword" class="user-form__label">Contraseña: </label>
+            <input type="password" id="repeatPassword" name="repeatPassword" class="user-form__input" placeholder="Repita su contraseña" required>
+        </div>
+
         <div class="user-form__field">
             <label for="description" class="user-form__label">Descripción:</label>
             <textarea th:text="${user.getDescription()}" id="description" name="description" rows="3" class="user-form__textarea" placeholder="Ingresa una descripción"></textarea>
@@ -52,6 +62,8 @@
             </select>
         </div>
 
+
+        <input th:if="${!isRegister}" th:value="${user.getPassword()}" type="text" id="role" name="role" class="user-form__input" required hidden="hidden">
         <input th:if="${!isRegister}" th:value="${user.getRole()}" type="text" id="role" name="role" class="user-form__input" required hidden="hidden">
         <input th:if="${!isRegister}" th:value="${user.getId()}" type="text" id="id" name="id" class="user-form__input" required hidden="hidden">
 

@@ -1,4 +1,4 @@
-
+@import "variables";
 // Estilos para la página de conciertos
 .content {
   display: flex;
@@ -6,6 +6,7 @@
   gap: 1.5rem;
   flex-direction: row;
   padding: 2rem 0;
+  justify-content: center; // Centrar las tarjetas
 }
 
 .concert-card{
@@ -15,7 +16,7 @@
   overflow: hidden;
   cursor: pointer;
   position: relative;
-  color: white;
+  color: $font-color;
   box-shadow: 0 10px 30px 5px rgba(0, 0, 0, 0.2);
 
   &__image{
@@ -57,7 +58,7 @@
     text-decoration: none;
 
     &:hover{
-      color: white;
+      color: $font-color;
     }
   }
 
@@ -88,4 +89,54 @@
 
 .material-symbols-outlined {
   vertical-align: middle;
+}
+
+// Media queries para hacer la página responsive
+@media only screen and (max-width: $tablet-breakpoint) {
+  .content {
+    padding: 2rem 1rem;
+    padding-left: 5rem; // Añadir espacio a la izquierda para el botón del menú
+    justify-content: space-around;
+  }
+
+  .concert-card {
+    width: 45%; // Dos tarjetas por fila en tablets
+    height: 16rem;
+  }
+}
+
+@media only screen and (max-width: $mobile-breakpoint) {
+  .content {
+    padding: 1.5rem 1rem;
+    padding-left: 5rem; // Mantener el espacio para el botón del menú
+  }
+
+  .concert-card {
+    width: 100%; // Una tarjeta por fila en móviles
+    height: 14rem;
+    max-width: 20rem; // Limitar el ancho máximo en móviles
+    margin: 0 auto;
+  }
+
+  // Mostrar siempre la información de las tarjetas de conciertos en móviles
+  .concert-card {
+    &__title {
+      inset: auto auto 80px 15px;
+      font-size: 1.2rem;
+    }
+
+    &__description {
+      opacity: 1;
+      inset: auto auto 50px 15px;
+    }
+
+    &__link {
+      opacity: 1;
+      inset: auto auto 20px 15px;
+    }
+
+    &__image {
+      opacity: 0.7;
+    }
+  }
 }

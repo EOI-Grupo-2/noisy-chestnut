@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="es" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" layout:decorate="~{layouts/main_layout.html}"
+      xmlns:th="http://www.thymeleaf.org">
+<head>
+    <link rel="stylesheet" th:href="@{/css/ConcertsAdmin.css}" />
+</head>
+<body>
+<div class="content" layout:fragment="content">
+
+    <h2 class="admin-title">Gestión de Conciertos</h2>
+
+    <table class="admin-table concert-table">
+        <thead>
+        <tr>
+            <th>ID</th>
+            <th>Título</th>
+            <th>Artista</th>
+            <th>Ubicación</th>
+            <th>Fecha</th>
+            <th>Acciones</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr>
+            <td>1</td>
+            <td>Concierto de Melendi</td>
+            <td>Melendi</td>
+            <td>Sevilla</td>
+            <td>25 marzo de 2022</td>
+            <td class="table-actions">
+                <button class="btn-edit">Editar</button>
+                <button class="btn-delete">Eliminar</button>
+            </td>
+        </tr>
+        <tr>
+            <td>2</td>
+            <td>Concierto de Melendi</td>
+            <td>Melendi</td>
+            <td>Sevilla</td>
+            <td>25 marzo de 2022</td>
+            <td class="table-actions">
+                <button class="btn-edit">Editar</button>
+                <button class="btn-delete">Eliminar</button>
+            </td>
+        </tr>
+        <tr>
+            <td>3</td>
+            <td>Concierto de Melendi</td>
+            <td>Melendi</td>
+            <td>Sevilla</td>
+            <td>25 marzo de 2022</td>
+            <td class="table-actions">
+                <button class="btn-edit">Editar</button>
+                <button class="btn-delete">Eliminar</button>
+            </td>
+        </tr>
+        <tr>
+            <td>4</td>
+            <td>Concierto de Estopa</td>
+            <td>Estopa</td>
+            <td>Madrid</td>
+            <td>15 abril de 2022</td>
+            <td class="table-actions">
+                <button class="btn-edit">Editar</button>
+                <button class="btn-delete">Eliminar</button>
+            </td>
+        </tr>
+        <tr>
+            <td>5</td>
+            <td>Concierto de Rosalía</td>
+            <td>Rosalía</td>
+            <td>Barcelona</td>
+            <td>10 mayo de 2022</td>
+            <td class="table-actions">
+                <button class="btn-edit">Editar</button>
+                <button class="btn-delete">Eliminar</button>
+            </td>
+        </tr>
+        <tr>
+            <td>6</td>
+            <td>Concierto de C. Tangana</td>
+            <td>C. Tangana</td>
+            <td>Valencia</td>
+            <td>20 junio de 2022</td>
+            <td class="table-actions">
+                <button class="btn-edit">Editar</button>
+                <button class="btn-delete">Eliminar</button>
+            </td>
+        </tr>
+        <tr>
+            <td>7</td>
+            <td>Concierto de Bad Bunny</td>
+            <td>Bad Bunny</td>
+            <td>Málaga</td>
+            <td>5 julio de 2022</td>
+            <td class="table-actions">
+                <button class="btn-edit">Editar</button>
+                <button class="btn-delete">Eliminar</button>
+            </td>
+        </tr>
+        <tr>
+            <td>8</td>
+            <td>Concierto de Dua Lipa</td>
+            <td>Dua Lipa</td>
+            <td>Bilbao</td>
+            <td>12 agosto de 2022</td>
+            <td class="table-actions">
+                <button class="btn-edit">Editar</button>
+                <button class="btn-delete">Eliminar</button>
+            </td>
+        </tr>
+        <tr>
+            <td>9</td>
+            <td>Concierto de Coldplay</td>
+            <td>Coldplay</td>
+            <td>Zaragoza</td>
+            <td>18 septiembre de 2022</td>
+            <td class="table-actions">
+                <button class="btn-edit">Editar</button>
+                <button class="btn-delete">Eliminar</button>
+            </td>
+        </tr>
+        <tr>
+            <td>10</td>
+            <td>Concierto de Imagine Dragons</td>
+            <td>Imagine Dragons</td>
+            <td>Sevilla</td>
+            <td>30 octubre de 2022</td>
+            <td class="table-actions">
+                <button class="btn-edit">Editar</button>
+                <button class="btn-delete">Eliminar</button>
+            </td>
+        </tr>
+        </tbody>
+    </table>
+
+    <div class="admin-actions">
+        <button class="btn-add">Añadir Concierto</button>
+    </div>
+
+</div>
+</body>
+</html>

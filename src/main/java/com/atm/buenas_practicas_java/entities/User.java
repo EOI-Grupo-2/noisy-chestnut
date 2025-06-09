@@ -8,7 +8,10 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
+import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 @Entity
 @Getter
@@ -31,6 +34,7 @@ public class User {
     private String lastName;
     @Column(nullable = false)
     private String email;
+    @Column(nullable = false)
     private String password;
     private String description;
     private Double rate;
@@ -40,9 +44,13 @@ public class User {
     @Enumerated(EnumType.STRING)
     @Column(name = "music_genre")
     private MusicGenre musicGenre;
-    @ManyToOne
-    @JoinColumn(name = "role_id")
-    private Role role;
-    @OneToMany
+    @ManyToMany(fetch = FetchType.EAGER)
+    @JoinTable(
+            name = "user_roles",
+            joinColumns = @JoinColumn(name = "user_id", referencedColumnName = "id"),
+            inverseJoinColumns = @JoinColumn(name = "role_id", referencedColumnName = "id")
+    )
+    private Set<Role> roles = new HashSet<>();
+    @OneToMany(fetch = FetchType.EAGER)
     private List<Follows> follows;
 }
