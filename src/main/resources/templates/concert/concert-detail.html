@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="es" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" layout:decorate="~{layouts/main_layout.html}"
+      xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Detalles del Concierto</title>
+    <link rel="stylesheet" th:href="@{/css/concert-detail.css}" />
+    <link href="https://fonts.googleapis.com/css2?family=Roboto+Condensed&family=Roboto:wght@300&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@48,400,0,0" />
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const attendButton = document.getElementById('attendButton');
+            const attendCount = document.getElementById('attendCount');
+            let isAttending = false;
+            let count = parseInt(attendCount.textContent);
+
+            attendButton.addEventListener('click', function() {
+                if (!isAttending) {
+                    count++;
+                    isAttending = true;
+                    attendButton.classList.add('active');
+                } else {
+                    count--;
+                    isAttending = false;
+                    attendButton.classList.remove('active');
+                }
+                attendCount.textContent = count;
+            });
+        });
+    </script>
+</head>
+<body>
+<div layout:fragment="content" class="content">
+    <a href="/concert" class="btn-back">
+        <span class="material-symbols-outlined">arrow_back</span> Volver a conciertos
+    </a>
+
+    <div class="concert-detail">
+        <div class="concert-header">
+            <img src="https://images.unsplash.com/photo-1540039155733-5bb30b53aa14?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80" alt="Imagen del concierto" class="concert-header__image">
+            <h1 class="concert-header__title">Concierto de Rock en Madrid</h1>
+        </div>
+
+        <div class="concert-content">
+            <div class="concert-info">
+                <div class="concert-info__item">
+                    <span class="material-symbols-outlined">calendar_month</span>
+                    <span>15/07/2023 20:00</span>
+                </div>
+                <div class="concert-info__item">
+                    <span class="material-symbols-outlined">location_on</span>
+                    <a href="/place" class="venue-link">WiZink Center, Madrid</a>
+                </div>
+                <div class="concert-info__item">
+                    <span class="material-symbols-outlined">music_note</span>
+                    <span>Rock</span>
+                </div>
+            </div>
+
+            <div class="concert-description">
+                <h2 class="concert-description__title">Descripción</h2>
+                <p class="concert-description__text"> Aquí se muestra la descripcion del concierto.</p>
+                <p class="concert-description__text"> Otro parrafo de descripcion del concierto.</p>
+            </div>
+
+            <div class="concert-artist">
+                <h2 class="concert-artist__title">Artista</h2>
+                <div class="concert-artist__card">
+                    <img src="https://images.unsplash.com/photo-1511367461989-f85a21fda167?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80" alt="Imagen del artista" class="concert-artist__image">
+                    <div class="concert-artist__info">
+                        <div class="concert-artist__info-header">
+                            <h3 class="concert-artist__name">Lola Indigo</h3>
+                            <input type="range" min="0.5" max="5" step="0.5" value="2.5" class="concert-artist__rating" style="--val:2.5" oninput="this.style='--val:'+this.value" disabled>
+                        </div>
+                        <p class="concert-artist__biography">Biografía corta del artista. Aunque madrileña de nacimiento Lola se crio en la Huétor Tájar, Granada. Su vocación artística encontró su cauce natural a través del baile.</p>
+                        <a href="#" class="concert-artist__button">Ver perfil completo</a>
+                    </div>
+                </div>
+            </div>
+
+            <div class="concert-actions">
+                <a href="#" class="concert-actions__btn concert-actions__btn--buy">
+                    <span class="material-symbols-outlined">local_activity</span> Comprar entradas
+                </a>
+                <button class="concert-actions__btn concert-actions__btn--attend" id="attendButton">
+                    <span class="material-symbols-outlined">event_available</span> Asistiré
+                    <span class="concert-actions__count" id="attendCount">42</span>
+                </button>
+                <button class="concert-actions__btn concert-actions__btn--share">
+                    <span class="material-symbols-outlined">share</span> Compartir
+                </button>
+            </div>
+        </div>
+
+        <div class="concert-comments">
+            <h2 class="concert-comments__title">Comentarios</h2>
+            <form class="concert-comments__form">
+                <textarea class="concert-comments__textbox" rows="3" placeholder="Escribe un comentario..."></textarea>
+                <button type="button" class="concert-comments__button">Comentar</button>
+            </form>
+
+            <div class="concert-comments__items">
+                <div class="concert-comments__item">
+                    <img src="https://images.unsplash.com/photo-1535713875002-d1d0cf377fde?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80" alt="Avatar de usuario" class="concert-comments__avatar">
+                    <div class="concert-comments__content">
+                        <div class="concert-comments__header">
+                            <h4 class="concert-comments__username">Usuario1</h4>
+                            <span class="concert-comments__date">10/06/2023 12:30</span>
+                        </div>
+                        <p class="concert-comments__text">¡Gran concierto! No puedo esperar para asistir.</p>
+                    </div>
+                </div>
+                <div class="concert-comments__item">
+                    <img src="https://images.unsplash.com/photo-1535713875002-d1d0cf377fde?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80" alt="Avatar de usuario" class="concert-comments__avatar">
+                    <div class="concert-comments__content">
+                        <div class="concert-comments__header">
+                            <h4 class="concert-comments__username">Usuario2</h4>
+                            <span class="concert-comments__date">09/06/2023 18:45</span>
+                        </div>
+                        <p class="concert-comments__text">Ya tengo mis entradas. ¿Alguien más va a ir?</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+</body>
+</html>

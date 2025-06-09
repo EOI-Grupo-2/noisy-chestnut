@@ -1,0 +1,111 @@
+@import "variables";
+
+.content {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 40px 20px;
+  min-height: 100vh;
+}
+
+.user-form {
+  width: 100%;
+  max-width: 600px;
+  background-color: $secondary-color;
+  padding: 30px;
+  border-radius: 12px;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.4);
+  color: $font-color;
+  display: flex;
+  flex-direction: column;
+  gap: 25px;
+
+  &__field {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+  }
+
+  &__label {
+    font-size: 1rem;
+    font-weight: bold;
+    color: $font-color;
+  }
+
+  &__input,
+  &__textarea,
+  &__select {
+    padding: 12px;
+    border: none;
+    border-radius: 6px;
+    background-color: $tertiary-color;
+    color: $font-color;
+    font-size: 1rem;
+
+    &::placeholder {
+      color: $aux-color;
+    }
+
+    &:focus {
+      outline: none;
+      border: 1px solid $primary-color;
+      box-shadow: 0 0 0 3px $hover-color;
+    }
+  }
+
+  &__actions {
+    display: flex;
+    justify-content: center;
+    margin-top: 10px;
+  }
+
+  &__button {
+    background-color: $primary-color;
+    color: $font-color;
+    border: none;
+    padding: 14px 24px;
+    border-radius: 6px;
+    font-size: 1rem;
+    font-weight: bold;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+
+    &:hover {
+      background-color: $hover-color;
+    }
+  }
+}
+
+// 📱 Tablet
+@media screen and (max-width: $tablet-breakpoint) {
+  .user-form {
+    max-width: 80%;
+    padding: 25px;
+    gap: 20px;
+  }
+}
+
+// 📱 Móvil
+@media screen and (max-width: $mobile-breakpoint) {
+  .user-form {
+    max-width: 100%;
+    padding: 20px;
+    gap: 18px;
+
+    &__label {
+      font-size: 0.95rem;
+    }
+
+    &__input,
+    &__textarea,
+    &__select {
+      font-size: 0.95rem;
+      padding: 10px;
+    }
+
+    &__button {
+      font-size: 0.95rem;
+      padding: 12px 20px;
+    }
+  }
+}

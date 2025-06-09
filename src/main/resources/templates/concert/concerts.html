@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="es" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" layout:decorate="~{layouts/main_layout.html}"
+      xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Conciertos</title>
+    <link rel="stylesheet" th:href="@{/css/concerts.css}" />
+    <link href="https://fonts.googleapis.com/css2?family=Roboto+Condensed&family=Roboto:wght@300&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@48,400,0,0" />
+</head>
+<body>
+<div layout:fragment="content" class="content">
+    <div class="concert-card">
+        <img class="concert-card__image" src="https://images.unsplash.com/photo-1656618020911-1c7a937175fd?crop=entropy&cs=tinysrgb&fm=jpg&ixid=MnwzMjM4NDZ8MHwxfHJhbmRvbXx8fHx8fHx8fDE2NTc1MzQyNTE&ixlib=rb-1.2.1&q=80" alt="concertImage">
+        <div class="concert-card__content">
+            <h2 class="concert-card__title">
+                Concierto de Melendi
+            </h2>
+            <p class="concert-card__description">
+                Sevilla, 25 marzo de 2022
+            </p>
+            <a href="/concert/detail" class="concert-card__link">
+                Conocer más
+                <span class="material-symbols-outlined">
+                    arrow_right_alt
+                </span>
+            </a>
+        </div>
+    </div>
+    <div class="concert-card">
+        <img class="concert-card__image" src="https://images.unsplash.com/photo-1656618020911-1c7a937175fd?crop=entropy&cs=tinysrgb&fm=jpg&ixid=MnwzMjM4NDZ8MHwxfHJhbmRvbXx8fHx8fHx8fDE2NTc1MzQyNTE&ixlib=rb-1.2.1&q=80" alt="concertImage">
+        <div class="concert-card__content">
+            <h2 class="concert-card__title">
+                Concierto de Melendi
+            </h2>
+            <p class="concert-card__description">
+                Sevilla, 25 marzo de 2022
+            </p>
+            <a href="/concert/detail" class="concert-card__link">
+                Conocer más
+                <span class="material-symbols-outlined">
+                    arrow_right_alt
+                </span>
+            </a>
+        </div>
+    </div>
+    <div class="concert-card">
+        <img class="concert-card__image" src="https://images.unsplash.com/photo-1656618020911-1c7a937175fd?crop=entropy&cs=tinysrgb&fm=jpg&ixid=MnwzMjM4NDZ8MHwxfHJhbmRvbXx8fHx8fHx8fDE2NTc1MzQyNTE&ixlib=rb-1.2.1&q=80" alt="concertImage">
+        <div class="concert-card__content">
+            <h2 class="concert-card__title">
+                Concierto de Melendi
+            </h2>
+            <p class="concert-card__description">
+                Sevilla, 25 marzo de 2022
+            </p>
+            <a href="/concert/detail" class="concert-card__link">
+                Conocer más
+                <span class="material-symbols-outlined">
+                    arrow_right_alt
+                </span>
+            </a>
+        </div>
+    </div>
+</div>
+</body>
+</html>

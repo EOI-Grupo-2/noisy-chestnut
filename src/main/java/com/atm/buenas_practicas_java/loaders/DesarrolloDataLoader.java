@@ -1,71 +1,82 @@
 package com.atm.buenas_practicas_java.loaders;
 
-import com.atm.buenas_practicas_java.entities.EntidadHija;
-import com.atm.buenas_practicas_java.entities.EntidadPadre;
-import com.atm.buenas_practicas_java.repositories.EntidadHijaRepository;
-import com.atm.buenas_practicas_java.repositories.EntidadPadreRepository;
+import com.atm.buenas_practicas_java.entities.Role;
+import com.atm.buenas_practicas_java.entities.User;
+import com.atm.buenas_practicas_java.entities.enums.Genre;
+import com.atm.buenas_practicas_java.entities.enums.MusicGenre;
+import com.atm.buenas_practicas_java.repositories.RoleRepository;
+import com.atm.buenas_practicas_java.repositories.UserRepository;
 import jakarta.annotation.PostConstruct;
 import lombok.extern.log4j.Log4j2;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Profile;
+import org.springframework.security.crypto.password.PasswordEncoder;
 
 import java.util.Arrays;
+import java.util.List;
+import java.util.Set;
 
-/**
-* Clase de configuración que permite cargar datos iniciales en los repositorios
-* de entidades para diferentes perfiles de configuración.
-*
-* Esta clase es útil para inicializar datos predefinidos utilizados durante el
-* desarrollo o en entornos locales.
-*
-* Se utiliza la anotación @Configuration para indicar que es una clase de configuración
-* de Spring, y métodos específicos anotados con @Profile para definir qué datos
-* iniciales se cargarán según el perfil activo.
-*/
 
 @Configuration
 @Log4j2
 @Profile("desarrollo")
 public class DesarrolloDataLoader {
 
-private final EntidadPadreRepository repository;
-private final EntidadHijaRepository entidadHijaRepository;
-/**
- * Clase de configuración que permite cargar datos iniciales en los repositorios
- * de entidades para diferentes perfiles de configuración.
- *
- * Esta clase es útil para inicializar datos predefinidos utilizados durante el
- * desarrollo o en entornos específicos según el perfil.
- *
- * **Anotaciones utilizadas**:
- * - `@Configuration`: Define esta clase como una clase de configuración de Spring.
- *   Permite registrar beans en el contexto de la aplicación y gestionar configuraciones específicas.
- *
- * - `@Log4j2`: Habilita el uso de Log4j2 para registrar mensajes de log importantes,
- *   utilizados para monitoreo y depuración de la aplicación.
- *
- * Cada método anotado con `@Profile` y `@PostConstruct` permite la carga de datos
- * iniciales dependiendo del perfil activo.
- */
-public DesarrolloDataLoader(EntidadPadreRepository repository, EntidadHijaRepository entidadHijaRepository) {
-    this.repository = repository;
-    this.entidadHijaRepository = entidadHijaRepository;
-}
+    private final UserRepository userRepository;
+    private final RoleRepository roleRepository;
+    private final PasswordEncoder passwordEncoder;
 
-@PostConstruct
-public void loadDataDesarrollo() {
-    log.info("Iniciando la carga de datos para el perfil desarrollo");
-    int numeroEntidades = 10;
-    EntidadPadre[] entidades = new EntidadPadre[numeroEntidades];
-    Arrays.setAll(entidades, i -> new EntidadPadre("Entidad-" + i+1));
-    repository.saveAll(Arrays.asList(entidades));
-    for (EntidadPadre entidadPadre : entidades) {
-        entidadHijaRepository.save(new EntidadHija("Hija de " + entidadPadre.getNombre()));
+    public DesarrolloDataLoader(UserRepository userRepository, RoleRepository roleRepository, PasswordEncoder passwordEncoder) {
+        this.userRepository = userRepository;
+        this.roleRepository = roleRepository;
+        this.passwordEncoder = passwordEncoder;
     }
-    log.info("Datos de entidades cargados correctamente.");
 
-}
+    @PostConstruct
+    public void loadDataDesarrollo() {
 
+        log.info("Iniciando la carga de datos para el perfil local");
 
+        Role adminRole = new Role();
+        adminRole.setName("ADMIN");
+        Role userRole = new Role();
+        userRole.setName("USER");
+        Role anonymousRole = new Role();
+        anonymousRole.setName("ANONYMOUS");
+        Role artistRole = new Role();
+        artistRole.setName("ARTIST");
+        Role concertAdminRole = new Role();
+        concertAdminRole.setName("CONCERT_ADMIN");
+        Role placeAdminRole = new Role();
+        placeAdminRole.setName("PLACES_ADMIN");
+        roleRepository.saveAll(List.of(adminRole, artistRole, concertAdminRole, placeAdminRole, userRole, anonymousRole));
+        User user1 = new User();
+        user1.setUsername("admin");
+        user1.setPassword(passwordEncoder.encode("admin"));
+        user1.setName("admin");
+        user1.setFirstName("admin");
+        user1.setLastName("admin");
+        user1.setEmail("admin@mail.com");
+        user1.setGenre(Genre.MALE);
+        user1.setDescription("Descripcion del admin chulo");
+        user1.setMusicGenre(MusicGenre.RAP);
+        user1.setRoles(Set.of(adminRole, userRole));
+        User user2 = new User();
+        user2.setUsername("user1");
+        user2.setPassword(passwordEncoder.encode("user2"));
+        user2.setName("user");
+        user2.setFirstName("1");
+        user2.setLastName("1");
+        user2.setEmail("user@mail.com");
+        user2.setGenre(Genre.MALE);
+        user2.setRoles(Set.of(userRole));
+        user2.setMusicGenre(MusicGenre.CLASSIC);
+        user2.setDescription("Descripcion del usuario chulo");
+        userRepository.saveAll(List.of(user1, user2));
+        adminRole.setUsers(List.of(user1));
+        userRole.setUsers(List.of(user1, user2));
+        roleRepository.saveAll(List.of(adminRole, artistRole, concertAdminRole, placeAdminRole, userRole, anonymousRole));
+        log.info("Datos de entidades cargados correctamente.");
+    }
 
 }

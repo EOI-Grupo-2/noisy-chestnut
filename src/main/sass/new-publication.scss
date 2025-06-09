@@ -1,0 +1,105 @@
+@import "variables";
+
+.content {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 40px 20px;
+  min-height: 100vh;
+}
+
+.post-form {
+  width: 100%;
+  max-width: 600px;
+  background-color: $secondary-color;
+  padding: 30px;
+  border-radius: 12px;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
+  color: $font-color;
+  display: flex;
+  flex-direction: column;
+  gap: 25px;
+
+  &__group {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+
+    &--center {
+      align-items: center;
+    }
+  }
+
+  &__label {
+    font-size: 1rem;
+    font-weight: bold;
+    color: $font-color;
+  }
+
+  &__input,
+  &__textarea {
+    padding: 12px;
+    border: none;
+    border-radius: 6px;
+    background-color: $tertiary-color;
+    color: $font-color;
+    font-size: 1rem;
+
+    &::placeholder {
+      color: $aux-color;
+    }
+
+    &:focus {
+      outline: none;
+      border: 1px solid $primary-color;
+      box-shadow: 0 0 0 3px $hover-color;
+    }
+  }
+
+  &__button {
+    background-color: $primary-color;
+    color: $font-color;
+    border: none;
+    padding: 14px 20px;
+    border-radius: 6px;
+    font-size: 1rem;
+    font-weight: bold;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+
+    &:hover {
+      background-color: $hover-color;
+    }
+  }
+}
+
+// 📱 Tablet
+@media screen and (max-width: $tablet-breakpoint) {
+  .post-form {
+    max-width: 80%;
+    padding: 25px;
+  }
+}
+
+// 📱 Móvil
+@media screen and (max-width: $mobile-breakpoint) {
+  .post-form {
+    max-width: 100%;
+    padding: 20px;
+
+    &__label {
+      font-size: 0.95rem;
+    }
+
+    &__input,
+    &__textarea {
+      font-size: 0.95rem;
+      padding: 10px;
+    }
+
+    &__button {
+      font-size: 0.95rem;
+      padding: 12px;
+    }
+  }
+}

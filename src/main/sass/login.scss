@@ -1,0 +1,132 @@
+@import "variables";
+
+.content {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+  padding: 40px 20px;
+}
+
+.login-card {
+  width: 100%;
+  max-width: 400px;
+  min-width: 280px;
+  border-radius: 12px;
+  overflow: hidden;
+  background-color: $secondary-color;
+  color: $font-color;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.4);
+  font-size: 16px;
+
+  &__header {
+    background-color: $primary-color;
+    font-weight: bold;
+    padding: 20px;
+    text-align: center;
+    font-size: 1.3rem;
+  }
+
+  &__body {
+    padding: 30px 25px;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+  }
+
+  &__field {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+
+    label {
+      font-size: 0.95rem;
+      color: $font-color;
+    }
+  }
+
+  &__input {
+    padding: 1rem ;
+    margin: 1rem;
+    max-width: 100%;
+    border-radius: 6px;
+    background-color: $tertiary-color;
+    color: $font-color;
+    font-size: 1rem;
+    transition: border 0.3s ease, box-shadow 0.3s ease;
+
+    &::placeholder {
+      color: $font-color;
+    }
+
+    &:focus {
+      outline: none;
+      border: 1px solid $tertiary-color;
+      box-shadow: 0 0 0 3px $hover-color;
+    }
+  }
+
+  &__button {
+    width: 100%;
+    background-color: $primary-color;
+    color: $font-color;
+    padding: 1rem;
+    margin-top: 1rem;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+    font-weight: bold;
+    font-size: 1rem;
+    transition: background-color 0.3s ease;
+
+    &:hover {
+      background-color: $hover-color;
+    }
+  }
+
+  &__register {
+    text-align: center;
+    margin-top: 10px;
+
+    a {
+      color: $font-color;
+      text-decoration: none;
+      font-size: 0.95rem;
+
+      &:hover {
+        text-decoration: underline;
+      }
+    }
+  }
+}
+
+@media (max-width: $tablet-breakpoint) {
+  .login-card {
+    max-width: 90%;
+    font-size: 15px;
+  }
+}
+
+@media (max-width: $mobile-breakpoint) {
+  .login-card {
+    max-width: 95%;
+    font-size: 14px;
+
+    &__body {
+      padding: 20px;
+    }
+
+    &__header {
+      font-size: 1.1rem;
+    }
+
+    &__input,
+    &__button {
+      font-size: 0.95rem;
+    }
+  }
+
+  .content {
+    padding: 20px 10px;
+  }
+}

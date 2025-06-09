@@ -1,8 +1,9 @@
 package com.atm.buenas_practicas_java.controllers;
 
 
-import com.atm.buenas_practicas_java.services.EntidadHijaService;
-import com.atm.buenas_practicas_java.services.EntidadPadreService;
+import com.atm.buenas_practicas_java.entities.AuthUser;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -35,123 +36,117 @@ import org.springframework.web.bind.annotation.PostMapping;
 @Controller
 public class DefaultController {
 
-    private final EntidadHijaService entidadHijaService;
-    private final EntidadPadreService entidadPadreService;
-
-    /**
-     * Constructor de la clase DefaultController.
-     * <p>
-     * Inicializa el controlador principal asignando los servicios
-     * utilizados para gestionar las entidades EntidadPadre y EntidadHija.
-     *
-     * @param entidadHijaService  instancia de {@link EntidadHijaService} que proporciona
-     *                            funcionalidades adicionales relacionadas con la entidad EntidadHija.
-     * @param entidadPadreService instancia de {@link EntidadPadreService} que proporciona
-     *                            funcionalidades adicionales relacionadas con la entidad EntidadPadre.
-     */
-    public DefaultController(EntidadHijaService entidadHijaService, EntidadPadreService entidadPadreService) {
-        this.entidadHijaService = entidadHijaService;
-        this.entidadPadreService = entidadPadreService;
-    }
-
-    /**
-     * Método que lista las entidades disponibles y las añade al modelo para ser utilizadas en la vista.
-     * Recupera todas las entidades de un repositorio y las presenta en una vista específica.
-     *
-     * @param model El objeto del modelo que se utiliza para compartir datos entre el backend y la vista.
-     *              Aquí se añade un atributo llamado "entities" con la lista obtenida del repositorio.
-     * @return Una cadena que representa el nombre de la vista ("entitiesList") donde se renderizarán las entidades.
-     */
-    @GetMapping("/entities")
-    public String listEntities(Model model)
-    {
-        model.addAttribute("entidades", entidadHijaService.findAll());
-        return "entidadesHijas"; // View name
-    }
-
-    /**
-     * Gestiona las solicitudes GET para obtener y mostrar la lista de entidades protegidas.
-     * Añade las entidades obtenidas del repositorio al modelo para renderizarlas en la vista correspondiente.
-     *
-     * @param model Objeto {@link Model} que se utiliza para pasar datos desde el controlador a la vista.
-     *              Contendrá la lista de entidades recuperadas desde el repositorio.
-     * @return El nombre de la vista "entitiesList" donde se mostrará la lista de entidades.
-     */
-    @GetMapping("/protected")
-    public String protectedList(Model model)
-    {
-        model.addAttribute("entidades", entidadPadreService.findAll());
-        return "entidadesPadre"; // View name
-    }
-
-    /**
-     * Deletes an EntidadHija entity by its ID using the EntidadHijaService.
-     *
-     * @param id The ID of the EntidadHija to delete.
-     * @return A redirect to the "/protected" endpoint after deletion.
-     */
-    @PostMapping("/entidades/deleteHija/{id}")
-    public String deleteEntidadHija(@PathVariable Long id) {
-        entidadHijaService.deleteById(id);
-        return "redirect:/entities";
-    }
-
-
-
-    /**
-     * Deletes an EntidadHija entity by its ID using the EntidadHijaService.
-     *
-     * @param id The ID of the EntidadHija to delete.
-     * @return A redirect to the "/protected" endpoint after deletion.
-     */
-    @PostMapping("/entidades/deletePadre/{id}")
-    public String deleteEntidadPadre(@PathVariable Long id) {
-        entidadPadreService.deleteById(id);
-        return "redirect:/entities";
-    }
-
     @GetMapping({"", "/"})
-    public String getHomePage(){
+    public String getHomePage() {
         return "index";
     }
 
     @GetMapping({"", "/concerts"})
     public String getConcertPage(){
-        return "/concert/index";
+        return "/concert/concerts";
     }
 
     @GetMapping({"", "/artists"})
     public String getArtistPage(){
         return "/artist/artist";
     }
+  
 
-    @GetMapping({"", "/Profile"})
+    @GetMapping({"", "/new-publication"})
+    public String getNewPublicationPage(){
+        return "/publication/new-publication";
+    }
+
+    @GetMapping({"", "/chat"})
+    public String getSocialPage(){
+        return "/social/social";
+    }
+  
+    @GetMapping({"", "/register"})
+    public String getRegister(){
+        return "/user/register";
+    }
+  
+    @GetMapping({"", "/user/profile"})
     public String getUserProfile(){
         return "/user/profile";
     }
 
-    @GetMapping({"", "/ArtistProfile"})
+    @GetMapping({"", "/user/editprofile"})
+    public String getUserEditProfile(){
+        return "/user/editprofile";
+    }
+
+    @GetMapping({"", "/user/adminpanel"})
+    public String getAdminPanel(){
+        return "/user/adminpanel";
+    }
+
+
+    @GetMapping({"", "/artist/profile"})
     public String getArtistProfile(){
-        return "/artist/artistProfile";
+        return "/artist/profile";
     }
   
-    @GetMapping({"", "/chat"})
+    @GetMapping({"", "/chat/id"})
     public String getChatPage(){
         return "/social/chat";
     }
-  
-    @GetMapping({"", "/search/artists"})
-    public String getSearchArtistPage(){
-        return "/search/artists";
+
+    @GetMapping({"", "/search"})
+    public String getSearch(){
+        return "/search/search";
     }
 
-    @GetMapping({"", "/search/users"})
-    public String getSearchUsersPage(){
-        return "/search/users";
+    @GetMapping({"", "/places/new"})
+    public String createPlacePage(){
+        return "/places/form";
     }
 
     @GetMapping({"", "/search/concerts"})
     public String getSearchConcertsPage(){
         return "/search/concerts";
     }
+
+    @GetMapping({"", "/places/id"})
+    public String getPlacesProfile(){
+        return "/places/profile";
+    }
+
+    @GetMapping({"", "/places/edit"})
+    public String editPlacePage(){
+        return "/places/form";
+    }
+
+    @GetMapping({"", "/publication"})
+    public String getPublicationPage(){return "/publication/publication";}
+  
+    @GetMapping("/concert")
+    public String showConcertsPage() {
+        return "concert/concerts";
+    }
+
+    @GetMapping("/concert/detail")
+    public String showConcertDetailPage() {
+        return "concert/concert-detail";
+    }
+
+    @GetMapping("/concert/form")
+    public String showConcertFormPage() {
+        return "concert/concert-form";
+    }
+
+
+    @GetMapping("/places/admin")
+    public String showPlacesAdminPage() {
+        return "places/placesAdmin";
+    }
+
+
+    @GetMapping("/places")
+    public String showPlacesPage() {return "/places/places"; }
+
+    @GetMapping("/concert/admin")
+    public String showConcertsAdminPage() {return "concert/concertsAdmin"; }
 }
+
