@@ -137,6 +137,12 @@ public class DefaultController {
     }
 
 
+    @GetMapping("/places/admin")
+    public String showPlacesAdminPage() {
+        return "places/placesAdmin";
+    }
+
+
     @GetMapping("/places")
     public String showPlacesPage() {return "/places/places"; }
 

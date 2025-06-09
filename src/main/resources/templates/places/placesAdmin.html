@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="es" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" layout:decorate="~{layouts/main_layout.html}"
+      xmlns:th="http://www.thymeleaf.org">
+<head>
+  <title>Places admin</title>
+  <link rel="stylesheet" th:href="@{/css/places.css}" />
+  <link rel="stylesheet" th:href="@{/css/placesAdmin.css}" />
+  <link href="https://fonts.googleapis.com/css2?family=Roboto+Condensed&family=Roboto:wght@300&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@48,400,0,0" />
+</head>
+<body>
+<div layout:fragment="content" class="content">
+
+  <div class="admin-header">
+    <h2 class="admin-header__title">Gestión de salas</h2>
+    <button class="admin-header__create-button" id="createPlaceButton" onclick="window.location.href='/places/new'"> + Crear nueva sala </button>
+  </div>
+  <table class="admin-table user-table">
+    <thead>
+    <tr>
+      <th>ID</th>
+      <th>Nombre</th>
+      <th>Ubicación</th>
+      <th>Dirección</th>
+      <th>Acciones</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr>
+    <tbody>
+    <tr>
+      <td>1</td>
+      <td>Sala Aurora</td>
+      <td>Madrid</td>
+      <td>Calle Libertad 12</td>
+      <td class="table-actions">
+        <button class="btn-edit" onclick="window.location.href='/places/new'">Editar</button>
+        <button class="btn-delete" onclick="openModal('deletePlaceModal')">Eliminar</button>
+      </td>
+    </tr>
+    <tr>
+      <td>2</td>
+      <td>La Caverna</td>
+      <td>Barcelona</td>
+      <td>Avinguda del Sol 87</td>
+      <td class="table-actions">
+        <button class="btn-edit" onclick="window.location.href='/places/new'">Editar</button>
+        <button class="btn-delete" onclick="openModal('deletePlaceModal')">Eliminar</button>
+      </td>
+    </tr>
+    <tr>
+      <td>3</td>
+      <td>Rock Palace</td>
+      <td>Sevilla</td>
+      <td>Paseo de los Mártires 22</td>
+      <td class="table-actions">
+        <button class="btn-edit" onclick="window.location.href='/places/new'">Editar</button>
+        <button class="btn-delete" onclick="openModal('deletePlaceModal')">Eliminar</button>
+      </td>
+    </tr>
+    <tr>
+      <td>4</td>
+      <td>Jazz Garden</td>
+      <td>Valencia</td>
+      <td>Plaza del Carmen 5</td>
+      <td class="table-actions">
+        <button class="btn-edit" onclick="window.location.href='/places/new'">Editar</button>
+        <button class="btn-delete" onclick="openModal('deletePlaceModal')">Eliminar</button>
+      </td>
+    </tr>
+    <tr>
+      <td>5</td>
+      <td>Indie Hall</td>
+      <td>Bilbao</td>
+      <td>Calle Urkijo 14</td>
+      <td class="table-actions">
+        <button class="btn-edit" onclick="window.location.href='/places/new'">Editar</button>
+        <button class="btn-delete" onclick="openModal('deletePlaceModal')">Eliminar</button>
+      </td>
+    </tr>
+    <tr>
+      <td>6</td>
+      <td>La Trastienda</td>
+      <td>Zaragoza</td>
+      <td>Ronda San José 8</td>
+      <td class="table-actions">
+        <button class="btn-edit" onclick="window.location.href='/places/new'">Editar</button>
+        <button class="btn-delete" onclick="openModal('deletePlaceModal')">Eliminar</button>
+      </td>
+    </tr>
+    <tr>
+      <td>7</td>
+      <td>Electric Sound</td>
+      <td>Granada</td>
+      <td>Camino de Ronda 56</td>
+      <td class="table-actions">
+        <button class="btn-edit" onclick="window.location.href='/places/new'">Editar</button>
+        <button class="btn-delete" onclick="openModal('deletePlaceModal')">Eliminar</button>
+      </td>
+    </tr>
+    <tr>
+      <td>8</td>
+      <td>La Catedral del Rock</td>
+      <td>A Coruña</td>
+      <td>Rua Real 101</td>
+      <td class="table-actions">
+        <button class="btn-edit" onclick="window.location.href='/places/new'">Editar</button>
+        <button class="btn-delete" onclick="openModal('deletePlaceModal')">Eliminar</button>
+      </td>
+    </tr>
+    <tr>
+      <td>9</td>
+      <td>El Subterráneo</td>
+      <td>Murcia</td>
+      <td>Avenida Constitución 30</td>
+      <td class="table-actions">
+        <button class="btn-edit" onclick="window.location.href='/places/new'">Editar</button>
+        <button class="btn-delete" onclick="openModal('deletePlaceModal')">Eliminar</button>
+      </td>
+    </tr>
+    <tr>
+      <td>10</td>
+      <td>Sala Nebula</td>
+      <td>Málaga</td>
+      <td>Calle Larios 17</td>
+      <td class="table-actions">
+        <button class="btn-edit" onclick="window.location.href='/places/new'" >Editar</button>
+        <button class="btn-delete" onclick="openModal('deletePlaceModal')">Eliminar</button>
+      </td>
+    </tr>
+    </tbody>
+</table>
+  <!--Modal para eliminar sala-->
+  <div class="modal" id="deletePlaceModal">
+    <div class="modal__content">
+      <header class="modal__header">
+        <h2>Eliminar sala</h2>
+      </header>
+      <div class="modal__body">
+        <p>¿Está seguro de que desea eliminar la sala?</p>
+      </div>
+      <div class="modal__footer">
+          <button class="btn-cancel" onclick="openModal('deletePlaceModal')" >Cancelar</button>
+          <button class="btn-confirm">Confirmar</button>
+      </div>
+    </div>
+  </div>
+</div>
+</body>
+</html>
