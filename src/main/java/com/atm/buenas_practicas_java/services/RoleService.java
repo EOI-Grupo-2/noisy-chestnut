@@ -25,7 +25,7 @@ public class RoleService extends AbstractBusinessService<Role, Long, RoleDTO, Ro
     }
 
     public List<User> getUsersByRoleName(String roleName) {
-        return userRepository.findByRole_Name(roleName);
+        return userRepository.findByRoleName(roleName);
     }
 
     public User assignRoleToUser(Long userId, Long roleId) {
