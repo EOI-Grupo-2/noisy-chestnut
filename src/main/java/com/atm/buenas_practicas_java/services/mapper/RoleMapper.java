@@ -9,22 +9,19 @@ import org.springframework.stereotype.Component;
 @Component
 public class RoleMapper extends AbstractServiceMapper<Role, RoleDTO> {
 
-    private final ModelMapper modelMapper;
-
-    @Autowired
-    public RoleMapper(ModelMapper modelMapper) {
-        this.modelMapper = modelMapper;
-    }
-
     @Override
     public RoleDTO toDto(Role entity) {
-        if (entity == null) return null;
-        return modelMapper.map(entity, RoleDTO.class);
+        RoleDTO roleDTO = new RoleDTO();
+        ModelMapper modelMapper = new ModelMapper();
+        modelMapper.map(entity, roleDTO);
+        return roleDTO;
     }
 
     @Override
     public Role toEntity(RoleDTO dto) {
-        if (dto == null) return null;
-        return modelMapper.map(dto, Role.class);
+        Role role = new Role();
+        ModelMapper modelMapper = new ModelMapper();
+        modelMapper.map(dto, role);
+        return role;
     }
 }

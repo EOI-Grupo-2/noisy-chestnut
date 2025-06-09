@@ -44,6 +44,8 @@ public class User {
     @Enumerated(EnumType.STRING)
     @Column(name = "music_genre")
     private MusicGenre musicGenre;
+    @Column(nullable = true)
+    private String imageUrl;
     @ManyToMany(fetch = FetchType.EAGER)
     @JoinTable(
             name = "user_roles",
@@ -51,6 +53,12 @@ public class User {
             inverseJoinColumns = @JoinColumn(name = "role_id", referencedColumnName = "id")
     )
     private Set<Role> roles = new HashSet<>();
-    @OneToMany(fetch = FetchType.EAGER)
-    private List<Follows> follows;
+
+    @ManyToMany(fetch = FetchType.EAGER)
+    @JoinTable(
+            name = "user_concert",
+            joinColumns = @JoinColumn(name = "user_id", referencedColumnName = "id"),
+            inverseJoinColumns = @JoinColumn(name = "concert_id", referencedColumnName = "id")
+    )
+    private List<Concert> concerts = new ArrayList<>();
 }

@@ -15,7 +15,6 @@ public class GroupsHasUserService extends AbstractBusinessService<
         GroupHasUserRepository,
         GroupsHasUserMapper> {
 
-    @Autowired
     public GroupsHasUserService(GroupHasUserRepository repo, GroupsHasUserMapper mapper) {
         super(repo, mapper);
     }

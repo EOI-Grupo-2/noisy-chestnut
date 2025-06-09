@@ -82,12 +82,6 @@ public class DefaultController {
         return "/user/adminpanel";
     }
 
-
-    @GetMapping({"", "/artist/profile"})
-    public String getArtistProfile(){
-        return "/artist/profile";
-    }
-  
     @GetMapping({"", "/chat/id"})
     public String getChatPage(){
         return "/social/chat";

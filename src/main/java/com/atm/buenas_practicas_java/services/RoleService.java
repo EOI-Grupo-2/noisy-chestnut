@@ -25,10 +25,6 @@ public class RoleService extends AbstractBusinessService<Role, Long, RoleDTO, Ro
         return getRepo().findByName(name);
     }
 
-    public List<User> getUsersByRoleName(String roleName) {
-        return userRepository.findByRoleName(roleName);
-    }
-
     public User assignRoleToUser(Long userId, Long roleId) {
         User user = userRepository.findById(userId)
                 .orElseThrow(() -> new RuntimeException("Usuario no encontrado"));

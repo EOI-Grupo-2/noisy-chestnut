@@ -1,11 +1,11 @@
 package com.atm.buenas_practicas_java.controllers;
 
 import com.atm.buenas_practicas_java.DTO.UserDTO;
+import com.atm.buenas_practicas_java.entities.Follows;
 import com.atm.buenas_practicas_java.entities.Role;
 import com.atm.buenas_practicas_java.entities.enums.Genre;
 import com.atm.buenas_practicas_java.entities.enums.MusicGenre;
-import com.atm.buenas_practicas_java.services.RoleService;
-import com.atm.buenas_practicas_java.services.UserService;
+import com.atm.buenas_practicas_java.services.*;
 import com.atm.buenas_practicas_java.services.mapper.UserMapper;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.crypto.password.PasswordEncoder;
@@ -14,6 +14,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.Set;
+import java.util.stream.Collectors;
 
 @Controller
 @RequestMapping("/users")
@@ -23,12 +24,16 @@ public class UserController {
     private final RoleService roleService;
     private final PasswordEncoder passwordEncoder;
     private final UserMapper userMapper;
+    private final PublicationsService publicationsService;
+    private final AlbumsService albumsService;
 
-    public UserController(UserService userService, RoleService roleService, PasswordEncoder passwordEncoder, UserMapper userMapper) {
+    public UserController(UserService userService, RoleService roleService, PasswordEncoder passwordEncoder, UserMapper userMapper, PublicationsService publicationsService, FollowsService followsService, AlbumsService albumsService) {
         this.userService = userService;
         this.roleService = roleService;
         this.passwordEncoder = passwordEncoder;
         this.userMapper = userMapper;
+        this.publicationsService = publicationsService;
+        this.albumsService = albumsService;
     }
 
     @GetMapping({"/", "{id}/edit"})
@@ -60,7 +65,7 @@ public class UserController {
     @PostMapping({"/", "register"})
     public String registerUser(@ModelAttribute("user") UserDTO userDTO) throws Exception {
         Role userRole = roleService.findByName("USER");
-        userDTO.setRole(Set.of(userRole));
+        userDTO.setRoles(Set.of(userRole));
         userDTO.setPassword(passwordEncoder.encode(userDTO.getPassword()));
         UserDTO savedUser = userService.save(userDTO);
         userRole.getUsers().add(userMapper.toEntity(savedUser));
@@ -69,8 +74,25 @@ public class UserController {
     }
 
     @GetMapping({"/", "{id}/profile"})
-    public String getUserProfile(@PathVariable Long id, Model model) {
-        model.addAttribute("user", userService.findByIdDTO(id).orElse(new UserDTO()));
+    public String getUserProfile(@PathVariable Long id, Model model) throws Exception {
+        UserDTO userDTO = userService.findByIdDTO(id).orElse(new UserDTO());
+        model.addAttribute("user", userDTO);
+        model.addAttribute("followers", userService.findAllUsersFollowedByUserDTO(userDTO));
+        model.addAttribute("usersFollowed",userService.findAllUsersFollowerByUserDTO(userDTO));
+        model.addAttribute("publications", publicationsService.findPublicationsByUser(userMapper.toEntity(userDTO)));
+        model.addAttribute("concerts", userDTO.getConcerts());
+
+        Boolean isArtist = false;
+        for(Role role : userDTO.getRoles()) {
+            if (role.getName().equals("ARTIST")) {
+                isArtist = true;
+                break;
+            }
+        }
+        if (isArtist) {
+            model.addAttribute("albums", albumsService.findAllAlbumsByUser(userMapper.toEntity(userDTO)));
+        }
+        model.addAttribute("isArtist", isArtist);
         return "/user/profile";
     }
 
