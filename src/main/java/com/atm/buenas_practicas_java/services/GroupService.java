@@ -7,7 +7,7 @@ import com.atm.buenas_practicas_java.services.mapper.GroupMapper;
 import org.springframework.stereotype.Service;
 
 @Service
-public class GroupService extends AbstractBusinessService<Group, Long, GroupDTO, GroupMapper, GroupRepository> {
+public class GroupService extends AbstractBusinessService<Group, Long, GroupDTO, GroupRepository, GroupMapper> {
     public GroupService(GroupRepository groupRepository, GroupMapper groupMapper) {
         super(groupRepository, groupMapper);
     }
