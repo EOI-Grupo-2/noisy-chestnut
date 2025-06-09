@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" layout:decorate="~{layouts/main_layout.html}"
+      xmlns:th="http://www.thymeleaf.org"  xmlns:sec="https://www.thymeleaf.org/thymeleaf-extras-springsecurity6">
+<head>
+    <title>Error</title>
+    <link rel="stylesheet" th:href="@{/css/error.css}"/>
+</head>
+<body>
+<div class="content" layout:fragment="content">
+    <h1 class="error__title">An error has occurred...</h1>
+    <p>There seems to be a problem with the page you requested
+        (<span th:text="${path}"></span>).</p>
+    <p class="error__description" th:text="${'The status code is ' + status
+       + ', which means that the page was ' + error + '.'}"></p>
+    <p class="error__details" th:text="${'Further details: ' + message + '.'}"></p>
+    <a class="error__button" href="/">Back to home</a>
+</div>
+</body>
+</html>
