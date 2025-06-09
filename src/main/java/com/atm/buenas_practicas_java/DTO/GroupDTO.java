@@ -12,5 +12,5 @@ public class GroupDTO {
     private Long id;
     private String title;
     private String description;
-    private Concert concertId;
+    private Concert concert;
 }
