@@ -4,9 +4,12 @@ import com.atm.buenas_practicas_java.DTO.PlaceDTO;
 import com.atm.buenas_practicas_java.entities.Place;
 import com.atm.buenas_practicas_java.repositories.PlaceRepository;
 import com.atm.buenas_practicas_java.services.mapper.PlaceMapper;
+import com.atm.buenas_practicas_java.specifications.PlaceSpecifications;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 @Service
 public class PlaceService extends AbstractBusinessService<Place, Long, PlaceDTO, PlaceRepository, PlaceMapper> {
@@ -22,5 +25,12 @@ public class PlaceService extends AbstractBusinessService<Place, Long, PlaceDTO,
     public Optional<PlaceDTO> findDTOByName(String name) {
         return this.getRepo().findByName(name)
                 .map(place -> this.getMapper().toDto(place));
+    }
+
+    public List<PlaceDTO> searchPlaces(String name, String address) {
+        return getRepo().findAll(PlaceSpecifications.filterBy(name, address))
+                .stream()
+                .map(getMapper()::toDto)
+                .collect(Collectors.toList());
     }
 }
