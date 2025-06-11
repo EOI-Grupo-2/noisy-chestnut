@@ -1,5 +1,7 @@
 package com.atm.buenas_practicas_java.DTO;
 
+import com.atm.buenas_practicas_java.entities.Chat;
+import com.atm.buenas_practicas_java.entities.Concert;
 import com.atm.buenas_practicas_java.entities.Place;
 import com.atm.buenas_practicas_java.entities.User;
 import lombok.AllArgsConstructor;
@@ -22,4 +24,6 @@ public class ConcertDTO {
     private LocalDateTime date;
     private String imageUrl;
     private List<User> users;
+    private Chat chat;
+    private Concert concert;
 }

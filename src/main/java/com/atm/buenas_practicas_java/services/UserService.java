@@ -6,6 +6,7 @@ import com.atm.buenas_practicas_java.entities.User;
 import com.atm.buenas_practicas_java.repositories.FollowsRepository;
 import com.atm.buenas_practicas_java.repositories.UserRepository;
 import com.atm.buenas_practicas_java.services.mapper.UserMapper;
+import jakarta.transaction.Transactional;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -29,5 +30,25 @@ public class UserService extends AbstractBusinessService<User,Long, UserDTO,
 
     public List<UserDTO> findAllUsersFollowerByUserDTO(UserDTO userDTO) throws Exception {
         return followsRepository.findByUserFollowed(getMapper().toEntity(userDTO)).stream().map(follows -> getMapper().toDto(follows.getUserFollower())).collect(Collectors.toList());
+    }
+
+    @Transactional
+    public void delete(User user){
+        user.getConcerts().clear();
+        user.getChats().clear();
+        user.getRoles().clear();
+
+        // Limpiar relaciones Follows bidireccionales
+        for (Follows f : user.getFollowers()) {
+            f.setUserFollowed(null); // o f.setUserFollower(null);
+        }
+        for (Follows f : user.getUsersFollowed()) {
+            f.setUserFollower(null); // o f.setUserFollowed(null);
+        }
+        user.getFollowers().clear();
+        user.getUsersFollowed().clear();
+
+        // Finalmente eliminar el usuario
+        getRepo().delete(user);
     }
 }

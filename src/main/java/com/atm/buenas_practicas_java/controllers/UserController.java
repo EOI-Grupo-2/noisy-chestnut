@@ -4,6 +4,7 @@ import com.atm.buenas_practicas_java.DTO.UserDTO;
 import com.atm.buenas_practicas_java.entities.AuthUser;
 import com.atm.buenas_practicas_java.entities.Follows;
 import com.atm.buenas_practicas_java.entities.Role;
+import com.atm.buenas_practicas_java.entities.User;
 import com.atm.buenas_practicas_java.entities.enums.Genre;
 import com.atm.buenas_practicas_java.entities.enums.MusicGenre;
 import com.atm.buenas_practicas_java.services.*;
@@ -32,14 +33,16 @@ public class UserController {
     private final UserMapper userMapper;
     private final PublicationsService publicationsService;
     private final AlbumsService albumsService;
+    private final FollowsService followsService;
 
-    public UserController(UserService userService, RoleService roleService, PasswordEncoder passwordEncoder, UserMapper userMapper, PublicationsService publicationsService, FollowsService followsService, AlbumsService albumsService) {
+    public UserController(UserService userService, RoleService roleService, PasswordEncoder passwordEncoder, UserMapper userMapper, PublicationsService publicationsService, FollowsService followsService, AlbumsService albumsService, FollowsService followsService1) {
         this.userService = userService;
         this.roleService = roleService;
         this.passwordEncoder = passwordEncoder;
         this.userMapper = userMapper;
         this.publicationsService = publicationsService;
         this.albumsService = albumsService;
+        this.followsService = followsService1;
     }
 
     @GetMapping({"/", "{id}/edit"})
@@ -57,7 +60,7 @@ public class UserController {
     @PreAuthorize("isAuthenticated()")
     public String updateUserProfile(@ModelAttribute("user") UserDTO userDTO, @AuthenticationPrincipal AuthUser authUser, Model model) throws Exception {
         List<String> errors = getFormErrors(userDTO);
-        if(userDTO.getId()!=authUser.getId() || !authUser.getAuthorities().stream().map(GrantedAuthority::getAuthority).collect(Collectors.toSet()).contains("ADMIN")){
+        if(userDTO.getId()!=authUser.getId() && !(authUser.getRoles().stream().map(Role::getName).collect(Collectors.toSet()).contains("ADMIN"))){
             errors.add("No se puede editar este usuario porque no posees los permisos necesarios");
         }
         if(!errors.isEmpty()){
@@ -68,7 +71,14 @@ public class UserController {
             model.addAttribute("musicGenres", MusicGenre.values());
             return "/user/editprofile";
         }
-        userDTO.setRoles(roleService.findAllByUser(userMapper.toEntity(userDTO)));
+        User userBeforeEdit = userService.findById(userDTO.getId()).orElseThrow();
+        userDTO.setRoles(userBeforeEdit.getRoles());
+        userDTO.setAlbums(userBeforeEdit.getAlbums());
+        userDTO.setFollowers(userBeforeEdit.getFollowers());
+        userDTO.setUsersFollowed(userBeforeEdit.getUsersFollowed());
+        userDTO.setConcerts(userBeforeEdit.getConcerts());
+        userDTO.setChats(userBeforeEdit.getChats());
+        userDTO.setPublications(userBeforeEdit.getPublications());
         userService.save(userDTO);
         return "redirect:/users/" + userDTO.getId() + "/profile ";
     }
@@ -138,9 +148,8 @@ public class UserController {
     @GetMapping({"/", "{id}/delete"})
     @PreAuthorize("hasAuthority('ADMIN')")
     public String deleteUserProfile(@PathVariable("id") Long id) throws Exception {
-        UserDTO userDTO = userService.findByIdDTO(id).orElse(new UserDTO());
-        userDTO.setIsDeleted(true);
-        userService.save(userDTO);
+        User user = userService.findById(id).orElseThrow();
+        userService.delete(user);
         return "redirect:/";
     }
 

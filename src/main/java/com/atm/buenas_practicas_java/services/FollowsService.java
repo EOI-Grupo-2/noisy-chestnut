@@ -17,4 +17,8 @@ public class FollowsService extends AbstractBusinessService<Follows, Long, Follo
     public FollowsService(FollowsRepository followsRepository, FollowsMapper followsMapper) {
         super(followsRepository, followsMapper);
     }
+
+    public void delete(Follows follows){
+        getRepo().delete(follows);
+    }
 }

@@ -17,7 +17,6 @@
             <th>Usuario</th>
             <th>Género</th>
             <th>Roles</th>
-            <th>Eliminado</th>
             <th>Acciones</th>
         </tr>
         </thead>
@@ -29,8 +28,6 @@
             <td th:text="${user.getMusicGenre()}">Rock</td>
             <td>
                 <span th:each="rol : ${user.getRoles()}" th:text="@{${rol.getName()} + ', '}"></span>
-            </td>
-            <td th:text="${user.getIsDeleted() ? 'Si' : 'No'}">
             </td>
             <td class="table-actions">
                 <button class="btn-edit" ><a class="btn-edit__link" th:href="@{'/users/' + ${user.getId()} + '/edit'}">Editar</a></button>

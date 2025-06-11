@@ -95,7 +95,7 @@ public class LocalDataLoader {
         user3.setEmail("user3@mail.com");
         userRepository.saveAll(List.of(user1, user2, user3));
         adminRole.setUsers(List.of(user1));
-        userRole.setUsers(List.of(user1, user2));
+        userRole.setUsers(List.of(user1, user2, user3));
         artistRole.setUsers(List.of(user3));
         roleRepository.saveAll(List.of(adminRole, artistRole, concertAdminRole, placeAdminRole, userRole, anonymousRole));
         Follows follows1 = new Follows();
@@ -111,6 +111,11 @@ public class LocalDataLoader {
         follows3.setUserFollower(user2);
         follows3.setStartDate(LocalDateTime.now());
         followsRepository.saveAll(List.of(follows1, follows2, follows3));
+        user1.setFollowers(List.of(follows1));
+        user1.setUsersFollowed(List.of(follows2));
+        user2.setUsersFollowed(List.of(follows1, follows3));
+        user3.setFollowers(List.of(follows2, follows3));
+        userRepository.saveAll(List.of(user1, user2, user3));
         Publications publications1 = new Publications();
         publications1.setDate(LocalDateTime.now());
         publications1.setDescription("Descripcion del usuario chulo");

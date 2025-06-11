@@ -68,8 +68,6 @@
         </div>
 
         <input th:if="${!isRegister}" th:value="${user.getId()}" type="text" id="id" name="id" class="user-form__input" required hidden="hidden">
-        <input th:if="${!isRegister}" th:value="${user.getIsDeleted()}" type="text" id="isDeleted" name="isDeleted" class="user-form__input" required hidden="hidden">
-
         <div class="user-form__actions">
             <button type="submit" class="user-form__button">Save</button>
         </div>

@@ -46,8 +46,6 @@ public class User {
     private MusicGenre musicGenre;
     @Column(nullable = true)
     private String imageUrl;
-    @Column(nullable = false)
-    private Boolean isDeleted = false;
     @ManyToMany(fetch = FetchType.EAGER)
     @JoinTable(
             name = "user_roles",
@@ -56,11 +54,31 @@ public class User {
     )
     private Set<Role> roles = new HashSet<>();
 
-    @ManyToMany(fetch = FetchType.EAGER)
+    @ManyToMany(fetch = FetchType.EAGER, cascade = CascadeType.DETACH)
     @JoinTable(
             name = "user_concert",
             joinColumns = @JoinColumn(name = "user_id", referencedColumnName = "id"),
             inverseJoinColumns = @JoinColumn(name = "concert_id", referencedColumnName = "id")
     )
     private List<Concert> concerts = new ArrayList<>();
+
+    @ManyToMany(fetch = FetchType.EAGER, cascade = {CascadeType.MERGE, CascadeType.REFRESH})
+    @JoinTable(
+            name = "user_chat",
+            joinColumns = @JoinColumn(name = "user_id", referencedColumnName = "id"),
+            inverseJoinColumns = @JoinColumn(name = "chat_id", referencedColumnName = "id")
+    )
+    private List<Chat> chats = new ArrayList<>();
+
+    @OneToMany(mappedBy = "userFollower", cascade = CascadeType.REMOVE, fetch = FetchType.EAGER,  orphanRemoval = true)
+    private List<Follows> usersFollowed = new ArrayList<>();
+
+    @OneToMany(mappedBy = "userFollowed", cascade = CascadeType.REMOVE, fetch = FetchType.EAGER, orphanRemoval = true)
+    private List<Follows> followers = new ArrayList<>();
+
+    @OneToMany(mappedBy = "user", cascade = CascadeType.REMOVE, fetch = FetchType.EAGER, orphanRemoval = true)
+    private List<Publications> publications = new ArrayList<>();
+
+    @OneToMany(mappedBy = "user", cascade = CascadeType.REMOVE, fetch = FetchType.EAGER, orphanRemoval = true)
+    private List<Albums> albums = new ArrayList<>();
 }

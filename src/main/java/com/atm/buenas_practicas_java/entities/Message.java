@@ -30,7 +30,7 @@ public class Message {
     @JoinColumn(name = "user_id", referencedColumnName = "id", nullable = false)
     private User user;
 
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "chat_id", referencedColumnName = "id", nullable = false)
     private Chat chat;
 }
