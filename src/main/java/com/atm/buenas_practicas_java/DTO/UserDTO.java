@@ -9,6 +9,7 @@ import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import org.hibernate.query.sql.internal.ParameterRecognizerImpl;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -32,5 +33,6 @@ public class UserDTO {
     private MusicGenre musicGenre;
     private Set<Role> roles;
     private String imageUrl;
+    private Boolean isDeleted;
     private List<Concert> concerts;
 }

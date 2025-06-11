@@ -46,6 +46,8 @@ public class User {
     private MusicGenre musicGenre;
     @Column(nullable = true)
     private String imageUrl;
+    @Column(nullable = false)
+    private Boolean isDeleted = false;
     @ManyToMany(fetch = FetchType.EAGER)
     @JoinTable(
             name = "user_roles",

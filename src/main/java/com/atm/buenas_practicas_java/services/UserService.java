@@ -24,10 +24,10 @@ public class UserService extends AbstractBusinessService<User,Long, UserDTO,
     }
 
     public List<UserDTO> findAllUsersFollowedByUserDTO(UserDTO userDTO) throws Exception {
-        return followsRepository.findByUserFollowed(getMapper().toEntity(userDTO)).stream().map(follows -> getMapper().toDto(follows.getUserFollowed())).collect(Collectors.toList());
+        return followsRepository.findByUserFollower(getMapper().toEntity(userDTO)).stream().map(follows -> getMapper().toDto(follows.getUserFollowed())).collect(Collectors.toList());
     }
 
     public List<UserDTO> findAllUsersFollowerByUserDTO(UserDTO userDTO) throws Exception {
-        return followsRepository.findByUserFollower(getMapper().toEntity(userDTO)).stream().map(follows -> getMapper().toDto(follows.getUserFollower())).collect(Collectors.toList());
+        return followsRepository.findByUserFollowed(getMapper().toEntity(userDTO)).stream().map(follows -> getMapper().toDto(follows.getUserFollower())).collect(Collectors.toList());
     }
 }

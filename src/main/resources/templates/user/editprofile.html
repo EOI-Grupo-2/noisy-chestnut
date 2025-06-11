@@ -10,6 +10,11 @@
 <body>
 
 <div class="content" layout:fragment="content">
+   <div th:if="${!errors.isEmpty()}" class="errors-container" id="errorContainer">
+       <div th:each="error : ${errors}" class="error">
+           <p th:text="${error}" class="error__message"></p>
+       </div>
+   </div>
     <form th:action="${isRegister ? '/users/register' : '/users/edit' }" method="POST" class="user-form" th:object="${user}">
         <div class="user-form__field">
             <label for="name" class="user-form__label">Nombre:</label>

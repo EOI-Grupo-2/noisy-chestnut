@@ -13,144 +13,32 @@
         <thead>
         <tr>
             <th>ID</th>
-            <th>Nombre</th>
+            <th>Nombre y Apellidos</th>
             <th>Usuario</th>
             <th>Género</th>
-            <th>Rol</th>
+            <th>Roles</th>
+            <th>Eliminado</th>
             <th>Acciones</th>
         </tr>
         </thead>
         <tbody>
-        <tr>
-            <td>1</td>
-            <td>Juan Pérez</td>
-            <td>juanp</td>
-            <td>Rock</td>
-            <td>Admin</td>
-            <td class="table-actions">
-                <button class="btn-edit">Editar</button>
-                <button class="btn-delete" onclick="openModal('deletePlaceModal')">Eliminar</button>
+        <tr th:each="user: ${users}">
+            <td th:text="${user.getId()}"></td>
+            <td th:text="@{${user.getName()} + ' ' + ${user.getFullLastName()}}">Juan Pérez</td>
+            <td th:text="${user.getUsername()}">juanp</td>
+            <td th:text="${user.getMusicGenre()}">Rock</td>
+            <td>
+                <span th:each="rol : ${user.getRoles()}" th:text="@{${rol.getName()} + ', '}"></span>
             </td>
-        </tr>
-        <tr>
-            <td>2</td>
-            <td>Ana Gómez</td>
-            <td>anag</td>
-            <td>Pop</td>
-            <td>Usuario</td>
-            <td class="table-actions">
-                <button class="btn-edit">Editar</button>
-                <button class="btn-delete" onclick="openModal('deletePlaceModal')">Eliminar</button>
+            <td th:text="${user.getIsDeleted() ? 'Si' : 'No'}">
             </td>
-        </tr>
-        <tr>
-            <td>3</td>
-            <td>Carlos Ruiz</td>
-            <td>carlr</td>
-            <td>Reggaeton</td>
-            <td>Moderador</td>
             <td class="table-actions">
-                <button class="btn-edit">Editar</button>
-                <button class="btn-delete" onclick="openModal('deletePlaceModal')">Eliminar</button>
-            </td>
-        </tr>
-        <tr>
-            <td>4</td>
-            <td>Laura Martínez</td>
-            <td>lauram</td>
-            <td>Jazz</td>
-            <td>Usuario</td>
-            <td class="table-actions">
-                <button class="btn-edit">Editar</button>
-                <button class="btn-delete" onclick="openModal('deletePlaceModal')">Eliminar</button>
-            </td>
-        </tr>
-        <tr>
-            <td>5</td>
-            <td>Pedro López</td>
-            <td>pedrol</td>
-            <td>Metal</td>
-            <td>Usuario</td>
-            <td class="table-actions">
-                <button class="btn-edit">Editar</button>
-                <button class="btn-delete" onclick="openModal('deletePlaceModal')">Eliminar</button>
-            </td>
-        </tr>
-        <tr>
-            <td>6</td>
-            <td>Sofía Díaz</td>
-            <td>sofiad</td>
-            <td>Indie</td>
-            <td>Admin</td>
-            <td class="table-actions">
-                <button class="btn-edit">Editar</button>
-                <button class="btn-delete" onclick="openModal('deletePlaceModal')">Eliminar</button>
-            </td>
-        </tr>
-        <tr>
-            <td>7</td>
-            <td>Diego Torres</td>
-            <td>diegot</td>
-            <td>Electrónica</td>
-            <td>Usuario</td>
-            <td class="table-actions">
-                <button class="btn-edit">Editar</button>
-                <button class="btn-delete" onclick="openModal('deletePlaceModal')">Eliminar</button>
-            </td>
-        </tr>
-        <tr>
-            <td>8</td>
-            <td>Lucía Hernández</td>
-            <td>luciah</td>
-            <td>Rap</td>
-            <td>Moderador</td>
-            <td class="table-actions">
-                <button class="btn-edit">Editar</button>
-                <button class="btn-delete" onclick="openModal('deletePlaceModal')">Eliminar</button>
-            </td>
-        </tr>
-        <tr>
-            <td>9</td>
-            <td>Álvaro Jiménez</td>
-            <td>alvaroj</td>
-            <td>Trap</td>
-            <td>Usuario</td>
-            <td class="table-actions">
-                <button class="btn-edit">Editar</button>
-                <button class="btn-delete" onclick="openModal('deletePlaceModal')">Eliminar</button>
-            </td>
-        </tr>
-        <tr>
-            <td>10</td>
-            <td>Elena Castro</td>
-            <td>elenac</td>
-            <td>Reggae</td>
-            <td>Usuario</td>
-            <td class="table-actions">
-                <button class="btn-edit">Editar</button>
-                <button class="btn-delete" onclick="openModal('deletePlaceModal')">Eliminar</button>
-
+                <button class="btn-edit" ><a class="btn-edit__link" th:href="@{'/users/' + ${user.getId()} + '/edit'}">Editar</a></button>
+                <button class="btn-delete"><a class="btn-delete__link" th:href="@{'/users/' + ${user.getId()} + '/delete'}">Eliminar</a></button>
             </td>
         </tr>
         </tbody>
     </table>
-
-    <!-- Modal para eliminar sala -->
-    <div class="modal" id="deletePlaceModal">
-        <div class="modal__content">
-            <header class="modal__header">
-                <h2>Eliminar sala</h2>
-            </header>
-            <div class="modal__body">
-                <p>¿Está seguro de que desea eliminar la sala?</p>
-            </div>
-            <div class="modal__footer">
-                <button class="btn-delete btn-cancel" onclick="openModal('deletePlaceModal')">Cancelar</button>
-                <button class="btn-edit btn-confirm">Confirmar</button>
-            </div>
-        </div> <!-- cierre de modal__content -->
-    </div> <!-- cierre de modal -->
-
 </div>
 
 </body>

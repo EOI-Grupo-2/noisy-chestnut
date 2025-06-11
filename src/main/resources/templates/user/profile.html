@@ -42,7 +42,7 @@
             <div class="profile-content__principal profile-content__principal--pubs" id="pubTab">
                 <div th:each="publication : ${publications}" class="pub-card">
                     <div class="pub-card__header">
-                        <img th:src="${publication.getPhotoUrl()}"
+                        <img th:src="${publication.getUser().getImageUrl()}"
                              class="pub-card__user-image" alt="">
                         <div class="pub-card__username" th:text="${publication.getUser().getUsername()}"></div>
                     </div>
