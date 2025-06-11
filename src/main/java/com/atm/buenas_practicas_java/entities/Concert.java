@@ -7,6 +7,8 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import java.time.LocalDateTime;
+import java.util.ArrayList;
+import java.util.List;
 
 @Entity
 @Getter
@@ -31,5 +33,16 @@ public class Concert {
 
     @Column(nullable = false)
     private LocalDateTime date;
+
+    @Column(nullable = false)
+    private String imageUrl;
+
+    @ManyToMany(fetch = FetchType.EAGER)
+    @JoinTable(
+            name = "user_concert",
+            joinColumns = @JoinColumn(name = "concert_id", referencedColumnName = "id"),
+            inverseJoinColumns = @JoinColumn(name = "user_id", referencedColumnName = "id")
+    )
+    private List<User> users = new ArrayList<>();
 
 }

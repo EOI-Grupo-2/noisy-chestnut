@@ -60,7 +60,7 @@ public class UserController {
     @PostMapping({"/", "register"})
     public String registerUser(@ModelAttribute("user") UserDTO userDTO) throws Exception {
         Role userRole = roleService.findByName("USER");
-        userDTO.setRole(Set.of(userRole));
+        userDTO.setRoles(Set.of(userRole));
         userDTO.setPassword(passwordEncoder.encode(userDTO.getPassword()));
         UserDTO savedUser = userService.save(userDTO);
         userRole.getUsers().add(userMapper.toEntity(savedUser));

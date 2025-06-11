@@ -1,7 +1,9 @@
 package com.atm.buenas_practicas_java.controllers;
 
 
+import com.atm.buenas_practicas_java.DTO.PublicationsDTO;
 import com.atm.buenas_practicas_java.entities.AuthUser;
+import com.atm.buenas_practicas_java.services.PublicationsService;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
@@ -9,6 +11,9 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Controlador encargado de manejar las solicitudes relacionadas con la entidad principal.
@@ -36,8 +41,21 @@ import org.springframework.web.bind.annotation.PostMapping;
 @Controller
 public class DefaultController {
 
-    @GetMapping({"", "/"})
-    public String getHomePage() {
+    private final PublicationsService publicationsService;
+
+    public DefaultController(PublicationsService publicationsService) {
+        this.publicationsService = publicationsService;
+    }
+
+    @GetMapping({"/", ""})
+    public String listPublications(@AuthenticationPrincipal AuthUser user, Model model) {
+        List<PublicationsDTO> publications = new ArrayList<>();
+        if(user != null) {
+            publications= publicationsService.findPublicationsOfFollowedUsers(user.getId());
+        } else {
+            publications = publicationsService.findAllDTO();
+        }
+        model.addAttribute("publications", publications);
         return "index";
     }
 
@@ -50,7 +68,6 @@ public class DefaultController {
     public String getArtistPage(){
         return "/artist/artist";
     }
-  
 
     @GetMapping({"", "/new-publication"})
     public String getNewPublicationPage(){
@@ -81,7 +98,6 @@ public class DefaultController {
     public String getAdminPanel(){
         return "/user/adminpanel";
     }
-
 
     @GetMapping({"", "/artist/profile"})
     public String getArtistProfile(){

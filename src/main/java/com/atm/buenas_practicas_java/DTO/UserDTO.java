@@ -1,5 +1,6 @@
 package com.atm.buenas_practicas_java.DTO;
 
+import com.atm.buenas_practicas_java.entities.Concert;
 import com.atm.buenas_practicas_java.entities.Follows;
 import com.atm.buenas_practicas_java.entities.Role;
 import com.atm.buenas_practicas_java.entities.enums.Genre;
@@ -29,6 +30,7 @@ public class UserDTO {
     private Double rate;
     private Genre genre;
     private MusicGenre musicGenre;
-    private Set<Role> role;
-    private List<Follows> follows = new ArrayList<>();
+    private Set<Role> roles;
+    private String imageUrl;
+    private List<Concert> concerts;
 }
