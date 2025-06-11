@@ -68,6 +68,7 @@ public class UserController {
             model.addAttribute("musicGenres", MusicGenre.values());
             return "/user/editprofile";
         }
+        userDTO.setRoles(roleService.findAllByUser(userMapper.toEntity(userDTO)));
         userService.save(userDTO);
         return "redirect:/users/" + userDTO.getId() + "/profile ";
     }
