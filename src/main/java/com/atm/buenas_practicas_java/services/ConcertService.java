@@ -10,8 +10,7 @@ import org.springframework.stereotype.Service;
 @Service
 public class ConcertService extends AbstractBusinessService<Concert, Long, ConcertDTO, ConcertRepository, ConcertMapper>{
 
-
-    protected ConcertService(ConcertRepository concertRepository, ConcertMapper mapper) {
+    public ConcertService(ConcertRepository concertRepository, ConcertMapper mapper) {
         super(concertRepository, mapper);
     }
 }

@@ -7,6 +7,8 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import java.time.LocalDateTime;
+import java.util.ArrayList;
+import java.util.List;
 
 @Entity
 @Getter
@@ -32,4 +34,12 @@ public class Concert {
     @Column(nullable = false)
     private LocalDateTime date;
 
+    @Column(nullable = false)
+    private String imageUrl;
+
+    @OneToOne(cascade = CascadeType.ALL, orphanRemoval = true)
+    private Chat chat;
+
+    @ManyToMany(mappedBy = "concerts", fetch = FetchType.EAGER)
+    private List<User> users = new ArrayList<>();
 }

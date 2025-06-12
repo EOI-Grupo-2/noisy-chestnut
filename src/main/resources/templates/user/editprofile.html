@@ -10,6 +10,11 @@
 <body>
 
 <div class="content" layout:fragment="content">
+   <div th:if="${!errors.isEmpty()}" class="errors-container" id="errorContainer">
+       <div th:each="error : ${errors}" class="error">
+           <p th:text="${error}" class="error__message"></p>
+       </div>
+   </div>
     <form th:action="${isRegister ? '/users/register' : '/users/edit' }" method="POST" class="user-form" th:object="${user}">
         <div class="user-form__field">
             <label for="name" class="user-form__label">Nombre:</label>
@@ -31,9 +36,9 @@
             <input th:value="${user.getUsername()}" type="text" id="username" name="username" class="user-form__input" placeholder="Ingresa tu nombre de usuario" required>
         </div>
 
-        <div th:if="${isRegister}" class="user-form__field">
+        <div th:style="${isRegister ? 'display:flex;' : 'display:none;'}" class="user-form__field">
             <label for="password" class="user-form__label">Contraseña: </label>
-            <input type="password" id="password" name="password" class="user-form__input" placeholder="Ingresa tu contraseña" required>
+            <input th:value="${user.getUsername()}" type="password" id="password" name="password" class="user-form__input" placeholder="Ingresa tu contraseña" required>
         </div>
 
         <div th:if="${isRegister}" class="user-form__field">
@@ -62,11 +67,7 @@
             </select>
         </div>
 
-
-        <input th:if="${!isRegister}" th:value="${user.getPassword()}" type="text" id="role" name="role" class="user-form__input" required hidden="hidden">
-        <input th:if="${!isRegister}" th:value="${user.getRole()}" type="text" id="role" name="role" class="user-form__input" required hidden="hidden">
         <input th:if="${!isRegister}" th:value="${user.getId()}" type="text" id="id" name="id" class="user-form__input" required hidden="hidden">
-
         <div class="user-form__actions">
             <button type="submit" class="user-form__button">Save</button>
         </div>

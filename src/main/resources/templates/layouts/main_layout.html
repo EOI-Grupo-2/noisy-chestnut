@@ -11,6 +11,7 @@
     <script th:src="@{/js/inputNumber.js}"></script>
     <script th:src="@{/js/menuListener.js}"></script>
     <script th:src="@{/js/openMenu.js}"></script>
+    <script th:src="@{/js/errorContainer.js}"></script>
 </head>
 <body>
 <div class="page-layout">
@@ -25,8 +26,9 @@
             <li class="menu__item"><a href="/concert" class="menu__link">Conciertos</a></li>
             <li class="menu__item"><a href="/new-publication" class="menu__link">Nueva publicación</a></li>
             <li class="menu__item"><a href="/search/users" class="menu__link">Buscar</a></li>
+            <li sec:authorize="hasRole('ADMIN')" class="menu__item"><a href="/users/admin" class="menu__link">Panel de administrador</a></li>
             <li sec:authorize="!isAuthenticated()" class="menu__item"><a href="/login" class="menu__link">Iniciar sesión</a></li>
-            <li sec:authorize="!isAuthenticated()" class="menu__item"><a href="/register" class="menu__link">Registrarse</a></li>
+            <li sec:authorize="!isAuthenticated()" class="menu__item"><a href="/users/users/register" class="menu__link">Registrarse</a></li>
             <li sec:authorize="isAuthenticated()" class="menu__item"><a  th:href="${'/users/'+ #authentication.getPrincipal().getId() +'/profile'}" class="menu__link" th:text="${#authentication.getName()}"></a></li>
             <li sec:authorize="isAuthenticated()" class="menu__item"><a href="/logout" class="menu__link">Cerrar sesión</a></li>
         </ul>
