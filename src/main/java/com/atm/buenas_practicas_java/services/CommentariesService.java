@@ -16,7 +16,10 @@ public class CommentariesService extends AbstractBusinessService<Commentaries, L
         super(commentariesRepository, commentariesMapper);
     }
 
-    public List<CommentariesDTO> findByPublicationsId(Long publicationsId) {
-        return getRepo().findByPublicationsId(publicationsId).stream().map(getMapper()::toDto).toList();
+    public List<CommentariesDTO> findByPublicationId(Long id) {
+
+        return getRepo().findByPublicationsId(id).stream()
+                .map(getMapper()::toDto)
+                .toList();
     }
 }
