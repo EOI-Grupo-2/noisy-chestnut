@@ -32,6 +32,8 @@ public class UserService extends AbstractBusinessService<User,Long, UserDTO,
         return followsRepository.findByUserFollowed(getMapper().toEntity(userDTO)).stream().map(follows -> getMapper().toDto(follows.getUserFollower())).collect(Collectors.toList());
     }
 
+
+
     @Transactional
     public void delete(User user){
         user.getConcerts().clear();

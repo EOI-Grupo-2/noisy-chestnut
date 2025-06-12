@@ -35,7 +35,7 @@
         <div th:if="${users != null}">
             <div th:each="user : ${users}" class="user-card">
                 <div class="user-card__info">
-                    <img class="user-card__image" th:src="${user.profileImageUrl}" alt="Profile Image"/>
+                    <img class="user-card__image" th:src="${user.imageUrl}" alt="Profile Image"/>
                     <h1 class="user-card__username">
                         <a class="user-card__link" th:href="@{/user/profile(id=${user.id})}" th:text="${user.username}"></a>
                     </h1>
@@ -66,7 +66,8 @@
     <div class="search-content" id="placesTab" style="display:none;">
         <div th:if="${places != null}">
             <div th:each="place : ${places}" class="place-card">
-                <img class="place-card__image" th:src="${place.imageUrl}" alt="Place Image"/>
+                <!-- Como PlaceDTO NO tiene imageUrl, mostramos una imagen por defecto -->
+                <img class="place-card__image" th:src="@{/images/default_place.png}" alt="Place Image"/>
                 <div class="place-card__content">
                     <h2 class="place-card__title" th:text="${place.name}"></h2>
                     <a th:href="@{/place/detail(id=${place.id})}" class="place-card__link">Conocer más</a>
