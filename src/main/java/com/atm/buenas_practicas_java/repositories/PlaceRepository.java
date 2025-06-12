@@ -9,4 +9,7 @@ import java.util.Optional;
 
 public interface PlaceRepository extends JpaRepository<Place, Long>, JpaSpecificationExecutor<Place> {
     Optional<Place> findByName(String name);
+
+    List<Place> findByNameContainingIgnoreCase(String name);
+
 }

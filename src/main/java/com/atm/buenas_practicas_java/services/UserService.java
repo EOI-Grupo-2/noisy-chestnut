@@ -51,4 +51,12 @@ public class UserService extends AbstractBusinessService<User,Long, UserDTO,
         // Finalmente eliminar el usuario
         getRepo().delete(user);
     }
+
+    public List<UserDTO> searchUsersByName(String name) {
+        // Asumiendo que UserRepository tiene un método findByNameContainingIgnoreCase
+        List<User> users = getRepo().findByNameContainingIgnoreCase(name);
+        return users.stream()
+                .map(getMapper()::toDto)
+                .collect(Collectors.toList());
+    }
 }

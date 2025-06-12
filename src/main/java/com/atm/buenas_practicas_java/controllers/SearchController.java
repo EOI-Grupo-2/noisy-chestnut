@@ -1,53 +1,38 @@
 package com.atm.buenas_practicas_java.controllers;
 
-import com.atm.buenas_practicas_java.DTO.ConcertDTO;
-import com.atm.buenas_practicas_java.DTO.PlaceDTO;
-import com.atm.buenas_practicas_java.DTO.SearchResponse;
-import com.atm.buenas_practicas_java.DTO.UserDTO;
+import org.springframework.ui.Model;
 import com.atm.buenas_practicas_java.services.ConcertService;
 import com.atm.buenas_practicas_java.services.PlaceService;
 import com.atm.buenas_practicas_java.services.UserService;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
-import java.time.LocalDateTime;
-import java.util.List;
-
-@RestController
-@RequestMapping("/search")
+@Controller
+@RequestMapping("/search/results")
 public class SearchController {
 
-    @Autowired
-    private UserService userService;
+    private final UserService userService;
+    private final ConcertService concertService;
+    private final PlaceService placeService;
 
-    @Autowired
-    private ConcertService concertService;
-
-    @Autowired
-    private PlaceService placeService;
+    public SearchController(UserService userService, ConcertService concertService, PlaceService placeService) {
+        this.userService = userService;
+        this.concertService = concertService;
+        this.placeService = placeService;
+    }
 
     @GetMapping
-    public SearchResponse search(
-            @RequestParam(required = false) String username,
-            @RequestParam(required = false) String email,
-            @RequestParam(required = false) String name,
-            @RequestParam(required = false) String concertName,
-            @RequestParam(required = false) Long placeId,
-            @RequestParam(required = false) String concertDate,
-            @RequestParam(required = false) String placeName,
-            @RequestParam(required = false) String address,
-            @RequestParam(required = false) Long capacity
-    ) {
-        List<UserDTO> users = userService.searchUsers(username, email, name);
+    public String search(@RequestParam("query") String query,
+                         Model model) {
 
-        LocalDateTime date = null;
-        if (concertDate != null && !concertDate.isEmpty()) {
-            date = LocalDateTime.parse(concertDate);
-        }
-        List<ConcertDTO> concerts = concertService.searchConcerts(concertName, concertDate);
+        model.addAttribute("users", userService.searchUsersByName(query));
+        model.addAttribute("concerts", concertService.searchConcertsByName(query));
+        model.addAttribute("places", placeService.searchPlacesByName(query));
+        model.addAttribute("query", query);
 
-        List<PlaceDTO> places = placeService.searchPlaces(placeName, address);
-
-        return new SearchResponse(users, concerts, places);
+        return "search/search";
     }
 }
+

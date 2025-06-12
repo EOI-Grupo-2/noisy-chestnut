@@ -4,7 +4,6 @@ import com.atm.buenas_practicas_java.DTO.ConcertDTO;
 import com.atm.buenas_practicas_java.entities.Concert;
 import com.atm.buenas_practicas_java.repositories.ConcertRepository;
 import com.atm.buenas_practicas_java.services.mapper.ConcertMapper;
-import com.atm.buenas_practicas_java.specifications.ConcertSpecifications;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -18,11 +17,12 @@ public class ConcertService extends AbstractBusinessService<Concert, Long, Conce
         super(concertRepository, mapper);
     }
 
-
-    public List<ConcertDTO> searchConcerts(String name, String description) {
-        return getRepo().findAll(ConcertSpecifications.filterBy(name, description))
-                .stream()
+    public List<ConcertDTO> searchConcertsByName(String name) {
+        List<Concert> concerts = getRepo().findByNameContainingIgnoreCase(name);
+        return concerts.stream()
                 .map(getMapper()::toDto)
                 .collect(Collectors.toList());
     }
+
+
 }
