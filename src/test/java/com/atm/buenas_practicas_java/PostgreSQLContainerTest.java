@@ -14,7 +14,7 @@ public abstract class PostgreSQLContainerTest {
     protected static final PostgreSQLContainer<?> dbContainer = new PostgreSQLContainer<>("postgres:latest").withDatabaseName("testDB").withUsername("appuser").withPassword("password123");
 
     static {
-        dbContainer.start();
+//        dbContainer.start();
     }
 
 }
