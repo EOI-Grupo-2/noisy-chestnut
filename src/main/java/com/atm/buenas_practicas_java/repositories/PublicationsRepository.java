@@ -9,6 +9,7 @@ import java.util.List;
 
 public interface PublicationsRepository extends JpaRepository<Publications, Long> {
     List<Publications> findByUser(User user);
+
     @Query("SELECT pub FROM Publications pub JOIN Follows follow ON follow.userFollower.id=?1 where pub.user.id = follow.userFollowed.id")
     List<Publications> findByUserFollowed(Long id);
 }

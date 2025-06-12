@@ -9,5 +9,5 @@ import java.util.List;
 @Repository
 public interface CommentariesRepository extends JpaRepository<Commentaries, Long> {
 
-    List<Commentaries> findByPublicationId(Long publicationId);
+    List<Commentaries> findByPublicationsId(Long publicationsId);
 }

@@ -21,7 +21,7 @@ public class Commentaries {
 
     @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn (name = "pub_id", nullable = false)
-    private Publications pub;
+    private Publications publications;
 
     @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn (name = "user_id", nullable = false)

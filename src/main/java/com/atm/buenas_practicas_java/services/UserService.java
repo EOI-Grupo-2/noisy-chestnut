@@ -10,8 +10,14 @@ import org.springframework.stereotype.Service;
 public class UserService extends AbstractBusinessService<User,Long, UserDTO,
         UserRepository, UserMapper>{
 
+    private final UserRepository userRepository;
 
     public UserService(UserRepository userRepository, UserMapper userMapper) {
         super(userRepository, userMapper);
+        this.userRepository = userRepository;
+    }
+
+    public UserDTO findByUsername(String username) throws Exception {
+        return this.getMapper().toDto(userRepository.findByUsername(username));
     }
 }

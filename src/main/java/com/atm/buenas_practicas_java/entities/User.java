@@ -61,4 +61,5 @@ public class User {
             inverseJoinColumns = @JoinColumn(name = "concert_id", referencedColumnName = "id")
     )
     private List<Concert> concerts = new ArrayList<>();
+
 }
