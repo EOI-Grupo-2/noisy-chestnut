@@ -31,19 +31,14 @@ public class UserController {
     private final RoleService roleService;
     private final PasswordEncoder passwordEncoder;
     private final UserMapper userMapper;
-    private final PublicationsService publicationsService;
-    private final AlbumsService albumsService;
-    private final FollowsService followsService;
 
-    public UserController(UserService userService, RoleService roleService, PasswordEncoder passwordEncoder, UserMapper userMapper, PublicationsService publicationsService, FollowsService followsService, AlbumsService albumsService, FollowsService followsService1) {
+    public UserController(UserService userService, RoleService roleService, PasswordEncoder passwordEncoder, UserMapper userMapper) {
         this.userService = userService;
         this.roleService = roleService;
         this.passwordEncoder = passwordEncoder;
         this.userMapper = userMapper;
-        this.publicationsService = publicationsService;
-        this.albumsService = albumsService;
-        this.followsService = followsService1;
     }
+
 
     @GetMapping({"/", "{id}/edit"})
     @PreAuthorize("isAuthenticated()")
@@ -121,9 +116,9 @@ public class UserController {
     public String getUserProfile(@PathVariable Long id, Model model) throws Exception {
         UserDTO userDTO = userService.findByIdDTO(id).orElse(new UserDTO());
         model.addAttribute("user", userDTO);
-        model.addAttribute("followers", userService.findAllUsersFollowerByUserDTO(userDTO));
-        model.addAttribute("usersFollowed",userService.findAllUsersFollowedByUserDTO(userDTO));
-        model.addAttribute("publications", publicationsService.findPublicationsByUser(userMapper.toEntity(userDTO)));
+        model.addAttribute("followers", userDTO.getFollowers().stream().map(Follows::getUserFollower));
+        model.addAttribute("usersFollowed",userDTO.getUsersFollowed().stream().map(Follows::getUserFollowed));
+        model.addAttribute("publications", userDTO.getPublications());
         model.addAttribute("concerts", userDTO.getConcerts());
 
         Boolean isArtist = false;
@@ -134,7 +129,7 @@ public class UserController {
             }
         }
         if (isArtist) {
-            model.addAttribute("albums", albumsService.findAllAlbumsByUser(userMapper.toEntity(userDTO)));
+            model.addAttribute("albums", userDTO.getAlbums());
         }
         model.addAttribute("isArtist", isArtist);
         return "/user/profile";

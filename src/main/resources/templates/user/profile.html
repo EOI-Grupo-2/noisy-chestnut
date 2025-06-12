@@ -17,14 +17,9 @@
                 <div class="profile-header__info">
                     <h1 class="profile-header__username" th:text="${user.getUsername()}"></h1>
                     <p class="profile-header__description" th:text="${user.getDescription()}"></p>
-                    <button class="edit-profile-button">
+                    <button th:if="${user.getId() == #authentication.getPrincipal().getId()}" class="edit-profile-button">
                         <a th:href="@{'/users/'+${user.getId()}+'/edit'}">Editar Perfil</a>
                     </button>
-                   <form th:action="@{'/users/'+${user.getId()}+'/delete'}"  method="get">
-                       <button class="edit-profile-button" type="submit">
-                            Eliminar Perfil
-                        </button>
-                    </form>
                 </div>
                 <ul class="profile-header__info-items">
                     <li class="profile-header__info-item"><button class="profile-header__info-button" type="button" onclick="selectTab('pubTab', 'profile-content__principal')">Publicaciones</button></li>
