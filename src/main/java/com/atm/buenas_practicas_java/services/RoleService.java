@@ -42,4 +42,8 @@ public class RoleService extends AbstractBusinessService<Role, Long, RoleDTO, Ro
         }
         getRepo().deleteById(id);
     }
+
+    public Set<Role> findAllByUser(User user) {
+        return getRepo().findAllByUsersContains(List.of(user));
+    }
 }

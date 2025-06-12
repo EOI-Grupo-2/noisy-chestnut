@@ -37,12 +37,9 @@ public class Concert {
     @Column(nullable = false)
     private String imageUrl;
 
-    @ManyToMany(fetch = FetchType.EAGER)
-    @JoinTable(
-            name = "user_concert",
-            joinColumns = @JoinColumn(name = "concert_id", referencedColumnName = "id"),
-            inverseJoinColumns = @JoinColumn(name = "user_id", referencedColumnName = "id")
-    )
-    private List<User> users = new ArrayList<>();
+    @OneToOne(cascade = CascadeType.ALL, orphanRemoval = true)
+    private Chat chat;
 
+    @ManyToMany(mappedBy = "concerts", fetch = FetchType.EAGER)
+    private List<User> users = new ArrayList<>();
 }
