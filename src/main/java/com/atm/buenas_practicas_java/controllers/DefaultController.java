@@ -66,20 +66,12 @@ public class DefaultController {
         return "/social/chat";
     }
 
-    @GetMapping({"", "/search"})
-    public String getSearch(){
-        return "/search/search";
-    }
 
     @GetMapping({"", "/places/new"})
     public String createPlacePage(){
         return "/places/form";
     }
 
-    @GetMapping({"", "/search/concerts"})
-    public String getSearchConcertsPage(){
-        return "/search/concerts";
-    }
 
     @GetMapping({"", "/places/id"})
     public String getPlacesProfile(){

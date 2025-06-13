@@ -1,5 +1,8 @@
 package com.atm.buenas_practicas_java.controllers;
 
+import com.atm.buenas_practicas_java.DTO.ConcertDTO;
+import com.atm.buenas_practicas_java.DTO.PlaceDTO;
+import com.atm.buenas_practicas_java.DTO.UserDTO;
 import org.springframework.ui.Model;
 import com.atm.buenas_practicas_java.services.ConcertService;
 import com.atm.buenas_practicas_java.services.PlaceService;
@@ -8,11 +11,13 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.RestController;
 
 import java.util.Collections;
+import java.util.List;
 
 @Controller
-@RequestMapping("/search/results")
+@RequestMapping("/search")
 public class SearchController {
 
     private final UserService userService;
@@ -25,14 +30,14 @@ public class SearchController {
         this.placeService = placeService;
     }
 
-    @GetMapping
-    public String search(@RequestParam("query") String query,
-                         @RequestParam("filter") String filter,
+    @GetMapping({"", ""})
+    public String search(@RequestParam(value = "query", defaultValue = "") String query,
+                         @RequestParam(value = "filter", defaultValue = "all") String filter,
                          Model model) {
 
-        var users = userService.searchUsersByName(query);
-        var concerts = concertService.searchConcertsByName(query);
-        var places = placeService.searchPlacesByName(query);
+        List<UserDTO> users = userService.searchUsersByName(query);
+        List<ConcertDTO> concerts = concertService.searchConcertsByName(query);
+        List<PlaceDTO> places = placeService.searchPlacesByName(query);
 
 
         // Aquí imprimes en consola para ver qué datos devuelve cada servicio
@@ -48,25 +53,33 @@ public class SearchController {
         model.addAttribute("filter", filter);
 
         switch (filter.toLowerCase()) {
-            case "users":
+            case "user": // coincide con el value del select
                 model.addAttribute("users", userService.searchUsersByName(query));
                 model.addAttribute("concerts", Collections.emptyList());
                 model.addAttribute("places", Collections.emptyList());
-                model.addAttribute("type", "users");
+                model.addAttribute("type", "user");
                 break;
 
-            case "concerts":
+            case "concert":
                 model.addAttribute("users", Collections.emptyList());
                 model.addAttribute("concerts", concertService.searchConcertsByName(query));
                 model.addAttribute("places", Collections.emptyList());
-                model.addAttribute("type", "concerts");
+                model.addAttribute("type", "concert");
                 break;
 
-            case "places":
+            case "place":
                 model.addAttribute("users", Collections.emptyList());
                 model.addAttribute("concerts", Collections.emptyList());
                 model.addAttribute("places", placeService.searchPlacesByName(query));
-                model.addAttribute("type", "places");
+                model.addAttribute("type", "place");
+                break;
+
+            case "all":
+            case "":
+                model.addAttribute("users", users);
+                model.addAttribute("concerts", concerts);
+                model.addAttribute("places", places);
+                model.addAttribute("type", "all");
                 break;
 
             default:
@@ -76,6 +89,7 @@ public class SearchController {
                 model.addAttribute("type", "none");
                 break;
         }
+
 
         model.addAttribute("query", query);
         model.addAttribute("filter", filter);

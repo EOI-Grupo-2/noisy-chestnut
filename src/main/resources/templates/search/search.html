@@ -14,8 +14,8 @@
     <!-- Buscador -->
     <form action="/search" method="get" class="search-form">
         <input type="text" name="query" placeholder="Buscar..." required>
-        <select name="type">
-            <option value="">Todos</option>
+        <select name="filter">
+            <option value="all">Todos</option>
             <option value="user">Usuarios</option>
             <option value="concert">Conciertos</option>
             <option value="place">Lugares</option>
@@ -25,13 +25,22 @@
 
     <!-- Tabs menú -->
     <div class="tabs-menu">
-        <button class="tabs-menu__item active" onclick="selectTab('usersTab')">Usuarios</button>
-        <button class="tabs-menu__item" onclick="selectTab('concertsTab')">Conciertos</button>
-        <button class="tabs-menu__item" onclick="selectTab('placesTab')">Lugares</button>
+        <button id="tab-users" class="tabs-menu__item active"
+                onclick="selectTab('usersTab', 'search-content', 'tabs-menu__item', 'tab-users')">
+            Usuarios
+        </button>
+        <button id="tab-concerts" class="tabs-menu__item"
+                onclick="selectTab('concertsTab', 'search-content', 'tabs-menu__item', 'tab-concerts')">
+            Conciertos
+        </button>
+        <button id="tab-places" class="tabs-menu__item"
+                onclick="selectTab('placesTab', 'search-content', 'tabs-menu__item', 'tab-places')">
+            Lugares
+        </button>
     </div>
 
     <!-- Usuarios -->
-    <div class="search-content" id="usersTab">
+    <div class="search-content" id="usersTab" style="display:flex;">
         <div th:if="${users != null}">
             <div th:each="user : ${users}" class="user-card">
                 <div class="user-card__info">
@@ -66,7 +75,6 @@
     <div class="search-content" id="placesTab" style="display:none;">
         <div th:if="${places != null}">
             <div th:each="place : ${places}" class="place-card">
-                <!-- Como PlaceDTO NO tiene imageUrl, mostramos una imagen por defecto -->
                 <img class="place-card__image" th:src="@{/images/default_place.png}" alt="Place Image"/>
                 <div class="place-card__content">
                     <h2 class="place-card__title" th:text="${place.name}"></h2>
@@ -79,12 +87,7 @@
 
 </div>
 
-<script>
-    function selectTab(tabId) {
-        const tabs = document.querySelectorAll('.search-content');
-        tabs.forEach(tab => tab.style.display = 'none');
-        document.getElementById(tabId).style.display = 'block';
-    }
-</script>
+<!-- TU JS PROPIO -->
+<script src="/js/tabs.js"></script>
 </body>
 </html>
