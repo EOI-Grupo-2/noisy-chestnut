@@ -1,5 +1,6 @@
 package com.atm.buenas_practicas_java.controllers;
 
+
 import com.atm.buenas_practicas_java.DTO.CommentariesDTO;
 import com.atm.buenas_practicas_java.DTO.PublicationsDTO;
 import com.atm.buenas_practicas_java.DTO.UserDTO;
@@ -15,7 +16,8 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.List;
+import java.sql.SQLOutput;
+import java.time.LocalDateTime;
 
 
 @Controller
@@ -24,13 +26,11 @@ public class PublicationsController {
     private final PublicationsService publicationsService;
     private final CommentariesService commentariesService;
     private final UserService userService;
-    private final UserMapper userMapper;
 
     public PublicationsController(PublicationsService publicationsService, CommentariesService commentariesService, UserService userService, UserMapper userMapper) {
         this.publicationsService = publicationsService;
         this.commentariesService = commentariesService;
         this.userService = userService;
-        this.userMapper = userMapper;
     }
 
     @GetMapping("/new-publication")
@@ -54,6 +54,9 @@ public class PublicationsController {
     public String showPublicationDetails(@PathVariable Long id, Model model){
         model.addAttribute("publication", publicationsService.findByIdDTO(id).orElseThrow());
         model.addAttribute("commentaries", commentariesService.findByPublicationId(id));
+        CommentariesDTO commentariesDTO = new CommentariesDTO();
+        commentariesDTO.setContent("Escribe un comentario...");
+        model.addAttribute("commentary", commentariesDTO);
         return "/publication/publication";
     }
 
@@ -73,6 +76,23 @@ public class PublicationsController {
         publicationDTO.setId(id);
         publicationsService.update(publicationDTO);
         return "redirect:/publication/" + id;
+    }
+
+
+    @PostMapping("/{id}/comment")
+    public String addComment(@PathVariable Long id,
+                             @ModelAttribute (name= "commentary") CommentariesDTO commentariesDTO,
+                             @AuthenticationPrincipal AuthUser authUser) throws Exception {
+        User user = userService.findByUsernameEntity(authUser.getUsername());
+        Publications publication = publicationsService.findByIdEntity(id);
+        CommentariesDTO commentariesDTO2 = new CommentariesDTO();
+        commentariesDTO2.setContent(commentariesDTO.getContent());
+        commentariesDTO2.setPublications(publication);
+        commentariesDTO2.setUser(user);
+        commentariesDTO2.setDate(LocalDateTime.now());
+        commentariesDTO2.setLikes(0);
+        CommentariesDTO commentariesDTO3 = commentariesService.save(commentariesDTO2);
+        return "redirect:/publication/" +id;
     }
 
 

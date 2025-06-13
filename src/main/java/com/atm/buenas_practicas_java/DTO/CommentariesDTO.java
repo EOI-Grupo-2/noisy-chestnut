@@ -16,7 +16,7 @@ import java.time.LocalDateTime;
 public class CommentariesDTO {
 
     private Long id;
-    private Publications pub;
+    private Publications publications;
     private User user;
     private String content;
     private Integer likes;

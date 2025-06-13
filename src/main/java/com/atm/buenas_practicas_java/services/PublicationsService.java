@@ -28,4 +28,9 @@ public class PublicationsService extends AbstractBusinessService<Publications, L
         Publications publication = getMapper().toEntity(dto);
         publicationsRepository.save(publication);
     }
+
+    public Publications findByIdEntity(Long id) {
+        return publicationsRepository.findById(id).orElseThrow(() -> new RuntimeException("Publication not found"));
+    }
+
 }

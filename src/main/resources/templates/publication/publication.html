@@ -9,34 +9,43 @@
 <body>
 <div class="content" layout:fragment="content">
     <div class="publication-layout">
+        <form role="form" th:method="post" th:object="${commentary}">
+
         <!-- Publicación -->
-        <div class="post">
-            <h5 class="post__author" th:text="${publication.getUser().getName()}"><span class="post__handle" th:text="${publication.getUser().getUsername()}"></span></h5>
-            <p class="post__text" th:text="${publication.getDescription()}">
-            </p>
-            <img class="post__image" th:src="${publication.getPhotoUrl()}" alt="Eladio Carrión en concierto">
+            <div class="post">
+                <h5 class="post__author" th:text="${publication.getUser().getName()}"><span class="post__handle" th:text="${publication.getUser().getUsername()}"></span></h5>
+                <p class="post__text" th:text="${publication.getDescription()}">
+                </p>
+                <img class="post__image" th:src="${publication.getPhotoUrl()}" alt="Eladio Carrión en concierto">
 
-            <div class="post__actions">
-                <button class="button button--like"><i class="fas fa-thumbs-up"></i> Me gusta</button>
-                <button class="button button--share"><i class="fas fa-share-alt"></i> Compartir</button>
-                <button class="button button--edit">
-                    <a th:href="@{/publication/edit/{id}(id=${publication.id})}">Editar</a>
-                </button>
-            </div>
-        </div>
-
-        <!-- Comentarios -->
-        <div class="comments">
-            <div class="comments__comment">
-                <p><strong>@TrapLover:</strong> 🔥🔥🔥 ¡Este show estuvo a otro nivel! #Eladio🐐</p>
+                <div class="post__actions">
+                    <button class="button button--like"><i class="fas fa-thumbs-up"></i> Me gusta</button>
+                    <button class="button button--share"><i class="fas fa-share-alt"></i> Compartir</button>
+                    <button class="button button--edit">
+                        <a th:href="@{/publication/edit/{id}(id=${publication.id})}">Editar</a>
+                    </button>
+                </div>
             </div>
 
-            <div class="comments__new">
-          <textarea class="comments__textarea" rows="3" placeholder="Escribir comentario..."
-                    onfocus="this.placeholder=''" onblur="this.placeholder='Escribir comentario...'"></textarea>
-                <button class="button button--comment">Comentar</button>
+            <!-- Comentarios -->
+            <div class="comments">
+                <div class="comments__comment">
+                    <p th:text="${publication.getUser().getUsername()}"></p>
+                    <p th:text="${publication.getDescription()}"></p>
+                </div>
+
+                <div class="comments__new">
+                    <textarea class="comments__textarea" rows="3" placeholder="Escribir comentario..."
+                              onfocus="this.placeholder=''"
+                              onblur="this.placeholder='Escribir comentario...'"
+                              th:field="${commentary.content}">
+                    </textarea>
+                    <button id="Comment" type="submit"
+                            th:formaction="'/publication/' + ${publication.id} + '/comment'"
+                            class="button button--comment">Comentar</button>
+                </div>
             </div>
-        </div>
+        </form>
     </div>
 
 </div>

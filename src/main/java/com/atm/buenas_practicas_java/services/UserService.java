@@ -38,6 +38,10 @@ public class UserService extends AbstractBusinessService<User,Long, UserDTO,
         return this.getMapper().toDto(userRepository.findByUsername(username));
     }
 
+    public User findByUsernameEntity(String username) throws Exception {
+        return userRepository.findByUsername(username);
+    }
+
     @Transactional
     public void delete(User user){
         user.getConcerts().clear();
