@@ -17,7 +17,7 @@ class EntidadPadreTest extends PostgreSQLContainerTest {
     @Test
     void testEntidadPadreConstructorWithNombre() {
         // Arrange
-        String expectedNombre = "Test Nombre";
+//        String expectedNombre = "Test Nombre";
 
         // Act
 //        EntidadPadre entidadPadre = new EntidadPadre(expectedNombre);

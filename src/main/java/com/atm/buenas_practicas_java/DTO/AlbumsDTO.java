@@ -17,7 +17,8 @@ public class AlbumsDTO {
     private String title;
     private Double rating;
     private String spotifyLink;
-    private User userId;
+    private User user;
     private Integer totalTracks;
     private LocalDateTime date;
+    private String imageUrl;
 }

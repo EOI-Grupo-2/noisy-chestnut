@@ -51,7 +51,6 @@ public class DefaultController {
         return "/artist/artist";
     }
   
-
     @GetMapping({"", "/new-publication"})
     public String getNewPublicationPage(){
         return "/publication/new-publication";
@@ -62,33 +61,7 @@ public class DefaultController {
         return "/social/social";
     }
   
-    @GetMapping({"", "/register"})
-    public String getRegister(){
-        return "/user/register";
-    }
-  
-    @GetMapping({"", "/user/profile"})
-    public String getUserProfile(){
-        return "/user/profile";
-    }
-
-    @GetMapping({"", "/user/editprofile"})
-    public String getUserEditProfile(){
-        return "/user/editprofile";
-    }
-
-    @GetMapping({"", "/user/adminpanel"})
-    public String getAdminPanel(){
-        return "/user/adminpanel";
-    }
-
-
-    @GetMapping({"", "/artist/profile"})
-    public String getArtistProfile(){
-        return "/artist/profile";
-    }
-  
-    @GetMapping({"", "/chat/id"})
+      @GetMapping({"", "/chat/id"})
     public String getChatPage(){
         return "/social/chat";
     }
@@ -136,12 +109,10 @@ public class DefaultController {
         return "concert/concert-form";
     }
 
-
     @GetMapping("/places/admin")
     public String showPlacesAdminPage() {
         return "places/placesAdmin";
     }
-
 
     @GetMapping("/places")
     public String showPlacesPage() {return "/places/places"; }
