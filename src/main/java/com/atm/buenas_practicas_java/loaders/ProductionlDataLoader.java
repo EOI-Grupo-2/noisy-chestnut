@@ -15,7 +15,6 @@ import java.util.Set;
 
 @Configuration
 @Log4j2
-@Profile("produccion")
 public class ProductionlDataLoader {
 
     private final UserRepository userRepository;
