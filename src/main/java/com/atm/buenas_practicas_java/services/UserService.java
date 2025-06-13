@@ -32,6 +32,8 @@ public class UserService extends AbstractBusinessService<User,Long, UserDTO,
         return followsRepository.findByUserFollowed(getMapper().toEntity(userDTO)).stream().map(follows -> getMapper().toDto(follows.getUserFollower())).collect(Collectors.toList());
     }
 
+
+
     @Transactional
     public void delete(User user){
         user.getConcerts().clear();
@@ -50,5 +52,13 @@ public class UserService extends AbstractBusinessService<User,Long, UserDTO,
 
         // Finalmente eliminar el usuario
         getRepo().delete(user);
+    }
+
+    public List<UserDTO> searchUsersByName(String name) {
+        // Asumiendo que UserRepository tiene un método findByNameContainingIgnoreCase
+        List<User> users = getRepo().findByNameContainingIgnoreCase(name);
+        return users.stream()
+                .map(getMapper()::toDto)
+                .collect(Collectors.toList());
     }
 }
