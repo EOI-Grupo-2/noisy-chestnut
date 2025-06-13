@@ -75,6 +75,13 @@
 
 }
 
+.btn-delete, .btn-edit{
+  &__link{
+    text-decoration: none;
+    color: inherit;
+  }
+}
+
 .modal{
   visibility: hidden;
   opacity: 0;

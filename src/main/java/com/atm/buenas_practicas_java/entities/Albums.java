@@ -39,4 +39,7 @@ public class Albums {
     @JoinColumn(name="releaseDate", nullable = false)
     private LocalDateTime Date;
 
+    @Column(nullable = false)
+    private String imageUrl;
+
 }
