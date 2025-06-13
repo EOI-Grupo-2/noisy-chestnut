@@ -50,13 +50,6 @@ public class PublicationsController {
         return "redirect:/";
     }
 
-    @PostMapping("/{id}")
-    public String addComment(@PathVariable Long id,
-                             @ModelAttribute CommentariesDTO commentariesDTO,
-                             @AuthenticationPrincipal AuthUser authUser){
-        return "redirect:/publication/";
-    }
-
     @GetMapping("/{id}")
     public String showPublicationDetails(@PathVariable Long id, Model model){
         model.addAttribute("publication", publicationsService.findByIdDTO(id).orElseThrow());
@@ -64,23 +57,23 @@ public class PublicationsController {
         return "/publication/publication";
     }
 
-    @GetMapping("/new-publication/{id}")
+    @GetMapping("/edit/{id}")
     public String showEditForm(@PathVariable Long id, Model model) {
         model.addAttribute("publication", publicationsService.findByIdDTO(id).orElseThrow());
-        model.addAttribute("formAction", "/publication/new-publication/");
-        return "/publication/publication";
+        model.addAttribute("formAction", "/publication/update/" + id);
+        return "/publication/edit-publication";
     }
 
-//    @PostMapping("/update/{id}")
-//    public String updatePublication(@PathVariable Long id,
-//                                    @ModelAttribute PublicationsDTO publicationDTO,
-//                                    @AuthenticationPrincipal AuthUser authUser) throws Exception {
-//        UserDTO userDTO = userService.findByUsername(authUser.getUsername());
-//        publicationDTO.setUser(userDTO);
-//        publicationDTO.setId(id);
-//        publicationsService.update(publicationDTO);
-//        return "redirect:/publication/";
-//    }
+    @PostMapping("/update/{id}")
+    public String updatePublication(@PathVariable Long id,
+                                    @ModelAttribute PublicationsDTO publicationDTO,
+                                    @AuthenticationPrincipal AuthUser authUser) throws Exception {
+        UserDTO userDTO = userService.findByUsername(authUser.getUsername());
+        publicationDTO.setUser(userDTO);
+        publicationDTO.setId(id);
+        publicationsService.update(publicationDTO);
+        return "redirect:/publication/" + id;
+    }
 
 
 }
