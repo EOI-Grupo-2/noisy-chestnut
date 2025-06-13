@@ -12,16 +12,18 @@
 <div class="content" layout:fragment="content">
 
     <!-- Buscador -->
-    <form action="/search" method="get" class="search-form">
-        <input type="text" name="query" placeholder="Buscar..." required>
-        <select name="filter">
-            <option value="all">Todos</option>
-            <option value="user">Usuarios</option>
-            <option value="concert">Conciertos</option>
-            <option value="place">Lugares</option>
-        </select>
-        <button type="submit">Buscar</button>
-    </form>
+    <div class="search-container">
+        <form action="/search" method="get" class="search-form">
+            <input type="text" name="query" placeholder="Buscar..." required>
+            <select name="filter">
+                <option value="all">Todos</option>
+                <option value="user">Usuarios</option>
+                <option value="concert">Conciertos</option>
+                <option value="place">Lugares</option>
+            </select>
+            <button type="submit">Buscar</button>
+        </form>
+    </div>
 
     <!-- Tabs menú -->
     <div class="tabs-menu">
