@@ -2,8 +2,10 @@ package com.atm.buenas_practicas_java.services;
 
 import com.atm.buenas_practicas_java.DTO.PublicationsDTO;
 import com.atm.buenas_practicas_java.entities.Publications;
+import com.atm.buenas_practicas_java.entities.User;
 import com.atm.buenas_practicas_java.repositories.PublicationsRepository;
 import com.atm.buenas_practicas_java.services.mapper.PublicationsMapper;
+import jakarta.transaction.Transactional;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -32,5 +34,18 @@ public class PublicationsService extends AbstractBusinessService<Publications, L
     public Publications findByIdEntity(Long id) {
         return publicationsRepository.findById(id).orElseThrow(() -> new RuntimeException("Publication not found"));
     }
+
+    @Transactional
+    public void delete(Publications publications) {
+        publications.getComments().clear();
+        publications.getUser().getPublications().remove(publications);
+        publicationsRepository.delete(publications);
+    }
+
+    public Publications saveEntity(Publications publication) {
+        return publicationsRepository.save(publication);
+    }
+
+
 
 }

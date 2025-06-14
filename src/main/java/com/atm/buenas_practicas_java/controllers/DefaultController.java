@@ -71,11 +71,6 @@ public class DefaultController {
     public String getArtistPage(){
         return "/artist/artist";
     }
-  
-    @GetMapping({"", "/new-publication"})
-    public String getNewPublicationPage(){
-        return "/publication/new-publication";
-    }
 
     @GetMapping({"", "/chat"})
     public String getSocialPage(){
@@ -111,9 +106,6 @@ public class DefaultController {
     public String editPlacePage(){
         return "/places/form";
     }
-
-    @GetMapping({"", "/publication"})
-    public String getPublicationPage(){return "/publication/publication";}
   
     @GetMapping("/concert")
     public String showConcertsPage() {

@@ -9,7 +9,6 @@
 <body>
 <div class="content" layout:fragment="content">
     <div class="publication-layout">
-        <form role="form" th:method="post" th:object="${commentary}">
 
         <!-- Publicación -->
             <div class="post">
@@ -19,19 +18,34 @@
                 <img class="post__image" th:src="${publication.getPhotoUrl()}" alt="Eladio Carrión en concierto">
 
                 <div class="post__actions">
-                    <button class="button button--like"><i class="fas fa-thumbs-up"></i> Me gusta</button>
-                    <button class="button button--share"><i class="fas fa-share-alt"></i> Compartir</button>
-                    <button class="button button--edit">
+                    <div class="post__actions">
+                        <form th:action="@{/publication/{id}/like(id=${publication.id})}" method="post" style="display: inline;">
+                            <button type="submit" class="button button--like">
+                                <i class="fas fa-thumbs-up"></i> Me gusta (<span th:text="${publication.likes}">0</span>)
+                            </button>
+                        </form>
+                    </div>
+                    <button class="button button--edit"
+                            th:if="${#authentication.name == publication.user.username}">
                         <a th:href="@{/publication/edit/{id}(id=${publication.id})}">Editar</a>
                     </button>
+                    <div th:if="${#authentication.name == publication.user.username or #authorization.expression('hasAuthority(''ADMIN'')')}">
+                        <form th:action="@{/publication/{id}/delete(id=${publication.id})}" method="post" style="display: inline;">
+                            <button type="submit" class="button button--delete"
+                                    onclick="return confirm('¿Estás seguro de que quieres eliminar esta publicación?')">
+                                Eliminar
+                            </button>
+                        </form>
+                    </div>
                 </div>
             </div>
 
+        <form role="form" th:method="post" th:object="${commentary}">
             <!-- Comentarios -->
             <div class="comments">
-                <div class="comments__comment">
-                    <p th:text="${publication.getUser().getUsername()}"></p>
-                    <p th:text="${publication.getDescription()}"></p>
+                <div class="comments__comment" th:each="comment : ${commentaries}">
+                    <p th:text="${comment.getUser().getUsername()}"><strong></strong></p>
+                    <p th:text="${comment.getContent()}"></p>
                 </div>
 
                 <div class="comments__new">

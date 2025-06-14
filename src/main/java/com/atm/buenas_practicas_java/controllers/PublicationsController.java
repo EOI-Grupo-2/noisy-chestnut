@@ -11,8 +11,10 @@ import com.atm.buenas_practicas_java.services.CommentariesService;
 import com.atm.buenas_practicas_java.services.PublicationsService;
 import com.atm.buenas_practicas_java.services.UserService;
 import com.atm.buenas_practicas_java.services.mapper.UserMapper;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
@@ -55,12 +57,30 @@ public class PublicationsController {
         model.addAttribute("publication", publicationsService.findByIdDTO(id).orElseThrow());
         model.addAttribute("commentaries", commentariesService.findByPublicationId(id));
         CommentariesDTO commentariesDTO = new CommentariesDTO();
-        commentariesDTO.setContent("Escribe un comentario...");
+        commentariesDTO.setContent("");
         model.addAttribute("commentary", commentariesDTO);
         return "/publication/publication";
     }
 
+    @PostMapping("/{id}/comment")
+    public String addComment(@PathVariable Long id,
+                             @ModelAttribute (name= "commentary") CommentariesDTO commentariesDTO,
+
+                             @AuthenticationPrincipal AuthUser authUser) throws Exception {
+        User user = userService.findByUsernameEntity(authUser.getUsername());
+        Publications publication = publicationsService.findByIdEntity(id);
+        CommentariesDTO commentariesDTO2 = new CommentariesDTO();
+        commentariesDTO2.setContent(commentariesDTO.getContent());
+        commentariesDTO2.setPublications(publication);
+        commentariesDTO2.setUser(user);
+        commentariesDTO2.setDate(LocalDateTime.now());
+        commentariesDTO2.setLikes(0);
+        CommentariesDTO commentariesDTO3 = commentariesService.save(commentariesDTO2);
+        return "redirect:/publication/" +id;
+    }
+
     @GetMapping("/edit/{id}")
+    @PreAuthorize("hasAuthority('USER')")
     public String showEditForm(@PathVariable Long id, Model model) {
         model.addAttribute("publication", publicationsService.findByIdDTO(id).orElseThrow());
         model.addAttribute("formAction", "/publication/update/" + id);
@@ -78,22 +98,35 @@ public class PublicationsController {
         return "redirect:/publication/" + id;
     }
 
-
-    @PostMapping("/{id}/comment")
-    public String addComment(@PathVariable Long id,
-                             @ModelAttribute (name= "commentary") CommentariesDTO commentariesDTO,
-                             @AuthenticationPrincipal AuthUser authUser) throws Exception {
-        User user = userService.findByUsernameEntity(authUser.getUsername());
+    @PostMapping("/{id}/like")
+    public String likePublication(@PathVariable Long id, @AuthenticationPrincipal AuthUser authUser) throws Exception {
         Publications publication = publicationsService.findByIdEntity(id);
-        CommentariesDTO commentariesDTO2 = new CommentariesDTO();
-        commentariesDTO2.setContent(commentariesDTO.getContent());
-        commentariesDTO2.setPublications(publication);
-        commentariesDTO2.setUser(user);
-        commentariesDTO2.setDate(LocalDateTime.now());
-        commentariesDTO2.setLikes(0);
-        CommentariesDTO commentariesDTO3 = commentariesService.save(commentariesDTO2);
-        return "redirect:/publication/" +id;
+        if (publication == null) {
+            throw new RuntimeException("Publicación no encontrada");
+        }
+        publication.setLikes(publication.getLikes() != null ? publication.getLikes() + 1 : 1);
+        publicationsService.saveEntity(publication);
+        System.out.println("Likes actuales: " + publication.getLikes()); // Log para depuración
+        return "redirect:/publication/" + id;
     }
+
+
+//    @PostMapping("/{id}/delete")
+//    @PreAuthorize("hasAnyAuthority('USER', 'ADMIN')")
+//    public String deletePublication(@PathVariable Long id,
+//                                    @AuthenticationPrincipal AuthUser authUser) throws Exception {
+//        Publications publication = publicationsService.findByIdEntity(id);
+//        boolean isOwner = publication.getUser().getUsername().equals(authUser.getUsername());
+//        boolean isAdmin = authUser.getAuthorities().stream()
+//                .anyMatch(auth -> auth.getAuthority().equals("ADMIN"));
+//        if (!isOwner && !isAdmin) {
+//            return "redirect:/publication/" + id + "?error=unauthorized";
+//        }
+//        publicationsService.delete(publication);
+//        return "redirect:/users/" + id + "/profile";
+//    }
+//
+
 
 
 }

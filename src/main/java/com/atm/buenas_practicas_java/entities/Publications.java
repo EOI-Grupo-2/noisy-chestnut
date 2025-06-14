@@ -6,6 +6,8 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import java.time.LocalDateTime;
+import java.util.ArrayList;
+import java.util.List;
 
 @Entity
 @Getter
@@ -36,4 +38,8 @@ public class Publications {
     @ManyToOne(fetch = FetchType.EAGER, cascade = CascadeType.DETACH)
     @JoinColumn (name = "user_id", nullable = false)
     private User user;
+
+    @OneToMany(mappedBy = "publications", cascade = CascadeType.REMOVE)
+    private List<Commentaries> comments = new ArrayList<>();
+
 }
