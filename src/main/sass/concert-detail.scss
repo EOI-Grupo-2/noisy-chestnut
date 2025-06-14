@@ -225,6 +225,39 @@
   }
 }
 
+.concert-artists__grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 20px;
+    margin-top: 15px;
+}
+
+.concert-artist__genre {
+    color: #666;
+    font-size: 0.9em;
+    margin: 5px 0;
+    font-style: italic;
+}
+
+.concert-artist__rating {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+    color: #ffd700;
+}
+
+.ticket-buttons {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+}
+
+.no-artists {
+    text-align: center;
+    padding: 40px;
+    color: #666;
+}
+
 // Botones de acción
 .concert-actions {
   display: flex;

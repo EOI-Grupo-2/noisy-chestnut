@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="es" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" layout:decorate="~{layouts/main_layout.html}"
+<html lang="en" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" layout:decorate="~{layouts/main_layout.html}"
       xmlns:th="http://www.thymeleaf.org">
 <head>
     <link rel="stylesheet" th:href="@{/css/ConcertsAdmin.css}" />
@@ -14,128 +14,38 @@
         <tr>
             <th>ID</th>
             <th>Título</th>
-            <th>Artista</th>
+            <th>Artistas</th>
             <th>Ubicación</th>
             <th>Fecha</th>
+            <th>Género Musical</th>
             <th>Acciones</th>
         </tr>
         </thead>
         <tbody>
-        <tr>
-            <td>1</td>
-            <td>Concierto de Melendi</td>
-            <td>Melendi</td>
-            <td>Sevilla</td>
-            <td>25 marzo de 2022</td>
-            <td class="table-actions">
-                <button class="btn-edit">Editar</button>
-                <button class="btn-delete">Eliminar</button>
+        <tr th:each="concert : ${concerts}">
+            <td th:text="${concert.getId()}"></td>
+            <td th:text="${concert.getName()}">Concierto de Melendi</td>
+            <td>
+                <span th:if="${concert.users != null and !#lists.isEmpty(concert.users)}">
+                    <span th:each="artist, iterStat : ${concert.users}"
+                          th:text="${artist.name + (iterStat.last ? '' : ', ')}"></span>
+                </span>
+                <span th:if="${concert.users == null or #lists.isEmpty(concert.users)}"
+                      class="no-artists">Sin artistas</span>
             </td>
-        </tr>
-        <tr>
-            <td>2</td>
-            <td>Concierto de Melendi</td>
-            <td>Melendi</td>
-            <td>Sevilla</td>
-            <td>25 marzo de 2022</td>
+            <td th:text="${concert.getPlace() != null ? concert.getPlace().getName() : 'Sin lugar'}">Sevilla</td>
+            <td th:text="${#temporals.format(concert.getDate(), 'dd/MM/yyyy HH:mm')}">25/03/2022 20:00</td>
+            <td th:text="${concert.getMusicGenre() != null ? concert.getMusicGenre() : 'Sin género'}">Rock</td>
             <td class="table-actions">
-                <button class="btn-edit">Editar</button>
-                <button class="btn-delete">Eliminar</button>
-            </td>
-        </tr>
-        <tr>
-            <td>3</td>
-            <td>Concierto de Melendi</td>
-            <td>Melendi</td>
-            <td>Sevilla</td>
-            <td>25 marzo de 2022</td>
-            <td class="table-actions">
-                <button class="btn-edit">Editar</button>
-                <button class="btn-delete">Eliminar</button>
-            </td>
-        </tr>
-        <tr>
-            <td>4</td>
-            <td>Concierto de Estopa</td>
-            <td>Estopa</td>
-            <td>Madrid</td>
-            <td>15 abril de 2022</td>
-            <td class="table-actions">
-                <button class="btn-edit">Editar</button>
-                <button class="btn-delete">Eliminar</button>
-            </td>
-        </tr>
-        <tr>
-            <td>5</td>
-            <td>Concierto de Rosalía</td>
-            <td>Rosalía</td>
-            <td>Barcelona</td>
-            <td>10 mayo de 2022</td>
-            <td class="table-actions">
-                <button class="btn-edit">Editar</button>
-                <button class="btn-delete">Eliminar</button>
-            </td>
-        </tr>
-        <tr>
-            <td>6</td>
-            <td>Concierto de C. Tangana</td>
-            <td>C. Tangana</td>
-            <td>Valencia</td>
-            <td>20 junio de 2022</td>
-            <td class="table-actions">
-                <button class="btn-edit">Editar</button>
-                <button class="btn-delete">Eliminar</button>
-            </td>
-        </tr>
-        <tr>
-            <td>7</td>
-            <td>Concierto de Bad Bunny</td>
-            <td>Bad Bunny</td>
-            <td>Málaga</td>
-            <td>5 julio de 2022</td>
-            <td class="table-actions">
-                <button class="btn-edit">Editar</button>
-                <button class="btn-delete">Eliminar</button>
-            </td>
-        </tr>
-        <tr>
-            <td>8</td>
-            <td>Concierto de Dua Lipa</td>
-            <td>Dua Lipa</td>
-            <td>Bilbao</td>
-            <td>12 agosto de 2022</td>
-            <td class="table-actions">
-                <button class="btn-edit">Editar</button>
-                <button class="btn-delete">Eliminar</button>
-            </td>
-        </tr>
-        <tr>
-            <td>9</td>
-            <td>Concierto de Coldplay</td>
-            <td>Coldplay</td>
-            <td>Zaragoza</td>
-            <td>18 septiembre de 2022</td>
-            <td class="table-actions">
-                <button class="btn-edit">Editar</button>
-                <button class="btn-delete">Eliminar</button>
-            </td>
-        </tr>
-        <tr>
-            <td>10</td>
-            <td>Concierto de Imagine Dragons</td>
-            <td>Imagine Dragons</td>
-            <td>Sevilla</td>
-            <td>30 octubre de 2022</td>
-            <td class="table-actions">
-                <button class="btn-edit">Editar</button>
-                <button class="btn-delete">Eliminar</button>
+                <button class="btn-edit"><a class="btn-edit__link" th:href="@{'/concert/' + ${concert.getId()} + '/edit'}">Editar</a></button>
+                <button class="btn-delete"><a class="btn-delete__link" th:href="@{'/concert/' + ${concert.getId()} + '/delete'}">Eliminar</a></button>
             </td>
         </tr>
         </tbody>
     </table>
 
     <div class="admin-actions">
-        <button class="btn-add">Añadir Concierto</button>
+        <a th:href="@{/concert/new}" class="btn-add">Añadir Concierto</a>
     </div>
 
 </div>

@@ -10,50 +10,21 @@
 </head>
 <body>
 <div layout:fragment="content" class="content">
-    <div class="concert-card">
-        <img class="concert-card__image" src="https://images.unsplash.com/photo-1656618020911-1c7a937175fd?crop=entropy&cs=tinysrgb&fm=jpg&ixid=MnwzMjM4NDZ8MHwxfHJhbmRvbXx8fHx8fHx8fDE2NTc1MzQyNTE&ixlib=rb-1.2.1&q=80" alt="concertImage">
-        <div class="concert-card__content">
-            <h2 class="concert-card__title">
-                Concierto de Melendi
-            </h2>
-            <p class="concert-card__description">
-                Sevilla, 25 marzo de 2022
-            </p>
-            <a href="/concert/detail" class="concert-card__link">
-                Conocer más
-                <span class="material-symbols-outlined">
-                    arrow_right_alt
-                </span>
-            </a>
-        </div>
+    <!-- Botón para ir al panel de administración (solo para ADMIN) -->
+    <div class="admin-actions" sec:authorize="hasAuthority('ADMIN')">
+        <a th:href="@{/concert/admin}" class="btn-admin">Panel de Administración</a>
     </div>
-    <div class="concert-card">
-        <img class="concert-card__image" src="https://images.unsplash.com/photo-1656618020911-1c7a937175fd?crop=entropy&cs=tinysrgb&fm=jpg&ixid=MnwzMjM4NDZ8MHwxfHJhbmRvbXx8fHx8fHx8fDE2NTc1MzQyNTE&ixlib=rb-1.2.1&q=80" alt="concertImage">
+
+    <div th:each="concert : ${concerts}" class="concert-card">
+        <img class="concert-card__image" th:src="${concert.imageUrl}" alt="concertImage">
         <div class="concert-card__content">
-            <h2 class="concert-card__title">
+            <h2 class="concert-card__title" th:text="${concert.name}">
                 Concierto de Melendi
             </h2>
-            <p class="concert-card__description">
+            <p class="concert-card__description" th:text="${concert.place.name + ', ' + #temporals.format(concert.date, 'dd MMMM yyyy')}">
                 Sevilla, 25 marzo de 2022
             </p>
-            <a href="/concert/detail" class="concert-card__link">
-                Conocer más
-                <span class="material-symbols-outlined">
-                    arrow_right_alt
-                </span>
-            </a>
-        </div>
-    </div>
-    <div class="concert-card">
-        <img class="concert-card__image" src="https://images.unsplash.com/photo-1656618020911-1c7a937175fd?crop=entropy&cs=tinysrgb&fm=jpg&ixid=MnwzMjM4NDZ8MHwxfHJhbmRvbXx8fHx8fHx8fDE2NTc1MzQyNTE&ixlib=rb-1.2.1&q=80" alt="concertImage">
-        <div class="concert-card__content">
-            <h2 class="concert-card__title">
-                Concierto de Melendi
-            </h2>
-            <p class="concert-card__description">
-                Sevilla, 25 marzo de 2022
-            </p>
-            <a href="/concert/detail" class="concert-card__link">
+            <a th:href="@{/concert/{id}(id=${concert.id})}" class="concert-card__link">
                 Conocer más
                 <span class="material-symbols-outlined">
                     arrow_right_alt
