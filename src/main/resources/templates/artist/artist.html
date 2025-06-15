@@ -4,53 +4,24 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Search</title>
+    <title>Artists Publications</title>
     <link rel="stylesheet" th:href="@{/css/artist.css}">
 </head>
 <body>
 <div class="content" layout:fragment="content">
 
-    <div class="pub-card" >
+    <div class="pub-card" th:each="publication : ${publications}">
         <div class="pub-card__header">
-            <img src="https://as1.ftcdn.net/v2/jpg/03/46/83/96/1000_F_346839683_6nAPzbhpSkIpb8pmAwufkC7c5eD7wYws.jpg" class="pub-card__user-image"alt="">
-            <div class="pub-card__username">Usuario 1</div>
+            <img th:src="${publication.user.imageUrl != null ? publication.user.imageUrl : 'https://as1.ftcdn.net/v2/jpg/03/46/83/96/1000_F_346839683_6nAPzbhpSkIpb8pmAwufkC7c5eD7wYws.jpg'}"
+                 class="pub-card__user-image" alt="">
+            <div class="pub-card__username" th:text="${publication.user.username}">Usuario</div>
         </div>
         <div class="pub-card__body">
-            <h5 class="pub-card__title">Contenido de la publicación</h5>
+            <h5 class="pub-card__title" th:text="${publication.content}">Contenido de la publicación</h5>
         </div>
         <div class="pub-card__footer">
-            <p class="pub-card__date">Fecha y hora de la publicación</p>
-            <a class="pub-card__link" href="/publication">Ver mas</a>
-        </div>
-    </div>
-
-    <!-- Publicación 2 -->
-    <div class="pub-card" >
-        <div class="pub-card__header">
-            <img src="https://as1.ftcdn.net/v2/jpg/03/46/83/96/1000_F_346839683_6nAPzbhpSkIpb8pmAwufkC7c5eD7wYws.jpg" class="pub-card__user-image"alt="">
-            <div class="pub-card__username">Usuario 2</div>
-        </div>
-        <div class="pub-card__body">
-            <h5 class="pub-card__title">Contenido de la publicación</h5>
-        </div>
-        <div class="pub-card__footer">
-            <p class="pub-card__date">Fecha y hora de la publicación</p>
-            <a class="pub-card__link" href="/publication">Ver mas</a>
-        </div>
-    </div>
-
-    <!-- Publicación 3 -->
-    <div class="pub-card" >
-        <div class="pub-card__header">
-            <img src="https://as1.ftcdn.net/v2/jpg/03/46/83/96/1000_F_346839683_6nAPzbhpSkIpb8pmAwufkC7c5eD7wYws.jpg" class="pub-card__user-image"alt="">
-            <div class="pub-card__username">Usuario 3</div>
-        </div>
-        <div class="pub-card__body">
-            <h5 class="pub-card__title">Contenido de la publicación</h5>
-        </div>
-        <div class="pub-card__footer">
-            <p class="pub-card__date">Fecha y hora de la publicación</p>
-            <a class="pub-card__link" href="/publication">Ver mas</a>
+            <p class="pub-card__date" th:text="${#temporals.format(publication.date, 'dd/MM/yyyy HH:mm')}">Fecha y hora de la publicación</p>
+            <a class="pub-card__link" th:href="@{/publication/{id}(id=${publication.id})}">Ver mas</a>
         </div>
     </div>
 </div>

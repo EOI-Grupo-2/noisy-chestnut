@@ -16,10 +16,12 @@ import java.util.stream.Collectors;
 public class PublicationsService extends AbstractBusinessService<Publications, Long, PublicationsDTO, PublicationsRepository, PublicationsMapper> {
 
     private final PublicationsRepository publicationsRepository;
+    private final PublicationsMapper publicationsMapper;
 
     public PublicationsService(PublicationsRepository repository, PublicationsMapper mapper) {
         super(repository, mapper);
         this.publicationsRepository = repository;
+        this.publicationsMapper = mapper;
     }
 
     public List<PublicationsDTO> findPublicationsOfFollowedUsers(Long userId) {
@@ -37,13 +39,19 @@ public class PublicationsService extends AbstractBusinessService<Publications, L
 
     @Transactional
     public void delete(Publications publications) {
-        publications.getComments().clear();
         publications.getUser().getPublications().remove(publications);
         publicationsRepository.delete(publications);
     }
 
     public Publications saveEntity(Publications publication) {
         return publicationsRepository.save(publication);
+    }
+
+    public List<PublicationsDTO> findPublicationsByUserRole(String roleName) {
+        List<Publications> publications = publicationsRepository.findByUserRoles(roleName);
+        return publications.stream()
+                .map(publicationsMapper::toDto)
+                .collect(Collectors.toList());
     }
 
 

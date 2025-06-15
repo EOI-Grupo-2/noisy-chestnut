@@ -5,6 +5,7 @@ import com.atm.buenas_practicas_java.DTO.CommentariesDTO;
 import com.atm.buenas_practicas_java.DTO.PublicationsDTO;
 import com.atm.buenas_practicas_java.DTO.UserDTO;
 import com.atm.buenas_practicas_java.entities.AuthUser;
+import com.atm.buenas_practicas_java.entities.Commentaries;
 import com.atm.buenas_practicas_java.entities.Publications;
 import com.atm.buenas_practicas_java.entities.User;
 import com.atm.buenas_practicas_java.services.CommentariesService;
@@ -20,6 +21,7 @@ import org.springframework.web.bind.annotation.*;
 
 import java.sql.SQLOutput;
 import java.time.LocalDateTime;
+import java.util.List;
 
 
 @Controller
@@ -35,11 +37,11 @@ public class PublicationsController {
         this.userService = userService;
     }
 
-    @GetMapping("/new-publication")
+    @GetMapping("/create-publication")
     public String showCreateForm(Model model) {
         model.addAttribute("publication", new PublicationsDTO());
         model.addAttribute("formAction", "/publication/create-publication");
-        return "publication/new-publication";
+        return "/new-publication";
     }
 
     @PostMapping("/create-publication")
@@ -111,22 +113,33 @@ public class PublicationsController {
     }
 
 
-//    @PostMapping("/{id}/delete")
-//    @PreAuthorize("hasAnyAuthority('USER', 'ADMIN')")
-//    public String deletePublication(@PathVariable Long id,
-//                                    @AuthenticationPrincipal AuthUser authUser) throws Exception {
-//        Publications publication = publicationsService.findByIdEntity(id);
-//        boolean isOwner = publication.getUser().getUsername().equals(authUser.getUsername());
-//        boolean isAdmin = authUser.getAuthorities().stream()
-//                .anyMatch(auth -> auth.getAuthority().equals("ADMIN"));
-//        if (!isOwner && !isAdmin) {
-//            return "redirect:/publication/" + id + "?error=unauthorized";
-//        }
-//        publicationsService.delete(publication);
-//        return "redirect:/users/" + id + "/profile";
-//    }
-//
+    @PostMapping("/{id}/delete")
+    @PreAuthorize("hasAnyAuthority('USER', 'ADMIN')")
+    public String deletePublication(@PathVariable Long id,
+                                    @AuthenticationPrincipal AuthUser authUser) throws Exception {
+        Publications publication = publicationsService.findByIdEntity(id);
+        publicationsService.delete(publication);
+        return "redirect:/users/" + id + "/profile";
+    }
 
+    @PostMapping("/{id}/delete-comment")
+    public String deleteComment(@PathVariable Long id,
+                                @AuthenticationPrincipal AuthUser authUser) throws Exception {
+        Commentaries commentaries = commentariesService.findByIdEntity(id);
+        if (!commentaries.getUser().getUsername().equals(authUser.getUsername())) {
+            throw new RuntimeException("No puedes eliminar comentarios de otros usuarios");
+        }
+        Long publicationId = commentaries.getPublications().getId();
+        commentariesService.deleteById(id);
+        return "redirect:/publication/" + publicationId;
+    }
+
+    @GetMapping("/artists")
+    public String showArtistPublications(Model model) {
+        List<PublicationsDTO> artistPublications = publicationsService.findPublicationsByUserRole("ARTIST");
+        model.addAttribute("publications", artistPublications);
+        return "/artist/artist";
+    }
 
 
 }

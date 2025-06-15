@@ -43,8 +43,8 @@
 
   &__actions {
     display: flex;
-    flex-wrap: wrap;
-    justify-content: center;
+    flex-direction: row;
+    justify-content: space-between;
     gap: 10px;
     margin-top: 15px;
 
@@ -111,7 +111,7 @@
 
   &__textarea {
     width: 100%;
-    background-color: #0C0C00;
+    background-color: #282828;
     color: #FFFAF0;
     border-radius: 5px;
     border: none;

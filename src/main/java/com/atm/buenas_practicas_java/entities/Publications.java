@@ -38,8 +38,4 @@ public class Publications {
     @ManyToOne(fetch = FetchType.EAGER, cascade = CascadeType.DETACH)
     @JoinColumn (name = "user_id", nullable = false)
     private User user;
-
-    @OneToMany(mappedBy = "publications", cascade = CascadeType.REMOVE)
-    private List<Commentaries> comments = new ArrayList<>();
-
 }
