@@ -72,20 +72,29 @@ public class DefaultController {
         return "/artist/artist";
     }
 
+<<<<<<< EOIG2-71-Controlador-Social
     @GetMapping({"", "/search"})
     public String getSearch(){
         return "/search/search";
     }
+=======
+    @GetMapping({"", "/chat"})
+    public String getSocialPage(){
+        return "/social/social";
+    }
+  
+      @GetMapping({"", "/chat/id"})
+    public String getChatPage(){
+        return "/social/chat";
+    }
+
+>>>>>>> desarrollo
 
     @GetMapping({"", "/places/new"})
     public String createPlacePage(){
         return "/places/form";
     }
 
-    @GetMapping({"", "/search/concerts"})
-    public String getSearchConcertsPage(){
-        return "/search/concerts";
-    }
 
     @GetMapping({"", "/places/id"})
     public String getPlacesProfile(){

@@ -66,7 +66,7 @@
                              src="https://as1.ftcdn.net/v2/jpg/03/46/83/96/1000_F_346839683_6nAPzbhpSkIpb8pmAwufkC7c5eD7wYws.jpg"
                              alt="Profile Image"/>
                         <h1 class="user-card__username">
-                            <a class="user-card__link" th:text="${follower.getUsername()}" th:href="@{'/users/'+${follower.getId()}+'/profile'}">
+                            <a th:href="@{/users/{id}/profile(id=${user.id})}" th:text="${user.username}"></a>
                             </a>
                         </h1>
                         <p class="user-card__description" th:text="${follower.getDescription()}">
