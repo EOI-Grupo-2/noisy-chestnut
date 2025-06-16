@@ -16,41 +16,47 @@
         <i class="fa-solid fa-arrow-left"></i> Volver a conciertos
     </a>
 
+    <!-- Mostrar errores si existen -->
+    <div th:if="${errors != null and !#lists.isEmpty(errors)}" class="error-messages">
+        <ul>
+            <li th:each="error : ${errors}" th:text="${error}"></li>
+        </ul>
+    </div>
+
     <div class="concert-form-card">
         <div class="concert-form-card__header">
-            <h4>Crear/Editar Concierto</h4>
+            <h4 th:text="${concert.id != null ? 'Editar Concierto' : 'Crear Concierto'}">Crear/Editar Concierto</h4>
         </div>
 
         <div class="concert-form-card__body">
-            <form action="/concert/save" method="post" enctype="multipart/form-data" id="concertForm">
+            <form th:action="@{/concert/save}" method="post" th:object="${concert}" enctype="multipart/form-data" id="concertForm">
+                <!-- ID oculto para edición -->
+                <input type="hidden" th:field="*{id}" />
+
                 <div class="concert-form-card__section">
                     <h5 class="concert-form-card__section-title">Información Básica</h5>
 
                     <div class="concert-form-card__field">
-                        <label for="title">Título del Concierto</label>
-                        <input type="text" id="title" name="title" class="concert-form-card__input"
+                        <label for="name">Título del Concierto</label>
+                        <input type="text" id="name" th:field="*{name}" class="concert-form-card__input"
                                placeholder="Ingresa el título del concierto" required>
                     </div>
 
                     <div class="concert-form-card__grid-container">
                         <div class="concert-form-card__field">
-                            <label for="date">Fecha</label>
-                            <input type="date" id="date" name="date" class="concert-form-card__input" required>
+                            <label for="date">Fecha y Hora</label>
+                            <input type="datetime-local" id="date" th:field="*{date}" class="concert-form-card__input" required>
                         </div>
 
                         <div class="concert-form-card__field">
-                            <label for="time">Hora</label>
-                            <input type="time" id="time" name="time" class="concert-form-card__input" required>
+                            <label for="musicGenre">Género Musical</label>
+                            <select id="musicGenre" th:field="*{musicGenre}" class="concert-form-card__input" required>
+                                <option value="">Selecciona un género</option>
+                                <option th:each="genre : ${musicGenres}"
+                                        th:value="${genre}"
+                                        th:text="${genre}">Género</option>
+                            </select>
                         </div>
-                    </div>
-
-                    <div class="concert-form-card__field">
-                        <label for="genre">Género Musical</label>
-                        <select id="genre" name="genre" class="concert-form-card__input" required>
-                            <option value="">Selecciona un género</option>
-                            <option value="rock">Rock</option>
-                            <option value="other">Otro</option>
-                        </select>
                     </div>
                 </div>
 
@@ -58,11 +64,12 @@
                     <h5 class="concert-form-card__section-title">Ubicación</h5>
 
                     <div class="concert-form-card__field">
-                        <label for="placeId">Lugar</label>
-                        <select id="placeId" name="placeId" class="concert-form-card__input" required>
+                        <label for="place">Lugar</label>
+                        <select id="place" th:field="*{place}" class="concert-form-card__input" required>
                             <option value="">Selecciona un lugar</option>
-                            <option value="1">Wizink Center - Madrid</option>
-                            <option value="2">Palau Sant Jordi - Barcelona</option>
+                            <option th:each="place : ${places}"
+                                    th:value="${place.id}"
+                                    th:text="${place.name + ' - ' + place.address}">Lugar</option>
                         </select>
                     </div>
                 </div>
@@ -72,7 +79,7 @@
 
                     <div class="concert-form-card__field">
                         <label for="description">Descripción</label>
-                        <textarea id="description" name="description" class="concert-form-card__textarea"
+                        <textarea id="description" th:field="*{description}" class="concert-form-card__textarea"
                                   rows="5" placeholder="Describe el concierto..." required></textarea>
                     </div>
 
@@ -81,10 +88,10 @@
                         <select data-placeholder="Selecciona artistas..." multiple class="chosen-select"
                                 name="artistIds" id="artistIds">
                             <option value=""></option>
-                            <option value="1">Rosalía</option>
-                            <option value="2">C. Tangana</option>
-                            <option value="3">Quevedo</option>
-                            <option value="4">Bad Bunny</option>
+                            <option th:each="artist : ${artists}"
+                                    th:value="${artist.id}"
+                                    th:text="${artist.name + ' (' + artist.username + ')'}"
+                                    th:selected="${concert.users != null and #lists.contains(concert.users.![id], artist.id)}">Artista</option>
                         </select>
                     </div>
                 </div>
@@ -97,25 +104,48 @@
                         <input type="url" id="ticketUrl" name="ticketUrl" class="concert-form-card__input"
                                placeholder="https://ejemplo.com/entradas">
                     </div>
+
+                    <div class="concert-form-card__field">
+                        <label for="ticketPrice">Precio de entrada (€)</label>
+                        <input type="number" id="ticketPrice" name="ticketPrice" class="concert-form-card__input"
+                               placeholder="25.00" step="0.01" min="0">
+                    </div>
                 </div>
 
                 <div class="concert-form-card__section">
                     <h5 class="concert-form-card__section-title">Imagen</h5>
 
                     <div class="concert-form-card__field">
-                        <label for="image">Imagen del Concierto</label>
-                        <input type="file" id="image" name="imageFile" class="concert-form-card__file" accept="image/*">
-                        <!-- Espacio para mostrar imagen actual en caso de edición -->
-                        <div class="current-image" style="display: none;">
-                            <p>Imagen actual:</p>
-                            <img src="" alt="Imagen actual" style="max-width: 200px; margin-top: 10px;">
+                        <label for="imageFile">Subir Imagen del Concierto</label>
+                        <input type="file" id="imageFile" name="imageFile" class="concert-form-card__file"
+                               accept="image/*" onchange="previewImage(this)">
+                        <small style="color: #666; font-size: 0.9em;">Formatos permitidos: JPG, PNG, GIF. Tamaño máximo: 10MB</small>
+
+                        <!-- Mostrar imagen actual en caso de edición -->
+                        <div class="current-image" th:if="${concert.imageUrl != null}" style="margin-top: 15px;">
+                            <p style="margin-bottom: 10px; font-weight: bold;">Imagen actual:</p>
+                            <img th:src="${concert.imageUrl}" alt="Imagen actual"
+                                 style="max-width: 200px; border-radius: 8px; box-shadow: 0 2px 8px rgba(0,0,0,0.1);">
+                        </div>
+
+                        <!-- Preview de la nueva imagen -->
+                        <div class="image-preview" style="display: none; margin-top: 15px;">
+                            <p style="margin-bottom: 10px; font-weight: bold;">Vista previa:</p>
+                            <img id="imagePreview" src="" alt="Vista previa"
+                                 style="max-width: 200px; border-radius: 8px; box-shadow: 0 2px 8px rgba(0,0,0,0.1);">
                         </div>
                     </div>
+
+                    <!-- Campo oculto para mantener la URL actual si no se sube nueva imagen -->
+                    <input type="hidden" th:field="*{imageUrl}" id="currentImageUrl">
                 </div>
 
                 <div class="concert-form-card__actions">
-                    <button type="button" class="concert-form-card__button concert-form-card__button--cancel" onclick="window.location.href='/concert'">Cancelar</button>
-                    <button type="submit" class="concert-form-card__button concert-form-card__button--save">Guardar Concierto</button>
+                    <button type="button" class="concert-form-card__button concert-form-card__button--cancel"
+                            onclick="window.location.href='/concert'">Cancelar</button>
+                    <button type="submit" class="concert-form-card__button concert-form-card__button--save">
+                        <span th:text="${concert.id != null ? 'Actualizar Concierto' : 'Guardar Concierto'}">Guardar Concierto</span>
+                    </button>
                 </div>
             </form>
         </div>
@@ -131,21 +161,47 @@
             allow_single_deselect: true
         });
 
-        // Validación del formulario
-        $("#concertForm").on("submit", function(e) {
-            if ($("#artistIds").val() === null || $("#artistIds").val().length === 0) {
-                alert("Por favor, selecciona al menos un artista.");
-                e.preventDefault();
-                return false;
-            }
-            return true;
-        });
-
         // Ajustar el ancho del Chosen en pantallas pequeñas
         $(window).on('resize', function() {
             $(".chosen-select").trigger("chosen:updated");
         });
     });
+
+    function previewImage(input) {
+        const preview = document.getElementById('imagePreview');
+        const previewContainer = document.querySelector('.image-preview');
+
+        if (input.files && input.files[0]) {
+            const file = input.files[0];
+
+            // Validar tamaño (10MB = 10 * 1024 * 1024 bytes)
+            if (file.size > 10 * 1024 * 1024) {
+                alert('El archivo es demasiado grande. El tamaño máximo es 10MB.');
+                input.value = '';
+                previewContainer.style.display = 'none';
+                return;
+            }
+
+            // Validar tipo de archivo
+            if (!file.type.startsWith('image/')) {
+                alert('Por favor, selecciona solo archivos de imagen.');
+                input.value = '';
+                previewContainer.style.display = 'none';
+                return;
+            }
+
+            const reader = new FileReader();
+
+            reader.onload = function(e) {
+                preview.src = e.target.result;
+                previewContainer.style.display = 'block';
+            }
+
+            reader.readAsDataURL(file);
+        } else {
+            previewContainer.style.display = 'none';
+        }
+    }
 </script>
 
 </body>

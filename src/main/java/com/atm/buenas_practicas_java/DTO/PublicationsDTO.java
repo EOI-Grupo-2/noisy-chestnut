@@ -1,6 +1,5 @@
 package com.atm.buenas_practicas_java.DTO;
 
-import com.atm.buenas_practicas_java.entities.User;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -19,5 +18,5 @@ public class PublicationsDTO {
     private String photoUrl;
     private Integer likes;
     private LocalDateTime date;
-    private User user;
+    private UserDTO user;
 }
