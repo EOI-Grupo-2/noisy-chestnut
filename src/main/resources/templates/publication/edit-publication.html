@@ -5,39 +5,27 @@
 <head>
     <meta charset="UTF-8">
     <link rel="stylesheet" th:href="@{/css/new-publication.css}">
-    <title>Crear Publicación</title>
+    <title>Editar Publicación</title>
 </head>
 <body>
 
+
 <div class="content" layout:fragment="content">
-    <form th:action="${formAction}" th:object="${publication}" method="POST" class="post-form">
+
+    <form th:action="${formAction}" method="POST" class="post-form">
         <div class="post-form__group">
             <label for="title" class="post-form__label">Título:</label>
-            <input type="text"
-                   id="title"
-                   th:value="${publication.getTitle()}"
-                   class="post-form__input"
-                   placeholder="Ingresa un título"
-                   required>
+            <input type="text" id="title" name="title" th:value="${publication.title}" class="post-form__input" placeholder="Ingresa un título" required>
         </div>
 
         <div class="post-form__group">
             <label for="description" class="post-form__label">Descripción:</label>
-            <textarea id="description"
-                      th:value="${publication.getDescription()}"
-                      class="post-form__textarea"
-                      rows="4"
-                      placeholder="Ingresa una descripción"
-                      required></textarea>
+            <textarea id="description" name="description" th:text="${publication.description}" class="post-form__textarea" rows="4" placeholder="Ingresa una descripción" required></textarea>
         </div>
 
         <div class="post-form__group">
             <label for="photoUrl" class="post-form__label">Foto URL:</label>
-            <input type="url"
-                   id="photoUrl"
-                   th:value="${publication.getPhotoUrl()}"
-                   class="post-form__input"
-                   placeholder="Ingresa un enlace para la foto">
+            <input type="url" id="photoUrl" name="photoUrl" class="post-form__input" th:value="${publication.photoUrl}" placeholder="Ingresa un enlace para la foto">
         </div>
 
         <div class="post-form__group post-form__group--center">
