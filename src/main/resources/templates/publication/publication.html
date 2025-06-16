@@ -16,11 +16,11 @@
             <div class="pub-card__header">
                 <img th:src="${publication.getUser().getImageUrl() != null ? publication.getUser().getImageUrl() : 'https://as1.ftcdn.net/v2/jpg/03/46/83/96/1000_F_346839683_6nAPzbhpSkIpb8pmAwufkC7c5eD7wYws.jpg'}"
                      class="pub-card__user-image" alt="">
-                <h5 class="post__author" th:text="${publication.getUser().getName()}"><span class="post__handle" th:text="${publication.getUser().getUsername()}"></span></h5>
+                <h3 class="post__author" th:text="${publication.getUser().getName()}"><span class="post__handle" th:text="${publication.getUser().getUsername()}"></span></h3>
             </div>
 
             <div class="post__body">
-                <p class="post__title" th:text="${publication.getTitle()}"> </p>
+                <h5 class="post__title" th:text="${publication.getTitle()}"></h5>
                 <p class="post__text" th:text="${publication.getDescription()}">
                 </p>
                 <img class="post__image"
