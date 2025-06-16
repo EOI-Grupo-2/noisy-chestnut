@@ -16,13 +16,15 @@
   width: 90%;
   max-width: 50rem;
   background-color: $secondary-color;
-  padding: 15px;
   border-radius: 10px;
   box-shadow: 0 4px 10px rgba(12, 12, 0, 0.8);
 
+  &__body{
+    padding: 15px;
+  }
+
   &__author {
     font-size: 18px;
-    margin-bottom: 5px;
     color: $font-color;
   }
 

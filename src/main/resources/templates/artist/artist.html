@@ -16,7 +16,7 @@
             <div class="pub-card__username" th:text="${publication.getUser().getUsername()}"></div>
         </div>
         <div class="pub-card__body">
-            <h5 class="pub-card__title" th:text="${publication.getDescription()}"></h5>
+            <p class="pub-card__description" th:text="${publication.getDescription()}"></p>
         </div>
         <div class="pub-card__footer">
             <p class="pub-card__date" th:text="${#temporals.format(publication.getDate(), 'dd/MM/yyyy HH:mm')}"></p>

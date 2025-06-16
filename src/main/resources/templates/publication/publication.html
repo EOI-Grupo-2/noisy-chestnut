@@ -12,11 +12,15 @@
 
         <!-- Publicación -->
         <div class="post">
+
             <div class="pub-card__header">
-                <img th:src="${publication.getUser().getImageUrl()}" class="pub-card__user-image"alt="">
+                <img th:src="${publication.getUser().getImageUrl() != null ? publication.getUser().getImageUrl() : 'https://as1.ftcdn.net/v2/jpg/03/46/83/96/1000_F_346839683_6nAPzbhpSkIpb8pmAwufkC7c5eD7wYws.jpg'}"
+                     class="pub-card__user-image" alt="">
                 <h5 class="post__author" th:text="${publication.getUser().getName()}"><span class="post__handle" th:text="${publication.getUser().getUsername()}"></span></h5>
             </div>
+
             <div class="post__body">
+                <p class="post__title" th:text="${publication.getTitle()}"> </p>
                 <p class="post__text" th:text="${publication.getDescription()}">
                 </p>
                 <img class="post__image"
@@ -44,28 +48,27 @@
                         </form>
                     </div>
                 </div>
-            </div>
 
-
-            <!-- Comentarios -->
-            <div class="comments">
-                <div class="comments__comment" th:each="comment : ${commentaries}">
-                    <div class="comment-header" style="display: flex; justify-content: space-between; align-items: center;">
-                        <p th:text="${comment.getUser().getUsername()}"><strong></strong></p>
+                <!-- Comentarios -->
+                <div class="comments">
+                    <div class="comments__comment" th:each="comment : ${commentaries}">
+                        <div class="comment-header" style="display: flex; justify-content: space-between; align-items: center;">
+                            <p th:text="${comment.getUser().getUsername()}"><strong></strong></p>
+                        </div>
+                        <p th:text="${comment.getContent()}"></p>
                     </div>
-                    <p th:text="${comment.getContent()}"></p>
+                    <form sec:authorize="isAuthenticated()" th:action="@{'/publication/' + ${publication.id} + '/comment'}" th:method="post" th:object="${commentary}">
+                        <div class="comments__new">
+                            <textarea id="content" name="content" class="comments__textarea" rows="3" placeholder="Escribir comentario..."
+                                      onfocus="this.placeholder=''"
+                                      onblur="this.placeholder='Escribir comentario...'"
+                                      th:text="${commentary.getContent()}">
+                            </textarea>
+                            <button id="Comment" type="submit"
+                                    class="button button--comment">Comentar</button>
+                        </div>
+                    </form>
                 </div>
-                <form sec:authorize="isAuthenticated()" th:action="@{'/publication/' + ${publication.id} + '/comment'}" th:method="post" th:object="${commentary}">
-                    <div class="comments__new">
-                        <textarea id="content" name="content" class="comments__textarea" rows="3" placeholder="Escribir comentario..."
-                                  onfocus="this.placeholder=''"
-                                  onblur="this.placeholder='Escribir comentario...'"
-                                  th:text="${commentary.getContent()}">
-                        </textarea>
-                        <button id="Comment" type="submit"
-                                class="button button--comment">Comentar</button>
-                    </div>
-                </form>
             </div>
         </div>
     </div>
