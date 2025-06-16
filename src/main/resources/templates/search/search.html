@@ -48,7 +48,7 @@
                 <div class="user-card__info">
                     <img class="user-card__image" th:src="${user.imageUrl}" alt="Profile Image"/>
                     <h1 class="user-card__username">
-                        <a class="user-card__link" th:href="@{/user/profile(id=${user.id})}" th:text="${user.username}"></a>
+                        <a th:href="@{/users/{id}/profile(id=${user.id})}" th:text="${user.username}"></a>
                     </h1>
                     <p class="user-card__description" th:text="${user.description}"></p>
                 </div>
