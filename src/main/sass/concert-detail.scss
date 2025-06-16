@@ -1,11 +1,5 @@
 @import "variables";
 
-// Estilos generales para el contenido
-.content {
-  padding-right: 2rem;
-  padding-left: 2rem;
-}
-
 // Botón de volver
 .btn-back {
   display: inline-flex;
@@ -33,10 +27,9 @@
   box-shadow: 0 5px 20px rgba(0, 0, 0, 0.4);
   color: $font-color;
   margin-bottom: 2rem;
-  width: 100%;
 }
 
-// Cabecera del concierto
+// Cabecera
 .concert-header {
   position: relative;
   height: 300px;
@@ -46,7 +39,6 @@
     width: 100%;
     height: 100%;
     object-fit: cover;
-    transition: transform 0.5s;
   }
 
   &__title {
@@ -65,17 +57,17 @@
   }
 }
 
-// Contenido principal
+// Contenido
 .concert-content {
   padding: 2rem;
 }
 
-// Información básica del concierto
+// Información básica
 .concert-info {
   display: flex;
   flex-wrap: wrap;
   gap: 1.5rem;
-  margin-bottom: 1rem;
+  margin-bottom: 2rem;
   padding-bottom: 1.5rem;
   border-bottom: 1px solid rgba(255, 255, 255, 0.1);
 
@@ -84,54 +76,48 @@
     align-items: center;
     gap: 0.5rem;
 
-    i {
-      color: $font-color;
+    .material-symbols-outlined {
+      color: $primary-color;
       font-size: 1.2rem;
-      width: 25px;
-      text-align: center;
     }
   }
 }
 
-// Enlace a la ubicación
-.venue-link {
-  color: $font-color;
-  text-decoration: none;
-  transition: color 0.3s;
-
-  &:hover {
-    color: $font-color;
-    text-decoration: underline;
-  }
-}
-
-// Descripción del concierto
+// Descripción
 .concert-description {
   margin-bottom: 2rem;
 
-  &__title {
+  h2 {
     font-size: 1.5rem;
     margin-bottom: 1rem;
     color: $font-color;
   }
 
-  &__text {
+  p {
     line-height: 1.6;
     color: $font-color;
   }
 }
 
-// Sección del artista
-.concert-artist {
+// Artistas
+.concert-artists {
   margin-bottom: 2rem;
 
-  &__title {
+  h2 {
     font-size: 1.5rem;
     margin-bottom: 1rem;
     color: $font-color;
   }
 
-  &__card{
+  &__grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 20px;
+  }
+}
+
+.concert-artist {
+  &__card {
     display: flex;
     background-color: transparentize($secondary-color, 0.8);
     border-radius: 8px;
@@ -140,87 +126,41 @@
 
   &__image {
     width: 120px;
+    height: 120px;
     object-fit: cover;
   }
 
   &__info {
     padding: 1rem;
     width: 100%;
-  }
 
-  &__info-header{
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    flex-direction: row;
-  }
-
-  &__name{
-    margin: 0 0 0.5rem 0;
-    font-size: 1.2rem;
-  }
-
-  &__rating {
-    --size: 25px;
-    --mask: conic-gradient(from -18deg at 61% 34.5%, #0000 108deg, #000 0) 0 / var(--size),
-    conic-gradient(from 270deg at 39% 34.5%, #0000 108deg, #000 0) 0 / var(--size),
-    conic-gradient(from 54deg at 68% 56%, #0000 108deg, #000 0) 0 / var(--size),
-    conic-gradient(from 198deg at 32% 56%, #0000 108deg, #000 0) 0 / var(--size),
-    conic-gradient(from 126deg at 50% 69%, #0000 108deg, #000 0) 0 / var(--size);
-    --bg: linear-gradient(90deg, $primary-color calc(var(--size) * var(--val)), transparentize($secondary-color, 0.4) 0);
-    background-color: transparent;
-    height: var(--size);
-    width: calc(var(--size) * 5);
-    border: 0; /* Firefox adds a default border to ranges */
-    -webkit-appearance: none;
-    appearance: none;
-
-    /* Chrome and Safari */
-    &::-webkit-slider-runnable-track {
-      height: 100%;
-      mask: var(--mask);
-      mask-composite: intersect;
-      background: var(--bg);
-      -webkit-print-color-adjust: exact;
-      print-color-adjust: exact;
-    }
-
-    &::-webkit-slider-thumb {
-      opacity: 0;
-    }
-
-    /* Firefox */
-    &::-moz-range-track {
-      height: 100%;
-      mask: var(--mask);
-      mask-composite: intersect;
-      background: var(--bg);
-      print-color-adjust: exact;
-    }
-
-    &::-moz-range-thumb {
-      opacity: 0;
-    }
-  }
-
-  &__biography{
-    color: $font-color;
-    margin-bottom: 1rem;
-  }
-
-  &__button{
-    display: inline-block;
-    background-color: $primary-color;
-    color: $font-color;
-    text-decoration: none;
-    padding: 0.5rem 1rem;
-    border-radius: 5px;
-    font-size: 0.9rem;
-    transition: background-color 0.3s;
-
-    &:hover {
-      background-color: $hover-color;
+    h3 {
+      margin: 0 0 0.5rem 0;
+      font-size: 1.2rem;
       color: $font-color;
+    }
+
+    p {
+      margin: 5px 0;
+      color: $font-color;
+      line-height: 1.4;
+    }
+
+    a {
+      display: inline-block;
+      background-color: $primary-color;
+      color: $font-color;
+      text-decoration: none;
+      padding: 0.5rem 1rem;
+      border-radius: 5px;
+      font-size: 0.9rem;
+      margin-top: 1rem;
+      transition: background-color 0.3s;
+
+      &:hover {
+        background-color: $hover-color;
+        color: $font-color;
+      }
     }
   }
 }
@@ -230,33 +170,38 @@
   display: flex;
   gap: 1rem;
   flex-wrap: wrap;
+  margin-top: 2rem;
 
   &__btn {
     display: inline-flex;
     align-items: center;
+    gap: 8px;
     padding: 0.8rem 1.5rem;
     border-radius: 5px;
     font-weight: bold;
     cursor: pointer;
-    transition: transform 0.2s;
+    transition: all 0.3s;
+    text-decoration: none;
+    border: none;
+    color: $font-color;
 
-    &--share {
-      background-color: transparent;
-      color: $font-color;
-      border: 1px solid transparentize($tertiary-color, 0.5);
+    &--buy {
+      background-color: $primary-color;
 
       &:hover {
-        background-color: transparentize($tertiary-color, 0.9);
+        background-color: $hover-color;
+        color: $font-color;
+      }
+
+      &:disabled {
+        background-color: $tertiary-color;
+        cursor: not-allowed;
       }
     }
 
     &--attend {
       background-color: transparent;
-      color: $font-color;
-      border: 1px solid transparentize($tertiary-color, 0.5);
-      position: relative;
-      transition: all 0.3s;
-      gap: 8px;
+      border: 1px solid $tertiary-color;
 
       &:hover {
         background-color: transparentize($tertiary-color, 0.9);
@@ -268,223 +213,176 @@
       }
     }
 
-    &--buy {
-      background-color:$primary-color;
-      color: $font-color;
-      text-decoration: none;
-      border: none;
+    &--share {
+      background-color: transparent;
+      border: 1px solid $tertiary-color;
 
       &:hover {
-        color: $font-color;
-        background-color: $hover-color;
+        background-color: transparentize($tertiary-color, 0.9);
       }
     }
   }
-
-  &__count {
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-    background-color: transparentize($tertiary-color, 0.3);
-    border-radius: 12px;
-    padding: 2px 8px;
-    font-size: 0.8rem;
-    min-width: 24px;
-    height: 24px;
-  }
 }
 
-// Sección de comentarios
+// Comentarios - VERSIÓN LIMPIA
 .concert-comments {
   padding: 2rem;
   background-color: transparentize($secondary-color, 0.6);
 
-  &__title {
+  h2 {
     font-size: 1.5rem;
     margin-bottom: 1.5rem;
     color: $font-color;
   }
 
-  &__form{
+  // Formulario
+  form {
     display: flex;
     gap: 1rem;
     margin-bottom: 2rem;
-  }
 
-  &__textbox{
-    flex-grow: 1;
-    background-color: transparentize($tertiary-color, 0.7);
-    border: 1px solid transparentize($aux-color, 0.5);
-    color: $font-color;
-    padding: 0.8rem;
-    border-radius: 5px;
-
-    &::placeholder {
+    textarea {
+      flex-grow: 1;
+      background-color: transparentize($tertiary-color, 0.7);
+      border: 1px solid transparentize($aux-color, 0.5);
       color: $font-color;
+      padding: 0.8rem;
+      border-radius: 5px;
+      resize: vertical;
+      min-height: 80px;
+
+      &::placeholder {
+        color: transparentize($font-color, 0.5);
+      }
+
+      &:focus {
+        background-color: transparentize($tertiary-color, 0.5);
+        border-color: $primary-color;
+        outline: none;
+      }
     }
 
-    &:focus {
-      background-color: transparentize($tertiary-color, 0.5);
-      border-color: transparentize($aux-color, 0.3);
-      box-shadow: none;
-      outline: none;
+    button {
+      background-color: $primary-color;
+      color: $font-color;
+      border: none;
+      border-radius: 5px;
+      padding: 0.8rem 1.5rem;
+      font-weight: bold;
+      cursor: pointer;
+
+      &:hover {
+        background-color: $hover-color;
+      }
     }
   }
 
-  &__button{
-    background-color: $primary-color;
-    color: $font-color;
-    border: none;
-    border-radius: 5px;
-    padding: 0.5rem 1.5rem;
-    font-weight: bold;
-    cursor: pointer;
-
-    &:hover {
-      background: $hover-color;
-    }
+  // Comentarios individuales
+  .comment-item {
+    margin-bottom: 1.5rem;
   }
 
-  &__items{
-    display: flex;
-    flex-direction: column;
-    gap: 1.5rem;
-  }
-
-  &__item {
+  .comment-content {
     display: flex;
     gap: 1rem;
+    background-color: transparentize($secondary-color, 0.4);
+    border-radius: 8px;
+    padding: 1rem;
+    align-items: flex-start;
   }
 
-  &__avatar{
+  .comment-avatar {
     width: 50px;
     height: 50px;
     border-radius: 50%;
     object-fit: cover;
+    flex-shrink: 0;
   }
 
-  &__content{
+  .comment-text {
     flex-grow: 1;
-    background-color: transparentize($secondary-color, 0.4);
-    border-radius: 8px;
-    padding: 1rem;
+    text-align: left;
+
+    .comment-username {
+      text-decoration: none;
+      color: inherit;
+      display: inline-block;
+      margin-bottom: 0.5rem;
+
+      h4 {
+        margin: 0;
+        font-size: 1rem;
+        font-weight: bold;
+        color: $primary-color;
+        transition: color 0.3s;
+      }
+
+      &:hover h4 {
+        color: $hover-color;
+        text-decoration: underline;
+      }
+    }
+
+    span {
+      font-size: 0.8rem;
+      color: $tertiary-color;
+      display: block;
+      margin-bottom: 0.5rem;
+    }
+
+    p {
+      line-height: 1.4;
+      color: $font-color;
+      margin: 0;
+      text-align: left;
+    }
   }
 
-  &__header{
-    display: flex;
-    justify-content: space-between;
-    margin-bottom: 0.5rem;
-  }
-
-  &__username{
+  // Mensaje sin comentarios
+  > div:last-child p {
+    text-align: center;
+    padding: 2rem;
+    color: $tertiary-color;
+    font-style: italic;
     margin: 0;
-    font-size: 1rem;
-    font-weight: bold;
-  }
-
-  &__date{
-    font-size: 0.8rem;
-    color: $font-color;
-  }
-
-  &__text {
-    line-height: 1.4;
   }
 }
 
-// Media queries para responsividad
-@media only screen and (max-width: $tablet-breakpoint) {
-  .content {
-    padding-left: 4.5rem; // Espacio para el botón del menú lateral
-    padding-right: 1rem;
-  }
+// Mensaje para usuarios no autenticados
+.login-message {
+  text-align: center;
+  padding: 1rem;
+  background-color: transparentize($secondary-color, 0.8);
+  border-radius: 5px;
+  margin-bottom: 2rem;
 
-  .concert-header {
-    height: 250px;
+  a {
+    color: $primary-color;
+    text-decoration: none;
 
-    &__title {
-      font-size: 2rem;
-      padding: 1.5rem;
+    &:hover {
+      text-decoration: underline;
     }
-  }
-
-  .concert-content {
-    padding: 1.5rem;
-  }
-
-  .concert-actions {
-    justify-content: space-between;
   }
 }
 
-@media only screen and (max-width: $mobile-breakpoint) {
-  .content {
-    padding-left: 4.5rem; // Espacio para el botón del menú lateral
-    padding-right: 1rem;
+// Responsive
+@media (max-width: $tablet-breakpoint) {
+  .concert-artists__grid {
+    grid-template-columns: 1fr;
   }
 
-  .concert-header {
-    height: 200px;
-
-    &__title {
-      font-size: 1.5rem;
-      padding: 1rem;
-    }
-  }
-
-  .concert-content {
-    padding: 1rem;
-  }
-
-  .concert-info {
+  .concert-artist__card {
     flex-direction: column;
-    gap: 1rem;
-    padding-bottom: 1rem;
   }
 
-  .concert-description {
-    &__title {
-      font-size: 1.3rem;
-    }
-
-    &__text {
-      font-size: 0.9rem;
-    }
+  .concert-artist__image {
+    width: 100%;
+    height: 200px;
   }
+}
 
-  .concert-artist {
-    &__title {
-      font-size: 1.3rem;
-    }
-
-    &__card {
-      flex-direction: column;
-    }
-
-    &__image {
-      width: 100%;
-      height: 180px;
-    }
-
-    &__info-header {
-      flex-direction: column;
-      align-items: flex-start;
-      gap: 0.5rem;
-    }
-
-    &__name {
-      margin-bottom: 0;
-    }
-
-    &__rating {
-      --size: 20px;
-    }
-
-    &__biography {
-      font-size: 0.9rem;
-    }
-  }
-
+@media (max-width: $mobile-breakpoint) {
   .concert-actions {
     flex-direction: column;
 
@@ -494,51 +392,7 @@
     }
   }
 
-  .concert-comments {
-    padding: 1rem;
-
-    &__title {
-      font-size: 1.3rem;
-      margin-bottom: 1rem;
-    }
-
-    &__form {
-      flex-direction: column;
-      margin-bottom: 1.5rem;
-    }
-
-    &__button {
-      align-self: flex-end;
-    }
-
-    &__items {
-      gap: 1rem;
-    }
-
-    &__item {
-      gap: 0.5rem;
-    }
-
-    &__avatar {
-      width: 40px;
-      height: 40px;
-    }
-
-    &__content {
-      padding: 0.75rem;
-    }
-
-    &__header {
-      flex-direction: column;
-      gap: 0.25rem;
-    }
-
-    &__date {
-      font-size: 0.7rem;
-    }
-
-    &__text {
-      font-size: 0.9rem;
-    }
+  .concert-comments form {
+    flex-direction: column;
   }
 }

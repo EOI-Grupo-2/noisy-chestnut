@@ -1,5 +1,6 @@
 package com.atm.buenas_practicas_java.entities;
 
+import com.atm.buenas_practicas_java.entities.enums.MusicGenre;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -36,6 +37,10 @@ public class Concert {
 
     @Column(nullable = false)
     private String imageUrl;
+
+    @Enumerated(EnumType.STRING)
+    @Column(name = "music_genre")
+    private MusicGenre musicGenre;
 
     @OneToOne(cascade = CascadeType.ALL, orphanRemoval = true)
     private Chat chat;
