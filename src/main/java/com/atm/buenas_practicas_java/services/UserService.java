@@ -2,6 +2,7 @@ package com.atm.buenas_practicas_java.services;
 
 import com.atm.buenas_practicas_java.DTO.UserDTO;
 import com.atm.buenas_practicas_java.entities.Follows;
+import com.atm.buenas_practicas_java.entities.Role;
 import com.atm.buenas_practicas_java.entities.User;
 import com.atm.buenas_practicas_java.repositories.FollowsRepository;
 import com.atm.buenas_practicas_java.repositories.UserRepository;
@@ -17,12 +18,15 @@ public class UserService extends AbstractBusinessService<User,Long, UserDTO,
         UserRepository, UserMapper>{
 
     private FollowsRepository followsRepository;
+    private RoleService roleService; // Ya existe
+
     private UserRepository userRepository;
 
-
-    public UserService(UserRepository userRepository, UserMapper userMapper, FollowsRepository followsRepository) {
+    public UserService(UserRepository userRepository, UserMapper userMapper, FollowsRepository followsRepository, RoleService roleService) {
         super(userRepository, userMapper);
         this.followsRepository = followsRepository;
+        this.roleService = roleService;
+
         this.userRepository = userRepository;
     }
 
@@ -50,15 +54,22 @@ public class UserService extends AbstractBusinessService<User,Long, UserDTO,
 
         // Limpiar relaciones Follows bidireccionales
         for (Follows f : user.getFollowers()) {
-            f.setUserFollowed(null); // o f.setUserFollower(null);
+            f.setUserFollowed(null);
         }
         for (Follows f : user.getUsersFollowed()) {
-            f.setUserFollower(null); // o f.setUserFollowed(null);
+            f.setUserFollower(null);
         }
         user.getFollowers().clear();
         user.getUsersFollowed().clear();
 
         // Finalmente eliminar el usuario
         getRepo().delete(user);
+    }
+
+    public List<UserDTO> findUsersByRoleName(String roleName) {
+        return findAllDTO().stream()
+                .filter(user -> user.getRoles().stream()
+                        .anyMatch(role -> role.getName().equals(roleName)))
+                .collect(Collectors.toList());
     }
 }

@@ -1,5 +1,6 @@
 package com.atm.buenas_practicas_java.DTO;
 
+import com.atm.buenas_practicas_java.entities.Concert;
 import com.atm.buenas_practicas_java.entities.Publications;
 import com.atm.buenas_practicas_java.entities.User;
 import lombok.AllArgsConstructor;
@@ -16,6 +17,9 @@ import java.time.LocalDateTime;
 public class CommentariesDTO {
 
     private Long id;
+    private Publications pub;
+    private Concert concert;
+
     private Publications publications;
     private User user;
     private String content;

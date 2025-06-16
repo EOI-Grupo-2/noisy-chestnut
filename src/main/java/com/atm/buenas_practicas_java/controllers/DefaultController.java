@@ -106,21 +106,9 @@ public class DefaultController {
     public String editPlacePage(){
         return "/places/form";
     }
-  
-    @GetMapping("/concert")
-    public String showConcertsPage() {
-        return "concert/concerts";
-    }
 
-    @GetMapping("/concert/detail")
-    public String showConcertDetailPage() {
-        return "concert/concert-detail";
-    }
-
-    @GetMapping("/concert/form")
-    public String showConcertFormPage() {
-        return "concert/concert-form";
-    }
+    @GetMapping({"", "/publication"})
+    public String getPublicationPage(){return "/publication/publication";}
 
     @GetMapping("/places/admin")
     public String showPlacesAdminPage() {
@@ -130,7 +118,5 @@ public class DefaultController {
     @GetMapping("/places")
     public String showPlacesPage() {return "/places/places"; }
 
-    @GetMapping("/concert/admin")
-    public String showConcertsAdminPage() {return "concert/concertsAdmin"; }
 }
 
