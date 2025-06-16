@@ -15,7 +15,7 @@
 .post {
   width: 90%;
   max-width: 50rem;
-  background-color: #0C0C00;
+  background-color: $secondary-color;
   padding: 15px;
   border-radius: 10px;
   box-shadow: 0 4px 10px rgba(12, 12, 0, 0.8);
@@ -23,16 +23,16 @@
   &__author {
     font-size: 18px;
     margin-bottom: 5px;
-    color: #FFFAF0;
+    color: $font-color;
   }
 
   &__handle {
-    color: #FAEBD7;
+    color: $font-color;
     font-weight: normal;
   }
 
   &__text {
-    color: #FFFAF0;
+    color: $font-color;
     margin: 10px 0;
   }
 
@@ -44,7 +44,7 @@
   &__actions {
     display: flex;
     flex-direction: row;
-    justify-content: space-between;
+    justify-content: center;
     gap: 10px;
     margin-top: 15px;
 
@@ -56,8 +56,8 @@
 }
 
 .button {
-  background-color: #9B111E;
-  color: #FFFAF0;
+  background-color: $primary-color;
+  color: $font-color;
   border: none;
   padding: 8px 16px;
   border-radius: 6px;
@@ -66,7 +66,7 @@
   transition: background 0.3s ease;
 
   &:hover {
-    background-color: #9B111E;
+    background-color: $primary-color;
     opacity: 0.85;
   }
 
@@ -87,22 +87,22 @@
 .comments {
   width: 90%;
   max-width: 40rem;
-  background-color: #0C0C00;
+  background-color: $secondary-color;
   padding: 15px;
   border-radius: 10px;
   box-shadow: 0 4px 10px rgba(12, 12, 0, 0.4);
 
   &__title {
     margin-bottom: 10px;
-    color: #FFFAF0;
+    color: $font-color;
   }
 
   &__comment {
-    background-color: #0C0C00;
+    background-color: $secondary-color;
     padding: 10px;
     border-radius: 5px;
     margin-bottom: 10px;
-    color: #FFFAF0;
+    color: $font-color;
   }
 
   &__new {
@@ -111,7 +111,7 @@
 
   &__textarea {
     width: 100%;
-    background-color: #282828;
+    background-color: $secondary-color;
     color: #FFFAF0;
     border-radius: 5px;
     border: none;

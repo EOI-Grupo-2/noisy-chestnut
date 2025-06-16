@@ -17,7 +17,7 @@
                     <h5 class="pub-card__title" th:text="${publication.getDescription()}">Contenido de la publicación</h5>
                 </div>
                 <div class="pub-card__footer">
-                    <p class="pub-card__date" th:text="${publication.getDate()}"></p>
+                    <p class="pub-card__date" th:text="${#temporals.format(publication.getDate(), 'dd/MM/yyyy HH:mm')}"></p>
                     <a class="pub-card__link" th:href="@{'/publication/'+${publication.getId()}}">Ver mas</a>
                 </div>
             </div>

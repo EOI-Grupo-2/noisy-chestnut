@@ -78,7 +78,7 @@ public class PublicationsController {
         commentariesDTO2.setUser(user);
         commentariesDTO2.setDate(LocalDateTime.now());
         commentariesDTO2.setLikes(0);
-        CommentariesDTO commentariesDTO3 = commentariesService.save(commentariesDTO2);
+        commentariesService.save(commentariesDTO2);
         return "redirect:/publication/" +id;
     }
 

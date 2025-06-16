@@ -2,7 +2,7 @@
 <html lang="en"
       xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
       layout:decorate="~{layouts/main_layout.html}"
-      xmlns:th="http://www.thymeleaf.org">
+      xmlns:th="http://www.thymeleaf.org" xmlns:sec="https://www.thymeleaf.org/thymeleaf-extras-springsecurity6">
 <head>
     <link rel="stylesheet" th:href="@{/css/publication.css}" />
 </head>
@@ -12,56 +12,61 @@
 
         <!-- Publicación -->
         <div class="post">
-            <h5 class="post__author" th:text="${publication.getUser().getName()}"><span class="post__handle" th:text="${publication.getUser().getUsername()}"></span></h5>
-            <p class="post__text" th:text="${publication.getDescription()}">
-            </p>
-            <img class="post__image" th:src="${publication.getPhotoUrl()}" alt="Eladio Carrión en concierto">
+            <div class="pub-card__header">
+                <img th:src="${publication.getUser().getImageUrl()}" class="pub-card__user-image"alt="">
+                <h5 class="post__author" th:text="${publication.getUser().getName()}"><span class="post__handle" th:text="${publication.getUser().getUsername()}"></span></h5>
+            </div>
+            <div class="post__body">
+                <p class="post__text" th:text="${publication.getDescription()}">
+                </p>
+                <img class="post__image"
+                     th:if="${publication.getPhotoUrl() != null and !#strings.isEmpty(publication.getPhotoUrl())}"
+                     th:src="${publication.getPhotoUrl()}"
+                     alt="Imagen">
+                <p class="pub-card__date" th:text="${#temporals.format(publication.getDate(), 'dd/MM/yyyy HH:mm')}"></p>
 
-            <div class="post__actions">
                 <div class="post__actions">
                     <form th:action="@{/publication/{id}/like(id=${publication.id})}" method="post" style="display: inline;">
                         <button type="submit" class="button button--like">
-                            <i class="fas fa-thumbs-up"></i> Me gusta (<span th:text="${publication.likes}">0</span>)
+                            <i class="fas fa-thumbs-up"></i> Me gusta (<span th:text="${publication.getLikes()}">0</span>)
                         </button>
                     </form>
-                </div>
-                <button class="button button--edit"
-                        th:if="${#authentication.name == publication.user.username}">
-                    <a th:href="@{/publication/edit/{id}(id=${publication.id})}">Editar</a>
-                </button>
-                <div th:if="${#authentication.name == publication.user.username or #authorization.expression('hasAuthority(''ADMIN'')')}">
-                    <form th:action="@{/publication/{id}/delete(id=${publication.id})}" method="post" style="display: inline;">
-                        <button type="submit" class="button button--delete"
-                                onclick="return confirm('¿Estás seguro de que quieres eliminar esta publicación?')">
-                            Eliminar
-                        </button>
-                    </form>
+                    <button class="button button--edit"
+                            th:if="${#authentication.name == publication.user.username}">
+                        <a th:href="@{/publication/edit/{id}(id=${publication.id})}">Editar</a>
+                    </button>
+                    <div th:if="${#authentication.name == publication.user.username or #authorization.expression('hasAuthority(''ADMIN'')')}">
+                        <form th:action="@{/publication/{id}/delete(id=${publication.id})}" method="post" style="display: inline;">
+                            <button type="submit" class="button button--delete"
+                                    onclick="return confirm('¿Estás seguro de que quieres eliminar esta publicación?')">
+                                Eliminar
+                            </button>
+                        </form>
+                    </div>
                 </div>
             </div>
 
 
-            <form role="form" th:method="post" th:object="${commentary}">
-                <!-- Comentarios -->
-                <div class="comments">
-                    <div class="comments__comment" th:each="comment : ${commentaries}">
-                        <div class="comment-header" style="display: flex; justify-content: space-between; align-items: center;">
-                            <p th:text="${comment.getUser().getUsername()}"><strong></strong></p>
-                        </div>
-                        <p th:text="${comment.getContent()}"></p>
+            <!-- Comentarios -->
+            <div class="comments">
+                <div class="comments__comment" th:each="comment : ${commentaries}">
+                    <div class="comment-header" style="display: flex; justify-content: space-between; align-items: center;">
+                        <p th:text="${comment.getUser().getUsername()}"><strong></strong></p>
                     </div>
-
+                    <p th:text="${comment.getContent()}"></p>
+                </div>
+                <form sec:authorize="isAuthenticated()" th:action="@{'/publication/' + ${publication.id} + '/comment'}" th:method="post" th:object="${commentary}">
                     <div class="comments__new">
-                        <textarea class="comments__textarea" rows="3" placeholder="Escribir comentario..."
+                        <textarea id="content" name="content" class="comments__textarea" rows="3" placeholder="Escribir comentario..."
                                   onfocus="this.placeholder=''"
                                   onblur="this.placeholder='Escribir comentario...'"
-                                  th:field="${commentary.content}">
+                                  th:text="${commentary.getContent()}">
                         </textarea>
                         <button id="Comment" type="submit"
-                                th:formaction="'/publication/' + ${publication.id} + '/comment'"
                                 class="button button--comment">Comentar</button>
                     </div>
-                </div>
-            </form>
+                </form>
+            </div>
         </div>
     </div>
 
