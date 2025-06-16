@@ -2,6 +2,7 @@ package com.atm.buenas_practicas_java.services;
 
 import com.atm.buenas_practicas_java.DTO.PublicationsDTO;
 import com.atm.buenas_practicas_java.entities.Publications;
+import com.atm.buenas_practicas_java.entities.Role;
 import com.atm.buenas_practicas_java.entities.User;
 import com.atm.buenas_practicas_java.repositories.PublicationsRepository;
 import com.atm.buenas_practicas_java.services.mapper.PublicationsMapper;
@@ -47,8 +48,8 @@ public class PublicationsService extends AbstractBusinessService<Publications, L
         return publicationsRepository.save(publication);
     }
 
-    public List<PublicationsDTO> findPublicationsByUserRole(String roleName) {
-        List<Publications> publications = publicationsRepository.findByUserRoles(roleName);
+    public List<PublicationsDTO> findPublicationsByUserRole(Role role) {
+        List<Publications> publications = publicationsRepository.findByUserRoles(role);
         return publications.stream()
                 .map(publicationsMapper::toDto)
                 .collect(Collectors.toList());

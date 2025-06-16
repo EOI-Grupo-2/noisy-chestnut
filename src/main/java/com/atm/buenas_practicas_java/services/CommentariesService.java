@@ -24,13 +24,5 @@ public class CommentariesService extends AbstractBusinessService<Commentaries, L
                 .toList();
     }
 
-    public Commentaries findByIdEntity(Long id) {
-        return getRepo().findById(id).orElseThrow(() -> new RuntimeException("Comentario no encontrado"));
-    }
-
-    @Transactional
-    public void deleteById(Long id) {
-        getRepo().deleteById(id);
-    }
 }
 

@@ -12,16 +12,16 @@
 
     <div class="pub-card" th:each="publication : ${publications}">
         <div class="pub-card__header">
-            <img th:src="${publication.user.imageUrl != null ? publication.user.imageUrl : 'https://as1.ftcdn.net/v2/jpg/03/46/83/96/1000_F_346839683_6nAPzbhpSkIpb8pmAwufkC7c5eD7wYws.jpg'}"
+            <img th:src="${publication.getUser().getImageUrl() != null ? publication.getUser().getImageUrl() : 'https://as1.ftcdn.net/v2/jpg/03/46/83/96/1000_F_346839683_6nAPzbhpSkIpb8pmAwufkC7c5eD7wYws.jpg'}"
                  class="pub-card__user-image" alt="">
-            <div class="pub-card__username" th:text="${publication.user.username}">Usuario</div>
+            <div class="pub-card__username" th:text="${publication.getUser().getUsername()}">Usuario</div>
         </div>
         <div class="pub-card__body">
-            <h5 class="pub-card__title" th:text="${publication.content}">Contenido de la publicación</h5>
+            <h5 class="pub-card__title" th:text="${publication.getDescription()}">Contenido de la publicación</h5>
         </div>
         <div class="pub-card__footer">
-            <p class="pub-card__date" th:text="${#temporals.format(publication.date, 'dd/MM/yyyy HH:mm')}">Fecha y hora de la publicación</p>
-            <a class="pub-card__link" th:href="@{/publication/{id}(id=${publication.id})}">Ver mas</a>
+            <p class="pub-card__date" th:text="${#temporals.format(publication.getDate(), 'dd/MM/yyyy HH:mm')}">Fecha y hora de la publicación</p>
+            <a class="pub-card__link" th:href="@{'/publications/' + ${publication.getId()}}">Ver mas</a>
         </div>
     </div>
 </div>

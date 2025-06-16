@@ -10,12 +10,12 @@
 <body>
 
 <div class="content" layout:fragment="content">
-    <form th:action="@{${formAction}}" th:object="${publication}" method="POST" class="post-form">
+    <form th:action="${formAction}" th:object="${publication}" method="POST" class="post-form">
         <div class="post-form__group">
             <label for="title" class="post-form__label">Título:</label>
             <input type="text"
                    id="title"
-                   th:field="*{publication.setTitle(title)}"
+                   th:value="${publication.getTitle()}"
                    class="post-form__input"
                    placeholder="Ingresa un título"
                    required>
@@ -24,7 +24,7 @@
         <div class="post-form__group">
             <label for="description" class="post-form__label">Descripción:</label>
             <textarea id="description"
-                      th:field="*{publication.setDescription(description)}"
+                      th:value="${publication.getDescription()}"
                       class="post-form__textarea"
                       rows="4"
                       placeholder="Ingresa una descripción"
@@ -35,7 +35,7 @@
             <label for="photoUrl" class="post-form__label">Foto URL:</label>
             <input type="url"
                    id="photoUrl"
-                   th:field="*{publication.setPhotoUrl(photoUrl)}"
+                   th:value="${publication.getPhotoUrl()}"
                    class="post-form__input"
                    placeholder="Ingresa un enlace para la foto">
         </div>

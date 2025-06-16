@@ -1,6 +1,7 @@
 package com.atm.buenas_practicas_java.repositories;
 
 import com.atm.buenas_practicas_java.entities.Publications;
+import com.atm.buenas_practicas_java.entities.Role;
 import com.atm.buenas_practicas_java.entities.User;
 import org.hibernate.annotations.Parameter;
 import org.springframework.data.jpa.repository.JpaRepository;
@@ -15,7 +16,7 @@ public interface PublicationsRepository extends JpaRepository<Publications, Long
     @Query("SELECT pub FROM Publications pub JOIN Follows follow ON follow.userFollower.id=?1 where pub.user.id = follow.userFollowed.id")
     List<Publications> findByUserFollowed(Long id);
 
-    @Query("SELECT p FROM Publications p JOIN p.user u JOIN u.roles r WHERE r.name = :roleName")
-    List<Publications> findByUserRoles(@Param("roleName") String roleName);
+    @Query("SELECT pub FROM Publications pub WHERE :role MEMBER OF pub.user.roles")
+    List<Publications> findByUserRoles(@Param("role") Role role);
 
 }

@@ -4,12 +4,10 @@ package com.atm.buenas_practicas_java.controllers;
 import com.atm.buenas_practicas_java.DTO.CommentariesDTO;
 import com.atm.buenas_practicas_java.DTO.PublicationsDTO;
 import com.atm.buenas_practicas_java.DTO.UserDTO;
-import com.atm.buenas_practicas_java.entities.AuthUser;
-import com.atm.buenas_practicas_java.entities.Commentaries;
-import com.atm.buenas_practicas_java.entities.Publications;
-import com.atm.buenas_practicas_java.entities.User;
+import com.atm.buenas_practicas_java.entities.*;
 import com.atm.buenas_practicas_java.services.CommentariesService;
 import com.atm.buenas_practicas_java.services.PublicationsService;
+import com.atm.buenas_practicas_java.services.RoleService;
 import com.atm.buenas_practicas_java.services.UserService;
 import com.atm.buenas_practicas_java.services.mapper.UserMapper;
 import org.springframework.security.access.prepost.PreAuthorize;
@@ -30,18 +28,21 @@ public class PublicationsController {
     private final PublicationsService publicationsService;
     private final CommentariesService commentariesService;
     private final UserService userService;
+    private final RoleService roleService;
 
-    public PublicationsController(PublicationsService publicationsService, CommentariesService commentariesService, UserService userService, UserMapper userMapper) {
+    public PublicationsController(PublicationsService publicationsService, CommentariesService commentariesService, UserService userService, UserMapper userMapper, RoleService roleService) {
         this.publicationsService = publicationsService;
         this.commentariesService = commentariesService;
         this.userService = userService;
+        this.roleService = roleService;
     }
 
     @GetMapping("/create-publication")
+    @PreAuthorize("hasAuthority('USER')")
     public String showCreateForm(Model model) {
         model.addAttribute("publication", new PublicationsDTO());
         model.addAttribute("formAction", "/publication/create-publication");
-        return "/new-publication";
+        return "publication/new-publication";
     }
 
     @PostMapping("/create-publication")
@@ -112,7 +113,6 @@ public class PublicationsController {
         return "redirect:/publication/" + id;
     }
 
-
     @PostMapping("/{id}/delete")
     @PreAuthorize("hasAnyAuthority('USER', 'ADMIN')")
     public String deletePublication(@PathVariable Long id,
@@ -122,21 +122,10 @@ public class PublicationsController {
         return "redirect:/users/" + id + "/profile";
     }
 
-    @PostMapping("/{id}/delete-comment")
-    public String deleteComment(@PathVariable Long id,
-                                @AuthenticationPrincipal AuthUser authUser) throws Exception {
-        Commentaries commentaries = commentariesService.findByIdEntity(id);
-        if (!commentaries.getUser().getUsername().equals(authUser.getUsername())) {
-            throw new RuntimeException("No puedes eliminar comentarios de otros usuarios");
-        }
-        Long publicationId = commentaries.getPublications().getId();
-        commentariesService.deleteById(id);
-        return "redirect:/publication/" + publicationId;
-    }
-
     @GetMapping("/artists")
     public String showArtistPublications(Model model) {
-        List<PublicationsDTO> artistPublications = publicationsService.findPublicationsByUserRole("ARTIST");
+        Role artistRole = roleService.findByName("ARTIST");
+        List<PublicationsDTO> artistPublications = publicationsService.findPublicationsByUserRole(artistRole);
         model.addAttribute("publications", artistPublications);
         return "/artist/artist";
     }

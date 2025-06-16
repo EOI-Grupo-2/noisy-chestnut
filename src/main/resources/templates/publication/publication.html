@@ -46,16 +46,6 @@
                     <div class="comments__comment" th:each="comment : ${commentaries}">
                         <div class="comment-header" style="display: flex; justify-content: space-between; align-items: center;">
                             <p th:text="${comment.getUser().getUsername()}"><strong></strong></p>
-                            <div th:if="${#authentication.name == comment.user.username}" class="comment-actions">
-                                <form th:action="@{/publication/{id}/delete-comment(id=${comment.id})}"
-                                      method="post"
-                                      style="display: inline;"
-                                      onsubmit="return confirm('¿Estás seguro de que quieres eliminar este comentario?');">
-                                    <button type="submit" class="button button--delete-comment" style="background: none; border: none; color: #dc3545; cursor: pointer; padding: 5px;">
-                                        <i class="fas fa-trash"></i>
-                                    </button>
-                                </form>
-                            </div>
                         </div>
                         <p th:text="${comment.getContent()}"></p>
                     </div>
