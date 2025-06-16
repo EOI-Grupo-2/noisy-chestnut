@@ -38,6 +38,8 @@ public class UserService extends AbstractBusinessService<User,Long, UserDTO,
         return followsRepository.findByUserFollowed(getMapper().toEntity(userDTO)).stream().map(follows -> getMapper().toDto(follows.getUserFollower())).collect(Collectors.toList());
     }
 
+
+
     public UserDTO findByUsername(String username) throws Exception {
         return this.getMapper().toDto(userRepository.findByUsername(username));
     }
@@ -66,6 +68,11 @@ public class UserService extends AbstractBusinessService<User,Long, UserDTO,
         getRepo().delete(user);
     }
 
+    public List<UserDTO> searchUsersByName(String name) {
+        // Asumiendo que UserRepository tiene un método findByNameContainingIgnoreCase
+        List<User> users = getRepo().findByNameContainingIgnoreCase(name);
+        return users.stream()
+                .map(getMapper()::toDto)
     public List<UserDTO> findUsersByRoleName(String roleName) {
         return findAllDTO().stream()
                 .filter(user -> user.getRoles().stream()

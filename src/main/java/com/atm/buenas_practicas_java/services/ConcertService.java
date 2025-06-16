@@ -9,6 +9,10 @@ import com.atm.buenas_practicas_java.services.mapper.ConcertMapper;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.List;
+import java.util.stream.Collectors;
+
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -142,4 +146,13 @@ public class ConcertService extends AbstractBusinessService<Concert, Long, Conce
         // Ahora eliminar el concierto
         getRepo().delete(concert);
     }
+
+    public List<ConcertDTO> searchConcertsByName(String name) {
+        List<Concert> concerts = getRepo().findByNameContainingIgnoreCase(name);
+        return concerts.stream()
+                .map(getMapper()::toDto)
+                .collect(Collectors.toList());
+    }
+
+
 }

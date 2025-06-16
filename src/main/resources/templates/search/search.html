@@ -1,231 +1,95 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" layout:decorate="~{layouts/main_layout.html}"
+<html lang="en" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{layouts/main_layout.html}"
       xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Search</title>
     <link rel="stylesheet" th:href="@{/css/search.css}">
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Roboto+Condensed&family=Roboto:wght@300&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@48,400,0,0" />
-    <script src="https://kit.fontawesome.com/cfb847b9dd.js" crossorigin="anonymous"></script>
 </head>
 <body>
 <div class="content" layout:fragment="content">
+
+    <!-- Buscador -->
+    <div class="search-container">
+        <form action="/search" method="get" class="search-form">
+            <input type="text" name="query" placeholder="Buscar..." required>
+            <select name="filter">
+                <option value="all">Todos</option>
+                <option value="user">Usuarios</option>
+                <option value="concert">Conciertos</option>
+                <option value="place">Lugares</option>
+            </select>
+            <button type="submit">Buscar</button>
+        </form>
+    </div>
+
+    <!-- Tabs menú -->
     <div class="tabs-menu">
-        <button class="tabs-menu__item active" id="usersTabItem" onclick="selectTab('usersTab','search-content', 'tabs-menu__item', 'usersTabItem')">
+        <button id="tab-users" class="tabs-menu__item active"
+                onclick="selectTab('usersTab', 'search-content', 'tabs-menu__item', 'tab-users')">
             Usuarios
         </button>
-        <button class="tabs-menu__item tabs-menu__item--concerts" id="concertsTabItem" onclick="selectTab('concertsTab','search-content', 'tabs-menu__item', 'concertsTabItem')">
+        <button id="tab-concerts" class="tabs-menu__item"
+                onclick="selectTab('concertsTab', 'search-content', 'tabs-menu__item', 'tab-concerts')">
             Conciertos
         </button>
-        <button class="tabs-menu__item tabs-menu__item--artists" id="artistsTabItem" onclick="selectTab('artistsTab','search-content', 'tabs-menu__item', 'artistsTabItem')">
-            Artistas
-        </button>
-        <button class="tabs-menu__item" id="placesTabItem" onclick="selectTab('placesTab','search-content', 'tabs-menu__item', 'placesTabItem')">
+        <button id="tab-places" class="tabs-menu__item"
+                onclick="selectTab('placesTab', 'search-content', 'tabs-menu__item', 'tab-places')">
             Lugares
         </button>
     </div>
-    <div class="search-content search-content--concerts" id="concertsTab">
-        <div class="concert-card">
-            <img class="concert-card__image" src="https://images.unsplash.com/photo-1656618020911-1c7a937175fd?crop=entropy&cs=tinysrgb&fm=jpg&ixid=MnwzMjM4NDZ8MHwxfHJhbmRvbXx8fHx8fHx8fDE2NTc1MzQyNTE&ixlib=rb-1.2.1&q=80" alt="concertImage">
-            <div class="concert-card__content">
-                <h2 class="concert-card__title">
-                    Concierto de Melendi
-                </h2>
-                <p class="concert-card__description">
-                    Sevilla, 25 marzo de 2022
-                </p>
-                <a href="/concert/detail" class="concert-card__link">
-                    Find out more
-                    <span class="material-symbols-outlined">
-                        arrow_right_alt
-                    </span>
-                </a>
+
+    <!-- Usuarios -->
+    <div class="search-content" id="usersTab" style="display:flex;">
+        <div th:if="${users != null}">
+            <div th:each="user : ${users}" class="user-card">
+                <div class="user-card__info">
+                    <img class="user-card__image" th:src="${user.imageUrl}" alt="Profile Image"/>
+                    <h1 class="user-card__username">
+                        <a th:href="@{/users/{id}/profile(id=${user.id})}" th:text="${user.username}"></a>
+                    </h1>
+                    <p class="user-card__description" th:text="${user.description}"></p>
+                </div>
+                <button class="user-card__button">Seguir</button>
             </div>
         </div>
-        <div class="concert-card">
-            <img class="concert-card__image" src="https://images.unsplash.com/photo-1656618020911-1c7a937175fd?crop=entropy&cs=tinysrgb&fm=jpg&ixid=MnwzMjM4NDZ8MHwxfHJhbmRvbXx8fHx8fHx8fDE2NTc1MzQyNTE&ixlib=rb-1.2.1&q=80" alt="concertImage">
-            <div class="concert-card__content">
-                <h2 class="concert-card__title">
-                    Concierto de Melendi
-                </h2>
-                <p class="concert-card__description">
-                    Sevilla, 25 marzo de 2022
-                </p>
-                <a href="/concert/detail" class="concert-card__link">
-                    Find out more
-                    <span class="material-symbols-outlined">
-                        arrow_right_alt
-                    </span>
-                </a>
-            </div>
-        </div>
-        <div class="concert-card">
-            <img class="concert-card__image" src="https://images.unsplash.com/photo-1656618020911-1c7a937175fd?crop=entropy&cs=tinysrgb&fm=jpg&ixid=MnwzMjM4NDZ8MHwxfHJhbmRvbXx8fHx8fHx8fDE2NTc1MzQyNTE&ixlib=rb-1.2.1&q=80" alt="concertImage">
-            <div class="concert-card__content">
-                <h2 class="concert-card__title">
-                    Concierto de Melendi
-                </h2>
-                <p class="concert-card__description">
-                    Sevilla, 25 marzo de 2022
-                </p>
-                <a href="/concert/detail" class="concert-card__link">
-                    Find out more
-                    <span class="material-symbols-outlined">
-                        arrow_right_alt
-                    </span>
-                </a>
-            </div>
-        </div>
+        <p th:if="${#lists.isEmpty(users)}">No se encontraron usuarios.</p>
     </div>
-    <div class="search-content search-content--artists" id="artistsTab">
-        <div class="user-card">
-            <div class="user-card__info">
-                <img class="user-card__image" src="https://i.scdn.co/image/ab6761610000e5eb81f47f44084e0a09b5f0fa13" alt="Profile Image"/>
-                <h1 class="user-card__username">
-                    <a class="user-card__link" href="/artist/profile">
-                        @BadBunny
-                    </a>
-                </h1>
-                <p class="user-card__description">
-                    Vente pa PR mami
-                </p>
+
+    <!-- Conciertos -->
+    <div class="search-content" id="concertsTab" style="display:none;">
+        <div th:if="${concerts != null}">
+            <div th:each="concert : ${concerts}" class="concert-card">
+                <img class="concert-card__image" th:src="${concert.imageUrl}" alt="Concert Image"/>
+                <div class="concert-card__content">
+                    <h2 class="concert-card__title" th:text="${concert.name}"></h2>
+                    <p class="concert-card__description" th:text="${concert.description}"></p>
+                    <a th:href="@{/concert/detail(id=${concert.id})}" class="concert-card__link">Conocer más</a>
+                </div>
             </div>
-            <button class="user-card__button">
-                Seguir
-            </button>
         </div>
-        <div class="user-card">
-            <div class="user-card__info">
-                <img class="user-card__image" src="https://i.scdn.co/image/ab6761610000e5eb81f47f44084e0a09b5f0fa13" alt="Profile Image"/>
-                <h1 class="user-card__username">
-                    <a class="user-card__link" href="/artist/profile">
-                        @BadBunny
-                    </a>
-                </h1>
-                <p class="user-card__description">
-                    Vente pa PR mami
-                </p>
-            </div>
-            <button class="user-card__button">
-                Seguir
-            </button>
-        </div>
-        <div class="user-card">
-            <div class="user-card__info">
-                <img class="user-card__image" src="https://i.scdn.co/image/ab6761610000e5eb81f47f44084e0a09b5f0fa13" alt="Profile Image"/>
-                <h1 class="user-card__username">
-                    <a class="user-card__link" href="/artist/profile">
-                        @BadBunny
-                    </a>
-                </h1>
-                <p class="user-card__description">
-                    Vente pa PR mami
-                </p>
-            </div>
-            <button class="user-card__button">
-                Seguir
-            </button>
-        </div>
+        <p th:if="${#lists.isEmpty(concerts)}">No se encontraron conciertos.</p>
     </div>
-    <div class="search-content search-content--users" id="usersTab">
-        <div class="user-card">
-            <div class="user-card__info">
-                <img class="user-card__image" src="https://i.scdn.co/image/ab6761610000e5eb81f47f44084e0a09b5f0fa13" alt="Profile Image"/>
-                <h1 class="user-card__username">
-                    <a class="user-card__link" href="/user/profile">
-                        @Usuario1
-                    </a>
-                </h1>
-                <p class="user-card__description">
-                    Descripcion usuario1
-                </p>
+
+    <!-- Lugares -->
+    <div class="search-content" id="placesTab" style="display:none;">
+        <div th:if="${places != null}">
+            <div th:each="place : ${places}" class="place-card">
+                <img class="place-card__image" th:src="@{/images/default_place.png}" alt="Place Image"/>
+                <div class="place-card__content">
+                    <h2 class="place-card__title" th:text="${place.name}"></h2>
+                    <a th:href="@{/place/detail(id=${place.id})}" class="place-card__link">Conocer más</a>
+                </div>
             </div>
-            <button class="user-card__button">
-                Seguir
-            </button>
         </div>
-        <div class="user-card">
-            <div class="user-card__info">
-                <img class="user-card__image" src="https://i.scdn.co/image/ab6761610000e5eb81f47f44084e0a09b5f0fa13" alt="Profile Image"/>
-                <h1 class="user-card__username">
-                    <a class="user-card__link" href="/user/profile">
-                        @Usuario2
-                    </a>
-                </h1>
-                <p class="user-card__description">
-                    Descripcion usuario2
-                </p>
-            </div>
-            <button class="user-card__button">
-                Seguir
-            </button>
-        </div>
-        <div class="user-card">
-            <div class="user-card__info">
-                <img class="user-card__image" src="https://i.scdn.co/image/ab6761610000e5eb81f47f44084e0a09b5f0fa13" alt="Profile Image"/>
-                <h1 class="user-card__username">
-                    <a class="user-card__link" href="/user/profile">
-                        @Usuario3
-                    </a>
-                </h1>
-                <p class="user-card__description">
-                    Descripcion usuario3
-                </p>
-            </div>
-            <button class="user-card__button">
-                Seguir
-            </button>
-        </div>
+        <p th:if="${#lists.isEmpty(places)}">No se encontraron lugares.</p>
     </div>
-    <div class="search-content search-content--places" id="placesTab">
-        <div class="place-card">
-            <img class="place-card__image" src="https://www.atleticodemadrid.com/system/file3s/78316/large/BV81gnkPa-__37A2770.jpg?1654122441" alt="placeImage">
-            <div class="place-card__content">
-                <h2 class="place-card__title">
-                    Sala 1
-                </h2>
-                <a href="/place/detail" class="place-card__link">
-                    Conocer más
-                    <span class="material-symbols-outlined">
-                    arrow_right_alt
-                </span>
-                </a>
-            </div>
-        </div>
-        <div class="place-card">
-            <img class="place-card__image" src="https://www.atleticodemadrid.com/system/file3s/78316/large/BV81gnkPa-__37A2770.jpg?1654122441" alt="placeImage">
-            <div class="place-card__content">
-                <h2 class="place-card__title">
-                    Sala 2
-                </h2>
-                <a href="/place/detail" class="place-card__link">
-                    Conocer más
-                    <span class="material-symbols-outlined">
-                    arrow_right_alt
-                </span>
-                </a>
-            </div>
-        </div>
-        <div class="place-card">
-            <div class="place-card__content">
-                <img class="place-card__image" src="https://www.atleticodemadrid.com/system/file3s/78316/large/BV81gnkPa-__37A2770.jpg?1654122441" alt="placeImage">
-                <h2 class="place-card__title">
-                    Sala 3
-                </h2>
-                <a href="/place/detail" class="place-card__link">
-                    Conocer más
-                    <span class="material-symbols-outlined">
-                    arrow_right_alt
-                </span>
-                </a>
-            </div>
-        </div>
-    </div>
+
 </div>
+
+<!-- TU JS PROPIO -->
+<script src="/js/tabs.js"></script>
 </body>
 </html>
