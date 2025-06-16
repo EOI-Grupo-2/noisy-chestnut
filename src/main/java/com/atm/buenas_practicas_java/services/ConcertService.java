@@ -22,6 +22,48 @@ public class ConcertService extends AbstractBusinessService<Concert, Long, Conce
         this.userRepository = userRepository;
     }
 
+    // MÉTODOS PARA EL BOTÓN ASISTIRÉ
+    public boolean isUserAttending(Long concertId, Long userId) {
+        Concert concert = findById(concertId).orElse(null);
+        if (concert == null) return false;
+
+        return concert.getUsers().stream()
+                .anyMatch(user -> user.getId().equals(userId) &&
+                         !user.getRoles().stream().anyMatch(role -> role.getName().equals("ARTIST")));
+    }
+
+    public int getAttendanceCount(Long concertId) {
+        Concert concert = findById(concertId).orElse(null);
+        if (concert == null) return 0;
+
+        return (int) concert.getUsers().stream()
+                .filter(user -> !user.getRoles().stream().anyMatch(role -> role.getName().equals("ARTIST")))
+                .count();
+    }
+
+    @Transactional
+    public void toggleUserAttendance(Long concertId, Long userId) throws Exception {
+        Concert concert = findById(concertId).orElseThrow();
+        User user = userRepository.findById(userId).orElseThrow();
+
+        boolean isArtist = user.getRoles().stream().anyMatch(role -> role.getName().equals("ARTIST"));
+        if (isArtist) {
+            throw new IllegalArgumentException("Los artistas no pueden marcarse como asistentes");
+        }
+
+        if (concert.getUsers().contains(user)) {
+            concert.getUsers().remove(user);
+            user.getConcerts().remove(concert);
+        } else {
+            concert.getUsers().add(user);
+            user.getConcerts().add(concert);
+        }
+
+        getRepo().save(concert);
+        userRepository.save(user);
+    }
+
+    // MÉTODO SAVE PERSONALIZADO PARA MANEJAR RELACIONES
     @Override
     @Transactional
     public ConcertDTO save(ConcertDTO dto) throws Exception {
@@ -80,15 +122,24 @@ public class ConcertService extends AbstractBusinessService<Concert, Long, Conce
             userRepository.save(user);
         }
 
-        // Debug logs
-        System.out.println("=== CONCIERTO GUARDADO ===");
-        System.out.println("ID: " + savedConcert.getId());
-        System.out.println("Nombre: " + savedConcert.getName());
-        System.out.println("Artistas: " + (savedConcert.getUsers() != null ? savedConcert.getUsers().size() : 0));
-        if (savedConcert.getUsers() != null) {
-            savedConcert.getUsers().forEach(u -> System.out.println("- " + u.getName() + " (" + u.getId() + ")"));
+        return getMapper().toDto(savedConcert);
+    }
+
+    // MÉTODO DE ELIMINACIÓN SEGURO
+    @Transactional
+    public void safeDeleteById(Long id) throws Exception {
+        Concert concert = findById(id).orElseThrow();
+
+        // Limpiar relaciones ManyToMany primero
+        if (concert.getUsers() != null) {
+            for (User user : new ArrayList<>(concert.getUsers())) {
+                user.getConcerts().remove(concert);
+                userRepository.save(user);
+            }
+            concert.getUsers().clear();
         }
 
-        return getMapper().toDto(savedConcert);
+        // Ahora eliminar el concierto
+        getRepo().delete(concert);
     }
 }

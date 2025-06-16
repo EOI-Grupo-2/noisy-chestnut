@@ -14,6 +14,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import java.io.IOException;
 import java.time.LocalDateTime;
@@ -50,9 +51,9 @@ public class ConcertController {
         return "/concert/concerts";
     }
 
-    // Mostrar detalles de un concierto específico
+    // Mostrar detalles de un concierto específico - VERSIÓN ORIGINAL
     @GetMapping("/{id}")
-    public String getConcertDetail(@PathVariable Long id, Model model) {
+    public String getConcertDetail(@PathVariable Long id, Model model, @AuthenticationPrincipal AuthUser authUser) {
         ConcertDTO concert = concertService.findByIdDTO(id).orElse(new ConcertDTO());
 
         // Obtener puntos de venta para este concierto
@@ -67,10 +68,31 @@ public class ConcertController {
             comments = commentariesService.findByConcert(concertEntity);
         }
 
+        // Variables para el botón asistiré
+        boolean isAttending = false;
+        int attendanceCount = concertService.getAttendanceCount(id);
+
+        if (authUser != null) {
+            isAttending = concertService.isUserAttending(id, authUser.getId());
+        }
+
+        // FILTRAR SOLO ARTISTAS DESDE EL BACKEND
+        List<User> artists = new ArrayList<>();
+        if (concert.getUsers() != null) {
+            artists = concert.getUsers().stream()
+                    .filter(user -> user.getRoles().stream()
+                            .anyMatch(role -> role.getName().equals("ARTIST")))
+                    .collect(Collectors.toList());
+        }
+
         model.addAttribute("concert", concert);
         model.addAttribute("salePoints", salePoints);
         model.addAttribute("comments", comments);
         model.addAttribute("newComment", new CommentariesDTO());
+        model.addAttribute("isAttending", isAttending);
+        model.addAttribute("attendanceCount", attendanceCount);
+        model.addAttribute("concertId", id);
+        model.addAttribute("artists", artists);
 
         return "/concert/concert-detail";
     }
@@ -80,30 +102,33 @@ public class ConcertController {
     @PreAuthorize("isAuthenticated()")
     public String addComment(@PathVariable Long id,
                             @RequestParam String content,
-                            @AuthenticationPrincipal AuthUser authUser) throws Exception {
+                            @AuthenticationPrincipal AuthUser authUser,
+                            RedirectAttributes redirectAttributes) {
+        try {
+            Concert concert = concertService.findById(id)
+                    .orElseThrow(() -> new RuntimeException("Concierto no encontrado"));
+            User user = userService.findById(authUser.getId())
+                    .orElseThrow(() -> new RuntimeException("Usuario no encontrado"));
 
-        System.out.println("=== AÑADIENDO COMENTARIO ===");
-        System.out.println("Concert ID: " + id);
-        System.out.println("Content: " + content);
-        System.out.println("User ID: " + authUser.getId());
+            CommentariesDTO commentDTO = new CommentariesDTO();
+            commentDTO.setConcert(concert);
+            commentDTO.setUser(user);
+            commentDTO.setContent(content);
+            commentDTO.setLikes(0);
+            commentDTO.setDate(LocalDateTime.now());
 
-        Concert concert = concertService.findById(id).orElseThrow();
-        User user = userService.findById(authUser.getId()).orElseThrow();
+            commentariesService.save(commentDTO);
 
-        CommentariesDTO commentDTO = new CommentariesDTO();
-        commentDTO.setConcert(concert);
-        commentDTO.setUser(user);
-        commentDTO.setContent(content);
-        commentDTO.setLikes(0);
-        commentDTO.setDate(LocalDateTime.now());
+            // AÑADIR MENSAJE DE ÉXITO
+            redirectAttributes.addAttribute("successMessage", "Comentario añadido correctamente");
 
-        commentariesService.save(commentDTO);
-
-        System.out.println("Comentario guardado exitosamente");
+        } catch (Exception e) {
+            // AÑADIR MENSAJE DE ERROR
+            redirectAttributes.addAttribute("errorMessage", "Error al añadir comentario: " + e.getMessage());
+        }
 
         return "redirect:/concert/" + id;
     }
-
     // Mostrar formulario para crear nuevo concierto (solo ADMIN)
     @GetMapping("/new")
     @PreAuthorize("hasAuthority('ADMIN')")
@@ -118,7 +143,13 @@ public class ConcertController {
     @GetMapping("/{id}/edit")
     @PreAuthorize("hasAuthority('ADMIN')")
     public String getEditConcertForm(@PathVariable Long id, Model model) {
-        ConcertDTO concert = concertService.findByIdDTO(id).orElse(new ConcertDTO());
+        ConcertDTO concert = concertService.findByIdDTO(id).orElse(null);
+
+        // Si no existe, redirigir al admin
+        if (concert == null) {
+            return "redirect:/concert/admin";
+        }
+
         model.addAttribute("concert", concert);
         model.addAttribute("errors", new ArrayList<String>());
         addFormAttributes(model);
@@ -155,7 +186,7 @@ public class ConcertController {
             }
         }
 
-        // Convertir IDs de artistas a objetos User
+        // DEBE SER ASÍ (bucle for original):
         List<User> selectedArtists = new ArrayList<>();
         if (artistIds != null && !artistIds.isEmpty()) {
             for (Long artistId : artistIds) {
@@ -190,7 +221,7 @@ public class ConcertController {
         return "redirect:/concert/" + savedConcert.getId();
     }
 
-    // Eliminar concierto (solo ADMIN)
+    // Eliminar concierto (solo ADMIN) - VERSIÓN ORIGINAL
     @GetMapping("/{id}/delete")
     @PreAuthorize("hasAuthority('ADMIN')")
     public String deleteConcert(@PathVariable Long id) throws Exception {
@@ -201,7 +232,8 @@ public class ConcertController {
             fileUploadService.deleteImage(concert.getImageUrl());
         }
 
-        concertService.deleteById(id);
+        // USAR EL MÉTODO SEGURO
+        concertService.safeDeleteById(id);
         return "redirect:/concert/admin";
     }
 
@@ -211,6 +243,14 @@ public class ConcertController {
     public String getAdminPanel(Model model) {
         model.addAttribute("concerts", concertService.findAllDTO());
         return "/concert/concertsAdmin";
+    }
+
+    // NUEVO MÉTODO PARA EL BOTÓN ASISTIRÉ
+    @PostMapping("/{id}/attend")
+    @PreAuthorize("isAuthenticated()")
+    public String toggleAttendance(@PathVariable Long id, @AuthenticationPrincipal AuthUser authUser) throws Exception {
+        concertService.toggleUserAttendance(id, authUser.getId());
+        return "redirect:/concert/" + id;
     }
 
     // Método privado para añadir atributos necesarios al formulario
