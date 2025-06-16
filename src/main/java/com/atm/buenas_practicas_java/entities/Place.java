@@ -29,6 +29,8 @@ public class Place {
     @Column (nullable = false)
     private Long capacity;
 
+    private String imageUrl;
+
     @Column(name = "rate", nullable = false)
     private DecimalFormat rating;
 
