@@ -27,6 +27,12 @@
     color: $font-color;
   }
 
+  &__title{
+    font-weight: bold;
+    color: $font-color;
+    margin-bottom: 0.2rem;
+  }
+
   &__handle {
     color: $font-color;
     font-weight: normal;
@@ -86,8 +92,7 @@
 }
 
 .comments {
-  width: 90%;
-  max-width: 40rem;
+  width: 100%;
   background-color: $secondary-color;
   padding: 15px;
   border-radius: 10px;

@@ -20,9 +20,8 @@
             </div>
 
             <div class="post__body">
-                <h5 class="post__title" th:text="${publication.getTitle()}"></h5>
-                <p class="post__text" th:text="${publication.getDescription()}">
-                </p>
+                <p class="post__title" th:text="${publication.getTitle()}"></p>
+                <p class="post__text" th:text="${publication.getDescription()}"></p>
                 <img class="post__image"
                      th:if="${publication.getPhotoUrl() != null and !#strings.isEmpty(publication.getPhotoUrl())}"
                      th:src="${publication.getPhotoUrl()}"
@@ -48,27 +47,27 @@
                         </form>
                     </div>
                 </div>
+            </div>
 
-                <!-- Comentarios -->
-                <div class="comments">
-                    <div class="comments__comment" th:each="comment : ${commentaries}">
-                        <div class="comment-header" style="display: flex; justify-content: space-between; align-items: center;">
-                            <p th:text="${comment.getUser().getUsername()}"><strong></strong></p>
-                        </div>
-                        <p th:text="${comment.getContent()}"></p>
+            <!-- Comentarios -->
+            <div class="comments">
+                <div class="comments__comment" th:each="comment : ${commentaries}">
+                    <div class="comment-header" style="display: flex; justify-content: space-between; align-items: center;">
+                        <p th:text="${comment.getUser().getUsername()}"><strong></strong></p>
                     </div>
-                    <form sec:authorize="isAuthenticated()" th:action="@{'/publication/' + ${publication.id} + '/comment'}" th:method="post" th:object="${commentary}">
-                        <div class="comments__new">
-                            <textarea id="content" name="content" class="comments__textarea" rows="3" placeholder="Escribir comentario..."
-                                      onfocus="this.placeholder=''"
-                                      onblur="this.placeholder='Escribir comentario...'"
-                                      th:text="${commentary.getContent()}">
-                            </textarea>
-                            <button id="Comment" type="submit"
-                                    class="button button--comment">Comentar</button>
-                        </div>
-                    </form>
+                    <p th:text="${comment.getContent()}"></p>
                 </div>
+                <form sec:authorize="isAuthenticated()" th:action="@{'/publication/' + ${publication.id} + '/comment'}" th:method="post" th:object="${commentary}">
+                    <div class="comments__new">
+                    <textarea id="content" name="content" class="comments__textarea" rows="3" placeholder="Escribir comentario..."
+                              onfocus="this.placeholder=''"
+                              onblur="this.placeholder='Escribir comentario...'"
+                              th:text="${commentary.getContent()}">
+                    </textarea>
+                        <button id="Comment" type="submit"
+                                class="button button--comment">Comentar</button>
+                    </div>
+                </form>
             </div>
         </div>
     </div>
