@@ -72,6 +72,12 @@ public class DefaultController {
         return "/artist/artist";
     }
 
+<<<<<<< EOIG2-71-Controlador-Social
+    @GetMapping({"", "/search"})
+    public String getSearch(){
+        return "/search/search";
+    }
+=======
     @GetMapping({"", "/chat"})
     public String getSocialPage(){
         return "/social/social";
@@ -82,6 +88,7 @@ public class DefaultController {
         return "/social/chat";
     }
 
+>>>>>>> desarrollo
 
     @GetMapping({"", "/places/new"})
     public String createPlacePage(){

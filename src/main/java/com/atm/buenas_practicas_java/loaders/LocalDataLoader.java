@@ -1,6 +1,7 @@
 package com.atm.buenas_practicas_java.loaders;
 
 import com.atm.buenas_practicas_java.entities.*;
+import com.atm.buenas_practicas_java.entities.enums.ChatType;
 import com.atm.buenas_practicas_java.entities.enums.Genre;
 import com.atm.buenas_practicas_java.entities.enums.MusicGenre;
 import com.atm.buenas_practicas_java.repositories.*;
@@ -28,8 +29,10 @@ public class LocalDataLoader {
     private final ConcertRepository concertRepository;
     private final PlaceRepository placeRepository;
     private final AlbumsRepository albumsRepository;
+    private final ChatRepository chatRepository;
+    private final MessageRepository messageRepository;
 
-    public LocalDataLoader(UserRepository userRepository, RoleRepository roleRepository, PublicationsRepository publicationsRepository, FollowsRepository followsRepository, PasswordEncoder passwordEncoder, ConcertRepository concertRepository, PlaceRepository placeRepository, AlbumsRepository albumsRepository) {
+    public LocalDataLoader(UserRepository userRepository, RoleRepository roleRepository, PublicationsRepository publicationsRepository, FollowsRepository followsRepository, PasswordEncoder passwordEncoder, ConcertRepository concertRepository, PlaceRepository placeRepository, AlbumsRepository albumsRepository, ChatRepository chatRepository, MessageRepository messageRepository) {
         this.userRepository = userRepository;
         this.roleRepository = roleRepository;
         this.publicationsRepository = publicationsRepository;
@@ -38,6 +41,8 @@ public class LocalDataLoader {
         this.concertRepository = concertRepository;
         this.placeRepository = placeRepository;
         this.albumsRepository = albumsRepository;
+        this.chatRepository = chatRepository;
+        this.messageRepository = messageRepository;
     }
 
     @PostConstruct
@@ -169,6 +174,19 @@ public class LocalDataLoader {
         albums1.setTotalTracks(10);
         albums1.setSpotifyLink("https://open.spotify.com/album/3beZ5DRcWVTpXaU3ViLIF6?si=vJbiUOpUQxyeeUWRi9caQw");
         albumsRepository.save(albums1);
+        Chat chat1 = new Chat();
+        chat1.setUsers(List.of(user1, user2));
+        chat1.setType(ChatType.USER);
+        chatRepository.save(chat1);
+        user1.setChats(List.of(chat1));
+        user2.setChats(List.of(chat1));
+        userRepository.saveAll(List.of(user1, user2));
+        Message message1 = new Message();
+        message1.setUser(user1);
+        message1.setMessage("Mensaje del usuario chulo");
+        message1.setDate(LocalDateTime.now());
+        message1.setChat(chat1);
+        messageRepository.save(message1);
         log.info("Datos de entidades cargados correctamente.");
     }
 }

@@ -20,6 +20,13 @@
                     <button th:if="${user.getId() == #authentication.getPrincipal().getId()}" class="edit-profile-button">
                         <a th:href="@{'/users/'+${user.getId()}+'/edit'}">Editar Perfil</a>
                     </button>
+                    <form th:if="${!isFollowed && #authentication.getPrincipal().getId()!=user.getId()}" th:action="@{'/follows/' + ${#authentication.getPrincipal().getId()} + '/' + ${user.getId()}}" method="post">
+                        <button class="edit-profile-button">
+                            Seguir
+                        </button>
+                    </form>
+
+
                 </div>
                 <ul class="profile-header__info-items">
                     <li class="profile-header__info-item"><button class="profile-header__info-button" type="button" onclick="selectTab('pubTab', 'profile-content__principal')">Publicaciones</button></li>
@@ -65,9 +72,9 @@
                         <p class="user-card__description" th:text="${follower.getDescription()}">
                         </p>
                     </div>
-                    <button class="user-card__button">
-                        Seguir
-                    </button>
+<!--                    <button class="user-card__button">-->
+<!--                        Seguir-->
+<!--                    </button>-->
                 </div>
             </div>
 
@@ -84,9 +91,9 @@
                         <p class="user-card__description" th:text="${followed.getDescription()}">
                         </p>
                     </div>
-                    <button class="user-card__button">
-                        Seguir
-                    </button>
+<!--                    <button class="user-card__button">-->
+<!--                        Seguir-->
+<!--                    </button>-->
                 </div>
             </div>
 

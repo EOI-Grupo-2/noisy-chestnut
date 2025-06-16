@@ -28,9 +28,12 @@ public class Chat {
     @JoinColumn(nullable = true)
     private Concert concert;
 
+    @Column(nullable = true)
+    private String groupName;
+
     @ManyToMany(mappedBy = "chats", fetch = FetchType.EAGER)
     private List<User> users = new ArrayList<>();
 
-    @OneToMany(mappedBy = "chat", fetch = FetchType.EAGER, cascade = CascadeType.ALL, orphanRemoval = true)
+    @OneToMany(mappedBy = "chat", fetch = FetchType.EAGER, cascade = CascadeType.PERSIST, orphanRemoval = true)
     private List<Message> messages = new ArrayList<>();
 }

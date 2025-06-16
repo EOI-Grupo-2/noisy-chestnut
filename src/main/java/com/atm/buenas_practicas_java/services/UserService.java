@@ -68,11 +68,17 @@ public class UserService extends AbstractBusinessService<User,Long, UserDTO,
         getRepo().delete(user);
     }
 
+    public void saveAll(List<User> users) {
+        getRepo().saveAll(users);
+    }
+          
     public List<UserDTO> searchUsersByName(String name) {
         // Asumiendo que UserRepository tiene un método findByNameContainingIgnoreCase
         List<User> users = getRepo().findByNameContainingIgnoreCase(name);
         return users.stream()
                 .map(getMapper()::toDto)
+      }
+          
     public List<UserDTO> findUsersByRoleName(String roleName) {
         return findAllDTO().stream()
                 .filter(user -> user.getRoles().stream()
