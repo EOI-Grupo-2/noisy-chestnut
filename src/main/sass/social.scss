@@ -107,13 +107,22 @@
       flex-direction: row;
       gap: 0.5rem;
       align-items: center;
+      justify-content: space-between;
       padding: 0.25rem 0.5rem;
       border-bottom: 0.1rem solid $tertiary-color;
-        a{
-          color: $font-color;
 
+      p{
+        margin: 0;
+        color: $font-color;
       }
 
+      button{
+        padding: 0.25rem 0.5rem;
+        background-color: $primary-color;
+        color: $font-color;
+        border: none;
+        border-radius: 10px;
+      }
     }
   }
 }
@@ -157,6 +166,21 @@
     text-decoration: none;
 
     &:hover{
+      text-decoration: none;
+    }
+  }
+
+  &__add-user{
+    padding: 0.5rem 1rem;
+    background-color: $primary-color;
+    color: $font-color;
+    width: 20%;
+    text-decoration: none;
+    border-radius: 10px;
+
+    &:hover{
+      background-color: $hover-color;
+      color: $font-color;
       text-decoration: none;
     }
   }

@@ -51,4 +51,8 @@ public class UserService extends AbstractBusinessService<User,Long, UserDTO,
         // Finalmente eliminar el usuario
         getRepo().delete(user);
     }
+
+    public void saveAll(List<User> users) {
+        getRepo().saveAll(users);
+    }
 }

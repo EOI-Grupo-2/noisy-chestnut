@@ -20,6 +20,7 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 import java.util.Set;
 import java.util.stream.Collectors;
 
@@ -113,13 +114,22 @@ public class UserController {
 
     @GetMapping({"/", "{id}/profile"})
     @PreAuthorize("isAuthenticated()")
-    public String getUserProfile(@PathVariable Long id, Model model) throws Exception {
+    public String getUserProfile(@PathVariable Long id, @AuthenticationPrincipal AuthUser authUser, Model model) throws Exception {
         UserDTO userDTO = userService.findByIdDTO(id).orElse(new UserDTO());
         model.addAttribute("user", userDTO);
         model.addAttribute("followers", userDTO.getFollowers().stream().map(Follows::getUserFollower));
         model.addAttribute("usersFollowed",userDTO.getUsersFollowed().stream().map(Follows::getUserFollowed));
         model.addAttribute("publications", userDTO.getPublications());
         model.addAttribute("concerts", userDTO.getConcerts());
+
+        Boolean isFollowed = false;
+
+        for (Follows follows : userDTO.getFollowers()){
+            if (follows.getUserFollower().getId().equals(authUser.getId())){
+                isFollowed = true;
+                break;
+            }
+        }
 
         Boolean isArtist = false;
         for(Role role : userDTO.getRoles()) {
@@ -132,6 +142,7 @@ public class UserController {
             model.addAttribute("albums", userDTO.getAlbums());
         }
         model.addAttribute("isArtist", isArtist);
+        model.addAttribute("isFollowed", isFollowed);
         return "/user/profile";
     }
 

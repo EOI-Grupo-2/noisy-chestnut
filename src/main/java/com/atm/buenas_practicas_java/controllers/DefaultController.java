@@ -56,16 +56,6 @@ public class DefaultController {
         return "/publication/new-publication";
     }
 
-    @GetMapping({"", "/chat"})
-    public String getSocialPage(){
-        return "/social/social";
-    }
-  
-      @GetMapping({"", "/chat/id"})
-    public String getChatPage(){
-        return "/social/chat";
-    }
-
     @GetMapping({"", "/search"})
     public String getSearch(){
         return "/search/search";
