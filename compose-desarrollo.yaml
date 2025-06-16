@@ -1,15 +1,22 @@
 name: ${COMPOSE_NAME}
 
+volumes:
+  produccion_pgdata:
+  produccion_javadata:
+
 # Definimos los servicios que se ejecutarán en los contenedores Docker.
 services:
   java:
     image: ${PROJECT_NAME}:${VERSION:-snapshot}
     ports:
-      - "${PUERTO_DESARROLLO:-8080}:8080"
+      - "${PUERTO_DESARROLLO}:8080"
+    expose: 
+      - "8080"
     environment:
       SPRING_DATASOURCE_URL: jdbc:postgresql://db:5432/desarrollodb
       SPRING_DATASOURCE_USERNAME: desarrollouser
       SPRING_DATASOURCE_PASSWORD: desarrollopassword
+      SPRING_PROFILES_ACTIVE: desarrollo
     depends_on:
       db:
         condition: service_healthy
@@ -19,6 +26,8 @@ services:
       timeout: 10s
       retries: 3
     restart: always
+    volumes:
+      - produccion_javadata:/var/lib/data/
 
   db:
     image: postgres:latest
@@ -33,3 +42,5 @@ services:
     restart: always
     ports:
       - "${PUERTO_DB_DESARROLLO}:5432"
+    volumes:
+      - produccion_pgdata:/var/lib/postgresql/data/
