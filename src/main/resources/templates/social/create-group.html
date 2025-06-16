@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" layout:decorate="~{layouts/main_layout.html}"
+      xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Interacción Social</title>
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" th:href="@{/css/create-group.css}"/>
+    <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"></script>
+
+</head>
+<body>
+      <div class="content" layout:fragment="content">
+        <div class="user-list__search">
+            <label for="userChatSearch" class="user-list__search-label">Añadir personas:</label>
+            <input type="text" id="userChatSearch" class="user-list__search-input" placeholder="Buscar personas..."  onkeyup="searchInput('chatList', 'userChatSearch')"/>
+        </div>
+         <div class="list-container">
+             <ul class="user-list">
+                 <li class="user-list__element" th:each="user : ${usersInGroup}" th:id="${user.getUsername()}">
+                     <p class="user-list__username" th:text="${user.getUsername()}">
+                     </p>
+                 </li>
+             </ul>
+
+
+             <ul class="user-list" id="chatList">
+                 <li class="user-list__element" th:each="user : ${users}" th:id="${user.getUsername()}">
+                     <p class="user-list__username" th:text="${user.getUsername()}">
+                     </p>
+                     <form method="post" th:action="@{'/chat/group/' + ${group.getId()} + '/add/'  + ${user.getId()}}">
+                         <button class="user-list__button">
+                             Añadir usuario
+                         </button>
+                     </form>
+                 </li>
+             </ul>
+
+         </div>
+        <a class="finish-button" th:href="@{'/chat/' + ${group.getId()}}">
+            Finalizar
+        </a>
+      </div>
+</body>
+</html>

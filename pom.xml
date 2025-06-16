@@ -1,47 +1,56 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
+<project xmlns="http://maven.apache.org/POM/4.0.0" 
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 
+         https://maven.apache.org/xsd/maven-4.0.0.xsd">
+         
     <modelVersion>4.0.0</modelVersion>
+
     <parent>
         <groupId>org.springframework.boot</groupId>
         <artifactId>spring-boot-starter-parent</artifactId>
         <version>3.4.3</version>
         <relativePath/> <!-- lookup parent from repository -->
     </parent>
+
     <properties>
         <java.version>24</java.version>
         <lombok.version>1.18.38</lombok.version>
         <sonar.coverage.exclusions>**/Application.*,**/loaders/*</sonar.coverage.exclusions>
-        <project.name>noisychestnut</project.name>
-        <project.groupId>com.eoi.grupo2</project.groupId>
+        <project.name>buenaspracticas</project.name>
+        <project.groupId>com.atm.java6</project.groupId>
     </properties>
+
     <groupId>${project.groupId}</groupId>
     <artifactId>${project.name}</artifactId>
     <version>0.0.1-SNAPSHOT</version>
     <name>${project.name}</name>
     <description>${project.name}</description>
-    <url/>
-    <licenses>
-        <license/>
-    </licenses>
-    <developers>
-        <developer/>
-    </developers>
-    <scm>
-        <connection/>
-        <developerConnection/>
-        <tag/>
-        <url/>
-    </scm>
+
+    <repositories>
+        <repository>
+            <id>spring-milestones</id>
+            <name>Spring Milestone Repository</name>
+            <url>https://repo.spring.io/milestone</url>
+            <releases>
+                <enabled>true</enabled>
+            </releases>
+            <snapshots>
+                <enabled>false</enabled>
+            </snapshots>
+        </repository>
+    </repositories>
+
     <dependencies>
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-data-rest</artifactId>
         </dependency>
+        <!-- https://mvnrepository.com/artifact/org.springframework.boot/spring-boot-maven-plugin -->
         <dependency>
-            <groupId>org.sonarsource.scanner.maven</groupId>
-            <artifactId>sonar-maven-plugin</artifactId>
-            <version>5.0.0.4389</version>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-maven-plugin</artifactId>
+            <version>3.5.0-M3</version>
         </dependency>
         <dependency>
             <groupId>org.springframework.boot</groupId>
@@ -50,10 +59,6 @@
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-thymeleaf</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>org.thymeleaf.extras</groupId>
-            <artifactId>thymeleaf-extras-springsecurity6</artifactId>
         </dependency>
         <dependency>
             <groupId>org.springframework.boot</groupId>
@@ -142,11 +147,6 @@
             <artifactId>postgresql</artifactId>
             <scope>runtime</scope>
         </dependency>
-        <dependency>
-            <groupId>org.springframework.boot</groupId>
-            <artifactId>spring-boot-maven-plugin</artifactId>
-            <version>3.4.3</version>
-        </dependency>
         <!-- https://mvnrepository.com/artifact/org.jacoco/jacoco-maven-plugin -->
         <dependency>
             <groupId>org.jacoco</groupId>
@@ -164,12 +164,13 @@
             <version>2.3.1</version>
         </dependency>
     </dependencies>
+
     <build>
         <plugins>
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-compiler-plugin</artifactId>
-                <version>3.13.0</version>
+                <version>3.14.0</version>
                 <configuration>
                     <annotationProcessorPaths>
                         <path>
@@ -178,7 +179,6 @@
                             <version>${lombok.version}</version>
                         </path>
                     </annotationProcessorPaths>
-                    <release>24</release>
                 </configuration>
             </plugin>
             <plugin>
@@ -187,8 +187,10 @@
                 <version>3.4.3</version>
                 <configuration>
                     <image>
-                        <!--suppress UnresolvedMavenProperty -->
-                        <name>${project.name}:${env.VERSION}</name>
+                        <name>docker.io/${env.PROJECT_NAME}:${env.VERSION}</name>
+                        <builder>paketobuildpacks/builder-jammy-full:latest</builder>
+                        <cleanCache>true</cleanCache>
+                        <verboseLogging>true</verboseLogging>
                     </image>
                 </configuration>
             </plugin>
@@ -218,10 +220,9 @@
                 <configuration>
                     <parallel>methods</parallel>
                     <threadCount>16</threadCount>
-                    <forkCount>2</forkCount>
+                    <forkCount>0</forkCount>
                     <reuseForks>true</reuseForks>
                     <argLine>@{argLine} -Xshare:off</argLine>
-                    <parallel>all</parallel>
                 </configuration>
             </plugin>
             <plugin>
@@ -234,7 +235,6 @@
                     <forkCount>2</forkCount>
                     <reuseForks>true</reuseForks>
                     <argLine>@{argLine} -Xshare:off</argLine>
-                    <parallel>all</parallel>
                 </configuration>
                 <executions>
                     <execution>
@@ -250,7 +250,6 @@
                 <artifactId>dart-sass-maven-plugin</artifactId>
                 <version>1.5.0</version>
                 <configuration>
-                    <!-- use a fixed version of dart-saas to ensure reproducible builds -->
                     <outputFolder>${project.build.directory}/classes/static/css</outputFolder>
                     <version>1.83.0</version>
                 </configuration>
@@ -265,7 +264,6 @@
                 </executions>
             </plugin>
         </plugins>
-
     </build>
 
 </project>

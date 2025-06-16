@@ -13,57 +13,37 @@
     <div class="content" layout:fragment="content">
         <div class="chat">
             <div class="chat__header">
-                <img class="chat__image" src="https://as1.ftcdn.net/v2/jpg/03/46/83/96/1000_F_346839683_6nAPzbhpSkIpb8pmAwufkC7c5eD7wYws.jpg" alt="Chat Image"/>
-                <div class="chat__header-text">
-                    <h1 class="chat__title">
-                        Usuario 1
-                    </h1>
-                    <p class="chat__description">
-                        Descripcion usuario 1
-                    </p>
+                <div th:if="${chat.getType().name() == 'USER'}">
+                    <div th:if="${user.getId() != #authentication.getPrincipal().getId()}"  class="chat__header" th:each="user : ${chat.getUsers()}">
+                        <img class="chat__image" th:src="${user.getImageUrl()}" alt="Chat Image"/>
+                        <div class="chat__header-text">
+                            <h1 class="chat__title" th:text="${user.getUsername()}">
+                            </h1>
+                            <p class="chat__description" th:text="${user.getDescription()}">
+                            </p>
+                        </div>
+                    </div>
                 </div>
+                <div th:if="${chat.getType().name() == 'GROUP'}" class="chat__header">
+                    <div class="chat__header-text">
+                        <h1 class="chat__title" th:text="${chat.getGroupName()}">
+                        </h1>
+                    </div>
+               </div>
             </div>
             <div class="chat__body">
-                <div class="chat__message chat__message--sender">
-                   <p class="chat__text">
-                       Prueba 1
-                   </p>
-                    <p class="chat__date">
-                        10/03/25 14:30
-                    </p>
-                </div>
-                <div class="chat__message chat__message--receiver">
-                    <p class="chat__text">
-                       Prueba 2
-                   </p>
-                    <p class="chat__date">
-                        10/03/25 15:30
-                    </p>
-                </div>
-                <div class="chat__message chat__message--sender">
-                    <p class="chat__text">
-                        Prueba 1
-                    </p>
-                    <p class="chat__date">
-                        10/03/25 14:30
-                    </p>
-                </div>
-                <div class="chat__message chat__message--sender">
-                    <p class="chat__text">
-                        Prueba 1
-                    </p>
-                    <p class="chat__date">
-                        10/03/25 14:30
-                    </p>
+                <div th:each="message : ${chat.messages}"
+                     th:class="@{'message message' +  ${message.user.id == #authentication.principal.id ? '--sender' : '--receiver'}}">
+                    <p th:text="${message.message}" class="chat__text"></p>
+                    <p th:text="${message.date}" class="chat__date">10/03/25 14:30</p>
                 </div>
             </div>
-            <div class="chat__input">
-                <input class="chat__input-box" type="text" placeholder="Escribe tu mensaje aqui" />
-            </div>
+            <form th:action="@{'/chat/' + ${chat.getId()}}" th:object="${newMessage}" method="post">
+                <div class="chat__input">
+                    <input class="chat__input-box" th:value="${newMessage.getMessage()}" type="text" name="message" id="message" placeholder="Escribe tu mensaje aqui" />
+                </div>
+            </form>
         </div>
     </div>
-
-
-
 </body>
 </html>

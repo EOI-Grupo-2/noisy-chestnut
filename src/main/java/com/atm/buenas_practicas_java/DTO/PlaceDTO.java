@@ -16,7 +16,6 @@ public class PlaceDTO {
     private String description;
     private String address;
     private Long capacity;
-    private String rating;
-    private String imageUrl;
+    private Double rating;
     private User user;
 }

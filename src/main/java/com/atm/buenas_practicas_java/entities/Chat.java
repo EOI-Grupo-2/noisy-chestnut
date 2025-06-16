@@ -6,6 +6,7 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Entity
@@ -23,13 +24,16 @@ public class Chat {
     @Enumerated(EnumType.STRING)
     private ChatType type;
 
-    @OneToOne(fetch = FetchType.EAGER)
-    @JoinColumn (name = "group_id", nullable = true)
-    private Group group;
+    @OneToOne(cascade = CascadeType.DETACH, orphanRemoval = true)
+    @JoinColumn(nullable = true)
+    private Concert concert;
 
-    @OneToMany(fetch = FetchType.EAGER)
-    private List<User> users;
+    @Column(nullable = true)
+    private String groupName;
 
-    @OneToMany(fetch = FetchType.EAGER)
-    private List<Message> messages;
+    @ManyToMany(mappedBy = "chats", fetch = FetchType.EAGER)
+    private List<User> users = new ArrayList<>();
+
+    @OneToMany(mappedBy = "chat", fetch = FetchType.EAGER, cascade = CascadeType.PERSIST, orphanRemoval = true)
+    private List<Message> messages = new ArrayList<>();
 }

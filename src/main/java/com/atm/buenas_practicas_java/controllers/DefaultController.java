@@ -1,7 +1,10 @@
 package com.atm.buenas_practicas_java.controllers;
 
 
+import com.atm.buenas_practicas_java.DTO.PublicationsDTO;
 import com.atm.buenas_practicas_java.entities.AuthUser;
+import com.atm.buenas_practicas_java.services.PublicationsService;
+import com.atm.buenas_practicas_java.services.UserService;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
@@ -9,6 +12,9 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Controlador encargado de manejar las solicitudes relacionadas con la entidad principal.
@@ -36,8 +42,23 @@ import org.springframework.web.bind.annotation.PostMapping;
 @Controller
 public class DefaultController {
 
-    @GetMapping({"", "/"})
-    public String getHomePage() {
+    private final PublicationsService publicationsService;
+    private final UserService userService;
+
+    public DefaultController(PublicationsService publicationsService, UserService userService) {
+        this.publicationsService = publicationsService;
+        this.userService = userService;
+    }
+
+    @GetMapping({"/", ""})
+    public String listPublications(@AuthenticationPrincipal AuthUser user, Model model) {
+        List<PublicationsDTO> publications = new ArrayList<>();
+        if(user != null) {
+            publications= publicationsService.findPublicationsOfFollowedUsers(user.getId());
+        } else {
+            publications = publicationsService.findAllDTO();
+        }
+        model.addAttribute("publications", publications);
         return "index";
     }
 
@@ -50,63 +71,30 @@ public class DefaultController {
     public String getArtistPage(){
         return "/artist/artist";
     }
-  
 
-    @GetMapping({"", "/new-publication"})
-    public String getNewPublicationPage(){
-        return "/publication/new-publication";
+<<<<<<< EOIG2-71-Controlador-Social
+    @GetMapping({"", "/search"})
+    public String getSearch(){
+        return "/search/search";
     }
-
+=======
     @GetMapping({"", "/chat"})
     public String getSocialPage(){
         return "/social/social";
     }
   
-    @GetMapping({"", "/register"})
-    public String getRegister(){
-        return "/user/register";
-    }
-  
-    @GetMapping({"", "/user/profile"})
-    public String getUserProfile(){
-        return "/user/profile";
-    }
-
-    @GetMapping({"", "/user/editprofile"})
-    public String getUserEditProfile(){
-        return "/user/editprofile";
-    }
-
-    @GetMapping({"", "/user/adminpanel"})
-    public String getAdminPanel(){
-        return "/user/adminpanel";
-    }
-
-
-    @GetMapping({"", "/artist/profile"})
-    public String getArtistProfile(){
-        return "/artist/profile";
-    }
-  
-    @GetMapping({"", "/chat/id"})
+      @GetMapping({"", "/chat/id"})
     public String getChatPage(){
         return "/social/chat";
     }
 
-    @GetMapping({"", "/search"})
-    public String getSearch(){
-        return "/search/search";
-    }
+>>>>>>> desarrollo
 
     @GetMapping({"", "/places/new"})
     public String createPlacePage(){
         return "/places/form";
     }
 
-    @GetMapping({"", "/search/concerts"})
-    public String getSearchConcertsPage(){
-        return "/search/concerts";
-    }
 
     @GetMapping({"", "/places/id"})
     public String getPlacesProfile(){
@@ -120,33 +108,14 @@ public class DefaultController {
 
     @GetMapping({"", "/publication"})
     public String getPublicationPage(){return "/publication/publication";}
-  
-    @GetMapping("/concert")
-    public String showConcertsPage() {
-        return "concert/concerts";
-    }
-
-    @GetMapping("/concert/detail")
-    public String showConcertDetailPage() {
-        return "concert/concert-detail";
-    }
-
-    @GetMapping("/concert/form")
-    public String showConcertFormPage() {
-        return "concert/concert-form";
-    }
-
 
     @GetMapping("/places/admin")
     public String showPlacesAdminPage() {
         return "places/placesAdmin";
     }
 
-
     @GetMapping("/places")
     public String showPlacesPage() {return "/places/places"; }
 
-    @GetMapping("/concert/admin")
-    public String showConcertsAdminPage() {return "concert/concertsAdmin"; }
 }
 

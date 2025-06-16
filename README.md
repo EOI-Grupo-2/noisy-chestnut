@@ -763,7 +763,6 @@ Esto permite:
 ✅ **Despliegue a Producción sin intervención manual**.  
 ✅ **Control total de versiones y Releases en GitHub**.  
 ✅ **Hotfixes rápidos y sincronización garantizada** entre `main` y `develop`.  
-✅ **Pruebas locales fáciles con perfiles `.run` en IntelliJ IDEA**.
-
+✅ **Pruebas locales fáciles con perfiles `.run` en IntelliJ IDEA**. 
 ---
 
