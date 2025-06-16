@@ -23,4 +23,9 @@ public class PlaceService extends AbstractBusinessService<Place, Long, PlaceDTO,
         return this.getRepo().findByName(name)
                 .map(place -> this.getMapper().toDto(place));
     }
+    public Optional<Place> findById(Long id) {
+        PlaceService placeRepository = null;
+        return placeRepository.findById(id);
+    }
+
 }

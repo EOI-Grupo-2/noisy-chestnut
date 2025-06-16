@@ -1,6 +1,7 @@
 package com.atm.buenas_practicas_java.config;
 
 import com.atm.buenas_practicas_java.services.UserDetailsServiceImpl;
+import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -50,5 +51,13 @@ public class SecurityConfig {
                 )
                 .csrf(AbstractHttpConfigurer::disable);
         return http.build();
+    }
+
+    public class AppConfig {
+
+        @Bean
+        public ModelMapper modelMapper() {
+            return new ModelMapper();
+        }
     }
 }

@@ -1,5 +1,6 @@
 package com.atm.buenas_practicas_java.services;
 
+import com.atm.buenas_practicas_java.entities.Place;
 import com.atm.buenas_practicas_java.services.mapper.AbstractServiceMapper;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -47,9 +48,9 @@ public abstract class AbstractBusinessService <E, ID, DTO,  REPO extends JpaRepo
         return this.repo.findById(id).map(this.serviceMapper::toDto);
     }
     //Guardar
-    public DTO save(DTO dto) throws Exception {
+    public DTO save(Place dto) throws Exception {
         //Traduzco del dto con datos de entrada a la entity
-        final E entity = serviceMapper.toEntity(dto);
+        final E entity = serviceMapper.toEntity((DTO) dto);
         //Guardo el la base de datos
         E savedEntity =  repo.save(entity);
         //Traducir la entity a DTO para devolver el DTO
