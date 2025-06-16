@@ -106,27 +106,9 @@ public class DefaultController {
     public String editPlacePage(){
         return "/places/form";
     }
- EOIG2-73-Controlador-Concerts
 
     @GetMapping({"", "/publication"})
     public String getPublicationPage(){return "/publication/publication";}
-
-  
-    @GetMapping("/concert")
-    public String showConcertsPage() {
-        return "concert/concerts";
-    }
-
-    @GetMapping("/concert/detail")
-    public String showConcertDetailPage() {
-        return "concert/concert-detail";
-    }
-
-    @GetMapping("/concert/form")
-    public String showConcertFormPage() {
-        return "concert/concert-form";
-    }
- desarrollo
 
     @GetMapping("/places/admin")
     public String showPlacesAdminPage() {

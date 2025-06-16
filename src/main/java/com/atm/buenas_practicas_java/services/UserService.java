@@ -18,20 +18,16 @@ public class UserService extends AbstractBusinessService<User,Long, UserDTO,
         UserRepository, UserMapper>{
 
     private FollowsRepository followsRepository;
- EOIG2-73-Controlador-Concerts
     private RoleService roleService; // Ya existe
 
     private UserRepository userRepository;
-desarrollo
 
     public UserService(UserRepository userRepository, UserMapper userMapper, FollowsRepository followsRepository, RoleService roleService) {
         super(userRepository, userMapper);
         this.followsRepository = followsRepository;
-EOIG2-73-Controlador-Concerts
         this.roleService = roleService;
 
         this.userRepository = userRepository;
- desarrollo
     }
 
     public List<UserDTO> findAllUsersFollowedByUserDTO(UserDTO userDTO) throws Exception {

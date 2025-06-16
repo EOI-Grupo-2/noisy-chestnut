@@ -17,12 +17,10 @@ import java.time.LocalDateTime;
 public class CommentariesDTO {
 
     private Long id;
- EOIG2-73-Controlador-Concerts
     private Publications pub;
     private Concert concert;
 
     private Publications publications;
- desarrollo
     private User user;
     private String content;
     private Integer likes;

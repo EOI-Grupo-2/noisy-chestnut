@@ -21,13 +21,12 @@ public class Commentaries {
 
     // Hacer opcional la relación con Publications
     @ManyToOne(fetch = FetchType.EAGER)
- EOIG2-73-Controlador-Concerts
     @JoinColumn (name = "pub_id", nullable = true)
     private Publications pub;
 
     @JoinColumn (name = "pub_id", nullable = false)
     private Publications publications;
- desarrollo
+
 
     // Añadir relación opcional con Concert
     @ManyToOne(fetch = FetchType.EAGER)
