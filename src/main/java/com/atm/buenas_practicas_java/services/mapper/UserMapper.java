@@ -2,7 +2,6 @@ package com.atm.buenas_practicas_java.services.mapper;
 
 import com.atm.buenas_practicas_java.DTO.UserDTO;
 import com.atm.buenas_practicas_java.entities.User;
-import com.atm.buenas_practicas_java.repositories.RoleRepository;
 import org.modelmapper.ModelMapper;
 import org.springframework.stereotype.Service;
 

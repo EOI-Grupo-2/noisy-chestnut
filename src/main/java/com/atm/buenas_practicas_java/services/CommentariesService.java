@@ -8,6 +8,12 @@ import com.atm.buenas_practicas_java.entities.User;
 import com.atm.buenas_practicas_java.repositories.CommentariesRepository;
 import com.atm.buenas_practicas_java.services.mapper.CommentariesMapper;
 import org.springframework.stereotype.Service;
+EOIG2-72-Controlador-Publications
+import org.springframework.transaction.annotation.Transactional;
+
+import java.util.List;
+
+ desarrollo
 
 import java.time.LocalDateTime;
 import java.util.List;
@@ -66,4 +72,17 @@ public class CommentariesService extends AbstractBusinessService<Commentaries, L
         // Guardar y retornar
         return this.save(commentDTO);
     }
+ EOIG2-72-Controlador-Publications
+
+    public List<CommentariesDTO> findByPublicationId(Long id) {
+
+        return getRepo().findByPublicationsId(id).stream()
+                .map(getMapper()::toDto)
+                .toList();
+    }
+
 }
+
+
+}
+desarrollo

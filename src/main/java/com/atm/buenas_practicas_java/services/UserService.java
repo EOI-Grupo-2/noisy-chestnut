@@ -18,12 +18,20 @@ public class UserService extends AbstractBusinessService<User,Long, UserDTO,
         UserRepository, UserMapper>{
 
     private FollowsRepository followsRepository;
+ EOIG2-73-Controlador-Concerts
     private RoleService roleService; // Ya existe
+
+    private UserRepository userRepository;
+desarrollo
 
     public UserService(UserRepository userRepository, UserMapper userMapper, FollowsRepository followsRepository, RoleService roleService) {
         super(userRepository, userMapper);
         this.followsRepository = followsRepository;
+EOIG2-73-Controlador-Concerts
         this.roleService = roleService;
+
+        this.userRepository = userRepository;
+ desarrollo
     }
 
     public List<UserDTO> findAllUsersFollowedByUserDTO(UserDTO userDTO) throws Exception {
@@ -32,6 +40,14 @@ public class UserService extends AbstractBusinessService<User,Long, UserDTO,
 
     public List<UserDTO> findAllUsersFollowerByUserDTO(UserDTO userDTO) throws Exception {
         return followsRepository.findByUserFollowed(getMapper().toEntity(userDTO)).stream().map(follows -> getMapper().toDto(follows.getUserFollower())).collect(Collectors.toList());
+    }
+
+    public UserDTO findByUsername(String username) throws Exception {
+        return this.getMapper().toDto(userRepository.findByUsername(username));
+    }
+
+    public User findByUsernameEntity(String username) throws Exception {
+        return userRepository.findByUsername(username);
     }
 
     @Transactional

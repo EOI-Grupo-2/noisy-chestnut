@@ -28,5 +28,4 @@ public class PlaceMapper extends AbstractServiceMapper<Place, PlaceDTO> {
         mapper.map(dto, Place.class);
         return place;
     }
-
 }
