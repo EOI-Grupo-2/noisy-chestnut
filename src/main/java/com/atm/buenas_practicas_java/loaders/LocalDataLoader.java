@@ -91,7 +91,6 @@ public class LocalDataLoader {
         user3.setDescription("Descripcion del artista guapo");
         user3.setRoles(Set.of(artistRole, userRole));
         user3.setGenre(Genre.MALE);
-        user3.setImageUrl("https://www.billboard.com/wp-content/uploads/2023/04/Eladio-Carrion-cr-Gabriel-Perez-Silva-billboard-1548.jpg");
         user3.setEmail("user3@mail.com");
         userRepository.saveAll(List.of(user1, user2, user3));
         adminRole.setUsers(List.of(user1));
@@ -128,7 +127,7 @@ public class LocalDataLoader {
         publications2.setDescription("Descripcion del usuario no chulo");
         publications2.setTitle("Title del usuario no chulo");
         publications2.setLikes(10);
-        publications2.setUser(user2);
+        publications2.setUser(user3);
         publicationsRepository.saveAll(List.of(publications1,publications2));
         Place place1 = new Place();
         place1.setName("Place 1");

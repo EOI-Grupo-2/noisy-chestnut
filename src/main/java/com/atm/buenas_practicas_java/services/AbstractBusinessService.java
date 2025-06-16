@@ -1,5 +1,6 @@
 package com.atm.buenas_practicas_java.services;
 
+import com.atm.buenas_practicas_java.DTO.PublicationsDTO;
 import com.atm.buenas_practicas_java.services.mapper.AbstractServiceMapper;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;

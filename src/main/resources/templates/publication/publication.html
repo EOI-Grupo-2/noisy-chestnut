@@ -2,52 +2,72 @@
 <html lang="en"
       xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
       layout:decorate="~{layouts/main_layout.html}"
-      xmlns:th="http://www.thymeleaf.org">
+      xmlns:th="http://www.thymeleaf.org" xmlns:sec="https://www.thymeleaf.org/thymeleaf-extras-springsecurity6">
 <head>
     <link rel="stylesheet" th:href="@{/css/publication.css}" />
 </head>
 <body>
 <div class="content" layout:fragment="content">
-
     <div class="publication-layout">
+
         <!-- Publicación -->
         <div class="post">
-            <h5 class="post__author">Eladio Carrión <span class="post__handle">@eladiocarrion</span></h5>
-            <p class="post__text">
-                🔥¡Gracias a todos los que hicieron posible esta noche! Sold out en el Choli, esto es por ustedes. #3MEN2KBRN 🐐💯
-            </p>
-            <img class="post__image" src="https://i.pinimg.com/736x/e8/eb/bb/e8ebbb4bf9e59858e9dd2440835c7484.jpg" alt="Eladio Carrión en concierto">
 
-            <div class="post__actions">
-                <button class="button button--like"><i class="fas fa-thumbs-up"></i> Me gusta</button>
-                <button class="button button--share"><i class="fas fa-share-alt"></i> Compartir</button>
-                <button class="button button--edit">
-                    <a href="/new-publication"><i class="fas fa-pen"></i> Editar</a>
-                </button>
-            </div>
-        </div>
-
-        <!-- Comentarios -->
-        <div class="comments">
-            <h5 class="comments__title">Comentarios</h5>
-
-            <div class="comments__comment">
-                <p><strong>@TrapLover:</strong> 🔥🔥🔥 ¡Este show estuvo a otro nivel! #Eladio🐐</p>
-            </div>
-            <div class="comments__comment">
-                <p><strong>@Reggaetonera24:</strong> "Coco Chanel" en vivo fue épico 😭🔥</p>
-            </div>
-            <div class="comments__comment">
-                <p><strong>@RealHastaLaMuerte:</strong> Papi, tú eres el mejor en el trap ahora mismo. RESPECT. 💯</p>
-            </div>
-            <div class="comments__comment">
-                <p><strong>@LatinoGang:</strong> Me dejaste sin voz cantando "Mbappé" 🤯⚡</p>
+            <div class="pub-card__header">
+                <img th:src="${publication.getUser().getImageUrl() != null ? publication.getUser().getImageUrl() : 'https://as1.ftcdn.net/v2/jpg/03/46/83/96/1000_F_346839683_6nAPzbhpSkIpb8pmAwufkC7c5eD7wYws.jpg'}"
+                     class="pub-card__user-image" alt="">
+                <h3 class="post__author" th:text="${publication.getUser().getName()}"><span class="post__handle" th:text="${publication.getUser().getUsername()}"></span></h3>
             </div>
 
-            <div class="comments__new">
-          <textarea class="comments__textarea" rows="3" placeholder="Escribir comentario..."
-                    onfocus="this.placeholder=''" onblur="this.placeholder='Escribir comentario...'"></textarea>
-                <button class="button button--comment">Comentar</button>
+            <div class="post__body">
+                <p class="post__title" th:text="${publication.getTitle()}"></p>
+                <p class="post__text" th:text="${publication.getDescription()}"></p>
+                <img class="post__image"
+                     th:if="${publication.getPhotoUrl() != null and !#strings.isEmpty(publication.getPhotoUrl())}"
+                     th:src="${publication.getPhotoUrl()}"
+                     alt="Imagen">
+                <p class="pub-card__date" th:text="${#temporals.format(publication.getDate(), 'dd/MM/yyyy HH:mm')}"></p>
+
+                <div class="post__actions">
+                    <form th:action="@{/publication/{id}/like(id=${publication.id})}" method="post" style="display: inline;">
+                        <button type="submit" class="button button--like">
+                            <i class="fas fa-thumbs-up"></i> Me gusta (<span th:text="${publication.getLikes()}">0</span>)
+                        </button>
+                    </form>
+                    <button class="button button--edit"
+                            th:if="${#authentication.name == publication.user.username}">
+                        <a th:href="@{/publication/edit/{id}(id=${publication.id})}">Editar</a>
+                    </button>
+                    <div th:if="${#authentication.name == publication.user.username or #authorization.expression('hasAuthority(''ADMIN'')')}">
+                        <form th:action="@{/publication/{id}/delete(id=${publication.id})}" method="post" style="display: inline;">
+                            <button type="submit" class="button button--delete"
+                                    onclick="return confirm('¿Estás seguro de que quieres eliminar esta publicación?')">
+                                Eliminar
+                            </button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Comentarios -->
+            <div class="comments">
+                <div class="comments__comment" th:each="comment : ${commentaries}">
+                    <div class="comment-header" style="display: flex; justify-content: space-between; align-items: center;">
+                        <p th:text="${comment.getUser().getUsername()}"><strong></strong></p>
+                    </div>
+                    <p th:text="${comment.getContent()}"></p>
+                </div>
+                <form sec:authorize="isAuthenticated()" th:action="@{'/publication/' + ${publication.id} + '/comment'}" th:method="post" th:object="${commentary}">
+                    <div class="comments__new">
+                    <textarea id="content" name="content" class="comments__textarea" rows="3" placeholder="Escribir comentario..."
+                              onfocus="this.placeholder=''"
+                              onblur="this.placeholder='Escribir comentario...'"
+                              th:text="${commentary.getContent()}">
+                    </textarea>
+                        <button id="Comment" type="submit"
+                                class="button button--comment">Comentar</button>
+                    </div>
+                </form>
             </div>
         </div>
     </div>
