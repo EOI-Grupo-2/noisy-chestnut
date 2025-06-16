@@ -34,8 +34,8 @@ public class ConcertController {
     private final CommentariesService commentariesService;
 
     public ConcertController(ConcertService concertService, PlaceService placeService,
-                           UserService userService, SalePointsService salePointsService,
-                           FileUploadService fileUploadService, CommentariesService commentariesService) {
+                             UserService userService, SalePointsService salePointsService,
+                             FileUploadService fileUploadService, CommentariesService commentariesService) {
         this.concertService = concertService;
         this.placeService = placeService;
         this.userService = userService;
@@ -44,45 +44,29 @@ public class ConcertController {
         this.commentariesService = commentariesService;
     }
 
-    // Mostrar lista de todos los conciertos
+    // Listar todos los conciertos
     @GetMapping({"", "/"})
     public String getAllConcerts(Model model) {
         model.addAttribute("concerts", concertService.findAllDTO());
         return "/concert/concerts";
     }
 
-    // Mostrar detalles de un concierto específico - VERSIÓN ORIGINAL
+    // Ver detalles de un concierto
     @GetMapping("/{id}")
     public String getConcertDetail(@PathVariable Long id, Model model, @AuthenticationPrincipal AuthUser authUser) {
         ConcertDTO concert = concertService.findByIdDTO(id).orElse(new ConcertDTO());
 
-        // Obtener puntos de venta para este concierto
-        List<SalePointsDTO> salePoints = salePointsService.findAllDTO().stream()
-                .filter(sp -> sp.getConcert() != null && sp.getConcert().getId().equals(id))
-                .collect(Collectors.toList());
+        // Obtener datos relacionados
+        List<SalePointsDTO> salePoints = getSalePointsForConcert(id);
+        List<CommentariesDTO> comments = getCommentsForConcert(id);
+        List<User> artists = getArtistsFromConcert(concert);
 
-        // Obtener comentarios para este concierto
-        Concert concertEntity = concertService.findById(id).orElse(null);
-        List<CommentariesDTO> comments = new ArrayList<>();
-        if (concertEntity != null) {
-            comments = commentariesService.findByConcert(concertEntity);
-        }
-
-        // Variables para el botón asistiré
+        // Variables para asistencia
         boolean isAttending = false;
         int attendanceCount = concertService.getAttendanceCount(id);
 
         if (authUser != null) {
             isAttending = concertService.isUserAttending(id, authUser.getId());
-        }
-
-        // FILTRAR SOLO ARTISTAS DESDE EL BACKEND
-        List<User> artists = new ArrayList<>();
-        if (concert.getUsers() != null) {
-            artists = concert.getUsers().stream()
-                    .filter(user -> user.getRoles().stream()
-                            .anyMatch(role -> role.getName().equals("ARTIST")))
-                    .collect(Collectors.toList());
         }
 
         model.addAttribute("concert", concert);
@@ -97,18 +81,14 @@ public class ConcertController {
         return "/concert/concert-detail";
     }
 
-    // Añadir comentario a un concierto
+    // Añadir comentario
     @PostMapping("/{id}/comment")
     @PreAuthorize("isAuthenticated()")
-    public String addComment(@PathVariable Long id,
-                            @RequestParam String content,
-                            @AuthenticationPrincipal AuthUser authUser,
-                            RedirectAttributes redirectAttributes) {
+    public String addComment(@PathVariable Long id, @RequestParam String content,
+                             @AuthenticationPrincipal AuthUser authUser, RedirectAttributes redirectAttributes) {
         try {
-            Concert concert = concertService.findById(id)
-                    .orElseThrow(() -> new RuntimeException("Concierto no encontrado"));
-            User user = userService.findById(authUser.getId())
-                    .orElseThrow(() -> new RuntimeException("Usuario no encontrado"));
+            Concert concert = concertService.findById(id).orElseThrow();
+            User user = userService.findById(authUser.getId()).orElseThrow();
 
             CommentariesDTO commentDTO = new CommentariesDTO();
             commentDTO.setConcert(concert);
@@ -118,75 +98,144 @@ public class ConcertController {
             commentDTO.setDate(LocalDateTime.now());
 
             commentariesService.save(commentDTO);
-
-            // AÑADIR MENSAJE DE ÉXITO
             redirectAttributes.addAttribute("successMessage", "Comentario añadido correctamente");
-
         } catch (Exception e) {
-            // AÑADIR MENSAJE DE ERROR
             redirectAttributes.addAttribute("errorMessage", "Error al añadir comentario: " + e.getMessage());
         }
 
         return "redirect:/concert/" + id;
     }
-    // Mostrar formulario para crear nuevo concierto (solo ADMIN)
+
+    // Formulario nuevo concierto
     @GetMapping("/new")
     @PreAuthorize("hasAuthority('ADMIN')")
     public String getNewConcertForm(Model model) {
-        model.addAttribute("concert", new ConcertDTO());
         model.addAttribute("errors", new ArrayList<String>());
+        model.addAttribute("concert", new ConcertDTO());
         addFormAttributes(model);
         return "/concert/concert-form";
     }
 
-    // Mostrar formulario para editar concierto existente (solo ADMIN)
+    // Formulario editar concierto
     @GetMapping("/{id}/edit")
     @PreAuthorize("hasAuthority('ADMIN')")
     public String getEditConcertForm(@PathVariable Long id, Model model) {
         ConcertDTO concert = concertService.findByIdDTO(id).orElse(null);
 
-        // Si no existe, redirigir al admin
         if (concert == null) {
             return "redirect:/concert/admin";
         }
 
-        model.addAttribute("concert", concert);
         model.addAttribute("errors", new ArrayList<String>());
+        model.addAttribute("concert", concert);
         addFormAttributes(model);
         return "/concert/concert-form";
     }
 
-    // Guardar concierto (crear o actualizar) (solo ADMIN)
+    // Guardar concierto
     @PostMapping("/save")
     @PreAuthorize("hasAuthority('ADMIN')")
     public String saveConcert(@ModelAttribute("concert") ConcertDTO concertDTO,
-                         @RequestParam(value = "artistIds", required = false) List<Long> artistIds,
-                         @RequestParam(value = "imageFile", required = false) MultipartFile imageFile,
-                         @RequestParam(required = false) String ticketUrl,
-                         @RequestParam(required = false) Double ticketPrice,
-                         Model model) throws Exception {
+                              @RequestParam(value = "artistIds", required = false) List<Long> artistIds,
+                              @RequestParam(value = "imageFile", required = false) MultipartFile imageFile,
+                              @RequestParam(required = false) String ticketUrl,
+                              @RequestParam(required = false) Double ticketPrice,
+                              Model model) throws Exception {
 
-        // Manejar subida de imagen
-        if (imageFile != null && !imageFile.isEmpty()) {
-            try {
-                // Si es una edición y ya tenía imagen, eliminar la anterior
-                if (concertDTO.getId() != null && concertDTO.getImageUrl() != null) {
-                    fileUploadService.deleteImage(concertDTO.getImageUrl());
-                }
-
-                String imageUrl = fileUploadService.saveImage(imageFile);
-                concertDTO.setImageUrl(imageUrl);
-            } catch (IOException e) {
-                List<String> errors = new ArrayList<>();
-                errors.add("Error al subir la imagen: " + e.getMessage());
-                model.addAttribute("errors", errors);
-                model.addAttribute("concert", concertDTO);
-                addFormAttributes(model);
-                return "/concert/concert-form";
-            }
+        // Validar errores
+        List<String> errors = getFormErrors(concertDTO);
+        if (!errors.isEmpty()) {
+            model.addAttribute("errors", errors);
+            model.addAttribute("concert", concertDTO);
+            addFormAttributes(model);
+            return "/concert/concert-form";
         }
 
-        // DEBE SER ASÍ (bucle for original):
+        // Manejar imagen
+        handleImageUpload(concertDTO, imageFile, model);
+
+        // Asignar artistas
+        assignArtistsToConcert(concertDTO, artistIds);
+
+        // Guardar concierto
+        ConcertDTO savedConcert = concertService.save(concertDTO);
+
+        // Crear punto de venta si es necesario
+        createSalePointIfNeeded(savedConcert, ticketUrl, ticketPrice);
+
+        return "redirect:/concert/" + savedConcert.getId();
+    }
+
+    // Eliminar concierto
+    @GetMapping("/{id}/delete")
+    @PreAuthorize("hasAuthority('ADMIN')")
+    public String deleteConcert(@PathVariable Long id) throws Exception {
+        Concert concert = concertService.findById(id).orElseThrow();
+
+        if (concert.getImageUrl() != null) {
+            fileUploadService.deleteImage(concert.getImageUrl());
+        }
+
+        concertService.safeDeleteById(id);
+        return "redirect:/concert/admin";
+    }
+
+    // Panel admin
+    @GetMapping("/admin")
+    @PreAuthorize("hasAuthority('ADMIN')")
+    public String getAdminPanel(Model model) {
+        model.addAttribute("concerts", concertService.findAllDTO());
+        return "/concert/concertsAdmin";
+    }
+
+    // Toggle asistencia
+    @PostMapping("/{id}/attend")
+    @PreAuthorize("isAuthenticated()")
+    public String toggleAttendance(@PathVariable Long id, @AuthenticationPrincipal AuthUser authUser) throws Exception {
+        concertService.toggleUserAttendance(id, authUser.getId());
+        return "redirect:/concert/" + id;
+    }
+
+    // ============ MÉTODOS PRIVADOS HELPER ============
+
+    private List<SalePointsDTO> getSalePointsForConcert(Long concertId) {
+        return salePointsService.findAllDTO().stream()
+                .filter(sp -> sp.getConcert() != null && sp.getConcert().getId().equals(concertId))
+                .collect(Collectors.toList());
+    }
+
+    private List<CommentariesDTO> getCommentsForConcert(Long concertId) {
+        Concert concertEntity = concertService.findById(concertId).orElse(null);
+        if (concertEntity != null) {
+            return commentariesService.findByConcert(concertEntity);
+        }
+        return new ArrayList<>();
+    }
+
+    private List<User> getArtistsFromConcert(ConcertDTO concert) {
+        if (concert.getUsers() == null) {
+            return new ArrayList<>();
+        }
+
+        return concert.getUsers().stream()
+                .filter(user -> user.getRoles().stream()
+                        .anyMatch(role -> role.getName().equals("ARTIST")))
+                .collect(Collectors.toList());
+    }
+
+    private void handleImageUpload(ConcertDTO concertDTO, MultipartFile imageFile, Model model) throws IOException {
+        if (imageFile != null && !imageFile.isEmpty()) {
+            // Eliminar imagen anterior si existe
+            if (concertDTO.getId() != null && concertDTO.getImageUrl() != null) {
+                fileUploadService.deleteImage(concertDTO.getImageUrl());
+            }
+
+            String imageUrl = fileUploadService.saveImage(imageFile);
+            concertDTO.setImageUrl(imageUrl);
+        }
+    }
+
+    private void assignArtistsToConcert(ConcertDTO concertDTO, List<Long> artistIds) {
         List<User> selectedArtists = new ArrayList<>();
         if (artistIds != null && !artistIds.isEmpty()) {
             for (Long artistId : artistIds) {
@@ -197,19 +246,9 @@ public class ConcertController {
             }
         }
         concertDTO.setUsers(selectedArtists);
+    }
 
-        List<String> errors = getFormErrors(concertDTO);
-        if (!errors.isEmpty()) {
-            model.addAttribute("errors", errors);
-            model.addAttribute("concert", concertDTO);
-            addFormAttributes(model);
-            return "/concert/concert-form";
-        }
-
-        // El ConcertService ahora maneja toda la lógica de relaciones
-        ConcertDTO savedConcert = concertService.save(concertDTO);
-
-        // Si hay datos de punto de venta, crear SalePoint
+    private void createSalePointIfNeeded(ConcertDTO savedConcert, String ticketUrl, Double ticketPrice) throws Exception {
         if (ticketUrl != null && !ticketUrl.isEmpty() && ticketPrice != null) {
             SalePointsDTO salePointDTO = new SalePointsDTO();
             salePointDTO.setSalePointUrl(ticketUrl);
@@ -217,70 +256,26 @@ public class ConcertController {
             salePointDTO.setConcert(concertService.getMapper().toEntity(savedConcert));
             salePointsService.save(salePointDTO);
         }
-
-        return "redirect:/concert/" + savedConcert.getId();
     }
 
-    // Eliminar concierto (solo ADMIN) - VERSIÓN ORIGINAL
-    @GetMapping("/{id}/delete")
-    @PreAuthorize("hasAuthority('ADMIN')")
-    public String deleteConcert(@PathVariable Long id) throws Exception {
-        Concert concert = concertService.findById(id).orElseThrow();
-
-        // Eliminar imagen asociada si existe
-        if (concert.getImageUrl() != null) {
-            fileUploadService.deleteImage(concert.getImageUrl());
-        }
-
-        // USAR EL MÉTODO SEGURO
-        concertService.safeDeleteById(id);
-        return "redirect:/concert/admin";
-    }
-
-    // Panel de administración de conciertos (solo ADMIN)
-    @GetMapping("/admin")
-    @PreAuthorize("hasAuthority('ADMIN')")
-    public String getAdminPanel(Model model) {
-        model.addAttribute("concerts", concertService.findAllDTO());
-        return "/concert/concertsAdmin";
-    }
-
-    // NUEVO MÉTODO PARA EL BOTÓN ASISTIRÉ
-    @PostMapping("/{id}/attend")
-    @PreAuthorize("isAuthenticated()")
-    public String toggleAttendance(@PathVariable Long id, @AuthenticationPrincipal AuthUser authUser) throws Exception {
-        concertService.toggleUserAttendance(id, authUser.getId());
-        return "redirect:/concert/" + id;
-    }
-
-    // Método privado para añadir atributos necesarios al formulario
     private void addFormAttributes(Model model) {
         model.addAttribute("places", placeService.findAllDTO());
         model.addAttribute("musicGenres", MusicGenre.values());
-        model.addAttribute("artists", userService.findUsersByRoleName("ARTIST")); // SOLO ARTISTAS
+        model.addAttribute("artists", userService.findUsersByRoleName("ARTIST"));
     }
 
-    // Método privado para validar errores del formulario
     private List<String> getFormErrors(ConcertDTO concertDTO) {
         List<String> errors = new ArrayList<>();
 
         if (concertDTO.getName() == null || concertDTO.getName().isEmpty()) {
             errors.add("El nombre del concierto no puede estar vacío");
         }
-
-        if (concertDTO.getDescription() == null || concertDTO.getDescription().isEmpty()) {
-            errors.add("La descripción no puede estar vacía");
-        }
-
         if (concertDTO.getDate() == null) {
             errors.add("La fecha del concierto es obligatoria");
         }
-
         if (concertDTO.getPlace() == null) {
             errors.add("El lugar del concierto es obligatorio");
         }
-
-        // Ya no validamos imageUrl como obligatorio porque puede subirse archivo
         if (concertDTO.getMusicGenre() == null) {
             errors.add("El género musical es obligatorio");
         }

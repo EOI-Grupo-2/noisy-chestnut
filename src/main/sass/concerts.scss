@@ -1,149 +1,115 @@
 @import "variables";
 
-// Sección de administración
-.admin-actions {
-  width: 100%;
-  display: flex;
-  justify-content: flex-end;
-  margin-bottom: 1rem;
-  padding: 0 2rem;
-}
-
+// Botón de admin
 .btn-admin {
   background-color: $primary-color;
   color: $font-color;
   text-decoration: none;
   padding: 0.5rem 1rem;
-  border-radius: 5px;
+  border-radius: 0.3rem;
   font-size: 0.9rem;
   transition: background-color 0.3s;
+  margin: 0 2rem 1rem auto;
+  display: block;
+  width: fit-content;
 
   &:hover {
     background-color: $hover-color;
-    color: $font-color;
   }
 }
 
-// Tarjetas de conciertos
+// Grid de conciertos
+.concerts-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(12rem, 1fr));
+  gap: 1.5rem;
+  padding: 0 2rem;
+}
+
+// Tarjetas
 .concert-card {
-  width: 12rem;
-  height: 18rem;
-  border-radius: 10px;
+  aspect-ratio: 2/3;
+  border-radius: 0.6rem;
   overflow: hidden;
   cursor: pointer;
   position: relative;
   color: $font-color;
-  box-shadow: 0 10px 30px 5px rgba(0, 0, 0, 0.2);
+  box-shadow: 0 0.6rem 1.8rem 0.3rem rgba(0, 0, 0, 0.2);
 
   &__image {
     position: absolute;
     object-fit: cover;
     width: 100%;
     height: 100%;
-    opacity: 0.9;
-    transition: opacity 0.2s ease-out;
+    transition: opacity 0.3s;
   }
 
   &__content {
     position: relative;
-    width: 100%;
     height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    padding: 1rem;
     z-index: 1;
   }
 
   &__title {
-    position: absolute;
-    bottom: 30px;
-    left: 15px;
-    margin: 0;
+    margin: 0 0 0.5rem;
     font-family: 'Roboto Condensed', sans-serif;
     text-transform: uppercase;
-    transition: bottom 0.3s ease-out;
+    transition: transform 0.3s;
   }
 
   &__description {
-    position: absolute;
-    bottom: 40px;
-    left: 15px;
-    max-width: 80%;
     opacity: 0;
-    transition: opacity 0.3s ease-out;
+    margin-bottom: 0.5rem;
+    transition: opacity 0.3s;
   }
 
   &__link {
-    position: absolute;
-    bottom: 20px;
-    left: 15px;
-    max-width: 80%;
     opacity: 0;
     color: inherit;
     text-decoration: none;
     display: flex;
     align-items: center;
-    gap: 5px;
-    transition: opacity 0.3s ease-out;
-
-    &:hover {
-      color: $font-color;
-    }
+    gap: 0.3rem;
+    transition: opacity 0.3s;
   }
 
   &:hover {
-    .concert-card__title {
-      bottom: 100px;
-    }
-
-    .concert-card__description,
-    .concert-card__link {
-      opacity: 1;
-    }
-
-    .concert-card__image {
-      opacity: 0.5;
-    }
+    .concert-card__title { transform: translateY(-2rem); }
+    .concert-card__description, .concert-card__link { opacity: 1; }
+    .concert-card__image { opacity: 0.5; }
   }
 }
 
 // Responsive
 @media (max-width: $tablet-breakpoint) {
-  .admin-actions {
-    padding-left: 5rem;
-  }
-
-  .concert-card {
-    width: 45%;
-    height: 16rem;
+  .btn-admin { margin: 0 1rem 1rem auto; }
+  .concerts-grid {
+    grid-template-columns: repeat(auto-fill, minmax(10rem, 1fr));
+    gap: 1rem;
+    padding: 0 1rem;
   }
 }
 
 @media (max-width: $mobile-breakpoint) {
-  .admin-actions {
-    padding-left: 5rem;
-    justify-content: center;
-  }
-
   .btn-admin {
+    margin: 0 auto 1rem;
     font-size: 0.8rem;
     padding: 0.4rem 0.8rem;
   }
 
-  .concert-card {
-    width: 100%;
-    height: 14rem;
+  .concerts-grid {
+    grid-template-columns: 1fr;
     max-width: 20rem;
+    margin: 0 auto;
+  }
 
-    &__title {
-      bottom: 80px;
-      font-size: 1.2rem;
-    }
-
-    &__description,
-    &__link {
-      opacity: 1;
-    }
-
-    &__image {
-      opacity: 0.7;
-    }
+  .concert-card {
+    &__description, &__link { opacity: 1; }
+    &__image { opacity: 0.7; }
+    &:hover .concert-card__title { transform: none; }
   }
 }
