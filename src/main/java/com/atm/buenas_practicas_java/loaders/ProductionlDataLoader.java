@@ -4,6 +4,7 @@ import com.atm.buenas_practicas_java.entities.*;
 import com.atm.buenas_practicas_java.entities.enums.Genre;
 import com.atm.buenas_practicas_java.entities.enums.MusicGenre;
 import com.atm.buenas_practicas_java.repositories.*;
+import jakarta.annotation.PostConstruct;
 import lombok.extern.log4j.Log4j2;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Profile;
@@ -15,7 +16,7 @@ import java.util.Set;
 
 @Configuration
 @Log4j2
-@Profile("produccion")
+@Profile("produccionRESETDATA")
 public class ProductionlDataLoader {
 
     private final UserRepository userRepository;
@@ -38,7 +39,7 @@ public class ProductionlDataLoader {
         this.albumsRepository = albumsRepository;
     }
 
-    @Profile("produccionRESETDATA")
+    @PostConstruct
     public void loadDataProduccion() {
         log.info("Iniciando la carga de datos para el perfil de producción.");
         log.info("Datos de producción aún no definidos. Este método requiere implementación adicional.");
