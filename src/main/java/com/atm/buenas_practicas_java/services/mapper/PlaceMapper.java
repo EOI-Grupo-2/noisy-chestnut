@@ -25,7 +25,7 @@ public class PlaceMapper extends AbstractServiceMapper<Place, PlaceDTO> {
     public Place toEntity(PlaceDTO dto) {
         Place place = new Place();
         ModelMapper mapper = new ModelMapper();
-        mapper.map(dto, Place.class);
+        mapper.map(dto, place);
         return place;
     }
 }

@@ -6,29 +6,114 @@
 </head>
 <body>
 <div class="content" layout:fragment="content">
-    <form class="places-form">
-        <div  class="places-form__item">
+    <form method="post" class="places-form" th:action="${isNew ? '/places/new' : '/places/edit'}" th:object="${place}" enctype="multipart/form-data">
+        <div class="places-form__item">
             <label for="name" class="places-form__label">Nombre</label>
-            <input id="name" name="name" placeholder="Inserte el nombre del lugar aquí" type="text" class="places-form__input">
+            <input th:value="${place.getName()}" id="name" name="name" placeholder="Inserte el nombre del lugar aquí" type="text" class="places-form__input">
         </div>
-        <div  class="places-form__item">
+        <div class="places-form__item">
             <label for="description" class="places-form__label">Descripción</label>
-            <label for="description"></label><textarea id="description" name="address" placeholder="Inserte la descripción del lugar aquí" type="" class="places-form__textarea"></textarea>
+            <label for="description"></label><textarea id="description" name="description" th:text="${place.getDescription()}" placeholder="Inserte la descripción del lugar aquí" type="" class="places-form__textarea"></textarea>
         </div>
-        <div  class="places-form__item">
+        <div class="places-form__item">
             <label for="address" class="places-form__label">Dirección</label>
-            <input id="address" name="address" placeholder="Inserte la dirección del lugar aquí" type="text" class="places-form__input">
+            <input id="address" name="address" th:value="${place.getAddress()}" placeholder="Inserte la dirección del lugar aquí" type="text" class="places-form__input">
         </div>
-        <div  class="places-form__item">
+        <div class="places-form__item">
             <label for="capacity" class="places-form__label">Capacidad</label>
             <div class="places-form__number-input-container">
                 <button onclick="inputNumberMinus('capacity')" type="button" class="places-form__number-button places-form__number-button--minus"></button>
-                <input id="capacity" name="capacity" placeholder="Inserte la capacidad del lugar aquí" type="number" class="places-form__number" min="0" value="0">
+                <input id="capacity" name="capacity" th:value="${place.getCapacity()}" placeholder="Inserte la capacidad del lugar aquí" type="number" class="places-form__number" min="0" value="0">
                 <button onclick="inputNumberPlus('capacity')" type="button" class="places-form__number-button places-form__number-button--plus"></button>
             </div>
         </div>
-        <input type="submit" class="places-form__button">
+
+        <!-- Nueva sección para manejo de imágenes -->
+        <div class="places-form__item">
+            <label for="imageFile" class="places-form__label">Imagen del Lugar</label>
+            <input type="file" id="imageFile" name="imageFile" class="places-form__input"
+                   accept="image/*" onchange="previewImage(this)">
+            <small style="color: #666; font-size: 0.9em; display: block; margin-top: 5px;">
+                Formatos permitidos: JPG, PNG, GIF. Tamaño máximo: 10MB
+            </small>
+
+            <!-- Mostrar imagen actual en caso de edición -->
+            <div class="current-image" th:if="${place.imageUrl != null and place.imageUrl != ''}" style="margin-top: 15px;">
+                <p style="margin-bottom: 10px; font-weight: bold; color: #333;">Imagen actual:</p>
+                <img th:src="${place.imageUrl}" alt="Imagen actual del lugar"
+                     style="max-width: 200px; max-height: 150px; border-radius: 8px; box-shadow: 0 2px 8px rgba(0,0,0,0.1); object-fit: cover;">
+            </div>
+
+            <!-- Preview de la nueva imagen -->
+            <div class="image-preview" style="display: none; margin-top: 15px;">
+                <p style="margin-bottom: 10px; font-weight: bold; color: #333;">Vista previa:</p>
+                <img id="imagePreview" src="" alt="Vista previa"
+                     style="max-width: 200px; max-height: 150px; border-radius: 8px; box-shadow: 0 2px 8px rgba(0,0,0,0.1); object-fit: cover;">
+            </div>
+        </div>
+
+        <!-- Campos ocultos -->
+        <input th:if="${!isNew}" type="number" th:value="${place.getId()}" id="id" name="id" hidden="hidden">
+        <input th:if="${!isNew}" type="number" th:value="${place.getRating()}" id="rating" name="rating" hidden="hidden">
+        <!-- Campo oculto para mantener la URL actual si no se sube nueva imagen -->
+        <input type="hidden" th:field="*{imageUrl}" id="currentImageUrl">
+
+        <button type="submit" class="places-form__button" th:text="${isNew ? 'Crear lugar' : 'Editar lugar'}"></button>
     </form>
 </div>
+
+<script>
+    function previewImage(input) {
+        const preview = document.getElementById('imagePreview');
+        const previewContainer = document.querySelector('.image-preview');
+
+        if (input.files && input.files[0]) {
+            const file = input.files[0];
+
+            // Validar tamaño (10MB = 10 * 1024 * 1024 bytes)
+            if (file.size > 10 * 1024 * 1024) {
+                alert('El archivo es demasiado grande. El tamaño máximo es 10MB.');
+                input.value = '';
+                previewContainer.style.display = 'none';
+                return;
+            }
+
+            // Validar tipo de archivo
+            if (!file.type.startsWith('image/')) {
+                alert('Por favor, selecciona solo archivos de imagen.');
+                input.value = '';
+                previewContainer.style.display = 'none';
+                return;
+            }
+
+            const reader = new FileReader();
+
+            reader.onload = function(e) {
+                preview.src = e.target.result;
+                previewContainer.style.display = 'block';
+            }
+
+            reader.readAsDataURL(file);
+        } else {
+            previewContainer.style.display = 'none';
+        }
+    }
+
+    // Funciones existentes para los campos numéricos
+    function inputNumberMinus(fieldId) {
+        const input = document.getElementById(fieldId);
+        const currentValue = parseInt(input.value) || 0;
+        if (currentValue > 0) {
+            input.value = currentValue - 1;
+        }
+    }
+
+    function inputNumberPlus(fieldId) {
+        const input = document.getElementById(fieldId);
+        const currentValue = parseInt(input.value) || 0;
+        input.value = currentValue + 1;
+    }
+</script>
+
 </body>
 </html>

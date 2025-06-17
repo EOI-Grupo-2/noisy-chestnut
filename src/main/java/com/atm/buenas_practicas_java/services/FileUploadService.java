@@ -13,10 +13,14 @@ import java.util.UUID;
 @Service
 public class FileUploadService {
 
-    // Carpeta en la raíz del proyecto para desarrollo
-    private final String uploadDir = "uploads/concerts/";
+    // Carpetas base para diferentes tipos de archivos
+    private final String baseUploadDir = "uploads/";
+    private final String concertsDir = baseUploadDir + "concerts/";
+    private final String placesDir = baseUploadDir + "places/";
+    private final String usersDir = baseUploadDir + "users/";
+    private final String publicationsDir = baseUploadDir + "publications/";
 
-    public String saveImage(MultipartFile file) throws IOException {
+    private String saveImage(MultipartFile file, String type) throws IOException {
         if (file.isEmpty()) {
             throw new IOException("El archivo está vacío");
         }
@@ -25,6 +29,25 @@ public class FileUploadService {
         String contentType = file.getContentType();
         if (contentType == null || !contentType.startsWith("image/")) {
             throw new IOException("El archivo debe ser una imagen");
+        }
+
+        // Determinar directorio según el tipo
+        String uploadDir;
+        switch (type.toLowerCase()) {
+            case "concerts":
+                uploadDir = concertsDir;
+                break;
+            case "places":
+                uploadDir = placesDir;
+                break;
+            case "users":
+                uploadDir = usersDir;
+                break;
+            case "publications":
+                uploadDir = publicationsDir;
+                break;
+            default:
+                throw new IOException("Tipo de archivo no válido: " + type);
         }
 
         // Crear directorio si no existe
@@ -43,18 +66,60 @@ public class FileUploadService {
         Files.copy(file.getInputStream(), filePath, StandardCopyOption.REPLACE_EXISTING);
 
         // Retornar la URL que Spring Boot puede servir
-        return "/uploads/concerts/" + newFilename;
+        return "/uploads/" + type.toLowerCase() + "/" + newFilename;
     }
 
+    // Método para eliminar imágenes (compatible con ambos tipos)
     public void deleteImage(String imageUrl) {
-        if (imageUrl != null && imageUrl.startsWith("/uploads/concerts/")) {
+        if (imageUrl != null && imageUrl.startsWith("/uploads/")) {
             try {
-                String filename = imageUrl.substring(imageUrl.lastIndexOf("/") + 1);
-                Path filePath = Paths.get(uploadDir + filename);
-                Files.deleteIfExists(filePath);
+                // Extraer el tipo y nombre del archivo de la URL
+                String[] parts = imageUrl.split("/");
+                if (parts.length >= 4) {
+                    String type = parts[2]; // concerts o places
+                    String filename = parts[3];
+                    String uploadDir;
+                    switch (type.toLowerCase()) {
+                        case "concerts":
+                            uploadDir = concertsDir;
+                            break;
+                        case "places":
+                            uploadDir = placesDir;
+                            break;
+                        case "users":
+                            uploadDir = usersDir;
+                            break;
+                        case "publications":
+                            uploadDir = publicationsDir;
+                            break;
+                        default:
+                            System.err.println("Tipo de archivo no reconocido en URL: " + imageUrl);
+                            return;
+                    }
+
+                    Path filePath = Paths.get(uploadDir + filename);
+                    Files.deleteIfExists(filePath);
+                }
             } catch (IOException e) {
                 System.err.println("Error deleting file: " + e.getMessage());
             }
         }
+    }
+
+    // Métodos específicos para mayor claridad (opcionales)
+    public String saveConcertImage(MultipartFile file) throws IOException {
+        return saveImage(file, "concerts");
+    }
+
+    public String savePlaceImage(MultipartFile file) throws IOException {
+        return saveImage(file, "places");
+    }
+
+    public String savePublicationImage(MultipartFile file) throws IOException {
+        return saveImage(file, "publications");
+    }
+
+    public String saveUserImage(MultipartFile file) throws IOException {
+        return saveImage(file, "users");
     }
 }

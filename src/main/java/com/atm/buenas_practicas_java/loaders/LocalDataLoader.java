@@ -5,7 +5,7 @@ import com.atm.buenas_practicas_java.entities.enums.ChatType;
 import com.atm.buenas_practicas_java.entities.enums.Genre;
 import com.atm.buenas_practicas_java.entities.enums.MusicGenre;
 import com.atm.buenas_practicas_java.repositories.*;
-import com.atm.buenas_practicas_java.services.PublicationsService;
+import com.atm.buenas_practicas_java.services.UserService;
 import jakarta.annotation.PostConstruct;
 import lombok.extern.log4j.Log4j2;
 import org.springframework.context.annotation.Configuration;
@@ -31,8 +31,9 @@ public class LocalDataLoader {
     private final AlbumsRepository albumsRepository;
     private final ChatRepository chatRepository;
     private final MessageRepository messageRepository;
+    private final UserService userService;
 
-    public LocalDataLoader(UserRepository userRepository, RoleRepository roleRepository, PublicationsRepository publicationsRepository, FollowsRepository followsRepository, PasswordEncoder passwordEncoder, ConcertRepository concertRepository, PlaceRepository placeRepository, AlbumsRepository albumsRepository, ChatRepository chatRepository, MessageRepository messageRepository) {
+    public LocalDataLoader(UserRepository userRepository, RoleRepository roleRepository, PublicationsRepository publicationsRepository, FollowsRepository followsRepository, PasswordEncoder passwordEncoder, ConcertRepository concertRepository, PlaceRepository placeRepository, AlbumsRepository albumsRepository, ChatRepository chatRepository, MessageRepository messageRepository, UserService userService) {
         this.userRepository = userRepository;
         this.roleRepository = roleRepository;
         this.publicationsRepository = publicationsRepository;
@@ -43,10 +44,11 @@ public class LocalDataLoader {
         this.albumsRepository = albumsRepository;
         this.chatRepository = chatRepository;
         this.messageRepository = messageRepository;
+        this.userService = userService;
     }
 
     @PostConstruct
-    public void loadDataLocal() {
+    public void loadDataDesarollo() {
 
         log.info("Iniciando la carga de datos para el perfil local");
 
@@ -62,7 +64,9 @@ public class LocalDataLoader {
         concertAdminRole.setName("CONCERT_ADMIN");
         Role placeAdminRole = new Role();
         placeAdminRole.setName("PLACES_ADMIN");
+
         roleRepository.saveAll(List.of(adminRole, artistRole, concertAdminRole, placeAdminRole, userRole, anonymousRole));
+
         User user1 = new User();
         user1.setUsername("admin");
         user1.setPassword(passwordEncoder.encode("admin"));
@@ -153,6 +157,7 @@ public class LocalDataLoader {
         place1.setCapacity(30L);
         place1.setRating(4.8);
         place1.setAddress("Direccion de prueba");
+        place1.setImageUrl("https://madridfilmoffice.com/wp-content/uploads/2019/10/wizink-center-1-474x600.jpg");
         placeRepository.save(place1);
         Concert concert1 = new Concert();
         concert1.setName("Concert 1");

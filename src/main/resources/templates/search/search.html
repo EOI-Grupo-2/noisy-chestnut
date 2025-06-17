@@ -46,11 +46,18 @@
         <div th:if="${users != null}">
             <div th:each="user : ${users}" class="user-card">
                 <div class="user-card__info">
-                    <img class="user-card__image" th:src="${user.imageUrl}" alt="Profile Image"/>
-                    <h1 class="user-card__username">
-                        <a th:href="@{/users/{id}/profile(id=${user.id})}" th:text="${user.username}"></a>
+                    <img class="user-card__image"
+                         th:if="${user.imageUrl != null and !#strings.isEmpty(user.imageUrl)}"
+                         th:src="@{${user.imageUrl}}"
+                         alt="Profile Image" />
+
+                    <img class="user-card__image"
+                         th:unless="${user.imageUrl != null and !#strings.isEmpty(user.imageUrl)}"
+                         th:src="@{'https://as1.ftcdn.net/v2/jpg/03/46/83/96/1000_F_346839683_6nAPzbhpSkIpb8pmAwufkC7c5eD7wYws.jpg'}"
+                         alt="Default Image" /> <h1 class="user-card__username">
+                        <a class="user-card__link" th:href="@{/users/{id}/profile(id=${user.getId()})}" th:text="${user.getName()}"></a>
                     </h1>
-                    <p class="user-card__description" th:text="${user.description}"></p>
+                    <p class="user-card__description" th:text="${user.getDescription()}"></p>
                 </div>
                 <button class="user-card__button">Seguir</button>
             </div>
@@ -66,7 +73,7 @@
                 <div class="concert-card__content">
                     <h2 class="concert-card__title" th:text="${concert.name}"></h2>
                     <p class="concert-card__description" th:text="${concert.description}"></p>
-                    <a th:href="@{/concert/detail(id=${concert.id})}" class="concert-card__link">Conocer más</a>
+                    <a th:href="@{/concert/{id}(id=${concert.id})}" class="concert-card__link">Conocer más</a>
                 </div>
             </div>
         </div>
@@ -77,19 +84,15 @@
     <div class="search-content" id="placesTab" style="display:none;">
         <div th:if="${places != null}">
             <div th:each="place : ${places}" class="place-card">
-                <img class="place-card__image" th:src="@{/images/default_place.png}" alt="Place Image"/>
+                <img class="place-card__image" th:src="${place.imageUrl}" alt="Place Image"/>
                 <div class="place-card__content">
                     <h2 class="place-card__title" th:text="${place.name}"></h2>
-                    <a th:href="@{/place/detail(id=${place.id})}" class="place-card__link">Conocer más</a>
+                    <a th:href="@{/places/{id}(id=${place.id})}" class="place-card__link">Conocer más</a>
                 </div>
             </div>
         </div>
         <p th:if="${#lists.isEmpty(places)}">No se encontraron lugares.</p>
     </div>
-
 </div>
-
-<!-- TU JS PROPIO -->
-<script src="/js/tabs.js"></script>
 </body>
 </html>

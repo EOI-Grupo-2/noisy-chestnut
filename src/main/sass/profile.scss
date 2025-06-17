@@ -125,6 +125,14 @@
     }
   }
 
+  &__concerts{
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    padding: 0 2rem;
+    gap: 1rem;
+  }
+
   &__more{
     grid-area: more;
     display: flex;
@@ -258,7 +266,7 @@
     align-items: center;
     justify-content: space-between;
     padding: 1rem;
-    background-color: $tertiary-color;
+    background-color: $primary-color;
     border-top-left-radius: 5px;
     border-top-right-radius: 5px;
   }

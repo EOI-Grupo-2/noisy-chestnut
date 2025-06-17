@@ -24,10 +24,6 @@ public class Chat {
     @Enumerated(EnumType.STRING)
     private ChatType type;
 
-    @OneToOne(cascade = CascadeType.DETACH, orphanRemoval = true)
-    @JoinColumn(nullable = true)
-    private Concert concert;
-
     @Column(nullable = true)
     private String groupName;
 

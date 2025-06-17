@@ -19,16 +19,10 @@ public class Commentaries {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    // Hacer opcional la relación con Publications
     @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn (name = "pub_id", nullable = true)
-    private Publications pub;
-
-    @JoinColumn (name = "pub_id", nullable = false)
     private Publications publications;
 
-
-    // Añadir relación opcional con Concert
     @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn (name = "concert_id", nullable = true)
     private Concert concert;

@@ -41,7 +41,6 @@ public class SecurityConfig {
                 .logout(logout -> logout.logoutUrl("/logout").logoutSuccessUrl("/").permitAll())
                 .authorizeHttpRequests(matcher -> {
                         matcher
-                                .requestMatchers("/users/**").hasAuthority("USER")
                                 .anyRequest().permitAll();
                     }
                 )

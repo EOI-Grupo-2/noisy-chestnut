@@ -1,8 +1,10 @@
 package com.atm.buenas_practicas_java.controllers;
 
 
+import com.atm.buenas_practicas_java.DTO.ChatDTO;
 import com.atm.buenas_practicas_java.DTO.PublicationsDTO;
 import com.atm.buenas_practicas_java.entities.AuthUser;
+import com.atm.buenas_practicas_java.services.ChatService;
 import com.atm.buenas_practicas_java.services.PublicationsService;
 import com.atm.buenas_practicas_java.services.UserService;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
@@ -43,11 +45,11 @@ import java.util.List;
 public class DefaultController {
 
     private final PublicationsService publicationsService;
-    private final UserService userService;
+    private final ChatService chatService;
 
-    public DefaultController(PublicationsService publicationsService, UserService userService) {
+    public DefaultController(PublicationsService publicationsService, ChatService chatService) {
         this.publicationsService = publicationsService;
-        this.userService = userService;
+        this.chatService = chatService;
     }
 
     @GetMapping({"/", ""})
@@ -61,61 +63,5 @@ public class DefaultController {
         model.addAttribute("publications", publications);
         return "index";
     }
-
-    @GetMapping({"", "/concerts"})
-    public String getConcertPage(){
-        return "/concert/concerts";
-    }
-
-    @GetMapping({"", "/artists"})
-    public String getArtistPage(){
-        return "/artist/artist";
-    }
-
-<<<<<<< EOIG2-71-Controlador-Social
-    @GetMapping({"", "/search"})
-    public String getSearch(){
-        return "/search/search";
-    }
-=======
-    @GetMapping({"", "/chat"})
-    public String getSocialPage(){
-        return "/social/social";
-    }
-  
-      @GetMapping({"", "/chat/id"})
-    public String getChatPage(){
-        return "/social/chat";
-    }
-
->>>>>>> desarrollo
-
-    @GetMapping({"", "/places/new"})
-    public String createPlacePage(){
-        return "/places/form";
-    }
-
-
-    @GetMapping({"", "/places/id"})
-    public String getPlacesProfile(){
-        return "/places/profile";
-    }
-
-    @GetMapping({"", "/places/edit"})
-    public String editPlacePage(){
-        return "/places/form";
-    }
-
-    @GetMapping({"", "/publication"})
-    public String getPublicationPage(){return "/publication/publication";}
-
-    @GetMapping("/places/admin")
-    public String showPlacesAdminPage() {
-        return "places/placesAdmin";
-    }
-
-    @GetMapping("/places")
-    public String showPlacesPage() {return "/places/places"; }
-
 }
 

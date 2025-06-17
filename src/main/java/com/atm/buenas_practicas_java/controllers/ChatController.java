@@ -42,7 +42,6 @@ public class ChatController {
         this.userMapper = userMapper;
     }
 
-
     @GetMapping("/{id}")
     public String chatPage(@PathVariable Long id, Model model){
         model.addAttribute("chat", chatService.findByIdDTO(id).orElseThrow());
