@@ -119,6 +119,7 @@ public class ProductionlDataLoader {
             place.setCapacity(100 + i * 25L);
             place.setRating(3.5 + i * 0.15);
             place.setUser(users.get(i % users.size()));
+            place.setImageUrl("");
             places.add(place);
         }
         placeRepository.saveAll(places);
