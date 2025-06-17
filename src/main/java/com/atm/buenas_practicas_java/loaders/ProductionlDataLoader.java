@@ -106,7 +106,19 @@ public class ProductionlDataLoader {
 
             users.add(user);
         }
-
+        User admin = new User();
+        admin.setUsername("admin");
+        admin.setPassword(passwordEncoder.encode("admin"));
+        admin.setName("admin");
+        admin.setFirstName("admin");
+        admin.setLastName("admin");
+        admin.setEmail("admin@mail.com");
+        admin.setGenre(Genre.MALE);
+        admin.setDescription("Descripcion del admin chulo");
+        admin.setMusicGenre(MusicGenre.RAP);
+        admin.setImageUrl("");
+        admin.setRoles(Set.of(adminRole, userRole));
+        users.add(admin);
         userRepository.saveAll(users);
 
         // 3. Lugares
