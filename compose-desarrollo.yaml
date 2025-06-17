@@ -3,7 +3,7 @@ name: ${COMPOSE_NAME}
 volumes:
   produccion_pgdata:
   produccion_javadata:
-  produccion_images:  # ✅ volumen para imágenes
+  produccion_images:
 
 services:
   java:
@@ -31,7 +31,7 @@ services:
       - produccion_javadata:/var/lib/data/
       - produccion_images:/workspace/uploads
     command: >
-      sh -c "mkdir -p /workspace/uploads &&
+      sh -c "mkdir -p /workspace/uploads/users /workspace/uploads/places /workspace/uploads/publications /workspace/uploads/concerts &&
              chmod -R 777 /workspace/uploads &&
              java -jar app.jar"
 
