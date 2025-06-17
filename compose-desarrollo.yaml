@@ -28,7 +28,6 @@ services:
     restart: always
     volumes:
       - produccion_javadata:/var/lib/data/
-      - produccion_images:/var/lib/uploads/
 
   db:
     image: postgres:latest
