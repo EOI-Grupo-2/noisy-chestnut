@@ -51,7 +51,7 @@ public class FileUploadService {
         }
 
         // Crear directorio si no existe
-        Path uploadPath = Paths.get(uploadDir);
+        Path uploadPath = Paths.get(baseUploadDir);
         if (!Files.exists(uploadPath)) {
             Files.createDirectories(uploadPath);
         }
