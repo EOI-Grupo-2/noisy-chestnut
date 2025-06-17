@@ -188,15 +188,4 @@ public class DesarrolloDataLoader {
 
         log.info("Datos de producción cargados correctamente.");
     }
-
-    @PostConstruct
-    public void createUploadDirs() {
-        List<String> folders = List.of("users", "places", "publications", "concerts");
-        for (String folder : folders) {
-            File dir = new File("/var/lib/data/uploads/" + folder);
-            if (!dir.exists()) {
-                dir.mkdirs();
-            }
-        }
-    }
 }

@@ -13,8 +13,7 @@ import java.util.UUID;
 @Service
 public class FileUploadService {
 
-
-    private final String baseUploadDir = "/var/lib/data/uploads/";
+    private final String baseUploadDir = "/var/lib/uploads/";
     private final String concertsDir = baseUploadDir + "concerts/";
     private final String placesDir = baseUploadDir + "places/";
     private final String usersDir = baseUploadDir + "users/";
