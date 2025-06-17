@@ -3,21 +3,21 @@ name: ${COMPOSE_NAME}
 volumes:
   produccion_pgdata:
   produccion_javadata:
-  produccion_images:
+  produccion_images:  # ✅ volumen para imágenes
 
-# Definimos los servicios que se ejecutarán en los contenedores Docker.
 services:
   java:
     image: ${PROJECT_NAME}:${VERSION:-snapshot}
     ports:
       - "${PUERTO_DESARROLLO}:8080"
-    expose: 
+    expose:
       - "8080"
     environment:
       SPRING_DATASOURCE_URL: jdbc:postgresql://db:5432/desarrollodb
       SPRING_DATASOURCE_USERNAME: desarrollouser
       SPRING_DATASOURCE_PASSWORD: desarrollopassword
       SPRING_PROFILES_ACTIVE: desarrollo
+      UPLOAD_PATH: file:/workspace/uploads/
     depends_on:
       db:
         condition: service_healthy
@@ -29,7 +29,11 @@ services:
     restart: always
     volumes:
       - produccion_javadata:/var/lib/data/
-      - produccion_images:/var/lib/uploads/
+      - produccion_images:/workspace/uploads
+    command: >
+      sh -c "mkdir -p /workspace/uploads &&
+             chmod -R 777 /workspace/uploads &&
+             java -jar app.jar"
 
   db:
     image: postgres:latest
