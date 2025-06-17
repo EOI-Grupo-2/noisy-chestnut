@@ -17,7 +17,7 @@ services:
       SPRING_DATASOURCE_USERNAME: desarrollouser
       SPRING_DATASOURCE_PASSWORD: desarrollopassword
       SPRING_PROFILES_ACTIVE: desarrollo
-      UPLOAD_PATH: file:/workspace/uploads/
+      UPLOAD_PATH: file:/var/lib/uploads/
     depends_on:
       db:
         condition: service_healthy
