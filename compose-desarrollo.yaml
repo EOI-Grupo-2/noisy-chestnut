@@ -29,11 +29,7 @@ services:
     restart: always
     volumes:
       - produccion_javadata:/var/lib/data/
-      - produccion_images:/workspace/uploads
-    command: >
-      sh -c "mkdir -p /workspace/uploads/users /workspace/uploads/places /workspace/uploads/publications /workspace/uploads/concerts &&
-             chmod -R 777 /workspace/uploads &&
-             java -jar app.jar"
+      - produccion_images:/var/lib/uploads/
 
   db:
     image: postgres:latest

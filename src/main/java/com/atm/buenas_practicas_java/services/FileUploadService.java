@@ -14,7 +14,7 @@ import java.util.UUID;
 public class FileUploadService {
 
     // Carpetas base para diferentes tipos de archivos
-    private final String baseUploadDir = "uploads/";
+    private final String baseUploadDir = "/uploads/";
     private final String concertsDir = baseUploadDir + "concerts/";
     private final String placesDir = baseUploadDir + "places/";
     private final String usersDir = baseUploadDir + "users/";
