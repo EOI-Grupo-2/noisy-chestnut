@@ -28,13 +28,10 @@ services:
       retries: 3
     restart: always
     volumes:
+      - ./init.sh:/init.sh:ro
       - produccion_javadata:/var/lib/data/
       - produccion_images:/var/lib/uploads/
-    command: >
-      sh -c "
-        chmod -R 777 /var/lib/uploads &&
-        java -jar app.jar
-      " 
+    entrypoint: [ "sh", "/init.sh" ]
 
   db:
     image: postgres:latest
