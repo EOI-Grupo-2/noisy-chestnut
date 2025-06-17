@@ -12,7 +12,7 @@
     <div class="content" layout:fragment="content">
         <!-- Encabezado perfil -->
         <div class="profile-header">
-            <img class="profile-header__userimage" th:src="${user.getImageUrl()}" alt="FotoPerfil">
+            <img class="profile-header__userimage" th:src="${user.getImageUrl() != null ? user.getImageUrl() : 'https://as1.ftcdn.net/v2/jpg/03/46/83/96/1000_F_346839683_6nAPzbhpSkIpb8pmAwufkC7c5eD7wYws.jpg'}" alt="FotoPerfil">
             <div class="profile-header__content">
                 <div class="profile-header__info">
                     <h1 class="profile-header__username" th:text="${user.getUsername()}"></h1>
@@ -20,6 +20,13 @@
                     <button th:if="${user.getId() == #authentication.getPrincipal().getId()}" class="edit-profile-button">
                         <a th:href="@{'/users/'+${user.getId()}+'/edit'}">Editar Perfil</a>
                     </button>
+                    <form th:if="${!isFollowed && #authentication.getPrincipal().getId()!=user.getId()}" th:action="@{'/follows/' + ${#authentication.getPrincipal().getId()} + '/' + ${user.getId()}}" method="post">
+                        <button class="edit-profile-button">
+                            Seguir
+                        </button>
+                    </form>
+
+
                 </div>
                 <ul class="profile-header__info-items">
                     <li class="profile-header__info-item"><button class="profile-header__info-button" type="button" onclick="selectTab('pubTab', 'profile-content__principal')">Publicaciones</button></li>
@@ -46,7 +53,7 @@
                     </div>
                     <div class="pub-card__footer">
                         <p class="pub-card__date" th:text="${publication.getDate()}"></p>
-                        <a class="pub-card__link" th:href="@{'/publication'+${publication.getId()}}">Ver mas</a>
+                        <a class="pub-card__link" th:href="@{'/publication/'+${publication.getId()}}">Ver mas</a>
                     </div>
                 </div>
             </div>
@@ -59,15 +66,15 @@
                              src="https://as1.ftcdn.net/v2/jpg/03/46/83/96/1000_F_346839683_6nAPzbhpSkIpb8pmAwufkC7c5eD7wYws.jpg"
                              alt="Profile Image"/>
                         <h1 class="user-card__username">
-                            <a class="user-card__link" th:text="${follower.getUsername()}" th:href="@{'/users/'+${follower.getId()}+'/profile'}">
+                            <a th:href="@{/users/{id}/profile(id=${user.id})}" th:text="${user.username}"></a>
                             </a>
                         </h1>
                         <p class="user-card__description" th:text="${follower.getDescription()}">
                         </p>
                     </div>
-                    <button class="user-card__button">
-                        Seguir
-                    </button>
+<!--                    <button class="user-card__button">-->
+<!--                        Seguir-->
+<!--                    </button>-->
                 </div>
             </div>
 
@@ -84,9 +91,9 @@
                         <p class="user-card__description" th:text="${followed.getDescription()}">
                         </p>
                     </div>
-                    <button class="user-card__button">
-                        Seguir
-                    </button>
+<!--                    <button class="user-card__button">-->
+<!--                        Seguir-->
+<!--                    </button>-->
                 </div>
             </div>
 

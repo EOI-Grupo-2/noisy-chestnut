@@ -9,55 +9,12 @@
 </head>
 <body>
 <div layout:fragment="content" class="content">
-    <div class="place-card">
-        <img class="place-card__image" src="https://www.atleticodemadrid.com/system/file3s/78316/large/BV81gnkPa-__37A2770.jpg?1654122441" alt="placeImage">
+    <div class="place-card" th:each="place : ${places}">
+        <img class="place-card__image" th:src="${place.getImageUrl()}" alt="placeImage">
         <div class="place-card__content">
-            <h2 class="place-card__title">
-                Sala 1
+            <h2 class="place-card__title" th:text="${place.getName()}">
             </h2>
-            <a href="/place/detail" class="place-card__link">
-                Conocer más
-                <span class="material-symbols-outlined">
-                    arrow_right_alt
-                </span>
-            </a>
-        </div>
-    </div>
-    <div class="place-card">
-        <img class="place-card__image" src="https://www.atleticodemadrid.com/system/file3s/78316/large/BV81gnkPa-__37A2770.jpg?1654122441" alt="placeImage">
-        <div class="place-card__content">
-            <h2 class="place-card__title">
-                Sala 2
-            </h2>
-            <a href="/place/detail" class="place-card__link">
-                Conocer más
-                <span class="material-symbols-outlined">
-                    arrow_right_alt
-                </span>
-            </a>
-        </div>
-    </div>
-    <div class="place-card">
-        <div class="place-card__content">
-            <img class="place-card__image" src="https://www.atleticodemadrid.com/system/file3s/78316/large/BV81gnkPa-__37A2770.jpg?1654122441" alt="placeImage">
-            <h2 class="place-card__title">
-                Sala 3
-            </h2>
-            <a href="/place/detail" class="place-card__link">
-                Conocer más
-                <span class="material-symbols-outlined">
-                    arrow_right_alt
-                </span>
-            </a>
-        </div>
-    </div>
-    <div class="place-card">
-        <div class="place-card__content">
-            <img class="place-card__image" src="https://www.atleticodemadrid.com/system/file3s/78316/large/BV81gnkPa-__37A2770.jpg?1654122441" alt="placeImage">
-            <h2 class="place-card__title">
-                Sala 4
-            </h2>
-            <a href="/place/detail" class="place-card__link">
+            <a th:href="@{'/places/' + ${place.getId()}}" class="place-card__link">
                 Conocer más
                 <span class="material-symbols-outlined">
                     arrow_right_alt

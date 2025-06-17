@@ -20,19 +20,23 @@ public class Commentaries {
     private Long id;
 
     @ManyToOne(fetch = FetchType.EAGER)
-    @JoinColumn (name = "pub_id", nullable = false)
-    private Publications pub;
+    @JoinColumn (name = "pub_id", nullable = true)
+    private Publications publications;
+
+    @ManyToOne(fetch = FetchType.EAGER)
+    @JoinColumn (name = "concert_id", nullable = true)
+    private Concert concert;
 
     @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn (name = "user_id", nullable = false)
     private User user;
 
-    @JoinColumn(name="text", nullable = false)
+    @Column(name="content", nullable = false)
     private String content;
 
     @Column(nullable = false)
     private Integer likes;
 
-    @Column(nullable = false)
-    private LocalDateTime Date;
+    @Column(name = "comment_date", nullable = false)
+    private LocalDateTime date;
 }

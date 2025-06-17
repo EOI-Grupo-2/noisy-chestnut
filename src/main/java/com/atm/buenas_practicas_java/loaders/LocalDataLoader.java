@@ -1,10 +1,11 @@
 package com.atm.buenas_practicas_java.loaders;
 
 import com.atm.buenas_practicas_java.entities.*;
+import com.atm.buenas_practicas_java.entities.enums.ChatType;
 import com.atm.buenas_practicas_java.entities.enums.Genre;
 import com.atm.buenas_practicas_java.entities.enums.MusicGenre;
 import com.atm.buenas_practicas_java.repositories.*;
-import com.atm.buenas_practicas_java.services.PublicationsService;
+import com.atm.buenas_practicas_java.services.UserService;
 import jakarta.annotation.PostConstruct;
 import lombok.extern.log4j.Log4j2;
 import org.springframework.context.annotation.Configuration;
@@ -28,8 +29,11 @@ public class LocalDataLoader {
     private final ConcertRepository concertRepository;
     private final PlaceRepository placeRepository;
     private final AlbumsRepository albumsRepository;
+    private final ChatRepository chatRepository;
+    private final MessageRepository messageRepository;
+    private final UserService userService;
 
-    public LocalDataLoader(UserRepository userRepository, RoleRepository roleRepository, PublicationsRepository publicationsRepository, FollowsRepository followsRepository, PasswordEncoder passwordEncoder, ConcertRepository concertRepository, PlaceRepository placeRepository, AlbumsRepository albumsRepository) {
+    public LocalDataLoader(UserRepository userRepository, RoleRepository roleRepository, PublicationsRepository publicationsRepository, FollowsRepository followsRepository, PasswordEncoder passwordEncoder, ConcertRepository concertRepository, PlaceRepository placeRepository, AlbumsRepository albumsRepository, ChatRepository chatRepository, MessageRepository messageRepository, UserService userService) {
         this.userRepository = userRepository;
         this.roleRepository = roleRepository;
         this.publicationsRepository = publicationsRepository;
@@ -38,10 +42,13 @@ public class LocalDataLoader {
         this.concertRepository = concertRepository;
         this.placeRepository = placeRepository;
         this.albumsRepository = albumsRepository;
+        this.chatRepository = chatRepository;
+        this.messageRepository = messageRepository;
+        this.userService = userService;
     }
 
     @PostConstruct
-    public void loadDataLocal() {
+    public void loadDataDesarollo() {
 
         log.info("Iniciando la carga de datos para el perfil local");
 
@@ -57,7 +64,9 @@ public class LocalDataLoader {
         concertAdminRole.setName("CONCERT_ADMIN");
         Role placeAdminRole = new Role();
         placeAdminRole.setName("PLACES_ADMIN");
+
         roleRepository.saveAll(List.of(adminRole, artistRole, concertAdminRole, placeAdminRole, userRole, anonymousRole));
+
         User user1 = new User();
         user1.setUsername("admin");
         user1.setPassword(passwordEncoder.encode("admin"));
@@ -91,12 +100,23 @@ public class LocalDataLoader {
         user3.setDescription("Descripcion del artista guapo");
         user3.setRoles(Set.of(artistRole, userRole));
         user3.setGenre(Genre.MALE);
-        user3.setImageUrl("https://www.billboard.com/wp-content/uploads/2023/04/Eladio-Carrion-cr-Gabriel-Perez-Silva-billboard-1548.jpg");
         user3.setEmail("user3@mail.com");
-        userRepository.saveAll(List.of(user1, user2, user3));
+        User user4 = new User();
+        user4.setUsername("user3");
+        user4.setPassword(passwordEncoder.encode("user4"));
+        user4.setName("Artista Feo");
+        user4.setFirstName("Artista");
+        user4.setLastName("Feo");
+        user4.setMusicGenre(MusicGenre.TECHNO);
+        user4.setDescription("Descripcion del artista feo");
+        user4.setRoles(Set.of(artistRole, userRole));
+        user4.setGenre(Genre.FEMALE);
+        user4.setImageUrl("https://www.billboard.com/wp-content/uploads/2023/04/Eladio-Carrion-cr-Gabriel-Perez-Silva-billboard-1548.jpg");
+        user4.setEmail("user4@mail.com");
+        userRepository.saveAll(List.of(user1, user2, user3, user4));
         adminRole.setUsers(List.of(user1));
-        userRole.setUsers(List.of(user1, user2, user3));
-        artistRole.setUsers(List.of(user3));
+        userRole.setUsers(List.of(user1, user2, user3, user4));
+        artistRole.setUsers(List.of(user3, user4));
         roleRepository.saveAll(List.of(adminRole, artistRole, concertAdminRole, placeAdminRole, userRole, anonymousRole));
         Follows follows1 = new Follows();
         follows1.setUserFollowed(user1);
@@ -128,7 +148,7 @@ public class LocalDataLoader {
         publications2.setDescription("Descripcion del usuario no chulo");
         publications2.setTitle("Title del usuario no chulo");
         publications2.setLikes(10);
-        publications2.setUser(user2);
+        publications2.setUser(user3);
         publicationsRepository.saveAll(List.of(publications1,publications2));
         Place place1 = new Place();
         place1.setName("Place 1");
@@ -137,6 +157,7 @@ public class LocalDataLoader {
         place1.setCapacity(30L);
         place1.setRating(4.8);
         place1.setAddress("Direccion de prueba");
+        place1.setImageUrl("https://madridfilmoffice.com/wp-content/uploads/2019/10/wizink-center-1-474x600.jpg");
         placeRepository.save(place1);
         Concert concert1 = new Concert();
         concert1.setName("Concert 1");
@@ -158,6 +179,19 @@ public class LocalDataLoader {
         albums1.setTotalTracks(10);
         albums1.setSpotifyLink("https://open.spotify.com/album/3beZ5DRcWVTpXaU3ViLIF6?si=vJbiUOpUQxyeeUWRi9caQw");
         albumsRepository.save(albums1);
+        Chat chat1 = new Chat();
+        chat1.setUsers(List.of(user1, user2));
+        chat1.setType(ChatType.USER);
+        chatRepository.save(chat1);
+        user1.setChats(List.of(chat1));
+        user2.setChats(List.of(chat1));
+        userRepository.saveAll(List.of(user1, user2));
+        Message message1 = new Message();
+        message1.setUser(user1);
+        message1.setMessage("Mensaje del usuario chulo");
+        message1.setDate(LocalDateTime.now());
+        message1.setChat(chat1);
+        messageRepository.save(message1);
         log.info("Datos de entidades cargados correctamente.");
     }
 }

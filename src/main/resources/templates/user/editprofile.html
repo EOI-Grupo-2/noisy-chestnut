@@ -15,7 +15,7 @@
            <p th:text="${error}" class="error__message"></p>
        </div>
    </div>
-    <form th:action="${isRegister ? '/users/register' : '/users/edit' }" method="POST" class="user-form" th:object="${user}">
+    <form th:action="${isRegister ? '/users/register' : '/users/edit' }" method="POST" class="user-form" th:object="${user}" enctype="multipart/form-data">
         <div class="user-form__field">
             <label for="name" class="user-form__label">Nombre:</label>
             <input th:value="${user.getUsername()}" type="text" id="name" name="name" class="user-form__input" placeholder="Ingresa tu nombre" required>
@@ -67,6 +67,30 @@
             </select>
         </div>
 
+        <div class="user-form__field">
+            <label for="imageFile" class="user-form__label">Imagen del Lugar</label>
+            <input type="file" id="imageFile" name="imageFile" class="user-form__input"
+                   accept="image/*" onchange="previewImage(this)">
+            <small style="color: #666; font-size: 0.9em; display: block; margin-top: 5px;">
+                Formatos permitidos: JPG, PNG, GIF. Tamaño máximo: 10MB
+            </small>
+
+            <!-- Mostrar imagen actual en caso de edición -->
+            <div class="current-image" th:if="${user.imageUrl != null and user.imageUrl != ''}" style="margin-top: 15px;">
+                <p style="margin-bottom: 10px; font-weight: bold; color: #333;">Imagen actual:</p>
+                <img th:src="${user.imageUrl}" alt="Imagen actual del lugar"
+                     style="max-width: 200px; max-height: 150px; border-radius: 8px; box-shadow: 0 2px 8px rgba(0,0,0,0.1); object-fit: cover;">
+            </div>
+
+            <!-- Preview de la nueva imagen -->
+            <div class="image-preview" style="display: none; margin-top: 15px;">
+                <p style="margin-bottom: 10px; font-weight: bold; color: #333;">Vista previa:</p>
+                <img id="imagePreview" src="" alt="Vista previa"
+                     style="max-width: 200px; max-height: 150px; border-radius: 8px; box-shadow: 0 2px 8px rgba(0,0,0,0.1); object-fit: cover;">
+            </div>
+        </div>
+
+        <input type="hidden" th:field="*{imageUrl}" id="currentImageUrl">
         <input th:if="${!isRegister}" th:value="${user.getId()}" type="text" id="id" name="id" class="user-form__input" required hidden="hidden">
         <div class="user-form__actions">
             <button type="submit" class="user-form__button">Save</button>

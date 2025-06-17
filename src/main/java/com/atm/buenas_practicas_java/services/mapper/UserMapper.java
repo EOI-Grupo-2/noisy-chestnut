@@ -2,7 +2,6 @@ package com.atm.buenas_practicas_java.services.mapper;
 
 import com.atm.buenas_practicas_java.DTO.UserDTO;
 import com.atm.buenas_practicas_java.entities.User;
-import com.atm.buenas_practicas_java.repositories.RoleRepository;
 import org.modelmapper.ModelMapper;
 import org.springframework.stereotype.Service;
 
@@ -24,8 +23,12 @@ public class UserMapper  extends AbstractServiceMapper<User, UserDTO> {
         ModelMapper mapper = new ModelMapper();
         mapper.map(dto, user);
         String[] lastNames = dto.getFullLastName().split(" ");
-        user.setFirstName(lastNames[0]);
-        user.setLastName(lastNames[1]);
+        if(lastNames.length>1){
+            user.setFirstName(lastNames[0]);
+            user.setLastName(lastNames[1]);
+        } else {
+            user.setFirstName(lastNames[0]);
+        }
         return user;
     }
 }

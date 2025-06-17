@@ -39,170 +39,35 @@
                           <i class="fa-solid fa-xmark fa-lg" style="color: #ffffff;" onclick="openModal('chatModal')"></i>
                       </div>
                       <div class="modal__body">
-                              <div class="modal__search">
-                                  <label for="userSearch" class="modal__label">Añadir personas:</label>
-                                  <input type="text" id="userChatSearch" class="modal__input" placeholder="Buscar personas..."  onkeyup="searchInput('chatList', 'userChatSearch')"/>
-                                  <ul id="chatList">
-                                      <li id="juan"><a href="#">Juan</a></li>
-                                      <li id="julio"><a href="#">Julio</a></li>
-                                      <li id="julia"><a href="#">Julia</a></li>
-                                      <li id="manuel"><a href="#">Manuel</a></li>
-                                      <li id="maríaa"><a href="#">María</a></li>
-                                      <li id="mario"><a href="#">Mario</a></li>
-                                      <li id="marta"><a href="#">Marta</a></li>
-                                  </ul>
-                                </div>
-                          <div class="confirmChatButton">
-                              <button class="buttons-container__button" id="confirmCreateChat">Crear nuevo chat</button>
-                          </div>
+                            <div class="modal__search">
+                                <label for="userChatSearch" class="modal__label">Añadir personas:</label>
+                                <input type="text" id="userChatSearch" class="modal__input" placeholder="Buscar personas..."  onkeyup="searchInput('chatList', 'userChatSearch')"/>
+                                <ul id="chatList">
+                                    <li th:each="user : ${users}" th:id="${user.getUsername()}">
+                                        <p th:text="${user.getUsername()}">
+                                        </p>
+                                        <form method="post" th:action="@{'/chat/user/' + ${user.getId()}}">
+                                            <button class="user-list__button">
+                                                Crear chat
+                                            </button>
+                                        </form>
+                                    </li>
+                                </ul>
+                            </div>
                       </div>
                   </div>
               </div>
 
 
-              <div class="chats-tab__item">
-                  <img class="chats-tab__image" src="https://as1.ftcdn.net/v2/jpg/03/46/83/96/1000_F_346839683_6nAPzbhpSkIpb8pmAwufkC7c5eD7wYws.jpg" alt="Chat Image"/>
-                  <a class="chats-tab__link" href="/chat/id">
-                      <h2 class="chats-tab__title">
-                          Usuario 1
-                      </h2>
-                  </a>
-              </div>
-              <div class="chats-tab__item">
-                  <img class="chats-tab__image" src="https://as1.ftcdn.net/v2/jpg/03/46/83/96/1000_F_346839683_6nAPzbhpSkIpb8pmAwufkC7c5eD7wYws.jpg" alt="Chat Image"/>
-                  <a class="chats-tab__link" href="/chat/id">
-                      <h2 class="chats-tab__title">
-                          Usuario 1
-                      </h2>
-                  </a>
-              </div>
-              <div class="chats-tab__item">
-                  <img class="chats-tab__image" src="https://as1.ftcdn.net/v2/jpg/03/46/83/96/1000_F_346839683_6nAPzbhpSkIpb8pmAwufkC7c5eD7wYws.jpg" alt="Chat Image"/>
-                  <a class="chats-tab__link" href="/chat/id">
-                      <h2 class="chats-tab__title">
-                          Usuario 1
-                      </h2>
-                  </a>
-              </div>
-              <div class="chats-tab__item">
-                  <img class="chats-tab__image" src="https://as1.ftcdn.net/v2/jpg/03/46/83/96/1000_F_346839683_6nAPzbhpSkIpb8pmAwufkC7c5eD7wYws.jpg" alt="Chat Image"/>
-                  <a class="chats-tab__link" href="/chat/id">
-                      <h2 class="chats-tab__title">
-                          Usuario 1
-                      </h2>
-                  </a>
-              </div>
-              <div class="chats-tab__item">
-                  <img class="chats-tab__image" src="https://as1.ftcdn.net/v2/jpg/03/46/83/96/1000_F_346839683_6nAPzbhpSkIpb8pmAwufkC7c5eD7wYws.jpg" alt="Chat Image"/>
-                  <a class="chats-tab__link" href="/chat/id">
-                      <h2 class="chats-tab__title">
-                          Usuario 1
-                      </h2>
-                  </a>
-              </div>
-              <div class="chats-tab__item">
-                  <img class="chats-tab__image" src="https://as1.ftcdn.net/v2/jpg/03/46/83/96/1000_F_346839683_6nAPzbhpSkIpb8pmAwufkC7c5eD7wYws.jpg" alt="Chat Image"/>
-                  <a class="chats-tab__link" href="/chat/id">
-                      <h2 class="chats-tab__title">
-                          Usuario 1
-                      </h2>
-                  </a>
-              </div>
-              <div class="chats-tab__item">
-                  <img class="chats-tab__image" src="https://as1.ftcdn.net/v2/jpg/03/46/83/96/1000_F_346839683_6nAPzbhpSkIpb8pmAwufkC7c5eD7wYws.jpg" alt="Chat Image"/>
-                  <a class="chats-tab__link" href="/chat/id">
-                      <h2 class="chats-tab__title">
-                          Usuario 1
-                      </h2>
-                  </a>
-              </div>
-              <div class="chats-tab__item">
-                  <img class="chats-tab__image" src="https://as1.ftcdn.net/v2/jpg/03/46/83/96/1000_F_346839683_6nAPzbhpSkIpb8pmAwufkC7c5eD7wYws.jpg" alt="Chat Image"/>
-                  <a class="chats-tab__link" href="/chat/id">
-                      <h2 class="chats-tab__title">
-                          Usuario 1
-                      </h2>
-                  </a>
-              </div>
-              <div class="chats-tab__item">
-                  <img class="chats-tab__image" src="https://as1.ftcdn.net/v2/jpg/03/46/83/96/1000_F_346839683_6nAPzbhpSkIpb8pmAwufkC7c5eD7wYws.jpg" alt="Chat Image"/>
-                  <a class="chats-tab__link" href="/chat/id">
-                      <h2 class="chats-tab__title">
-                          Usuario 1
-                      </h2>
-                  </a>
-              </div>
-              <div class="chats-tab__item">
-                  <img class="chats-tab__image" src="https://as1.ftcdn.net/v2/jpg/03/46/83/96/1000_F_346839683_6nAPzbhpSkIpb8pmAwufkC7c5eD7wYws.jpg" alt="Chat Image"/>
-                  <a class="chats-tab__link" href="/chat/id">
-                      <h2 class="chats-tab__title">
-                          Usuario 1
-                      </h2>
-                  </a>
-              </div>
-              <div class="chats-tab__item">
-                  <img class="chats-tab__image" src="https://as1.ftcdn.net/v2/jpg/03/46/83/96/1000_F_346839683_6nAPzbhpSkIpb8pmAwufkC7c5eD7wYws.jpg" alt="Chat Image"/>
-                  <a class="chats-tab__link" href="/chat/id">
-                      <h2 class="chats-tab__title">
-                          Usuario 1
-                      </h2>
-                  </a>
-              </div>
-              <div class="chats-tab__item">
-                  <img class="chats-tab__image" src="https://as1.ftcdn.net/v2/jpg/03/46/83/96/1000_F_346839683_6nAPzbhpSkIpb8pmAwufkC7c5eD7wYws.jpg" alt="Chat Image"/>
-                  <a class="chats-tab__link" href="/chat/id">
-                      <h2 class="chats-tab__title">
-                          Usuario 1
-                      </h2>
-                  </a>
-              </div>
-              <div class="chats-tab__item">
-                  <img class="chats-tab__image" src="https://as1.ftcdn.net/v2/jpg/03/46/83/96/1000_F_346839683_6nAPzbhpSkIpb8pmAwufkC7c5eD7wYws.jpg" alt="Chat Image"/>
-                  <a class="chats-tab__link" href="/chat/id">
-                      <h2 class="chats-tab__title">
-                          Usuario 1
-                      </h2>
-                  </a>
-              </div>
-              <div class="chats-tab__item">
-                  <img class="chats-tab__image" src="https://as1.ftcdn.net/v2/jpg/03/46/83/96/1000_F_346839683_6nAPzbhpSkIpb8pmAwufkC7c5eD7wYws.jpg" alt="Chat Image"/>
-                  <a class="chats-tab__link" href="/chat/id">
-                      <h2 class="chats-tab__title">
-                          Usuario 1
-                      </h2>
-                  </a>
-              </div>
-              <div class="chats-tab__item">
-                  <img class="chats-tab__image" src="https://as1.ftcdn.net/v2/jpg/03/46/83/96/1000_F_346839683_6nAPzbhpSkIpb8pmAwufkC7c5eD7wYws.jpg" alt="Chat Image"/>
-                  <a class="chats-tab__link" href="/chat/id">
-                      <h2 class="chats-tab__title">
-                          Usuario 1
-                      </h2>
-                  </a>
-              </div>
-              <div class="chats-tab__item">
-                  <img class="chats-tab__image" src="https://as1.ftcdn.net/v2/jpg/03/46/83/96/1000_F_346839683_6nAPzbhpSkIpb8pmAwufkC7c5eD7wYws.jpg" alt="Chat Image"/>
-                  <a class="chats-tab__link" href="/chat/id">
-                      <h2 class="chats-tab__title">
-                          Usuario 1
-                      </h2>
-                  </a>
-              </div>
-              <div class="chats-tab__item">
-                  <img class="chats-tab__image" src="https://as1.ftcdn.net/v2/jpg/03/46/83/96/1000_F_346839683_6nAPzbhpSkIpb8pmAwufkC7c5eD7wYws.jpg" alt="Chat Image"/>
-                  <a class="chats-tab__link" href="/chat/id">
-                      <h2 class="chats-tab__title">
-                          Usuario 1
-                      </h2>
-                  </a>
-              </div>
-              <div class="chats-tab__item">
-                  <img class="chats-tab__image" src="https://as1.ftcdn.net/v2/jpg/03/46/83/96/1000_F_346839683_6nAPzbhpSkIpb8pmAwufkC7c5eD7wYws.jpg" alt="Chat Image"/>
-                  <a class="chats-tab__link" href="/chat/id">
-                      <h2 class="chats-tab__title">
-                          Usuario 1
-                      </h2>
-                  </a>
+              <div th:each="userChat : ${userChats}" class="chats-tab__item">
+                  <div th:if="${user.getId() != #authentication.getPrincipal().getId()}" th:each="user : ${userChat.getUsers()}">
+                      <img class="chats-tab__image" th:src="${user.getImageUrl()}" alt="Chat Image"/>
+                      <a class="chats-tab__link" th:href="@{'/chat/' + ${userChat.getId()}}">
+                          <h2 class="chats-tab__title" th:text="${user.getUsername()}">
+                          </h2>
+                      </a>
+                  </div>
+
               </div>
           </div>
 
@@ -220,179 +85,29 @@
                           <i class="fa-solid fa-xmark fa-lg" style="color: #ffffff;" onclick="openModal('groupModal')"></i>
                       </div>
                       <div class="modal__body">
-                          <div class="modal__name">
-                              <label for="groupName" class="modal__label">Nombre del grupo:</label>
-                              <input type="text" id="groupName" class="modal__input" placeholder="Escribe el nombre del grupo" />
-                          </div>
-                          <div class="modal__search">
-                              <label for="userSearch" class="modal__label">Añadir personas:</label>
-                              <input type="text" id="userSearch" class="modal__input" placeholder="Buscar personas..."  onkeyup="searchInput('usersList', 'userSearch')"/>
-                              <ul id="usersList">
-                                  <li id="adele"><a href="#">Adele</a></li>
-                                  <li id="agnes"><a href="#">Agnes</a></li>
-                                  <li id="billy"><a href="#">Billy</a></li>
-                                  <li id="bob"><a href="#">Bob</a></li>
-                                  <li id="calvin"><a href="#">Calvin</a></li>
-                                  <li id="christina"><a href="#">Christina</a></li>
-                                  <li id="cindy"><a href="#">Cindy</a></li>
-                              </ul>
-                          </div>
-                          <div class="confirmGroupButton">
-                              <button class="buttons-container__button" id="confirmCreateGroup">Crear grupo</button>
-                          </div>
+                          <form action="/chat/group" method="post" th:object="${newGroup}">
+                              <div class="modal__name">
+                                  <label for="groupName" class="modal__label">Nombre del grupo:</label>
+                                  <input type="text" name="groupName" id="groupName" class="modal__input" placeholder="Escribe el nombre del grupo" />
+                              </div>
+                              <div class="confirmGroupButton">
+                                  <button type="submit" class="buttons-container__button" id="confirmCreateGroup">Crear grupo</button>
+                              </div>
+                          </form>
                       </div>
                   </div>
               </div>
 
-              <div class="chats-tab__item">
-                  <img class="chats-tab__image" src="https://as1.ftcdn.net/v2/jpg/03/46/83/96/1000_F_346839683_6nAPzbhpSkIpb8pmAwufkC7c5eD7wYws.jpg" alt="Chat Image"/>
-                  <a class="chats-tab__link" href="/chat/id">
-                      <h2 class="chats-tab__title">
-                          Grupo 1
+              <div th:each="groupChat : ${groupChats}" class="chats-tab__item">
+                  <a class="chats-tab__link" th:href="@{'/chat/' + ${groupChat.getId()}}">
+                      <h2 class="chats-tab__title" th:text="${groupChat.getGroupName()}">
                       </h2>
                   </a>
-              </div>
-              <div class="chats-tab__item">
-                  <img class="chats-tab__image" src="https://as1.ftcdn.net/v2/jpg/03/46/83/96/1000_F_346839683_6nAPzbhpSkIpb8pmAwufkC7c5eD7wYws.jpg" alt="Chat Image"/>
-                  <a class="chats-tab__link" href="/chat/id">
-                      <h2 class="chats-tab__title">
-                          Grupo 1
-                      </h2>
-                  </a>
-              </div>
-              <div class="chats-tab__item">
-                  <img class="chats-tab__image" src="https://as1.ftcdn.net/v2/jpg/03/46/83/96/1000_F_346839683_6nAPzbhpSkIpb8pmAwufkC7c5eD7wYws.jpg" alt="Chat Image"/>
-                  <a class="chats-tab__link" href="/chat/id">
-                      <h2 class="chats-tab__title">
-                          Grupo 1
-                      </h2>
-                  </a>
-              </div>
-              <div class="chats-tab__item">
-                  <img class="chats-tab__image" src="https://as1.ftcdn.net/v2/jpg/03/46/83/96/1000_F_346839683_6nAPzbhpSkIpb8pmAwufkC7c5eD7wYws.jpg" alt="Chat Image"/>
-                  <a class="chats-tab__link" href="/chat/id">
-                      <h2 class="chats-tab__title">
-                          Grupo 1
-                      </h2>
-                  </a>
-              </div>
-              <div class="chats-tab__item">
-                  <img class="chats-tab__image" src="https://as1.ftcdn.net/v2/jpg/03/46/83/96/1000_F_346839683_6nAPzbhpSkIpb8pmAwufkC7c5eD7wYws.jpg" alt="Chat Image"/>
-                  <a class="chats-tab__link" href="/chat/id">
-                      <h2 class="chats-tab__title">
-                          Grupo 1
-                      </h2>
-                  </a>
-              </div>
-              <div class="chats-tab__item">
-                  <img class="chats-tab__image" src="https://as1.ftcdn.net/v2/jpg/03/46/83/96/1000_F_346839683_6nAPzbhpSkIpb8pmAwufkC7c5eD7wYws.jpg" alt="Chat Image"/>
-                  <a class="chats-tab__link" href="/chat/id">
-                      <h2 class="chats-tab__title">
-                          Grupo 1
-                      </h2>
-                  </a>
-              </div>
-              <div class="chats-tab__item">
-                  <img class="chats-tab__image" src="https://as1.ftcdn.net/v2/jpg/03/46/83/96/1000_F_346839683_6nAPzbhpSkIpb8pmAwufkC7c5eD7wYws.jpg" alt="Chat Image"/>
-                  <a class="chats-tab__link" href="/chat/id">
-                      <h2 class="chats-tab__title">
-                          Grupo 1
-                      </h2>
-                  </a>
-              </div>
-              <div class="chats-tab__item">
-                  <img class="chats-tab__image" src="https://as1.ftcdn.net/v2/jpg/03/46/83/96/1000_F_346839683_6nAPzbhpSkIpb8pmAwufkC7c5eD7wYws.jpg" alt="Chat Image"/>
-                  <a class="chats-tab__link" href="/chat/id">
-                      <h2 class="chats-tab__title">
-                          Grupo 1
-                      </h2>
-                  </a>
-              </div>
-              <div class="chats-tab__item">
-                  <img class="chats-tab__image" src="https://as1.ftcdn.net/v2/jpg/03/46/83/96/1000_F_346839683_6nAPzbhpSkIpb8pmAwufkC7c5eD7wYws.jpg" alt="Chat Image"/>
-                  <a class="chats-tab__link" href="/chat/id">
-                      <h2 class="chats-tab__title">
-                          Grupo 1
-                      </h2>
-                  </a>
-              </div>
-              <div class="chats-tab__item">
-                  <img class="chats-tab__image" src="https://as1.ftcdn.net/v2/jpg/03/46/83/96/1000_F_346839683_6nAPzbhpSkIpb8pmAwufkC7c5eD7wYws.jpg" alt="Chat Image"/>
-                  <a class="chats-tab__link" href="/chat/id">
-                      <h2 class="chats-tab__title">
-                          Grupo 1
-                      </h2>
-                  </a>
-              </div>
-              <div class="chats-tab__item">
-                  <img class="chats-tab__image" src="https://as1.ftcdn.net/v2/jpg/03/46/83/96/1000_F_346839683_6nAPzbhpSkIpb8pmAwufkC7c5eD7wYws.jpg" alt="Chat Image"/>
-                  <a class="chats-tab__link" href="/chat/id">
-                      <h2 class="chats-tab__title">
-                          Grupo 1
-                      </h2>
-                  </a>
-              </div>
-              <div class="chats-tab__item">
-                  <img class="chats-tab__image" src="https://as1.ftcdn.net/v2/jpg/03/46/83/96/1000_F_346839683_6nAPzbhpSkIpb8pmAwufkC7c5eD7wYws.jpg" alt="Chat Image"/>
-                  <a class="chats-tab__link" href="/chat/id">
-                      <h2 class="chats-tab__title">
-                          Grupo 1
-                      </h2>
-                  </a>
-              </div>
-              <div class="chats-tab__item">
-                  <img class="chats-tab__image" src="https://as1.ftcdn.net/v2/jpg/03/46/83/96/1000_F_346839683_6nAPzbhpSkIpb8pmAwufkC7c5eD7wYws.jpg" alt="Chat Image"/>
-                  <a class="chats-tab__link" href="/chat/id">
-                      <h2 class="chats-tab__title">
-                          Grupo 1
-                      </h2>
-                  </a>
-              </div>
-              <div class="chats-tab__item">
-                  <img class="chats-tab__image" src="https://as1.ftcdn.net/v2/jpg/03/46/83/96/1000_F_346839683_6nAPzbhpSkIpb8pmAwufkC7c5eD7wYws.jpg" alt="Chat Image"/>
-                  <a class="chats-tab__link" href="/chat/id">
-                      <h2 class="chats-tab__title">
-                          Grupo 1
-                      </h2>
-                  </a>
-              </div>
-              <div class="chats-tab__item">
-                  <img class="chats-tab__image" src="https://as1.ftcdn.net/v2/jpg/03/46/83/96/1000_F_346839683_6nAPzbhpSkIpb8pmAwufkC7c5eD7wYws.jpg" alt="Chat Image"/>
-                  <a class="chats-tab__link" href="/chat/id">
-                      <h2 class="chats-tab__title">
-                          Grupo 1
-                      </h2>
-                  </a>
-              </div>
-              <div class="chats-tab__item">
-                  <img class="chats-tab__image" src="https://as1.ftcdn.net/v2/jpg/03/46/83/96/1000_F_346839683_6nAPzbhpSkIpb8pmAwufkC7c5eD7wYws.jpg" alt="Chat Image"/>
-                  <a class="chats-tab__link" href="/chat/id">
-                      <h2 class="chats-tab__title">
-                          Grupo 1
-                      </h2>
-                  </a>
-              </div>
-              <div class="chats-tab__item">
-                  <img class="chats-tab__image" src="https://as1.ftcdn.net/v2/jpg/03/46/83/96/1000_F_346839683_6nAPzbhpSkIpb8pmAwufkC7c5eD7wYws.jpg" alt="Chat Image"/>
-                  <a class="chats-tab__link" href="/chat/id">
-                      <h2 class="chats-tab__title">
-                          Grupo 1
-                      </h2>
-                  </a>
-              </div>
-              <div class="chats-tab__item">
-                  <img class="chats-tab__image" src="https://as1.ftcdn.net/v2/jpg/03/46/83/96/1000_F_346839683_6nAPzbhpSkIpb8pmAwufkC7c5eD7wYws.jpg" alt="Chat Image"/>
-                  <a class="chats-tab__link" href="/chat/id">
-                      <h2 class="chats-tab__title">
-                          Grupo 1
-                      </h2>
+                  <a class="chats-tab__add-user" th:href="@{'/chat/group/' + ${groupChat.getId()}}">
+                      Añadir usuarios
                   </a>
               </div>
           </div>
       </div>
-      <script>
-
-      </script>
-</div>
 </body>
 </html>

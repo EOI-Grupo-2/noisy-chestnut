@@ -11,7 +11,6 @@ import lombok.Setter;
 @NoArgsConstructor
 @AllArgsConstructor
 public class SalePointsDTO {
-
     private Long id;
     private String salePointUrl;
     private Concert concert;

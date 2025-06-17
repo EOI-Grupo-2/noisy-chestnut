@@ -35,6 +35,7 @@ public class UserDTO {
     private List<Chat> chats;
     private List<Follows> usersFollowed;
     private List<Follows> followers;
+    private List<Place> places;
     private List<Publications> publications;
     private List<Albums> albums;
 }

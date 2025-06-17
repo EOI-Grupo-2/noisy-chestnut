@@ -24,7 +24,7 @@ public class User {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    @Column(nullable = false)
+    @Column(nullable = false, unique = true)
     private String username;
     @Column(nullable = false)
     private String name;
@@ -32,7 +32,7 @@ public class User {
     private String firstName;
     @Column(nullable = false)
     private String lastName;
-    @Column(nullable = false)
+    @Column(nullable = false, unique = true)
     private String email;
     @Column(nullable = false)
     private String password;
@@ -73,6 +73,9 @@ public class User {
     @OneToMany(mappedBy = "userFollower", cascade = CascadeType.REMOVE, fetch = FetchType.EAGER,  orphanRemoval = true)
     private List<Follows> usersFollowed = new ArrayList<>();
 
+    @OneToMany(mappedBy = "user", cascade = CascadeType.REMOVE, fetch = FetchType.EAGER,  orphanRemoval = true)
+    private List<Place> places = new ArrayList<>();
+
     @OneToMany(mappedBy = "userFollowed", cascade = CascadeType.REMOVE, fetch = FetchType.EAGER, orphanRemoval = true)
     private List<Follows> followers = new ArrayList<>();
 
@@ -81,4 +84,7 @@ public class User {
 
     @OneToMany(mappedBy = "user", cascade = CascadeType.REMOVE, fetch = FetchType.EAGER, orphanRemoval = true)
     private List<Albums> albums = new ArrayList<>();
+
+    @OneToMany(mappedBy = "user", cascade = CascadeType.REMOVE, fetch = FetchType.EAGER, orphanRemoval = true)
+    private List<Commentaries> commentaries = new ArrayList<>();
 }
