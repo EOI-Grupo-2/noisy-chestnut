@@ -66,7 +66,7 @@ public class FileUploadService {
         Files.copy(file.getInputStream(), filePath, StandardCopyOption.REPLACE_EXISTING);
 
         // Retornar la URL que Spring Boot puede servir
-        return "/uploads/" + type.toLowerCase() + "/" + newFilename;
+        return "/uploads/" + newFilename;
     }
 
     // Método para eliminar imágenes (compatible con ambos tipos)
