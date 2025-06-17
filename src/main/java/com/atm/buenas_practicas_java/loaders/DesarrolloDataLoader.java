@@ -10,6 +10,7 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Profile;
 import org.springframework.security.crypto.password.PasswordEncoder;
 
+import java.io.File;
 import java.time.LocalDateTime;
 import java.util.*;
 
@@ -186,5 +187,16 @@ public class DesarrolloDataLoader {
         userRepository.saveAll(users);
 
         log.info("Datos de producción cargados correctamente.");
+    }
+
+    @PostConstruct
+    public void createUploadDirs() {
+        List<String> folders = List.of("users", "places", "publications", "concerts");
+        for (String folder : folders) {
+            File dir = new File("/var/lib/data/uploads/" + folder);
+            if (!dir.exists()) {
+                dir.mkdirs();
+            }
+        }
     }
 }

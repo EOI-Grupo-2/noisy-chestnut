@@ -3,7 +3,6 @@ name: ${COMPOSE_NAME}
 volumes:
   produccion_pgdata:
   produccion_javadata:
-  produccion_images:
 
 services:
   java:
@@ -17,7 +16,7 @@ services:
       SPRING_DATASOURCE_USERNAME: desarrollouser
       SPRING_DATASOURCE_PASSWORD: desarrollopassword
       SPRING_PROFILES_ACTIVE: desarrollo
-      UPLOAD_PATH: file:/var/lib/uploads/
+      UPLOAD_PATH: file:/var/lib/data/uploads/
     depends_on:
       db:
         condition: service_healthy
@@ -28,10 +27,7 @@ services:
       retries: 3
     restart: always
     volumes:
-      - ./init.sh:/init.sh:ro
       - produccion_javadata:/var/lib/data/
-      - produccion_images:/var/lib/uploads/
-    entrypoint: [ "sh", "/init.sh" ]
 
   db:
     image: postgres:latest
