@@ -30,6 +30,11 @@ services:
     volumes:
       - produccion_javadata:/var/lib/data/
       - produccion_images:/var/lib/uploads/
+    command: >
+      sh -c "
+        chmod -R 777 /var/lib/uploads &&
+        java -jar app.jar
+      " 
 
   db:
     image: postgres:latest
