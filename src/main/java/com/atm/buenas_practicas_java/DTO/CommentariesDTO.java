@@ -15,11 +15,8 @@ import java.time.LocalDateTime;
 @NoArgsConstructor
 @AllArgsConstructor
 public class CommentariesDTO {
-
     private Long id;
-    private Publications pub;
     private Concert concert;
-
     private Publications publications;
     private User user;
     private String content;

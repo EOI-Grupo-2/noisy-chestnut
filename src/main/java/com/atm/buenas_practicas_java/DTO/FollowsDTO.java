@@ -13,7 +13,6 @@ import java.time.LocalDateTime;
 @NoArgsConstructor
 @AllArgsConstructor
 public class FollowsDTO {
-
     private Long id;
     private User userFollower;
     private User userFollowed;

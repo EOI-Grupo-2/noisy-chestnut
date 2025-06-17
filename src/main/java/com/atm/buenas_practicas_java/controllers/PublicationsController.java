@@ -2,13 +2,11 @@ package com.atm.buenas_practicas_java.controllers;
 
 
 import com.atm.buenas_practicas_java.DTO.CommentariesDTO;
+import com.atm.buenas_practicas_java.DTO.PlaceDTO;
 import com.atm.buenas_practicas_java.DTO.PublicationsDTO;
 import com.atm.buenas_practicas_java.DTO.UserDTO;
 import com.atm.buenas_practicas_java.entities.*;
-import com.atm.buenas_practicas_java.services.CommentariesService;
-import com.atm.buenas_practicas_java.services.PublicationsService;
-import com.atm.buenas_practicas_java.services.RoleService;
-import com.atm.buenas_practicas_java.services.UserService;
+import com.atm.buenas_practicas_java.services.*;
 import com.atm.buenas_practicas_java.services.mapper.UserMapper;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
@@ -16,7 +14,9 @@ import org.springframework.stereotype.Controller;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 
+import java.io.IOException;
 import java.sql.SQLOutput;
 import java.time.LocalDateTime;
 import java.util.List;
@@ -29,12 +29,14 @@ public class PublicationsController {
     private final CommentariesService commentariesService;
     private final UserService userService;
     private final RoleService roleService;
+    private final FileUploadService fileUploadService;
 
-    public PublicationsController(PublicationsService publicationsService, CommentariesService commentariesService, UserService userService, UserMapper userMapper, RoleService roleService) {
+    public PublicationsController(PublicationsService publicationsService, CommentariesService commentariesService, UserService userService, UserMapper userMapper, RoleService roleService, FileUploadService fileUploadService) {
         this.publicationsService = publicationsService;
         this.commentariesService = commentariesService;
         this.userService = userService;
         this.roleService = roleService;
+        this.fileUploadService = fileUploadService;
     }
 
     @GetMapping("/create-publication")
@@ -47,10 +49,13 @@ public class PublicationsController {
 
     @PostMapping("/create-publication")
     public String createPublication(@AuthenticationPrincipal AuthUser authUser,
-                                    @ModelAttribute PublicationsDTO publicationDTO
+                                    @RequestParam(value = "imageFile", required = false) MultipartFile imageFile,@ModelAttribute("publication") PublicationsDTO publicationDTO
     ) throws Exception {
         UserDTO userDTO = userService.findByUsername(authUser.getUsername());
-        publicationDTO.setUser(userDTO);
+        publicationDTO.setUser(userService.getMapper().toEntity(userDTO));
+        handleImageUpload(publicationDTO, imageFile);
+        publicationDTO.setLikes(0);
+        publicationDTO.setDate(LocalDateTime.now());
         publicationsService.save(publicationDTO);
         return "redirect:/";
     }
@@ -59,26 +64,24 @@ public class PublicationsController {
     public String showPublicationDetails(@PathVariable Long id, Model model){
         model.addAttribute("publication", publicationsService.findByIdDTO(id).orElseThrow());
         model.addAttribute("commentaries", commentariesService.findByPublicationId(id));
-        CommentariesDTO commentariesDTO = new CommentariesDTO();
-        commentariesDTO.setContent("");
-        model.addAttribute("commentary", commentariesDTO);
+        model.addAttribute("commentary", new CommentariesDTO());
         return "/publication/publication";
     }
 
     @PostMapping("/{id}/comment")
     public String addComment(@PathVariable Long id,
                              @ModelAttribute (name= "commentary") CommentariesDTO commentariesDTO,
-
                              @AuthenticationPrincipal AuthUser authUser) throws Exception {
-        User user = userService.findByUsernameEntity(authUser.getUsername());
-        Publications publication = publicationsService.findByIdEntity(id);
-        CommentariesDTO commentariesDTO2 = new CommentariesDTO();
-        commentariesDTO2.setContent(commentariesDTO.getContent());
-        commentariesDTO2.setPublications(publication);
-        commentariesDTO2.setUser(user);
-        commentariesDTO2.setDate(LocalDateTime.now());
-        commentariesDTO2.setLikes(0);
-        commentariesService.save(commentariesDTO2);
+        User user = userService.findById(authUser.getId()).orElseThrow();
+        PublicationsDTO publicationDTO = publicationsService.findByIdDTO(id).orElseThrow();
+        CommentariesDTO commentary = new CommentariesDTO();
+        commentary.setContent(commentariesDTO.getContent());
+        Publications publication = publicationsService.getMapper().toEntity(publicationDTO);
+        commentary.setPublications(publication);
+        commentary.setUser(user);
+        commentary.setDate(LocalDateTime.now());
+        commentary.setLikes(0);
+        commentariesService.save(commentary);
         return "redirect:/publication/" +id;
     }
 
@@ -87,15 +90,17 @@ public class PublicationsController {
     public String showEditForm(@PathVariable Long id, Model model) {
         model.addAttribute("publication", publicationsService.findByIdDTO(id).orElseThrow());
         model.addAttribute("formAction", "/publication/update/" + id);
-        return "/publication/edit-publication";
+        return "/publication/new-publication";
     }
 
     @PostMapping("/update/{id}")
     public String updatePublication(@PathVariable Long id,
                                     @ModelAttribute PublicationsDTO publicationDTO,
+                                    @RequestParam(value = "imageFile", required = false) MultipartFile imageFile,
                                     @AuthenticationPrincipal AuthUser authUser) throws Exception {
         UserDTO userDTO = userService.findByUsername(authUser.getUsername());
-        publicationDTO.setUser(userDTO);
+        publicationDTO.setUser(userService.getMapper().toEntity(userDTO));
+        handleImageUpload(publicationDTO, imageFile);
         publicationDTO.setId(id);
         publicationsService.update(publicationDTO);
         return "redirect:/publication/" + id;
@@ -109,7 +114,6 @@ public class PublicationsController {
         }
         publication.setLikes(publication.getLikes() != null ? publication.getLikes() + 1 : 1);
         publicationsService.saveEntity(publication);
-        System.out.println("Likes actuales: " + publication.getLikes()); // Log para depuración
         return "redirect:/publication/" + id;
     }
 
@@ -130,5 +134,15 @@ public class PublicationsController {
         return "/artist/artist";
     }
 
+    private void handleImageUpload(PublicationsDTO publicationsDTO, MultipartFile imageFile) throws IOException {
+        if (imageFile != null && !imageFile.isEmpty()) {
+            if (publicationsDTO.getId() != null && publicationsDTO.getPhotoUrl() != null) {
+                fileUploadService.deleteImage(publicationsDTO.getPhotoUrl());
+            }
 
+            // Guardar nueva imagen
+            String imageUrl = fileUploadService.savePublicationImage(imageFile);
+            publicationsDTO.setPhotoUrl(imageUrl);
+        }
+    }
 }

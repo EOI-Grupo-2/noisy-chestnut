@@ -1,3 +1,5 @@
+
+
 @import "variables";
 
 
@@ -9,7 +11,6 @@
   align-items: center;
   justify-content: center;
   padding: 1rem;
-
 }
 
 .post {
@@ -117,7 +118,7 @@
 
   &__textarea {
     width: 100%;
-    background-color: $secondary-color;
+    background-color: #333333;
     color: #FFFAF0;
     border-radius: 5px;
     border: none;
@@ -130,17 +131,11 @@
 
   .publication-layout{
     flex-direction: column;
-
   }
-
 }
 
 @media only screen and (max-width: $mobile-breakpoint) {
   .publication-layout{
     flex-direction: column;
   }
-
 }
-
-
-

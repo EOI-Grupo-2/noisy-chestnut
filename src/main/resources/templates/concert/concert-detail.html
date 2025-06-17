@@ -56,7 +56,15 @@
                 <h2 th:text="${#lists.size(artists) == 1 ? 'Artista' : 'Artistas'}">Artistas</h2>
                 <div class="concert-artists__grid">
                     <div class="concert-artist__card" th:each="artist : ${artists}">
-                        <img th:src="${artist.imageUrl}" th:alt="${artist.name}" class="concert-artist__image">
+                        <img class="user-card__image"
+                             th:if="${artist.imageUrl != null and !#strings.isEmpty(artist.imageUrl)}"
+                             th:src="@{${artist.imageUrl}}"
+                             alt="Profile Image" />
+
+                        <img class="user-card__image"
+                             th:unless="${artist.imageUrl != null and !#strings.isEmpty(artist.imageUrl)}"
+                             th:src="@{'https://as1.ftcdn.net/v2/jpg/03/46/83/96/1000_F_346839683_6nAPzbhpSkIpb8pmAwufkC7c5eD7wYws.jpg'}"
+                             alt="Default Image" />
                         <div class="concert-artist__info">
                             <h3 th:text="${artist.name}">Artista</h3>
                             <p th:text="${artist.musicGenre}">Género</p>

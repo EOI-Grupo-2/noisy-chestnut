@@ -3,7 +3,6 @@
       xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
-    <link rel="stylesheet" href="pruebaweb.css">
     <link rel="stylesheet" th:href="@{/css/profile.css}" />
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@48,400,0,0" />
     <title>Places</title>
@@ -13,118 +12,35 @@
 <div class="content" layout:fragment="content">
     <!-- Encabezado place-->
     <div class="profile-header">
-        <img class="profile-header__userimage" src="https://imgs.search.brave.com/E_UWBRRxi_Mth0t2pKHhoYW5627CGE77wLMeEt6qDb0/rs:fit:860:0:0:0/g:ce/aHR0cHM6Ly93YWxs/cGFwZXJzLmNvbS9p/bWFnZXMvaGQvYmFz/aWMtZGVmYXVsdC1w/ZnAtcHhpNzdxdjVv/MHp1ejhqMy5qcGc" alt="FotoPerfil">
+        <img class="profile-header__userimage" th:src="${place.getImageUrl()}" alt="FotoPerfil">
         <div class="profile-header__content">
             <div class="profile-header__info">
-                <h1 class="profile-header__username">Sala 1</h1>
-                <p class="profile-header__description">Descripción del lugar.<br>Localización.</p>
+                <h1 class="profile-header__username" th:text="${place.getName()}"></h1>
+                <p class="profile-header__description" th:text="${place.getDescription()}"></p>
+                <p class="profile-header__description" th:text="${place.getAddress()}"></p>
             </div>
-            <ul class="profile-header__info-items">
-                <li class="profile-header__info-item"><button class="profile-header__info-button" type="button" onclick="selectTab('pubTab', 'profile-content__principal')">Publicaciones</button></li>
-                <li class="profile-header__info-item"><button class="profile-header__info-button" type="button" onclick="selectTab('followersTab', 'profile-content__principal')">Seguidores</button></li>
-                <li class="profile-header__info-item-hidden"><button class="profile-header__info-button" type="button" onclick="selectTab('concertsModal', 'modal')">Conciertos</button></li>
-            </ul>
         </div>
     </div>
     <!-- Contenido -->
     <div class="profile-content">
-        <!-- COLUMNA PRINCIPAL PUBLICACIONES -->
-        <div class="profile-content__principal profile-content__principal--pubs" id="pubTab">
-            <div class="pub-card" th:each="publication:${publications}">
-                <div class="pub-card__header">
-                    <img th:src="${publication.getUser().getImageUrl() != null ? publication.getUser().getImageUrl() : 'https://as1.ftcdn.net/v2/jpg/03/46/83/96/1000_F_346839683_6nAPzbhpSkIpb8pmAwufkC7c5eD7wYws.jpg'}" class="pub-card__user-image"alt="">
-                    <div class="pub-card__username" th:text="${publication.getUser().getUsername()}"></div>
-                </div>
-                <div class="pub-card__body">
-                    <h5 class="pub-card__title" th:text="${publication.getDescription()}"></h5>
-                </div>
-                <div class="pub-card__footer">
-                    <p class="pub-card__date" th:text="${#temporals.format(publication.getDate(), 'dd/MM/yyyy HH:mm')}"></p>
-                    <a class="pub-card__link" th:href="@{'/publication/'+${publication.getId()}}">Ver mas</a>
-                </div>
-            </div>
-            <!-- Publicación 2 -->
-            <div class="pub-card" th:each="publication:${publications}">
-                <div class="pub-card__header">
-                    <img th:src="${publication.getUser().getImageUrl() != null ? publication.getUser().getImageUrl() : 'https://as1.ftcdn.net/v2/jpg/03/46/83/96/1000_F_346839683_6nAPzbhpSkIpb8pmAwufkC7c5eD7wYws.jpg'}" class="pub-card__user-image"alt="">
-                    <div class="pub-card__username" th:text="${publication.getUser().getUsername()}"></div>
-                </div>
-                <div class="pub-card__body">
-                    <h5 class="pub-card__title" th:text="${publication.getDescription()}"></h5>
-                </div>
-                <div class="pub-card__footer">
-                    <p class="pub-card__date" th:text="${#temporals.format(publication.getDate(), 'dd/MM/yyyy HH:mm')}"></p>
-                    <a class="pub-card__link" th:href="@{'/publication/'+${publication.getId()}}">Ver mas</a>
+        <div class="profile-content__concerts">
+            <div th:each="concert : ${place.getConcerts()}" class="concert-card">
+                <img class="concert-card__image" th:src="${concert.imageUrl}" alt="concertImage">
+                <div class="concert-card__content">
+                    <h2 class="concert-card__title" th:text="${concert.name}">
+                    </h2>
+                    <p class="concert-card__description" th:text="${concert.place.name + ', ' + #temporals.format(concert.date, 'dd MMMM yyyy')}">
+                    </p>
+                    <a th:href="@{/concert/{id}(id=${concert.id})}" class="concert-card__link">
+                        Conocer más
+                        <span class="material-symbols-outlined">
+                            arrow_right_alt
+                        </span>
+                    </a>
                 </div>
             </div>
         </div>
 
-        <div class="profile-content__principal profile-content__principal--followers" id="followersTab">
-            <div class="user-card">
-                <div class="user-card__info">
-                    <img class="user-card__image" src="https://i.scdn.co/image/ab6761610000e5eb81f47f44084e0a09b5f0fa13" alt="Profile Image"/>
-                    <h1 class="user-card__username">
-                        @Usuario1
-                    </h1>
-                    <p class="user-card__description">
-                        Descripcion usuario1
-                    </p>
-                </div>
-                <button class="user-card__button">
-                    Seguir
-                </button>
-            </div>
-            <div class="user-card">
-                <div class="user-card__info">
-                    <img class="user-card__image" src="https://i.scdn.co/image/ab6761610000e5eb81f47f44084e0a09b5f0fa13" alt="Profile Image"/>
-                    <h1 class="user-card__username">
-                        @Usuario1
-                    </h1>
-                    <p class="user-card__description">
-                        Descripcion usuario1
-                    </p>
-                </div>
-                <button class="user-card__button">
-                    Seguir
-                </button>
-            </div>
-        </div>
-
-        <div class="profile-content__principal profile-content__principal--following" id="followingTab">
-            <div class="user-card">
-                <div class="user-card__info">
-                    <img class="user-card__image" src="https://i.scdn.co/image/ab6761610000e5eb81f47f44084e0a09b5f0fa13" alt="Profile Image"/>
-                    <h1 class="user-card__username">
-                        @Usuario1
-                    </h1>
-                    <p class="user-card__description">
-                        Descripcion usuario1
-                    </p>
-                </div>
-                <button class="user-card__button">
-                    Siguiendo
-                </button>
-            </div>
-            <div class="user-card">
-                <div class="user-card__info">
-                    <img class="user-card__image" src="https://i.scdn.co/image/ab6761610000e5eb81f47f44084e0a09b5f0fa13" alt="Profile Image"/>
-                    <h1 class="user-card__username">
-                        @Usuario1
-                    </h1>
-                    <p class="user-card__description">
-                        Descripcion usuario1
-                    </p>
-                </div>
-                <button class="user-card__button">
-                    Siguiendo
-                </button>
-            </div>
-        </div>
-
-        <div class="profile-content__principal profile-content__principal--insignia" id="insigniaTab">
-
-        </div>
-        <!-- COLUMNA DERECHA CARDS -->
         <div class="profile-content__more">
             <!-- Próximos conciertos -->
             <div class="concerts-card">
@@ -132,9 +48,7 @@
                     <h3 class="concerts-card__title">Próximos conciertos</h3>
                 </div>
                 <div class="concerts-card__body">
-                    <div class="concerts-card__item">Lia Kali - 08.04.2025</div>
-                    <div class="concerts-card__item">Califato 3/4 - 15.04.2025</div>
-                    <div class="concerts-card__item">Pantera Blue - 20.04.2025</div>
+                    <div class="concerts-card__item" th:each="concert : ${recentConcerts}" th:text="${concert.getName()}"></div>
                 </div>
                 <div class="concerts-card__footer">
                     <a class="concerts-card__link" href="#" onclick="openModal('concertsModal')">Ver mas</a>
@@ -150,124 +64,19 @@
                 <span class="modal__close" onclick="openModal('concertsModal')">&times;</span>
             </div>
             <div class="modal__body">
-                <div class="concert-card">
-                    <img class="concert-card__image" src="https://images.unsplash.com/photo-1656618020911-1c7a937175fd?crop=entropy&cs=tinysrgb&fm=jpg&ixid=MnwzMjM4NDZ8MHwxfHJhbmRvbXx8fHx8fHx8fDE2NTc1MzQyNTE&ixlib=rb-1.2.1&q=80" alt="concertImage">
-                    <div class="concert-card__content">
-                        <h2 class="concert-card__title">
-                            Concierto de Lia Kali
-                        </h2>
-                        <p class="concert-card__description">
-                            08.04.2025
-                        </p>
-                        <a href="/concert/detail" class="concert-card__link">
-                            Detalles
-                            <span class="material-symbols-outlined">
+                <div th:each="concert : ${recentConcerts}" class="concert-card">
+                <img class="concert-card__image" th:src="${concert.imageUrl}" alt="concertImage">
+                <div class="concert-card__content">
+                    <h2 class="concert-card__title" th:text="${concert.name}">
+                    </h2>
+                    <p class="concert-card__description" th:text="${concert.place.name + ', ' + #temporals.format(concert.date, 'dd MMMM yyyy')}">
+                    </p>
+                    <a th:href="@{/concert/{id}(id=${concert.id})}" class="concert-card__link">
+                        Conocer más
+                        <span class="material-symbols-outlined">
                             arrow_right_alt
-                            </span>
-                        </a>
-                    </div>
-                </div>
-                <div class="concert-card">
-                    <img class="concert-card__image" src="https://images.unsplash.com/photo-1656618020911-1c7a937175fd?crop=entropy&cs=tinysrgb&fm=jpg&ixid=MnwzMjM4NDZ8MHwxfHJhbmRvbXx8fHx8fHx8fDE2NTc1MzQyNTE&ixlib=rb-1.2.1&q=80" alt="concertImage">
-                    <div class="concert-card__content">
-                        <h2 class="concert-card__title">
-                            Concierto de Lia Kali
-                        </h2>
-                        <p class="concert-card__description">
-                            08.04.2025
-                        </p>
-                        <a href="/concert/detail" class="concert-card__link">
-                            Detalles
-                            <span class="material-symbols-outlined">
-                            arrow_right_alt
-                            </span>
-                        </a>
-                    </div>
-                </div>
-                <div class="concert-card">
-                    <img class="concert-card__image" src="https://images.unsplash.com/photo-1656618020911-1c7a937175fd?crop=entropy&cs=tinysrgb&fm=jpg&ixid=MnwzMjM4NDZ8MHwxfHJhbmRvbXx8fHx8fHx8fDE2NTc1MzQyNTE&ixlib=rb-1.2.1&q=80" alt="concertImage">
-                    <div class="concert-card__content">
-                        <h2 class="concert-card__title">
-                            Concierto de Lia Kali
-                        </h2>
-                        <p class="concert-card__description">
-                            08.04.2025
-                        </p>
-                        <a href="/concert/detail" class="concert-card__link">
-                            Detalles
-                            <span class="material-symbols-outlined">
-                            arrow_right_alt
-                            </span>
-                        </a>
-                    </div>
-                </div>
-                <div class="concert-card">
-                    <img class="concert-card__image" src="https://images.unsplash.com/photo-1656618020911-1c7a937175fd?crop=entropy&cs=tinysrgb&fm=jpg&ixid=MnwzMjM4NDZ8MHwxfHJhbmRvbXx8fHx8fHx8fDE2NTc1MzQyNTE&ixlib=rb-1.2.1&q=80" alt="concertImage">
-                    <div class="concert-card__content">
-                        <h2 class="concert-card__title">
-                            Concierto de Lia Kali
-                        </h2>
-                        <p class="concert-card__description">
-                            08.04.2025
-                        </p>
-                        <a href="/concert/detail" class="concert-card__link">
-                            Detalles
-                            <span class="material-symbols-outlined">
-                            arrow_right_alt
-                            </span>
-                        </a>
-                    </div>
-                </div>
-                <div class="concert-card">
-                    <img class="concert-card__image" src="https://images.unsplash.com/photo-1656618020911-1c7a937175fd?crop=entropy&cs=tinysrgb&fm=jpg&ixid=MnwzMjM4NDZ8MHwxfHJhbmRvbXx8fHx8fHx8fDE2NTc1MzQyNTE&ixlib=rb-1.2.1&q=80" alt="concertImage">
-                    <div class="concert-card__content">
-                        <h2 class="concert-card__title">
-                            Concierto de Lia Kali
-                        </h2>
-                        <p class="concert-card__description">
-                            08.04.2025
-                        </p>
-                        <a href="/concert/detail" class="concert-card__link">
-                            Detalles
-                            <span class="material-symbols-outlined">
-                            arrow_right_alt
-                            </span>
-                        </a>
-                    </div>
-                </div>
-                <div class="concert-card">
-                    <img class="concert-card__image" src="https://images.unsplash.com/photo-1656618020911-1c7a937175fd?crop=entropy&cs=tinysrgb&fm=jpg&ixid=MnwzMjM4NDZ8MHwxfHJhbmRvbXx8fHx8fHx8fDE2NTc1MzQyNTE&ixlib=rb-1.2.1&q=80" alt="concertImage">
-                    <div class="concert-card__content">
-                        <h2 class="concert-card__title">
-                            Concierto de Lia Kali
-                        </h2>
-                        <p class="concert-card__description">
-                            08.04.2025
-                        </p>
-                        <a href="/concert/detail" class="concert-card__link">
-                            Detalles
-                            <span class="material-symbols-outlined">
-                            arrow_right_alt
-                            </span>
-                        </a>
-                    </div>
-                </div>
-                <div class="concert-card">
-                    <img class="concert-card__image" src="https://images.unsplash.com/photo-1656618020911-1c7a937175fd?crop=entropy&cs=tinysrgb&fm=jpg&ixid=MnwzMjM4NDZ8MHwxfHJhbmRvbXx8fHx8fHx8fDE2NTc1MzQyNTE&ixlib=rb-1.2.1&q=80" alt="concertImage">
-                    <div class="concert-card__content">
-                        <h2 class="concert-card__title">
-                            Concierto de Lia Kali
-                        </h2>
-                        <p class="concert-card__description">
-                            08.04.2025
-                        </p>
-                        <a href="/concert/detail" class="concert-card__link">
-                            Detalles
-                            <span class="material-symbols-outlined">
-                            arrow_right_alt
-                            </span>
-                        </a>
-                    </div>
+                        </span>
+                    </a>
                 </div>
             </div>
         </div>

@@ -3,148 +3,45 @@
       xmlns:th="http://www.thymeleaf.org">
 <head>
   <title>Places admin</title>
-  <link rel="stylesheet" th:href="@{/css/places.css}" />
   <link rel="stylesheet" th:href="@{/css/placesAdmin.css}" />
-  <link href="https://fonts.googleapis.com/css2?family=Roboto+Condensed&family=Roboto:wght@300&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@48,400,0,0" />
 </head>
 <body>
-<div layout:fragment="content" class="content">
+<div class="content" layout:fragment="content">
 
-  <div class="admin-header">
-    <h2 class="admin-header__title">Gestión de salas</h2>
-    <button class="admin-header__create-button" id="createPlaceButton" onclick="window.location.href='/places/new'"> + Crear nueva sala </button>
-  </div>
-  <table class="admin-table user-table">
+  <h2 class="admin-title">Gestión de Salas</h2>
+
+  <table class="admin-table places-table">
     <thead>
     <tr>
-      <th>ID</th>
+      <th class="col-id">ID</th>
       <th>Nombre</th>
-      <th>Ubicación</th>
-      <th>Dirección</th>
+      <th class="col-address">Dirección</th>
+      <th class="col-capacity">Capacidad</th>
+      <th class="col-rating">Valoración</th>
+      <th class="col-owner">Propietario</th>
       <th>Acciones</th>
     </tr>
     </thead>
     <tbody>
-    <tr>
-    <tbody>
-    <tr>
-      <td>1</td>
-      <td>Sala Aurora</td>
-      <td>Madrid</td>
-      <td>Calle Libertad 12</td>
+    <tr th:each="place : ${places}">
+      <td class="col-id" th:text="${place.id}"></td>
+      <td th:text="${place.name}">Sala Ejemplo</td>
+      <td class="col-address" th:text="${place.address != null ? place.address : 'Sin dirección'}">Calle Ejemplo 123</td>
+      <td class="col-capacity" th:text="${place.capacity != null ? place.capacity : 'Sin especificar'}">500</td>
+      <td class="col-rating" th:text="${place.rating != null ? #numbers.formatDecimal(place.rating, 1, 1) + '/5' : 'Sin valorar'}">4.5/5</td>
+      <td class="col-owner" th:text="${place.user != null ? place.user.name : 'Sin propietario'}">Usuario Ejemplo</td>
       <td class="table-actions">
-        <button class="btn-edit" onclick="window.location.href='/places/new'">Editar</button>
-        <button class="btn-delete" onclick="openModal('deletePlaceModal')">Eliminar</button>
-      </td>
-    </tr>
-    <tr>
-      <td>2</td>
-      <td>La Caverna</td>
-      <td>Barcelona</td>
-      <td>Avinguda del Sol 87</td>
-      <td class="table-actions">
-        <button class="btn-edit" onclick="window.location.href='/places/new'">Editar</button>
-        <button class="btn-delete" onclick="openModal('deletePlaceModal')">Eliminar</button>
-      </td>
-    </tr>
-    <tr>
-      <td>3</td>
-      <td>Rock Palace</td>
-      <td>Sevilla</td>
-      <td>Paseo de los Mártires 22</td>
-      <td class="table-actions">
-        <button class="btn-edit" onclick="window.location.href='/places/new'">Editar</button>
-        <button class="btn-delete" onclick="openModal('deletePlaceModal')">Eliminar</button>
-      </td>
-    </tr>
-    <tr>
-      <td>4</td>
-      <td>Jazz Garden</td>
-      <td>Valencia</td>
-      <td>Plaza del Carmen 5</td>
-      <td class="table-actions">
-        <button class="btn-edit" onclick="window.location.href='/places/new'">Editar</button>
-        <button class="btn-delete" onclick="openModal('deletePlaceModal')">Eliminar</button>
-      </td>
-    </tr>
-    <tr>
-      <td>5</td>
-      <td>Indie Hall</td>
-      <td>Bilbao</td>
-      <td>Calle Urkijo 14</td>
-      <td class="table-actions">
-        <button class="btn-edit" onclick="window.location.href='/places/new'">Editar</button>
-        <button class="btn-delete" onclick="openModal('deletePlaceModal')">Eliminar</button>
-      </td>
-    </tr>
-    <tr>
-      <td>6</td>
-      <td>La Trastienda</td>
-      <td>Zaragoza</td>
-      <td>Ronda San José 8</td>
-      <td class="table-actions">
-        <button class="btn-edit" onclick="window.location.href='/places/new'">Editar</button>
-        <button class="btn-delete" onclick="openModal('deletePlaceModal')">Eliminar</button>
-      </td>
-    </tr>
-    <tr>
-      <td>7</td>
-      <td>Electric Sound</td>
-      <td>Granada</td>
-      <td>Camino de Ronda 56</td>
-      <td class="table-actions">
-        <button class="btn-edit" onclick="window.location.href='/places/new'">Editar</button>
-        <button class="btn-delete" onclick="openModal('deletePlaceModal')">Eliminar</button>
-      </td>
-    </tr>
-    <tr>
-      <td>8</td>
-      <td>La Catedral del Rock</td>
-      <td>A Coruña</td>
-      <td>Rua Real 101</td>
-      <td class="table-actions">
-        <button class="btn-edit" onclick="window.location.href='/places/new'">Editar</button>
-        <button class="btn-delete" onclick="openModal('deletePlaceModal')">Eliminar</button>
-      </td>
-    </tr>
-    <tr>
-      <td>9</td>
-      <td>El Subterráneo</td>
-      <td>Murcia</td>
-      <td>Avenida Constitución 30</td>
-      <td class="table-actions">
-        <button class="btn-edit" onclick="window.location.href='/places/new'">Editar</button>
-        <button class="btn-delete" onclick="openModal('deletePlaceModal')">Eliminar</button>
-      </td>
-    </tr>
-    <tr>
-      <td>10</td>
-      <td>Sala Nebula</td>
-      <td>Málaga</td>
-      <td>Calle Larios 17</td>
-      <td class="table-actions">
-        <button class="btn-edit" onclick="window.location.href='/places/new'" >Editar</button>
-        <button class="btn-delete" onclick="openModal('deletePlaceModal')">Eliminar</button>
+        <button class="btn-edit"><a class="btn-edit__link" th:href="@{'/places/' + ${place.id} + '/edit'}">Editar</a></button>
+        <button class="btn-delete"><a class="btn-delete__link" th:href="@{'/places/' + ${place.id} + '/delete'}">Eliminar</a></button>
       </td>
     </tr>
     </tbody>
-</table>
-  <!--Modal para eliminar sala-->
-  <div class="modal" id="deletePlaceModal">
-    <div class="modal__content">
-      <header class="modal__header">
-        <h2>Eliminar sala</h2>
-      </header>
-      <div class="modal__body">
-        <p>¿Está seguro de que desea eliminar la sala?</p>
-      </div>
-      <div class="modal__footer">
-          <button class="btn-cancel" onclick="openModal('deletePlaceModal')" >Cancelar</button>
-          <button class="btn-confirm">Confirmar</button>
-      </div>
-    </div>
+  </table>
+
+  <div class="admin-actions">
+    <a th:href="@{/places/new}" class="btn-add">Añadir Sala</a>
   </div>
+
 </div>
 </body>
 </html>

@@ -42,9 +42,6 @@ public class Concert {
     @Column(name = "music_genre")
     private MusicGenre musicGenre;
 
-    @OneToOne(cascade = CascadeType.ALL, orphanRemoval = true)
-    private Chat chat;
-
-    @ManyToMany(mappedBy = "concerts", fetch = FetchType.EAGER)
+    @ManyToMany(mappedBy = "concerts", cascade = CascadeType.DETACH, fetch = FetchType.EAGER)
     private List<User> users = new ArrayList<>();
 }

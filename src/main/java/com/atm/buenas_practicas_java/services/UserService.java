@@ -73,10 +73,9 @@ public class UserService extends AbstractBusinessService<User,Long, UserDTO,
     }
           
     public List<UserDTO> searchUsersByName(String name) {
-        // Asumiendo que UserRepository tiene un método findByNameContainingIgnoreCase
         List<User> users = getRepo().findByNameContainingIgnoreCase(name);
         return users.stream()
-                .map(getMapper()::toDto)
+                .map(getMapper()::toDto).toList();
       }
           
     public List<UserDTO> findUsersByRoleName(String roleName) {

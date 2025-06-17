@@ -10,11 +10,12 @@
 <body>
 
 <div class="content" layout:fragment="content">
-    <form th:action="${formAction}" th:object="${publication}" method="POST" class="post-form">
+    <form th:action="${formAction}" th:object="${publication}" method="POST" class="post-form" enctype="multipart/form-data">
         <div class="post-form__group">
             <label for="title" class="post-form__label">Título:</label>
             <input type="text"
                    id="title"
+                   name="title"
                    th:value="${publication.getTitle()}"
                    class="post-form__input"
                    placeholder="Ingresa un título"
@@ -24,20 +25,39 @@
         <div class="post-form__group">
             <label for="description" class="post-form__label">Descripción:</label>
             <textarea id="description"
-                      th:value="${publication.getDescription()}"
+                      th:text="${publication.getDescription()}"
                       class="post-form__textarea"
                       rows="4"
+                      name="description"
                       placeholder="Ingresa una descripción"
                       required></textarea>
         </div>
 
-        <div class="post-form__group">
-            <label for="photoUrl" class="post-form__label">Foto URL:</label>
-            <input type="url"
-                   id="photoUrl"
-                   th:value="${publication.getPhotoUrl()}"
-                   class="post-form__input"
-                   placeholder="Ingresa un enlace para la foto">
+        <input type="hidden" th:field="*{photoUrl}" name="photoUrl" id="currentImageUrl">
+        <input type="hidden" th:field="*{likes}" name="likes" id="likes">
+        <input type="hidden" th:field="*{date}" name="date" id="date">
+
+        <div class="publication-form__item">
+            <label for="imageFile" class="publication-form__label">Imagen del Lugar</label>
+            <input type="file" id="imageFile" name="imageFile" class="publication-form__input"
+                   accept="image/*" onchange="previewImage(this)">
+            <small style="color: #666; font-size: 0.9em; display: block; margin-top: 5px;">
+                Formatos permitidos: JPG, PNG, GIF. Tamaño máximo: 10MB
+            </small>
+
+            <!-- Mostrar imagen actual en caso de edición -->
+            <div class="current-image" th:if="${publication.photoUrl != null and publication.photoUrl != ''}" style="margin-top: 15px;">
+                <p style="margin-bottom: 10px; font-weight: bold; color: #333;">Imagen actual:</p>
+                <img th:src="${publication.photoUrl}" alt="Imagen actual del lugar"
+                     style="max-width: 200px; max-height: 150px; border-radius: 8px; box-shadow: 0 2px 8px rgba(0,0,0,0.1); object-fit: cover;">
+            </div>
+
+            <!-- Preview de la nueva imagen -->
+            <div class="image-preview" style="display: none; margin-top: 15px;">
+                <p style="margin-bottom: 10px; font-weight: bold; color: #333;">Vista previa:</p>
+                <img id="imagePreview" src="" alt="Vista previa"
+                     style="max-width: 200px; max-height: 150px; border-radius: 8px; box-shadow: 0 2px 8px rgba(0,0,0,0.1); object-fit: cover;">
+            </div>
         </div>
 
         <div class="post-form__group post-form__group--center">
@@ -46,4 +66,56 @@
     </form>
 </div>
 </body>
+<script>
+    function previewImage(input) {
+        const preview = document.getElementById('imagePreview');
+        const previewContainer = document.querySelector('.image-preview');
+
+        if (input.files && input.files[0]) {
+            const file = input.files[0];
+
+            // Validar tamaño (10MB = 10 * 1024 * 1024 bytes)
+            if (file.size > 10 * 1024 * 1024) {
+                alert('El archivo es demasiado grande. El tamaño máximo es 10MB.');
+                input.value = '';
+                previewContainer.style.display = 'none';
+                return;
+            }
+
+            // Validar tipo de archivo
+            if (!file.type.startsWith('image/')) {
+                alert('Por favor, selecciona solo archivos de imagen.');
+                input.value = '';
+                previewContainer.style.display = 'none';
+                return;
+            }
+
+            const reader = new FileReader();
+
+            reader.onload = function(e) {
+                preview.src = e.target.result;
+                previewContainer.style.display = 'block';
+            }
+
+            reader.readAsDataURL(file);
+        } else {
+            previewContainer.style.display = 'none';
+        }
+    }
+
+    // Funciones existentes para los campos numéricos
+    function inputNumberMinus(fieldId) {
+        const input = document.getElementById(fieldId);
+        const currentValue = parseInt(input.value) || 0;
+        if (currentValue > 0) {
+            input.value = currentValue - 1;
+        }
+    }
+
+    function inputNumberPlus(fieldId) {
+        const input = document.getElementById(fieldId);
+        const currentValue = parseInt(input.value) || 0;
+        input.value = currentValue + 1;
+    }
+</script>
 </html>

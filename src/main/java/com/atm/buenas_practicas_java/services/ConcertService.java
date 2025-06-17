@@ -6,6 +6,7 @@ import com.atm.buenas_practicas_java.entities.User;
 import com.atm.buenas_practicas_java.repositories.ConcertRepository;
 import com.atm.buenas_practicas_java.repositories.UserRepository;
 import com.atm.buenas_practicas_java.services.mapper.ConcertMapper;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -95,7 +96,6 @@ public class ConcertService extends AbstractBusinessService<Concert, Long, Conce
         concert.setDate(dto.getDate());
         concert.setImageUrl(dto.getImageUrl());
         concert.setMusicGenre(dto.getMusicGenre());
-        concert.setChat(dto.getChat());
 
         // Preparar la nueva lista de usuarios
         List<User> newUsers = new ArrayList<>();
@@ -154,5 +154,11 @@ public class ConcertService extends AbstractBusinessService<Concert, Long, Conce
                 .collect(Collectors.toList());
     }
 
+    public List<Concert> findConcertsByPlaceId(Long placeId) {
+        return getRepo().findConcertByPlaceId(placeId);
+    }
 
+    public List<ConcertDTO> findRecentConcertsByPlaceId(Long placeId) {
+        return getRepo().findConcertByPlaceId(placeId, Sort.by(Sort.Order.asc("date"))).stream().map(getMapper()::toDto).toList();
+    }
 }

@@ -6,6 +6,8 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import java.text.DecimalFormat;
+import java.util.ArrayList;
+import java.util.List;
 
 @Entity
 @Getter
@@ -29,12 +31,16 @@ public class Place {
     @Column (nullable = false)
     private Long capacity;
 
+    @Column (nullable = false)
     private String imageUrl;
 
     @Column(name = "rate", nullable = false)
     private Double rating;
 
-    @OneToOne(fetch = FetchType.EAGER)
+    @ManyToOne(fetch = FetchType.EAGER, cascade = CascadeType.DETACH)
     @JoinColumn (name = "user_id", nullable = false)
     private User user;
+
+    @OneToMany(mappedBy = "place", cascade = CascadeType.DETACH, fetch = FetchType.EAGER, orphanRemoval = true)
+    private List<Concert> concerts = new ArrayList<>();
 }

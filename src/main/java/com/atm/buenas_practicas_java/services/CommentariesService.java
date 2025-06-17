@@ -34,15 +34,6 @@ public class CommentariesService extends AbstractBusinessService<Commentaries, L
         this.userService = userService;
     }
 
-    // Buscar comentarios por publicación
-    public List<CommentariesDTO> findByPublication(Publications publication) {
-        return getRepo().findByPubOrderByDateDesc(publication)
-                .stream()
-                .map(comment -> getMapper().toDto(comment))
-                .collect(Collectors.toList());
-    }
-
-    // Buscar comentarios por concierto
     public List<CommentariesDTO> findByConcert(Concert concert) {
         return getRepo().findByConcertOrderByDateDesc(concert)
                 .stream()
@@ -50,30 +41,22 @@ public class CommentariesService extends AbstractBusinessService<Commentaries, L
                 .collect(Collectors.toList());
     }
 
-    // Añadir este método a tu CommentariesService
+
     public CommentariesDTO addCommentToConcert(Long concertId, Long userId, String content) throws Exception {
-        // Buscar concierto
         Concert concert = concertService.findById(concertId)
                 .orElseThrow(() -> new RuntimeException("Concierto no encontrado"));
-
-        // Buscar usuario
         User user = userService.findById(userId)
                 .orElseThrow(() -> new RuntimeException("Usuario no encontrado"));
-
-        // Crear comentario
         CommentariesDTO commentDTO = new CommentariesDTO();
         commentDTO.setConcert(concert);
         commentDTO.setUser(user);
         commentDTO.setContent(content);
         commentDTO.setLikes(0);
         commentDTO.setDate(LocalDateTime.now());
-
-        // Guardar y retornar
         return this.save(commentDTO);
     }
 
     public List<CommentariesDTO> findByPublicationId(Long id) {
-
         return getRepo().findByPublicationsId(id).stream()
                 .map(getMapper()::toDto)
                 .toList();

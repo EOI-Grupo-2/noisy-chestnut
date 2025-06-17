@@ -1,5 +1,6 @@
 package com.atm.buenas_practicas_java.controllers;
 
+import com.atm.buenas_practicas_java.DTO.ChatDTO;
 import com.atm.buenas_practicas_java.DTO.CommentariesDTO;
 import com.atm.buenas_practicas_java.DTO.ConcertDTO;
 import com.atm.buenas_practicas_java.DTO.SalePointsDTO;
@@ -32,22 +33,29 @@ public class ConcertController {
     private final SalePointsService salePointsService;
     private final FileUploadService fileUploadService;
     private final CommentariesService commentariesService;
+    private final ChatService chatService;
 
     public ConcertController(ConcertService concertService, PlaceService placeService,
                              UserService userService, SalePointsService salePointsService,
-                             FileUploadService fileUploadService, CommentariesService commentariesService) {
+                             FileUploadService fileUploadService, CommentariesService commentariesService, ChatService chatService) {
         this.concertService = concertService;
         this.placeService = placeService;
         this.userService = userService;
         this.salePointsService = salePointsService;
         this.fileUploadService = fileUploadService;
         this.commentariesService = commentariesService;
+        this.chatService = chatService;
     }
 
     // Listar todos los conciertos
     @GetMapping({"", "/"})
-    public String getAllConcerts(Model model) {
+    public String getAllConcerts(@AuthenticationPrincipal AuthUser authUser, Model model) {
         model.addAttribute("concerts", concertService.findAllDTO());
+        if(authUser!=null){
+            List<ChatDTO> chatDTOs = chatService.findGroupChatsByUserId(authUser.getId());
+            chatDTOs.addAll(chatService.findUsersChatsByUserId(authUser.getId()));
+            model.addAttribute("userChats", chatDTOs);
+        }
         return "/concert/concerts";
     }
 
@@ -55,7 +63,11 @@ public class ConcertController {
     @GetMapping("/{id}")
     public String getConcertDetail(@PathVariable Long id, Model model, @AuthenticationPrincipal AuthUser authUser) {
         ConcertDTO concert = concertService.findByIdDTO(id).orElse(new ConcertDTO());
-
+        if(authUser!=null){
+            List<ChatDTO> chatDTOs = chatService.findGroupChatsByUserId(authUser.getId());
+            chatDTOs.addAll(chatService.findUsersChatsByUserId(authUser.getId()));
+            model.addAttribute("userChats", chatDTOs);
+        }
         // Obtener datos relacionados
         List<SalePointsDTO> salePoints = getSalePointsForConcert(id);
         List<CommentariesDTO> comments = getCommentsForConcert(id);
@@ -121,7 +133,6 @@ public class ConcertController {
     @PreAuthorize("hasAuthority('ADMIN')")
     public String getEditConcertForm(@PathVariable Long id, Model model) {
         ConcertDTO concert = concertService.findByIdDTO(id).orElse(null);
-
         if (concert == null) {
             return "redirect:/concert/admin";
         }
@@ -171,6 +182,8 @@ public class ConcertController {
     @PreAuthorize("hasAuthority('ADMIN')")
     public String deleteConcert(@PathVariable Long id) throws Exception {
         Concert concert = concertService.findById(id).orElseThrow();
+
+
 
         if (concert.getImageUrl() != null) {
             fileUploadService.deleteImage(concert.getImageUrl());
@@ -230,7 +243,7 @@ public class ConcertController {
                 fileUploadService.deleteImage(concertDTO.getImageUrl());
             }
 
-            String imageUrl = fileUploadService.saveImage(imageFile);
+            String imageUrl = fileUploadService.saveConcertImage(imageFile);
             concertDTO.setImageUrl(imageUrl);
         }
     }

@@ -11,11 +11,8 @@ import java.util.List;
 @Repository
 public interface CommentariesRepository extends JpaRepository<Commentaries, Long> {
 
+    List<Commentaries> findByPublicationsOrderByDateDesc(Publications pub);
 
-    // Buscar comentarios por publicación (ya existente)
-    List<Commentaries> findByPubOrderByDateDesc(Publications pub);
-
-    // Buscar comentarios por concierto (nuevo)
     List<Commentaries> findByConcertOrderByDateDesc(Concert concert);
 
     List<Commentaries> findByPublicationsId(Long publicationsId);

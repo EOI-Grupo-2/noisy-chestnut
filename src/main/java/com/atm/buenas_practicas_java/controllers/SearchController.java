@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
@@ -39,13 +40,6 @@ public class SearchController {
         List<ConcertDTO> concerts = concertService.searchConcertsByName(query);
         List<PlaceDTO> places = placeService.searchPlacesByName(query);
 
-
-        // Aquí imprimes en consola para ver qué datos devuelve cada servicio
-        System.out.println("Usuarios encontrados: " + users.size());
-        System.out.println("Conciertos encontrados: " + concerts.size());
-        System.out.println("Lugares encontrados: " + places.size());
-
-        // Añades los resultados al modelo para que Thymeleaf los use
         model.addAttribute("users", users);
         model.addAttribute("concerts", concerts);
         model.addAttribute("places", places);
@@ -55,21 +49,21 @@ public class SearchController {
         switch (filter.toLowerCase()) {
             case "user": // coincide con el value del select
                 model.addAttribute("users", userService.searchUsersByName(query));
-                model.addAttribute("concerts", Collections.emptyList());
-                model.addAttribute("places", Collections.emptyList());
+                model.addAttribute("concerts", new ArrayList<ConcertDTO>());
+                model.addAttribute("places", new ArrayList<PlaceDTO>());
                 model.addAttribute("type", "user");
                 break;
 
             case "concert":
-                model.addAttribute("users", Collections.emptyList());
+                model.addAttribute("users", new ArrayList<UserDTO>());
                 model.addAttribute("concerts", concertService.searchConcertsByName(query));
-                model.addAttribute("places", Collections.emptyList());
+                model.addAttribute("places", new ArrayList<PlaceDTO>());
                 model.addAttribute("type", "concert");
                 break;
 
             case "place":
-                model.addAttribute("users", Collections.emptyList());
-                model.addAttribute("concerts", Collections.emptyList());
+                model.addAttribute("users", new ArrayList<UserDTO>());
+                model.addAttribute("concerts", new ArrayList<ConcertDTO>());
                 model.addAttribute("places", placeService.searchPlacesByName(query));
                 model.addAttribute("type", "place");
                 break;

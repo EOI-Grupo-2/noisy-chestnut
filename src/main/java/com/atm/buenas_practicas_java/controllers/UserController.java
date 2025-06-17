@@ -17,7 +17,9 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
@@ -32,14 +34,16 @@ public class UserController {
     private final RoleService roleService;
     private final PasswordEncoder passwordEncoder;
     private final UserMapper userMapper;
+    private final FileUploadService fileUploadService;
 
-    public UserController(UserService userService, RoleService roleService, PasswordEncoder passwordEncoder, UserMapper userMapper) {
+    public UserController(UserService userService, RoleService roleService, PasswordEncoder passwordEncoder,
+                          UserMapper userMapper, FileUploadService fileUploadService) {
         this.userService = userService;
         this.roleService = roleService;
         this.passwordEncoder = passwordEncoder;
         this.userMapper = userMapper;
+        this.fileUploadService = fileUploadService;
     }
-
 
     @GetMapping({"/", "{id}/edit"})
     @PreAuthorize("isAuthenticated()")
@@ -54,11 +58,15 @@ public class UserController {
 
     @PostMapping({"/", "edit"})
     @PreAuthorize("isAuthenticated()")
-    public String updateUserProfile(@ModelAttribute("user") UserDTO userDTO, @AuthenticationPrincipal AuthUser authUser, Model model) throws Exception {
+    public String updateUserProfile(@ModelAttribute("user") UserDTO userDTO,
+                                    @RequestParam(value = "imageFile", required = false) MultipartFile profileImageFile,
+                                    @AuthenticationPrincipal AuthUser authUser, Model model) throws Exception {
         List<String> errors = getFormErrors(userDTO);
+
         if(userDTO.getId()!=authUser.getId() && !(authUser.getRoles().stream().map(Role::getName).collect(Collectors.toSet()).contains("ADMIN"))){
             errors.add("No se puede editar este usuario porque no posees los permisos necesarios");
         }
+
         if(!errors.isEmpty()){
             model.addAttribute("errors", errors);
             model.addAttribute("isRegister", false);
@@ -67,7 +75,12 @@ public class UserController {
             model.addAttribute("musicGenres", MusicGenre.values());
             return "/user/editprofile";
         }
+
         User userBeforeEdit = userService.findById(userDTO.getId()).orElseThrow();
+
+        // Manejar la imagen de perfil
+        handleImageUpload(userDTO, profileImageFile);
+
         userDTO.setRoles(userBeforeEdit.getRoles());
         userDTO.setAlbums(userBeforeEdit.getAlbums());
         userDTO.setFollowers(userBeforeEdit.getFollowers());
@@ -75,11 +88,12 @@ public class UserController {
         userDTO.setConcerts(userBeforeEdit.getConcerts());
         userDTO.setChats(userBeforeEdit.getChats());
         userDTO.setPublications(userBeforeEdit.getPublications());
+
         userService.save(userDTO);
         return "redirect:/users/" + userDTO.getId() + "/profile ";
     }
 
-    @GetMapping({"/", "/register"})
+    @GetMapping({"/", "register"})
     public String getRegister(Model model) {
         model.addAttribute("errors", new ArrayList<String>());
         model.addAttribute("isRegister", true);
@@ -90,11 +104,15 @@ public class UserController {
     }
 
     @PostMapping({"/", "register"})
-    public String registerUser(@ModelAttribute("user") UserDTO userDTO, Model model) throws Exception {
+    public String registerUser(@ModelAttribute("user") UserDTO userDTO,
+                               @RequestParam(value = "imageFile", required = false) MultipartFile profileImageFile,
+                               Model model) throws Exception {
         List<String> errors = getFormErrors(userDTO);
+
         if(userDTO.getPassword() == null || userDTO.getPassword().isEmpty() || userDTO.getPassword().length() < 8){
             errors.add("La contraseña introducida no puede estar vacía o no cumple con la longitud mínima");
         }
+
         if(!errors.isEmpty()){
             model.addAttribute("errors", errors);
             model.addAttribute("isRegister", true);
@@ -103,6 +121,10 @@ public class UserController {
             model.addAttribute("musicGenres", MusicGenre.values());
             return "/user/editprofile";
         }
+
+        // Manejar la imagen de perfil para nuevo usuario
+        handleImageUpload(userDTO, profileImageFile);
+
         Role userRole = roleService.findByName("USER");
         userDTO.setRoles(Set.of(userRole));
         userDTO.setPassword(passwordEncoder.encode(userDTO.getPassword()));
@@ -155,6 +177,12 @@ public class UserController {
     @PreAuthorize("hasAuthority('ADMIN')")
     public String deleteUserProfile(@PathVariable("id") Long id) throws Exception {
         User user = userService.findById(id).orElseThrow();
+
+        // Eliminar imagen de perfil si existe
+        if (user.getImageUrl() != null) {
+            fileUploadService.deleteImage(user.getImageUrl());
+        }
+
         userService.delete(user);
         return "redirect:/";
     }
@@ -166,6 +194,29 @@ public class UserController {
         return "/user/adminpanel";
     }
 
+    // ============ MÉTODOS PRIVADOS HELPER ============
+
+    /**
+     * Maneja la subida de imagen de perfil
+     */
+    private void handleImageUpload(UserDTO userDTO, MultipartFile imageFile) throws IOException {
+        if (imageFile != null && !imageFile.isEmpty()) {
+            // Eliminar imagen anterior si existe y estamos editando
+            if (userDTO.getId() != null && userDTO.getImageUrl() != null) {
+                fileUploadService.deleteImage(userDTO.getImageUrl());
+            }
+
+            // Guardar nueva imagen
+            String imageUrl = fileUploadService.saveUserImage(imageFile);
+            userDTO.setImageUrl(imageUrl);
+        }
+        // Si no hay archivo de imagen, mantener la URL existente (no cambiar nada)
+        // Esto permite editar otros campos sin afectar la imagen actual
+    }
+
+    /**
+     * Valida los errores del formulario
+     */
     private List<String> getFormErrors(UserDTO userDTO){
         List<String> errors = new ArrayList<>();
         if(userDTO.getName() == null || userDTO.getName().isEmpty()){
