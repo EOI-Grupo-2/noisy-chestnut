@@ -13,8 +13,7 @@ import org.springframework.context.annotation.Profile;
 import org.springframework.security.crypto.password.PasswordEncoder;
 
 import java.time.LocalDateTime;
-import java.util.List;
-import java.util.Set;
+import java.util.*;
 
 @Configuration
 @Log4j2
@@ -50,8 +49,9 @@ public class LocalDataLoader {
     @PostConstruct
     public void loadDataDesarollo() {
 
-        log.info("Iniciando la carga de datos para el perfil local");
+        log.info("Iniciando la carga de datos para el perfil de producción.");
 
+        // 1. Roles
         Role adminRole = new Role();
         adminRole.setName("ADMIN");
         Role userRole = new Role();
@@ -67,150 +67,150 @@ public class LocalDataLoader {
 
         roleRepository.saveAll(List.of(adminRole, artistRole, concertAdminRole, placeAdminRole, userRole, anonymousRole));
 
-        User user1 = new User();
-        user1.setUsername("admin");
-        user1.setPassword(passwordEncoder.encode("admin"));
-        user1.setName("admin");
-        user1.setFirstName("admin");
-        user1.setLastName("admin");
-        user1.setEmail("admin@mail.com");
-        user1.setGenre(Genre.MALE);
-        user1.setDescription("Descripcion del admin chulo");
-        user1.setMusicGenre(MusicGenre.RAP);
-        user1.setImageUrl("https://www.billboard.com/wp-content/uploads/2023/04/Eladio-Carrion-cr-Gabriel-Perez-Silva-billboard-1548.jpg");
-        user1.setRoles(Set.of(adminRole, userRole));
-        User user2 = new User();
-        user2.setUsername("user1");
-        user2.setPassword(passwordEncoder.encode("user2"));
-        user2.setName("user");
-        user2.setFirstName("1");
-        user2.setLastName("1");
-        user2.setEmail("user@mail.com");
-        user2.setGenre(Genre.MALE);
-        user2.setRoles(Set.of(userRole));
-        user2.setMusicGenre(MusicGenre.CLASSIC);
-        user2.setDescription("Descripcion del usuario chulo");
-        User user3 = new User();
-        user3.setUsername("user2");
-        user3.setPassword(passwordEncoder.encode("user3"));
-        user3.setName("Artista Guapo");
-        user3.setFirstName("Artista");
-        user3.setLastName("Guapo");
-        user3.setMusicGenre(MusicGenre.CLASSIC);
-        user3.setDescription("Descripcion del artista guapo");
-        user3.setRoles(Set.of(artistRole, userRole));
-        user3.setGenre(Genre.MALE);
-        user3.setEmail("user3@mail.com");
-        User user4 = new User();
-        user4.setUsername("user3");
-        user4.setPassword(passwordEncoder.encode("user4"));
-        user4.setName("Artista Feo");
-        user4.setFirstName("Artista");
-        user4.setLastName("Feo");
-        user4.setMusicGenre(MusicGenre.TECHNO);
-        user4.setDescription("Descripcion del artista feo");
-        user4.setRoles(Set.of(artistRole, userRole));
-        user4.setGenre(Genre.FEMALE);
-        user4.setImageUrl("https://www.billboard.com/wp-content/uploads/2023/04/Eladio-Carrion-cr-Gabriel-Perez-Silva-billboard-1548.jpg");
-        user4.setEmail("user4@mail.com");
-        User user5 = new User();
-        user5.setUsername("adminPlaces");
-        user5.setPassword(passwordEncoder.encode("adminPlaces"));
-        user5.setName("Admin Lugares");
-        user5.setFirstName("Admin");
-        user5.setLastName("Lugares");
-        user5.setGenre(Genre.MALE);
-        user5.setRoles(Set.of(placeAdminRole, userRole));
-        user5.setEmail("adminPlaces@mail.com");
-        User user6 = new User();
-        user6.setUsername("adminConcerts");
-        user6.setPassword(passwordEncoder.encode("adminConcerts"));
-        user6.setName("Admin Conciertos");
-        user6.setFirstName("Admin");
-        user6.setLastName("Conciertos");
-        user6.setGenre(Genre.MALE);
-        user6.setRoles(Set.of(concertAdminRole, userRole));
-        user6.setEmail("adminConcerts@mail.com");
-        userRepository.saveAll(List.of(user1, user2, user3, user4, user5, user6));
-        adminRole.setUsers(List.of(user1));
-        userRole.setUsers(List.of(user1, user2, user3, user4));
-        artistRole.setUsers(List.of(user3, user4));
-        roleRepository.saveAll(List.of(adminRole, artistRole, concertAdminRole, placeAdminRole, userRole, anonymousRole));
-        Follows follows1 = new Follows();
-        follows1.setUserFollowed(user1);
-        follows1.setUserFollower(user2);
-        follows1.setStartDate(LocalDateTime.now());
-        Follows follows2 = new Follows();
-        follows2.setUserFollowed(user3);
-        follows2.setUserFollower(user1);
-        follows2.setStartDate(LocalDateTime.now());
-        Follows follows3 = new Follows();
-        follows3.setUserFollowed(user3);
-        follows3.setUserFollower(user2);
-        follows3.setStartDate(LocalDateTime.now());
-        followsRepository.saveAll(List.of(follows1, follows2, follows3));
-        user1.setFollowers(List.of(follows1));
-        user1.setUsersFollowed(List.of(follows2));
-        user2.setUsersFollowed(List.of(follows1, follows3));
-        user3.setFollowers(List.of(follows2, follows3));
-        userRepository.saveAll(List.of(user1, user2, user3));
-        Publications publications1 = new Publications();
-        publications1.setDate(LocalDateTime.now());
-        publications1.setDescription("Descripcion del usuario chulo");
-        publications1.setTitle("Title del usuario chulo");
-        publications1.setLikes(0);
-        publications1.setUser(user1);
-        publications1.setPhotoUrl("https://www.billboard.com/wp-content/uploads/2023/04/Eladio-Carrion-cr-Gabriel-Perez-Silva-billboard-1548.jpg");
-        Publications publications2 = new Publications();
-        publications2.setDate(LocalDateTime.now());
-        publications2.setDescription("Descripcion del usuario no chulo");
-        publications2.setTitle("Title del usuario no chulo");
-        publications2.setLikes(10);
-        publications2.setUser(user3);
-        publicationsRepository.saveAll(List.of(publications1,publications2));
-        Place place1 = new Place();
-        place1.setName("Place 1");
-        place1.setDescription("Descripcion de la place 1");
-        place1.setUser(user5);
-        place1.setCapacity(30L);
-        place1.setRating(4.8);
-        place1.setAddress("Direccion de prueba");
-        place1.setImageUrl("https://madridfilmoffice.com/wp-content/uploads/2019/10/wizink-center-1-474x600.jpg");
-        placeRepository.save(place1);
-        Concert concert1 = new Concert();
-        concert1.setName("Concert 1");
-        concert1.setDescription("Descripcion del usuario chulo");
-        concert1.setDate(LocalDateTime.now().plusDays(10));
-        concert1.setImageUrl("https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRiqqsyK8RwtkHlL18FOATcJL8lslPR2K0q5g&s");
-        concert1.setUsers(List.of(user3, user1, user6));
-        concert1.setPlace(place1);
-        concertRepository.save(concert1);
-        user1.setConcerts(List.of(concert1));
-        user3.setConcerts(List.of(concert1));
-        user6.setConcerts(List.of(concert1));
-        userRepository.saveAll(List.of(user3, user1,  user6));
-        Albums albums1 = new Albums();
-        albums1.setImageUrl("https://i.etsystatic.com/45238099/r/il/79666d/5261418390/il_fullxfull.5261418390_4d6g.jpg");
-        albums1.setTitle("Album 1");
-        albums1.setUser(user3);
-        albums1.setDate(LocalDateTime.now().minusDays(10));
-        albums1.setRating(4.9);
-        albums1.setTotalTracks(10);
-        albums1.setSpotifyLink("https://open.spotify.com/album/3beZ5DRcWVTpXaU3ViLIF6?si=vJbiUOpUQxyeeUWRi9caQw");
-        albumsRepository.save(albums1);
-        Chat chat1 = new Chat();
-        chat1.setUsers(List.of(user1, user2));
-        chat1.setType(ChatType.USER);
-        chatRepository.save(chat1);
-        user1.setChats(List.of(chat1));
-        user2.setChats(List.of(chat1));
-        userRepository.saveAll(List.of(user1, user2));
-        Message message1 = new Message();
-        message1.setUser(user1);
-        message1.setMessage("Mensaje del usuario chulo");
-        message1.setDate(LocalDateTime.now());
-        message1.setChat(chat1);
-        messageRepository.save(message1);
-        log.info("Datos de entidades cargados correctamente.");
+        // 2. Datos para usuarios: nombres, apellidos, géneros, música
+        List<String> firstNames = List.of("Laura", "Carlos", "Ana", "Miguel", "Sofía", "David", "Elena", "Javier", "María", "Luis");
+        List<String> lastNames = List.of("García", "Rodríguez", "López", "Martínez", "Sánchez", "Pérez", "Gómez", "Ruiz", "Díaz", "Morales");
+        List<Genre> genders = List.of(Genre.FEMALE, Genre.MALE);
+        List<MusicGenre> musicGenres = List.of(MusicGenre.ROCK, MusicGenre.POP, MusicGenre.TECHNO, MusicGenre.URBAN, MusicGenre.TRAP, MusicGenre.RAP, MusicGenre.FLAMENCO, MusicGenre.CLASSIC);
+
+        Random random = new Random();
+
+        List<User> users = new ArrayList<>();
+
+        for (int i = 0; i < 10; i++) {
+            User user = new User();
+            String firstName = firstNames.get(i);
+            String lastName = lastNames.get(i);
+            user.setUsername((firstName.charAt(0) + lastName).toLowerCase());
+            user.setPassword(passwordEncoder.encode("password" + (i + 1)));
+            user.setFirstName(firstName);
+            user.setLastName(lastName);
+            user.setName(firstName + " " + lastName);
+            user.setEmail(user.getUsername() + "@musicapp.com");
+            Genre genre = genders.get(i % genders.size());
+            user.setGenre(genre);
+
+            // 50% ARTIST, 50% USER only
+            boolean isArtist = (i % 2 == 0);
+            if (isArtist) {
+                user.setRoles(Set.of(userRole, artistRole));
+                user.setMusicGenre(musicGenres.get(random.nextInt(musicGenres.size())));
+                user.setDescription("Artista profesional especializado en " + user.getMusicGenre().name().toLowerCase() + ".");
+            } else {
+                user.setRoles(Set.of(userRole));
+                user.setMusicGenre(MusicGenre.POP);
+                user.setDescription("Usuario entusiasta de la música con gusto por el pop.");
+            }
+
+            // Imagen realista (randomuser.me)
+            String genderPath = genre == Genre.MALE ? "men" : "women";
+            user.setImageUrl("https://randomuser.me/api/portraits/" + genderPath + "/" + (i + 10) + ".jpg");
+
+            users.add(user);
+        }
+        User admin = new User();
+        admin.setUsername("admin");
+        admin.setPassword(passwordEncoder.encode("admin"));
+        admin.setName("admin");
+        admin.setFirstName("admin");
+        admin.setLastName("admin");
+        admin.setEmail("admin@mail.com");
+        admin.setGenre(Genre.MALE);
+        admin.setDescription("Descripcion del admin chulo");
+        admin.setImageUrl("");
+        admin.setRoles(Set.of(adminRole, userRole));
+        User adminPlaces = new User();
+        adminPlaces.setUsername("adminPlaces");
+        adminPlaces.setPassword(passwordEncoder.encode("adminPlaces"));
+        adminPlaces.setName("Admin Lugares");
+        adminPlaces.setFirstName("Admin");
+        adminPlaces.setLastName("Lugares");
+        adminPlaces.setGenre(Genre.MALE);
+        adminPlaces.setRoles(Set.of(placeAdminRole, userRole));
+        adminPlaces.setEmail("adminPlaces@mail.com");
+        User adminConcerts = new User();
+        adminConcerts.setUsername("adminConcerts");
+        adminConcerts.setPassword(passwordEncoder.encode("adminConcerts"));
+        adminConcerts.setName("Admin Conciertos");
+        adminConcerts.setFirstName("Admin");
+        adminConcerts.setLastName("Conciertos");
+        adminConcerts.setGenre(Genre.MALE);
+        adminConcerts.setRoles(Set.of(concertAdminRole, userRole));
+        adminConcerts.setEmail("adminConcerts@mail.com");
+        users.addAll(List.of(admin, adminPlaces, adminConcerts));
+        userRepository.saveAll(users);
+
+        // 3. Lugares
+        List<Place> places = new ArrayList<>();
+        for (int i = 1; i <= 10; i++) {
+            Place place = new Place();
+            place.setName("Sala " + (char)('A' + i - 1));
+            place.setDescription("Lugar con excelente acústica y ambiente para conciertos en vivo.");
+            place.setAddress("Calle " + (100 + i) + ", Ciudad Ejemplo");
+            place.setCapacity(100 + i * 25L);
+            place.setRating(3.5 + i * 0.15);
+            place.setUser(adminPlaces);
+            place.setImageUrl("");
+            places.add(place);
+        }
+        placeRepository.saveAll(places);
+
+        // 4. Conciertos
+        List<Concert> concerts = new ArrayList<>();
+        for (int i = 0; i < 10; i++) {
+            Concert concert = new Concert();
+            concert.setName("Concierto " + (i + 1));
+            concert.setDescription("Evento musical con artistas destacados del género.");
+            concert.setDate(LocalDateTime.now().plusDays(7 * (i + 1)));
+            concert.setImageUrl("https://picsum.photos/seed/concert" + (i + 1) + "/600/400");
+            concert.setPlace(places.get(i));
+
+            // Asignar dos artistas al concierto, elegidos aleatoriamente
+            List<User> artists = new ArrayList<>();
+            for (User u : users) {
+                if (u.getRoles().contains(artistRole)) {
+                    artists.add(u);
+                }
+            }
+            Collections.shuffle(artists);
+            List<User> concertUsers = artists.subList(0, Math.min(2, artists.size()));
+            concertUsers.add(adminConcerts);
+            concert.setUsers(concertUsers);
+
+            concerts.add(concert);
+        }
+        concertRepository.saveAll(concerts);
+
+        // 5. Publicaciones (3 por usuario)
+        List<Publications> publications = new ArrayList<>();
+        for (User user : users) {
+            for (int j = 1; j <= 3; j++) {
+                Publications pub = new Publications();
+                pub.setUser(user);
+                pub.setTitle("Publicación " + j + " de " + user.getUsername());
+                pub.setDescription("Contenido de la publicación número " + j + " realizada por " + user.getName() + ".");
+                pub.setDate(LocalDateTime.now().minusDays(j));
+                pub.setLikes(j * 10 + random.nextInt(20));
+                pub.setPhotoUrl("https://picsum.photos/seed/pub" + user.getUsername() + j + "/400/300");
+                publications.add(pub);
+            }
+        }
+        publicationsRepository.saveAll(publications);
+
+        // Asociar conciertos a usuarios artistas
+        for (User user : users) {
+            if (user.getRoles().contains(artistRole)) {
+                List<Concert> userConcerts = new ArrayList<>();
+                for (Concert c : concerts) {
+                    if (c.getUsers().contains(user)) {
+                        userConcerts.add(c);
+                    }
+                }
+                user.setConcerts(userConcerts);
+            }
+        }
+        userRepository.saveAll(users);
+
+        log.info("Datos de producción cargados correctamente.");
     }
 }
