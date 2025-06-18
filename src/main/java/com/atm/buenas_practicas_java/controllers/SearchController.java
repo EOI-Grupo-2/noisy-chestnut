@@ -47,7 +47,7 @@ public class SearchController {
         model.addAttribute("filter", filter);
 
         switch (filter.toLowerCase()) {
-            case "user": // coincide con el value del select
+            case "user":// coincide con el value del select
                 model.addAttribute("users", userService.searchUsersByName(query));
                 model.addAttribute("concerts", new ArrayList<ConcertDTO>());
                 model.addAttribute("places", new ArrayList<PlaceDTO>());

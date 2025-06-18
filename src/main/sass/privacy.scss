@@ -1,0 +1,74 @@
+@import "variables";
+
+.legal-page {
+  max-width: 800px;
+  margin: 0 auto;
+  padding: 60px 20px;
+  background-color: $secondary-color;
+  color: $font-color;
+  font-family: 'Segoe UI', Roboto, sans-serif;
+  font-size: 1rem;
+  line-height: 1.6;
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.1);
+  border-radius: 12px;
+}
+
+.legal-title {
+  font-size: 2.2rem;
+  font-weight: bold;
+  color: $primary-color;
+  text-align: center;
+  margin-bottom: 40px;
+}
+
+.legal-page h2 {
+  font-size: 1.4rem;
+  color: $primary-color;
+  margin-top: 30px;
+  margin-bottom: 10px;
+  border-left: 4px solid $primary-color;
+  padding-left: 10px;
+}
+
+.legal-page p {
+  margin-bottom: 20px;
+  color: $font-color;
+}
+
+.legal-update {
+  font-size: 0.9rem;
+  color: $font-color;
+  text-align: right;
+  margin-top: 40px;
+  font-style: italic;
+}
+
+@media (max-width: $tablet-breakpoint) {
+  .legal-page {
+    padding: 40px 15px;
+    font-size: 0.95rem;
+  }
+
+  .legal-title {
+    font-size: 1.8rem;
+  }
+
+  .legal-page h2 {
+    font-size: 1.2rem;
+  }
+}
+
+@media (max-width: $mobile-breakpoint) {
+  .legal-page {
+    padding: 30px 10px;
+    font-size: 0.9rem;
+  }
+
+  .legal-title {
+    font-size: 1.6rem;
+  }
+
+  .legal-page h2 {
+    font-size: 1.1rem;
+  }
+}

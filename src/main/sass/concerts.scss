@@ -24,7 +24,7 @@
   grid-template-columns: repeat(auto-fill, minmax(12rem, 1fr));
   gap: 1.5rem;
   padding: 0 2rem;
-}
+margin-top: 2rem}
 
 // Tarjetas
 .concert-card {
@@ -35,7 +35,6 @@
   position: relative;
   color: $font-color;
   box-shadow: 0 0.6rem 1.8rem 0.3rem rgba(0, 0, 0, 0.2);
-
   &__image {
     position: absolute;
     object-fit: cover;
@@ -51,9 +50,7 @@
     flex-direction: column;
     justify-content: flex-end;
     padding: 1rem;
-    z-index: 1;
-  }
-
+    z-index: 1;}
   &__title {
     margin: 0 0 0.5rem;
     font-family: 'Roboto Condensed', sans-serif;

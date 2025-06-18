@@ -25,13 +25,17 @@
             <li class="menu__item"><a href="/publication/artists" class="menu__link">Artistas</a></li>
             <li class="menu__item"><a href="/concert" class="menu__link">Conciertos</a></li>
             <li class="menu__item"><a href="/search" class="menu__link">Buscar</a></li>
-            <li sec:authorize="hasRole('ADMIN')" class="menu__item"><a href="/users/admin" class="menu__link">Panel de administrador</a></li>
-            <li class="menu__item"><a href="/publication/create-publication" class="menu__link">Nueva publicación</a></li>
+            <li sec:authorize="hasAuthority('USER')" class="menu__item"><a href="/publication/create-publication" class="menu__link">Nueva publicación</a></li>
             <li sec:authorize="hasAuthority('ADMIN')" class="menu__item"><a href="/users/admin" class="menu__link">Panel de administrador</a></li>
+            <li sec:authorize="hasAuthority('PLACES_ADMIN')" class="menu__item"><a href="/places/admin" class="menu__link">Panel de administrador de lugares</a></li>
+            <li sec:authorize="hasAuthority('CONCERT_ADMIN')" class="menu__item"><a href="/concert/admin" class="menu__link">Panel de administrador de conciertos</a></li>
             <li sec:authorize="!isAuthenticated()" class="menu__item"><a href="/login" class="menu__link">Iniciar sesión</a></li>
             <li sec:authorize="!isAuthenticated()" class="menu__item"><a href="/users/register" class="menu__link">Registrarse</a></li>
             <li sec:authorize="isAuthenticated()" class="menu__item"><a  th:href="${'/users/'+ #authentication.getPrincipal().getId() +'/profile'}" class="menu__link" th:text="${#authentication.getName()}"></a></li>
             <li sec:authorize="isAuthenticated()" class="menu__item"><a href="/logout" class="menu__link">Cerrar sesión</a></li>
+            <li class="menu__item"><a href="/privacy" class="menu__link">Política de Privacidad</a></li>
+            <li class="menu__item"><a href="/terms" class="menu__link">Términos y Condiciones</a></li>
+            <li class="menu__item"><span class="menu__link">© 2025 Noisy-chestnut</span></li>
         </ul>
     </div>
     <div layout:fragment="content">

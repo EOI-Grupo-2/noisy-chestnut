@@ -71,17 +71,20 @@ public class UserService extends AbstractBusinessService<User,Long, UserDTO,
     public void saveAll(List<User> users) {
         getRepo().saveAll(users);
     }
-          
     public List<UserDTO> searchUsersByName(String name) {
-        List<User> users = getRepo().findByNameContainingIgnoreCase(name);
+        List<String> allowedRoles = List.of("USER", "ARTIST");
+        List<User> users = getRepo().findDistinctByNameContainingIgnoreCaseAndRoles_NameIn(name, allowedRoles);
         return users.stream()
-                .map(getMapper()::toDto).toList();
-      }
-          
-    public List<UserDTO> findUsersByRoleName(String roleName) {
+                .map(getMapper()::toDto)
+                .collect(Collectors.toList());
+    }
+
+
+
+    public List<UserDTO> findUsersByRoles(List<String> roleNames) {
         return findAllDTO().stream()
                 .filter(user -> user.getRoles().stream()
-                        .anyMatch(role -> role.getName().equals(roleName)))
+                        .anyMatch(role -> roleNames.contains(role.getName())))
                 .collect(Collectors.toList());
     }
 }
