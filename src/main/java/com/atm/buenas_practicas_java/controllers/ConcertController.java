@@ -120,7 +120,7 @@ public class ConcertController {
 
     // Formulario nuevo concierto
     @GetMapping("/new")
-    @PreAuthorize("hasAuthority('ADMIN')")
+    @PreAuthorize("hasAuthority('CONCERT_ADMIN')")
     public String getNewConcertForm(Model model) {
         model.addAttribute("errors", new ArrayList<String>());
         model.addAttribute("concert", new ConcertDTO());
@@ -130,7 +130,7 @@ public class ConcertController {
 
     // Formulario editar concierto
     @GetMapping("/{id}/edit")
-    @PreAuthorize("hasAuthority('ADMIN')")
+    @PreAuthorize("hasAuthority('CONCERT_ADMIN')")
     public String getEditConcertForm(@PathVariable Long id, Model model) {
         ConcertDTO concert = concertService.findByIdDTO(id).orElse(null);
         if (concert == null) {
@@ -145,7 +145,7 @@ public class ConcertController {
 
     // Guardar concierto
     @PostMapping("/save")
-    @PreAuthorize("hasAuthority('ADMIN')")
+    @PreAuthorize("hasAuthority('CONCERT_ADMIN')")
     public String saveConcert(@ModelAttribute("concert") ConcertDTO concertDTO,
                               @RequestParam(value = "artistIds", required = false) List<Long> artistIds,
                               @RequestParam(value = "imageFile", required = false) MultipartFile imageFile,
@@ -179,7 +179,7 @@ public class ConcertController {
 
     // Eliminar concierto
     @GetMapping("/{id}/delete")
-    @PreAuthorize("hasAuthority('ADMIN')")
+    @PreAuthorize("hasAuthority('CONCERT_ADMIN')")
     public String deleteConcert(@PathVariable Long id) throws Exception {
         Concert concert = concertService.findById(id).orElseThrow();
 
@@ -195,7 +195,7 @@ public class ConcertController {
 
     // Panel admin
     @GetMapping("/admin")
-    @PreAuthorize("hasAuthority('ADMIN')")
+    @PreAuthorize("hasAuthority('CONCERT_ADMIN')")
     public String getAdminPanel(Model model) {
         model.addAttribute("concerts", concertService.findAllDTO());
         return "/concert/concertsAdmin";
@@ -274,7 +274,7 @@ public class ConcertController {
     private void addFormAttributes(Model model) {
         model.addAttribute("places", placeService.findAllDTO());
         model.addAttribute("musicGenres", MusicGenre.values());
-        model.addAttribute("artists", userService.findUsersByRoleName("ARTIST"));
+        model.addAttribute("artists", userService.findUsersByRoles(List.of("ARTIST")));
     }
 
     private List<String> getFormErrors(ConcertDTO concertDTO) {

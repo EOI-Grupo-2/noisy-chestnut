@@ -63,5 +63,15 @@ public class DefaultController {
         model.addAttribute("publications", publications);
         return "index";
     }
+
+    @GetMapping("/privacy")
+    public String privacyPolicyPage() {
+        return "/terms/privacy";
+    }
+
+    @GetMapping("/terms")
+    public String termsPage() {
+        return "/terms/terms";
+    }
 }
 

@@ -11,8 +11,6 @@
 </head>
 <body>
 <div layout:fragment="content" class="content">
-    <!-- Botón para ir al panel de administración (solo para ADMIN) -->
-    <a th:href="@{/concert/admin}" class="btn-admin" sec:authorize="hasAuthority('ADMIN')">Panel de Administración</a>
 
     <!-- Grid de conciertos -->
     <div class="concerts-grid">

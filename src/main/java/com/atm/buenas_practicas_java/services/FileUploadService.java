@@ -13,7 +13,7 @@ import java.util.UUID;
 @Service
 public class FileUploadService {
 
-    private final String baseUploadDir = "/var/lib/uploads/";
+    private final String baseUploadDir = "uploads/";
     private final String concertsDir = baseUploadDir + "concerts/";
     private final String placesDir = baseUploadDir + "places/";
     private final String usersDir = baseUploadDir + "users/";
@@ -50,7 +50,7 @@ public class FileUploadService {
         }
 
         // Crear directorio si no existe
-        Path uploadPath = Paths.get(baseUploadDir);
+        Path uploadPath = Paths.get(uploadDir);
         if (!Files.exists(uploadPath)) {
             Files.createDirectories(uploadPath);
         }
@@ -65,7 +65,7 @@ public class FileUploadService {
         Files.copy(file.getInputStream(), filePath, StandardCopyOption.REPLACE_EXISTING);
 
         // Retornar la URL que Spring Boot puede servir
-        return "/uploads/" + newFilename;
+        return "/uploads/" + type  + "/" + newFilename;
     }
 
     // Método para eliminar imágenes (compatible con ambos tipos)
