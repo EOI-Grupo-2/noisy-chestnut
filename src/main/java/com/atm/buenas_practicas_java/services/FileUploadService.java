@@ -13,7 +13,6 @@ import java.util.UUID;
 @Service
 public class FileUploadService {
 
-    // Carpetas base para diferentes tipos de archivos
     private final String baseUploadDir = "uploads/";
     private final String concertsDir = baseUploadDir + "concerts/";
     private final String placesDir = baseUploadDir + "places/";
@@ -66,7 +65,7 @@ public class FileUploadService {
         Files.copy(file.getInputStream(), filePath, StandardCopyOption.REPLACE_EXISTING);
 
         // Retornar la URL que Spring Boot puede servir
-        return "/uploads/" + type.toLowerCase() + "/" + newFilename;
+        return "/uploads/" + type  + "/" + newFilename;
     }
 
     // Método para eliminar imágenes (compatible con ambos tipos)

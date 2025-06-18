@@ -48,6 +48,7 @@ public class PlaceController {
     }
 
     @GetMapping("/new")
+    @PreAuthorize("hasAuthority('PLACES_ADMIN')")
     public String newPlace(Model model){
         model.addAttribute("place", new PlaceDTO());
         model.addAttribute("isNew", true);
@@ -55,6 +56,7 @@ public class PlaceController {
     }
 
     @PostMapping("/new")
+    @PreAuthorize("hasAuthority('PLACES_ADMIN')")
     public String savePlace(@ModelAttribute("place") PlaceDTO placeDTO,
                             @RequestParam(value = "imageFile", required = false) MultipartFile imageFile,
                             @AuthenticationPrincipal AuthUser authUser,
@@ -70,6 +72,7 @@ public class PlaceController {
     }
 
     @GetMapping("/{id}/edit")
+    @PreAuthorize("hasAuthority('PLACES_ADMIN')")
     public String editPlace(@PathVariable Long id, Model model){
         model.addAttribute("place", placeService.findByIdDTO(id).orElseThrow());
         model.addAttribute("isNew", false);
@@ -77,6 +80,7 @@ public class PlaceController {
     }
 
     @PostMapping("/edit")
+    @PreAuthorize("hasAuthority('PLACES_ADMIN')")
     public String updatePlace(@ModelAttribute("place") PlaceDTO placeDTO,
                               @RequestParam(value = "imageFile", required = false) MultipartFile imageFile,
                               @AuthenticationPrincipal AuthUser authUser,
@@ -93,7 +97,7 @@ public class PlaceController {
 
     // Eliminar lugar
     @GetMapping("/{id}/delete")
-    @PreAuthorize("hasAuthority('ADMIN')")
+    @PreAuthorize("hasAuthority('PLACES_ADMIN')")
     public String deletePlace(@PathVariable Long id) throws Exception {
         Place place = placeService.findById(id).orElseThrow();
 
@@ -108,7 +112,7 @@ public class PlaceController {
 
     // Panel admin
     @GetMapping("/admin")
-    @PreAuthorize("hasAuthority('ADMIN')")
+    @PreAuthorize("hasAuthority('PLACES_ADMIN')")
     public String showPlacesAdmin(Model model) {
         List<PlaceDTO> places = placeService.findAllDTO();
         model.addAttribute("places", places);

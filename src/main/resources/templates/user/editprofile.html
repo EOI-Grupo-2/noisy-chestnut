@@ -23,12 +23,12 @@
 
         <div class="user-form__field">
             <label for="fullLastName" class="user-form__label">Apellido:</label>
-            <input th:value="${user.getFullLastName()}" type="text" id="fullLastName" name="fullLastName" class="user-form__input" placeholder="Ingresa tu Apellido" required>
+            <input th:value="${user.getFullLastName()}" type="text" id="fullLastName" name="fullLastName" class="user-form__input" placeholder="Ingresa tu apellido" required>
         </div>
 
         <div class="user-form__field">
-            <label for="email" class="user-form__label">Correo electronico:</label>
-            <input th:value="${user.getEmail()}" type="email" id="email" name="email" class="user-form__input" placeholder="Ingresa tu Apellido" required>
+            <label for="email" class="user-form__label">Correo electrónico:</label>
+            <input th:value="${user.getEmail()}" type="email" id="email" name="email" class="user-form__input" placeholder="Ingresa tu email" required>
         </div>
 
         <div class="user-form__field">
@@ -42,7 +42,7 @@
         </div>
 
         <div th:if="${isRegister}" class="user-form__field">
-            <label for="repeatPassword" class="user-form__label">Contraseña: </label>
+            <label for="repeatPassword" class="user-form__label">Repita su contraseña: </label>
             <input type="password" id="repeatPassword" name="repeatPassword" class="user-form__input" placeholder="Repita su contraseña" required>
         </div>
 

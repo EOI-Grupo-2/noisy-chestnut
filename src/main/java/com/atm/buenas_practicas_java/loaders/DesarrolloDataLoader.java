@@ -10,6 +10,7 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Profile;
 import org.springframework.security.crypto.password.PasswordEncoder;
 
+import java.io.File;
 import java.time.LocalDateTime;
 import java.util.*;
 
@@ -110,10 +111,27 @@ public class DesarrolloDataLoader {
         admin.setEmail("admin@mail.com");
         admin.setGenre(Genre.MALE);
         admin.setDescription("Descripcion del admin chulo");
-        admin.setMusicGenre(MusicGenre.RAP);
         admin.setImageUrl("");
         admin.setRoles(Set.of(adminRole, userRole));
-        users.add(admin);
+        User adminPlaces = new User();
+        adminPlaces.setUsername("adminPlaces");
+        adminPlaces.setPassword(passwordEncoder.encode("adminPlaces"));
+        adminPlaces.setName("Admin Lugares");
+        adminPlaces.setFirstName("Admin");
+        adminPlaces.setLastName("Lugares");
+        adminPlaces.setGenre(Genre.MALE);
+        adminPlaces.setRoles(Set.of(placeAdminRole, userRole));
+        adminPlaces.setEmail("adminPlaces@mail.com");
+        User adminConcerts = new User();
+        adminConcerts.setUsername("adminConcerts");
+        adminConcerts.setPassword(passwordEncoder.encode("adminConcerts"));
+        adminConcerts.setName("Admin Conciertos");
+        adminConcerts.setFirstName("Admin");
+        adminConcerts.setLastName("Conciertos");
+        adminConcerts.setGenre(Genre.MALE);
+        adminConcerts.setRoles(Set.of(concertAdminRole, userRole));
+        adminConcerts.setEmail("adminConcerts@mail.com");
+        users.addAll(List.of(admin, adminPlaces, adminConcerts));
         userRepository.saveAll(users);
 
         // 3. Lugares
@@ -125,7 +143,7 @@ public class DesarrolloDataLoader {
             place.setAddress("Calle " + (100 + i) + ", Ciudad Ejemplo");
             place.setCapacity(100 + i * 25L);
             place.setRating(3.5 + i * 0.15);
-            place.setUser(users.get(i % users.size()));
+            place.setUser(adminPlaces);
             place.setImageUrl("");
             places.add(place);
         }
@@ -149,7 +167,9 @@ public class DesarrolloDataLoader {
                 }
             }
             Collections.shuffle(artists);
-            concert.setUsers(artists.subList(0, Math.min(2, artists.size())));
+            List<User> concertUsers = artists.subList(0, Math.min(2, artists.size()));
+            concertUsers.add(adminConcerts);
+            concert.setUsers(concertUsers);
 
             concerts.add(concert);
         }
